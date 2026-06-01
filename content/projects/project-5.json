@@ -1,0 +1,11 @@
+{
+  "slug": "project-5",
+  "title": "Project Title Five",
+  "label": "Company · AI · 2022",
+  "coverImage": "",
+  "tags": ["AI/ML", "Product Design", "Concept"],
+  "year": 2022,
+  "featured": false,
+  "description": "A short description of what this project was about and the impact it had.",
+  "role": "Product Design Intern"
+}

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cursor Option C — Ghost Ink</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --color-bg: #ffffff;
+    --color-surface: #f5f5f5;
+    --color-text-primary: #0a0a0a;
+    --color-text-secondary: #666666;
+    --color-text-muted: #999999;
+    --color-border: #e5e5e5;
+    --red: #E8000D;
+  }
+
+  body {
+    background: var(--color-bg);
+    color: var(--color-text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    cursor: none;
+  }
+
+  .variant-label {
+    position: fixed;
+    top: 16px; left: 50%;
+    transform: translateX(-50%);
+    background: #0a0a0a;
+    color: #fff;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    padding: 6px 14px;
+    border-radius: 100px;
+    z-index: 9998;
+    pointer-events: none;
+    text-transform: uppercase;
+  }
+
+  #cursor-canvas {
+    position: fixed; inset: 0;
+    pointer-events: none; z-index: 9999;
+  }
+
+  header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(255,255,255,0.85); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .nav-inner {
+    max-width: 900px; margin: 0 auto; padding: 0 32px;
+    height: 56px; display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo { font-weight: 600; font-size: 14px; text-decoration: none; color: inherit; }
+  nav { display: flex; gap: 24px; }
+  nav a { font-size: 13px; color: var(--color-text-secondary); text-decoration: none; }
+
+  main { max-width: 900px; margin: 0 auto; padding: 80px 32px 120px; }
+
+  .hero { margin-bottom: 80px; }
+  .hero h1 {
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 600; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 20px;
+  }
+  .hero p {
+    font-size: clamp(1rem, 1.6vw, 1.125rem);
+    color: var(--color-text-secondary); max-width: 560px; line-height: 1.7;
+  }
+
+  .section-label {
+    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--color-text-muted); margin-bottom: 24px;
+  }
+  .project-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 80px;
+  }
+  .project-card a { display: block; text-decoration: none; color: inherit; }
+  .card-img {
+    width: 100%; aspect-ratio: 16/10; border-radius: 10px;
+    margin-bottom: 12px; overflow: hidden;
+  }
+  .card-img div { width: 100%; height: 100%; transition: transform 0.3s ease; }
+  .project-card a:hover .card-img div { transform: scale(1.02); }
+  .card-label { font-size: 11px; color: var(--color-text-muted); margin-bottom: 4px; }
+  .card-title { font-size: 15px; font-weight: 500; }
+
+  .about-row {
+    display: grid; grid-template-columns: 1fr 1.4fr; gap: 48px; align-items: start;
+  }
+  .about-row h2 {
+    font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 600;
+    letter-spacing: -0.02em; line-height: 1.2;
+  }
+  .about-row p {
+    font-size: 15px; line-height: 1.75;
+    color: var(--color-text-secondary); margin-bottom: 16px;
+  }
+
+  footer { border-top: 1px solid var(--color-border); padding: 32px; }
+  .footer-inner {
+    max-width: 900px; margin: 0 auto; display: flex;
+    justify-content: space-between; align-items: center;
+    font-size: 13px; color: var(--color-text-muted);
+  }
+  .footer-links { display: flex; gap: 16px; }
+  .footer-links a { color: var(--color-text-muted); text-decoration: none; }
+
+  /* ── OPTION C: Ghost Ink ───────────────────────────── */
+
+  /* Text hover: faint warm highlight on the whole paragraph */
+  .ink-text {
+    position: relative;
+    border-radius: 3px;
+    transition: text-shadow 0.3s ease;
+  }
+  .ink-text:hover {
+    text-shadow:
+      0 0 28px rgba(232, 0, 13, 0.12),
+      0 0 8px rgba(232, 0, 13, 0.06);
+  }
+
+  /* Links: inverted dot (white + red outline) + red fill highlight */
+  a {
+    color: var(--color-text-primary);
+    text-decoration: none;
+    position: relative;
+    display: inline;
+  }
+  nav a { color: var(--color-text-secondary); }
+
+  /* The red fill reveal on links */
+  a.ink-link {
+    background-image: linear-gradient(transparent 0%, transparent 100%);
+    background-size: 0% 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.22s ease, color 0.22s ease;
+    background-position: left center;
+    border-radius: 2px;
+    padding: 1px 2px;
+    margin: -1px -2px;
+  }
+  a.ink-link:hover {
+    background-image: linear-gradient(rgba(232, 0, 13, 0.1) 0%, rgba(232, 0, 13, 0.1) 100%);
+    background-size: 100% 100%;
+  }
+</style>
+</head>
+<body>
+
+<div class="variant-label">Option C — Ghost Ink</div>
+<canvas id="cursor-canvas" aria-hidden="true"></canvas>
+
+<header>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo ink-link">Shruthy Nair</a>
+    <nav>
+      <a href="#" class="ink-link">Work</a>
+      <a href="#" class="ink-link">About</a>
+      <a href="#" class="ink-link">Resume ↗</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main-content">
+  <section class="hero">
+    <h1 class="ink-text">Designing at the intersection of craft and systems.</h1>
+    <p class="ink-text">
+      I'm a product designer and engineer. I work on interfaces that feel inevitable —
+      where the design disappears and only the experience remains.
+    </p>
+  </section>
+
+  <p class="section-label">Selected Work</p>
+  <div class="project-grid">
+    <div class="project-card">
+      <a href="#" class="ink-link">
+        <div class="card-img">
+          <div style="background: linear-gradient(135deg,#f0ede8 0%,#ddd8d0 100%);"></div>
+        </div>
+        <p class="card-label">OpenAI × Hardware · 2025</p>
+        <h3 class="card-title ink-text">The future of AI & hardware</h3>
+      </a>
+    </div>
+    <div class="project-card">
+      <a href="#" class="ink-link">
+        <div class="card-img">
+          <div style="background: linear-gradient(135deg,#e8ecf0 0%,#c8d4de 100%);"></div>
+        </div>
+        <p class="card-label">1Password · 2024</p>
+        <h3 class="card-title ink-text">Secrets Manager redesign</h3>
+      </a>
+    </div>
+    <div class="project-card">
+      <a href="#" class="ink-link">
+        <div class="card-img">
+          <div style="background: linear-gradient(135deg,#ece8f0 0%,#d0c8de 100%);"></div>
+        </div>
+        <p class="card-label">Side project · 2024</p>
+        <h3 class="card-title ink-text">Type specimen generator</h3>
+      </a>
+    </div>
+    <div class="project-card">
+      <a href="#" class="ink-link">
+        <div class="card-img">
+          <div style="background: linear-gradient(135deg,#e8f0ec 0%,#c8decf 100%);"></div>
+        </div>
+        <p class="card-label">Research · 2023</p>
+        <h3 class="card-title ink-text">Accessibility in motion design</h3>
+      </a>
+    </div>
+  </div>
+
+  <div class="about-row">
+    <h2 class="ink-text">Building things that feel right.</h2>
+    <div>
+      <p class="ink-text">
+        I studied design and computer science, which means I think in systems but care
+        deeply about the human moment. My work lives in the space between pixel and
+        product — where decisions compound.
+      </p>
+      <p class="ink-text">
+        Previously at <a href="#" class="ink-link">1Password</a>, currently exploring
+        what AI-native interfaces look like when they're designed with intention.
+        <a href="#" class="ink-link">Read more about my process →</a>
+      </p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span>Designed & built by Shruthy Nair</span>
+    <div class="footer-links">
+      <a href="#" class="ink-link">LinkedIn</a>
+      <a href="#" class="ink-link">GitHub</a>
+      <a href="#" class="ink-link">sndesigns50@gmail.com</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const canvas = document.getElementById('cursor-canvas')
+  const ctx = canvas.getContext('2d')
+  const RED = '#E8000D'
+
+  let mx = -300, my = -300
+  let started = false
+  let isLink = false
+
+  // For the inverted dot animation
+  let dotR = 4.5
+  let ringAlpha = 0   // ring alpha for inverted state
+  let ringR = 0
+
+  const resize = () => { canvas.width = innerWidth; canvas.height = innerHeight }
+  resize()
+  window.addEventListener('resize', resize)
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY
+    started = true
+    const el = document.elementFromPoint(mx, my)
+    isLink = !!el?.closest('a, button')
+  })
+
+  let rafId
+  const tick = () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+    if (started) {
+      // Animate toward link state
+      const targetRingAlpha = isLink ? 0.9 : 0
+      const targetRingR = isLink ? 9 : 0
+      const targetDotR = isLink ? 3 : 4.5
+
+      ringAlpha += (targetRingAlpha - ringAlpha) * 0.15
+      ringR += (targetRingR - ringR) * 0.15
+      dotR += (targetDotR - dotR) * 0.15
+
+      if (isLink && ringR > 1) {
+        // Outer ring (red border)
+        ctx.beginPath()
+        ctx.arc(mx, my, ringR + 3, 0, Math.PI * 2)
+        ctx.strokeStyle = `rgba(232,0,13,${ringAlpha * 0.8})`
+        ctx.lineWidth = 1.5
+        ctx.stroke()
+      }
+
+      // Dot center
+      ctx.beginPath()
+      ctx.arc(mx, my, dotR, 0, Math.PI * 2)
+
+      if (isLink && ringAlpha > 0.3) {
+        // Inverted: white dot with red border
+        ctx.fillStyle = `rgb(255,255,255)`
+        ctx.fill()
+        ctx.strokeStyle = RED
+        ctx.lineWidth = 1.5
+        ctx.stroke()
+      } else {
+        // Normal: solid red
+        ctx.fillStyle = RED
+        ctx.fill()
+      }
+    }
+
+    rafId = requestAnimationFrame(tick)
+  }
+  tick()
+</script>
+</body>
+</html>

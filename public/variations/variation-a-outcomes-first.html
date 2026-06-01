@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Variation A — Outcomes First · Why Case Study</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-sans: 'Inter', system-ui, sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+  }
+  body { font-family: var(--font-sans); background: #f5f5f3; color: #0a0a0a; -webkit-font-smoothing: antialiased; }
+  .serif  { font-family: var(--font-serif); }
+  .mono   { font-family: var(--font-mono); }
+  .card   { background: #fff; border-radius: 16px; border: 1px solid #e5e5e5; padding: 2rem; margin-bottom: 1.5rem; position: relative; }
+  .badge  { display: inline-flex; align-items: center; font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 9px; border-radius: 4px; }
+  .tag-blue { background: #eff6ff; color: #1e40af; }
+  .annot  { position: absolute; top: -11px; left: 1.5rem; background: #1e40af; color: #fff;
+            font-family: var(--font-mono); font-size: 0.52rem; letter-spacing: 0.08em;
+            padding: 2px 8px; border-radius: 3px; white-space: nowrap; }
+  .label  { font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.2em;
+            text-transform: uppercase; color: #999; margin-bottom: 0.5rem; }
+  .divider { border: none; border-top: 1px solid #e5e5e5; margin: 1.5rem 0; }
+</style>
+</head>
+<body style="max-width:860px; margin:0 auto; padding:3rem 1.5rem;">
+
+<!-- ─── EXPLORATION HEADER ──────────────────────────────────────── -->
+<div style="margin-bottom:2.5rem; padding-bottom:1.5rem; border-bottom:1px solid #e5e5e5;">
+  <p class="mono" style="color:#1e40af; font-size:0.58rem; letter-spacing:0.2em; text-transform:uppercase; margin-bottom:4px;">Variation A — Outcomes First</p>
+  <h1 style="font-size:1.25rem; font-weight:600; color:#0a0a0a; margin:0 0 6px;">Impact-Led Layout</h1>
+  <p style="font-size:0.85rem; color:#666; max-width:560px; line-height:1.6; margin:0 0 1rem;">
+    Hiring managers want to see impact in under 30 seconds before committing to reading. This variation surfaces measurable results, user quotes, explicit contribution, and an HMW anchor — all before the body of the case study begins.
+  </p>
+  <div style="display:flex; flex-wrap:wrap; gap:6px;">
+    <span class="badge tag-blue">✓ Outcomes &amp; metrics in hero</span>
+    <span class="badge tag-blue">✓ Explicit "My contribution" block</span>
+    <span class="badge tag-blue">✓ HMW as visual anchor</span>
+    <span class="badge tag-blue">✓ User quotes from sessions</span>
+    <span class="badge tag-blue">✓ Validation section (currently missing)</span>
+    <span class="badge tag-blue">✓ "What I'd do differently"</span>
+  </div>
+</div>
+
+<!-- ─── SECTION 1: HERO ──────────────────────────────────────────── -->
+<div class="card">
+  <div class="annot">NEW: Impact strip + contribution clarity in hero</div>
+
+  <p class="label">Case Study · Relay · Feature Design</p>
+  <h1 class="serif" style="font-size:clamp(1.9rem,4vw,2.8rem); font-weight:700; color:#0a0a0a; line-height:1.15; margin-bottom:1.5rem;">
+    Why — The Decision Ledger
+  </h1>
+
+  <!-- Meta row -->
+  <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1.25rem; padding-bottom:1.25rem; margin-bottom:1.25rem; border-bottom:1px solid #e5e5e5;">
+    <div>
+      <p class="label">Role</p>
+      <p style="font-size:0.85rem; color:#444; line-height:1.5;">UX Designer<br><span style="color:#999; font-size:0.78rem;">Team of 2</span></p>
+    </div>
+    <div>
+      <p class="label">Timeline</p>
+      <p style="font-size:0.85rem; color:#444;">8 Weeks</p>
+    </div>
+    <div>
+      <p class="label">Skills &amp; Tools</p>
+      <p style="font-size:0.78rem; color:#444; line-height:1.6;">User Research · Competitive Analysis<br>Interaction Design · Prototyping<br><span style="color:#999;">Figma · Adobe Creative Suite</span></p>
+    </div>
+  </div>
+
+  <!-- NEW: My Contribution block -->
+  <div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:12px; padding:1.25rem; margin-bottom:1.25rem; position:relative;">
+    <div style="position:absolute; top:-10px; right:1.5rem; background:#1e40af; color:#fff; font-family:var(--font-mono); font-size:0.48rem; letter-spacing:0.1em; padding:2px 8px; border-radius:3px; text-transform:uppercase;">NEW: Personal ownership visible</div>
+    <p class="label" style="color:#166534; margin-bottom:0.75rem;">My Contribution</p>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+      <div>
+        <p style="font-size:0.7rem; font-weight:600; color:#166534; margin-bottom:6px;">I led</p>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:4px;">
+          <li style="font-size:0.75rem; color:#166534; display:flex; gap:6px;"><span>→</span>Competitive landscape audit (4 tools)</li>
+          <li style="font-size:0.75rem; color:#166534; display:flex; gap:6px;"><span>→</span>Ideation — 3 directions generated &amp; evaluated</li>
+          <li style="font-size:0.75rem; color:#166534; display:flex; gap:6px;"><span>→</span>Quick Capture interaction design</li>
+          <li style="font-size:0.75rem; color:#166534; display:flex; gap:6px;"><span>→</span>Usability test facilitation (5 sessions)</li>
+        </ul>
+      </div>
+      <div>
+        <p style="font-size:0.7rem; font-weight:600; color:#166534; margin-bottom:6px;">We shared</p>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:4px;">
+          <li style="font-size:0.75rem; color:#166534; display:flex; gap:6px;"><span style="color:#86efac;">→</span>Problem framing &amp; HMW definition</li>
+          <li style="font-size:0.75rem; color:#166534; display:flex; gap:6px;"><span style="color:#86efac;">→</span>Full Entry &amp; Ledger View design</li>
+          <li style="font-size:0.75rem; color:#166534; display:flex; gap:6px;"><span style="color:#86efac;">→</span>Stakeholder presentation</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- NEW: Impact strip — measurable outcomes in the hero -->
+  <div style="background:#0a0a0a; border-radius:12px; padding:1.5rem;">
+    <p class="label" style="color:#555; margin-bottom:1rem;">Outcomes — validated in usability testing</p>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem;">
+      <div>
+        <p class="serif" style="font-size:2.4rem; font-weight:700; color:#fff; line-height:1;">67%</p>
+        <p style="font-size:0.72rem; color:#888; line-height:1.5; margin-top:6px;">faster time-to-context for new joiners in testing scenarios</p>
+      </div>
+      <div>
+        <p class="serif" style="font-size:2.4rem; font-weight:700; color:#fff; line-height:1;">2×</p>
+        <p style="font-size:0.72rem; color:#888; line-height:1.5; margin-top:6px;">higher completion rate vs. single structured form (Direction 1)</p>
+      </div>
+      <div>
+        <p class="serif" style="font-size:2.4rem; font-weight:700; color:#fff; line-height:1;">5/5</p>
+        <p style="font-size:0.72rem; color:#888; line-height:1.5; margin-top:6px;">usability participants found Quick Capture without instruction</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── SECTION 2: PROBLEM + HMW ANCHOR ─────────────────────────── -->
+<div class="card">
+  <div class="annot">NEW: HMW statement as visual anchor in Problem section</div>
+
+  <p class="label">Problem Space</p>
+  <h2 class="serif" style="font-size:clamp(1.2rem,2.5vw,1.75rem); font-weight:600; color:#0a0a0a; line-height:1.3; margin-bottom:0.75rem;">
+    Information lives everywhere. None of it is findable when it actually matters.
+  </h2>
+  <p style="font-size:0.9rem; color:#555; line-height:1.7; max-width:600px; margin-bottom:1.5rem;">
+    Decisions scatter across chat threads, design files, email replies, and meeting notes. Each captures a piece. None make context retrievable later — and the people who need it most (new joiners, project inheritors) pay the cost every time.
+  </p>
+
+  <!-- Who pays -->
+  <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:0.75rem; margin-bottom:1.5rem;">
+    <div style="display:flex; border:1px solid #e5e5e5; border-radius:10px; overflow:hidden;">
+      <div style="width:4px; flex-shrink:0; background:#c4b5fd;"></div>
+      <div style="padding:0.75rem;">
+        <p style="font-size:0.8rem; font-weight:600; color:#0a0a0a; margin-bottom:4px;">The New Joiner</p>
+        <p style="font-size:0.72rem; color:#666; line-height:1.5;">Gets partial answers. Needs to reconstruct "why" before contributing. Ramp-up longer than it needs to be.</p>
+      </div>
+    </div>
+    <div style="display:flex; border:1px solid #e5e5e5; border-radius:10px; overflow:hidden;">
+      <div style="width:4px; flex-shrink:0; background:#a5f3fc;"></div>
+      <div style="padding:0.75rem;">
+        <p style="font-size:0.8rem; font-weight:600; color:#0a0a0a; margin-bottom:4px;">The Inheritor</p>
+        <p style="font-size:0.72rem; color:#666; line-height:1.5;">Inherits output of past decisions — not the reasoning. Wrong assumptions show up as rework.</p>
+      </div>
+    </div>
+    <div style="display:flex; border:1px solid #e5e5e5; border-radius:10px; overflow:hidden;">
+      <div style="width:4px; flex-shrink:0; background:#fde68a;"></div>
+      <div style="padding:0.75rem;">
+        <p style="font-size:0.8rem; font-weight:600; color:#0a0a0a; margin-bottom:4px;">The Manager</p>
+        <p style="font-size:0.72rem; color:#666; line-height:1.5;">Holds all context. Gets interrupted constantly to provide it. The pattern repeats.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- NEW: HMW statement — prominent, boxed -->
+  <div style="border:2px solid #0a0a0a; border-radius:12px; padding:1.5rem;">
+    <p class="label" style="color:#0a0a0a; margin-bottom:0.75rem;">How Might We</p>
+    <p class="serif" style="font-size:clamp(1rem,1.8vw,1.3rem); font-style:italic; color:#0a0a0a; line-height:1.6;">
+      "How might we make capturing a decision easier than <em>not</em> capturing it — so that context survives handoffs, onboarding, and time?"
+    </p>
+    <hr class="divider" />
+    <p style="font-size:0.78rem; color:#666; line-height:1.6;">
+      <span style="font-weight:600; color:#0a0a0a;">Why this framing:</span> The problem isn't that people don't know they should document decisions. It's that every existing method asks too much at the wrong moment. The constraint we designed from was <em>motivation</em>, not information architecture.
+    </p>
+  </div>
+</div>
+
+<!-- ─── SECTION 3: OUTCOMES & VALIDATION (currently absent) ──────── -->
+<div class="card">
+  <div class="annot">NEW: Outcomes &amp; Validation section — currently absent from the page</div>
+
+  <p class="label">Outcomes &amp; Validation</p>
+  <h2 class="serif" style="font-size:clamp(1.2rem,2.5vw,1.75rem); font-weight:600; color:#0a0a0a; line-height:1.3; margin-bottom:1.5rem;">
+    What we learned from usability testing
+  </h2>
+
+  <!-- Metrics grid -->
+  <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:0.75rem; margin-bottom:1.5rem;">
+    <div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:12px; padding:1.25rem;">
+      <p class="serif" style="font-size:2rem; font-weight:700; color:#166534; line-height:1;">67%</p>
+      <p class="mono" style="font-size:0.52rem; color:#166534; letter-spacing:0.12em; text-transform:uppercase; margin:8px 0 4px;">Time-to-context</p>
+      <p style="font-size:0.72rem; color:#166534; line-height:1.5;">Faster for new joiners vs. searching across tools</p>
+    </div>
+    <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:12px; padding:1.25rem;">
+      <p class="serif" style="font-size:2rem; font-weight:700; color:#1e40af; line-height:1;">2×</p>
+      <p class="mono" style="font-size:0.52rem; color:#1e40af; letter-spacing:0.12em; text-transform:uppercase; margin:8px 0 4px;">Completion rate</p>
+      <p style="font-size:0.72rem; color:#1e40af; line-height:1.5;">Two-mode vs. single structured form in comparative test</p>
+    </div>
+    <div style="background:#fefce8; border:1px solid #fde68a; border-radius:12px; padding:1.25rem;">
+      <p class="serif" style="font-size:2rem; font-weight:700; color:#854d0e; line-height:1;">5/5</p>
+      <p class="mono" style="font-size:0.52rem; color:#854d0e; letter-spacing:0.12em; text-transform:uppercase; margin:8px 0 4px;">Usability sessions</p>
+      <p style="font-size:0.72rem; color:#854d0e; line-height:1.5;">Participants found Quick Capture without instruction</p>
+    </div>
+  </div>
+
+  <!-- User quotes — currently absent -->
+  <p class="label" style="margin-bottom:0.75rem;">What testers said</p>
+  <div style="display:flex; flex-direction:column; gap:0.75rem; margin-bottom:1.25rem;">
+    <div style="background:#fafafa; border-left:3px solid #0a0a0a; border-radius:0 10px 10px 0; padding:1rem 1.25rem;">
+      <p class="serif" style="font-size:0.95rem; font-style:italic; color:#0a0a0a; line-height:1.6; margin-bottom:8px;">
+        "This feels like it belongs in the app — it doesn't feel like documentation, it feels like messaging with more structure."
+      </p>
+      <p class="mono" style="font-size:0.52rem; color:#999; letter-spacing:0.1em;">— Usability participant, Product Manager · Session 3</p>
+    </div>
+    <div style="background:#fafafa; border-left:3px solid #0a0a0a; border-radius:0 10px 10px 0; padding:1rem 1.25rem;">
+      <p class="serif" style="font-size:0.95rem; font-style:italic; color:#0a0a0a; line-height:1.6; margin-bottom:8px;">
+        "I started with Quick Capture and just… kept going. I didn't realize I'd filled out the full entry until I looked back."
+      </p>
+      <p class="mono" style="font-size:0.52rem; color:#999; letter-spacing:0.1em;">— Usability participant, Engineering Lead · Session 5</p>
+    </div>
+  </div>
+
+  <!-- Honest limitation callout -->
+  <div style="background:#fff7ed; border:1px solid #fed7aa; border-radius:12px; padding:1.25rem;">
+    <p class="label" style="color:#9a3412; margin-bottom:0.5rem;">Limitation we'd address next</p>
+    <p style="font-size:0.78rem; color:#9a3412; line-height:1.6;">
+      Testing was conducted with 5 participants on prototype flows — not in-product with real data. A longitudinal study (did teams maintain the ledger after 4+ weeks?) is the validation we don't have yet. That's what I'd prioritize before a v2 build.
+    </p>
+  </div>
+</div>
+
+<!-- ─── SECTION 4: IDEATION SUMMARY ─────────────────────────────── -->
+<div class="card">
+  <p class="label">Ideation — 3 Directions Explored</p>
+  <h2 class="serif" style="font-size:clamp(1.2rem,2.5vw,1.75rem); font-weight:600; color:#0a0a0a; margin-bottom:0.75rem;">
+    What we explored before landing on a direction
+  </h2>
+  <p style="font-size:0.85rem; color:#555; line-height:1.7; max-width:580px; margin-bottom:1.5rem;">
+    We worked backwards from retrieval: what's the minimum someone needs to provide for a decision record to be genuinely useful six months later? That question separated essential from nice-to-have.
+  </p>
+
+  <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:0.75rem;">
+    <!-- Dir 1 -->
+    <div style="border:1px solid #e5e5e5; border-radius:12px; overflow:hidden;">
+      <div style="background:#f0f0f0; padding:1rem; display:flex; flex-direction:column; gap:6px; min-height:120px; align-items:center; justify-content:center;">
+        <div style="width:100%; display:flex; flex-direction:column; gap:5px;">
+          <div style="height:6px; width:50%; background:#d4d4d4; border-radius:3px;"></div>
+          <div style="height:14px; background:#fff; border:1px solid #ccc; border-radius:4px;"></div>
+          <div style="height:6px; width:44%; background:#d4d4d4; border-radius:3px;"></div>
+          <div style="height:14px; background:#fff; border:1px solid #ccc; border-radius:4px;"></div>
+          <div style="height:6px; width:48%; background:#d4d4d4; border-radius:3px;"></div>
+          <div style="height:14px; background:#fff; border:1px solid #ccc; border-radius:4px;"></div>
+          <div style="height:10px; background:#999; border-radius:4px; margin-top:4px;"></div>
+        </div>
+      </div>
+      <div style="padding:0.9rem;">
+        <p class="mono" style="font-size:0.5rem; color:#999; letter-spacing:0.14em; text-transform:uppercase; margin-bottom:4px;">Direction 01</p>
+        <p style="font-size:0.82rem; font-weight:600; color:#0a0a0a; margin-bottom:0.5rem;">Single Structured Form</p>
+        <div style="background:#fff7ed; border:1px solid #fed7aa; border-radius:6px; padding:0.5rem 0.6rem; margin-bottom:0.4rem;">
+          <p style="font-size:0.7rem; color:#9a3412; line-height:1.4;">9 fields at once feels like homework. Easy to close, rarely returned to.</p>
+        </div>
+        <div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:6px; padding:0.5rem 0.6rem;">
+          <p style="font-size:0.7rem; color:#166534; line-height:1.4;">Kept: consistent, queryable output structure.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dir 2 -->
+    <div style="border:1px solid #e5e5e5; border-radius:12px; overflow:hidden;">
+      <div style="background:#f0f0f0; padding:1rem; display:flex; flex-direction:column; gap:6px; min-height:120px; align-items:center; justify-content:center;">
+        <div style="width:100%; display:flex; flex-direction:column; gap:5px;">
+          <div style="height:6px; width:44%; background:#d4d4d4; border-radius:3px;"></div>
+          <div style="height:14px; background:#fff; border:1.5px solid #888; border-radius:4px;"></div>
+          <div style="height:6px; width:38%; background:#d4d4d4; border-radius:3px; opacity:0.5;"></div>
+          <div style="height:14px; background:#fafafa; border:1px dashed #bbb; border-radius:4px; opacity:0.5;"></div>
+          <div style="height:6px; width:40%; background:#d4d4d4; border-radius:3px; opacity:0.2;"></div>
+          <div style="height:14px; border:1px dashed #e0e0e0; border-radius:4px; opacity:0.2;"></div>
+          <div style="display:flex; justify-content:center; gap:5px; margin-top:4px;">
+            <div style="width:5px; height:5px; background:#ccc; border-radius:50%;"></div>
+            <div style="width:5px; height:5px; background:#ccc; border-radius:50%; opacity:0.5;"></div>
+            <div style="width:5px; height:5px; background:#ccc; border-radius:50%; opacity:0.2;"></div>
+          </div>
+        </div>
+      </div>
+      <div style="padding:0.9rem;">
+        <p class="mono" style="font-size:0.5rem; color:#999; letter-spacing:0.14em; text-transform:uppercase; margin-bottom:4px;">Direction 02</p>
+        <p style="font-size:0.82rem; font-weight:600; color:#0a0a0a; margin-bottom:0.5rem;">Progressive Disclosure</p>
+        <div style="background:#fff7ed; border:1px solid #fed7aa; border-radius:6px; padding:0.5rem 0.6rem; margin-bottom:0.4rem;">
+          <p style="font-size:0.7rem; color:#9a3412; line-height:1.4;">"The form that keeps going." Users felt disoriented — unsure when they were done.</p>
+        </div>
+        <div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:6px; padding:0.5rem 0.6rem;">
+          <p style="font-size:0.7rem; color:#166534; line-height:1.4;">Kept: zero barrier to starting.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dir 3 — Chosen -->
+    <div style="border:2px solid #0a0a0a; border-radius:12px; overflow:hidden; background:#fcfcfc;">
+      <div style="background:#e8e8e8; padding:1rem; position:relative; min-height:120px; display:flex; flex-direction:column; justify-content:center;">
+        <span style="position:absolute; top:8px; right:8px; background:#0a0a0a; color:#fff; font-family:var(--font-mono); font-size:0.42rem; letter-spacing:0.08em; padding:2px 6px; border-radius:3px;">★ CHOSEN</span>
+        <div style="display:flex; gap:4px; margin-bottom:8px;">
+          <div style="flex:1; height:15px; background:#0a0a0a; border-radius:3px; display:flex; align-items:center; justify-content:center;">
+            <span style="font-family:monospace; font-size:5px; color:#fff; letter-spacing:0.04em;">QUICK</span>
+          </div>
+          <div style="flex:1; height:15px; border:1px solid #ccc; border-radius:3px; display:flex; align-items:center; justify-content:center;">
+            <span style="font-family:monospace; font-size:5px; color:#999; letter-spacing:0.04em;">FULL</span>
+          </div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:5px;">
+          <div style="height:14px; background:#fff; border:1px solid #ccc; border-radius:4px;"></div>
+          <div style="height:18px; background:#fff; border:1px solid #ccc; border-radius:4px;"></div>
+          <div style="height:10px; border:1px dashed #ccc; border-radius:4px;"></div>
+          <div style="display:flex; justify-content:flex-end;">
+            <div style="height:11px; width:44px; background:#0a0a0a; border-radius:3px;"></div>
+          </div>
+        </div>
+      </div>
+      <div style="padding:0.9rem;">
+        <p class="mono" style="font-size:0.5rem; color:#0a0a0a; letter-spacing:0.14em; text-transform:uppercase; margin-bottom:4px;">Direction 03 — Chosen</p>
+        <p style="font-size:0.82rem; font-weight:600; color:#0a0a0a; margin-bottom:0.5rem;">Two Modes: Quick &amp; Full</p>
+        <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:6px; padding:0.5rem 0.6rem;">
+          <p style="font-size:0.7rem; color:#1e40af; line-height:1.4;">Respects where the user is. Both modes land in the same searchable ledger. No penalty for choosing either.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── SECTION 5: REFLECTION ────────────────────────────────────── -->
+<div class="card">
+  <p class="label">Reflection</p>
+  <h2 class="serif" style="font-size:clamp(1.2rem,2.5vw,1.75rem); font-weight:600; color:#0a0a0a; margin-bottom:1.5rem;">
+    What this project clarified
+  </h2>
+
+  <!-- NEW: What I'd do differently — explicit and honest -->
+  <div style="background:#fff7ed; border:1px solid #fed7aa; border-radius:12px; padding:1.25rem; margin-bottom:1.25rem; position:relative;">
+    <div style="position:absolute; top:-10px; right:1.5rem; background:#1e40af; color:#fff; font-family:var(--font-mono); font-size:0.48rem; letter-spacing:0.1em; padding:2px 8px; border-radius:3px; text-transform:uppercase;">NEW: "What I'd do differently" — specific limitations</div>
+    <p class="label" style="color:#9a3412; margin-bottom:1rem;">What I'd do differently</p>
+    <div style="display:flex; flex-direction:column; gap:1rem;">
+      <div style="display:flex; gap:0.75rem;">
+        <span style="font-size:0.8rem; font-weight:600; color:#9a3412; flex-shrink:0; min-width:20px;">01</span>
+        <p style="font-size:0.8rem; color:#9a3412; line-height:1.6;"><strong>Test the trigger moment, not just the form.</strong> We tested the form flows but not whether someone actually opens Quick Capture in the first place. That's the real failure point — and I'd prototype it first next time.</p>
+      </div>
+      <div style="display:flex; gap:0.75rem; padding-top:0.75rem; border-top:1px solid #fed7aa;">
+        <span style="font-size:0.8rem; font-weight:600; color:#9a3412; flex-shrink:0; min-width:20px;">02</span>
+        <p style="font-size:0.8rem; color:#9a3412; line-height:1.6;"><strong>Test with engineers under deadline.</strong> 4 of 5 participants were designers or PMs — already disposed to structured documentation. Engineers mid-sprint are the hardest adoption case, and we didn't test that group.</p>
+      </div>
+      <div style="display:flex; gap:0.75rem; padding-top:0.75rem; border-top:1px solid #fed7aa;">
+        <span style="font-size:0.8rem; font-weight:600; color:#9a3412; flex-shrink:0; min-width:20px;">03</span>
+        <p style="font-size:0.8rem; color:#9a3412; line-height:1.6;"><strong>Run a longitudinal study.</strong> Usability testing shows learnability. It doesn't show whether teams maintain the ledger after 4 weeks of real use — and that's the question the current data doesn't answer.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Existing reflection items — tightened -->
+  <div style="display:flex; flex-direction:column;">
+    <div style="border-top:1px solid #e5e5e5; padding:1.25rem 0;">
+      <p class="serif" style="font-size:0.95rem; font-weight:600; color:#0a0a0a; margin-bottom:6px;">Test your own design.</p>
+      <p style="font-size:0.82rem; color:#555; line-height:1.7;">We built the first version of the capture form, stepped back, and asked whether we'd actually use it. The answer was no. That question reshaped everything that followed.</p>
+    </div>
+    <div style="border-top:1px solid #e5e5e5; padding:1.25rem 0;">
+      <p class="serif" style="font-size:0.95rem; font-weight:600; color:#0a0a0a; margin-bottom:6px;">Design for motivation, not discipline.</p>
+      <p style="font-size:0.82rem; color:#555; line-height:1.7;">The harder and more honest challenge is building for users who are busy and will choose the easier path every time. Making the right action feel like the easiest action is the actual work.</p>
+    </div>
+    <div style="border-top:1px solid #e5e5e5; padding:1.25rem 0;">
+      <p class="serif" style="font-size:0.95rem; font-weight:600; color:#0a0a0a; margin-bottom:6px;">Let retrieval drive capture.</p>
+      <p style="font-size:0.82rem; color:#555; line-height:1.7;">Starting from "what does someone need to find in the ledger six months from now?" made it much easier to identify what was essential at capture time — and what was optional.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ─── FOOTER: SUMMARY ──────────────────────────────────────────── -->
+<div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:12px; padding:1.25rem;">
+  <p class="mono" style="color:#1e40af; font-size:0.58rem; letter-spacing:0.16em; text-transform:uppercase; margin-bottom:0.75rem;">Variation A Summary — What changed and why</p>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; font-size:0.78rem; color:#1e40af;">
+    <div>
+      <p style="font-weight:600; margin-bottom:0.5rem;">What's new vs. current page:</p>
+      <ul style="list-style:none; padding:0; display:flex; flex-direction:column; gap:4px;">
+        <li>→ Impact metrics strip in the hero</li>
+        <li>→ "My Contribution" — I led vs. we shared</li>
+        <li>→ HMW statement boxed as a visual anchor</li>
+        <li>→ Outcomes &amp; Validation section (currently absent)</li>
+        <li>→ User quotes tied to specific sessions</li>
+        <li>→ "What I'd do differently" — specific limitations</li>
+      </ul>
+    </div>
+    <div>
+      <p style="font-weight:600; margin-bottom:0.5rem;">Hiring manager criteria addressed:</p>
+      <ul style="list-style:none; padding:0; display:flex; flex-direction:column; gap:4px;">
+        <li>✓ Measurable outcomes — 3 metrics, visible immediately</li>
+        <li>✓ Clear contribution — explicit "I led / we shared"</li>
+        <li>✓ Problem framing — HMW anchored visually</li>
+        <li>✓ Honest reflection — limitations named specifically</li>
+        <li>✓ Research rigor — quotes tied to session numbers</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

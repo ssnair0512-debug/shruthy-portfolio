@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Variation B — Comparison Table</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #ffffff;
+      --surface: #f5f5f5;
+      --text-primary: #0a0a0a;
+      --text-secondary: #555555;
+      --text-muted: #999999;
+      --border: #e5e5e5;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text-primary);
+      font-family: 'IBM Plex Sans', sans-serif;
+      padding: 48px 24px 80px;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .variation-badge {
+      display: inline-block;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      background: #0a0a0a;
+      color: #ffffff;
+      padding: 4px 10px;
+      border-radius: 4px;
+      margin-bottom: 32px;
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+
+    .section-intro {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 36px;
+      max-width: 580px;
+    }
+
+    /* Table header */
+    .table-header {
+      display: grid;
+      grid-template-columns: 220px 1fr 200px;
+      gap: 0;
+      border-bottom: 1px solid var(--text-primary);
+      padding-bottom: 10px;
+      margin-bottom: 0;
+    }
+
+    .col-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.56rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* Table rows */
+    .table-row {
+      display: grid;
+      grid-template-columns: 220px 1fr 200px;
+      gap: 0;
+      border-bottom: 1px solid var(--border);
+      padding: 22px 0;
+      align-items: start;
+    }
+
+    .tool-col {
+      padding-right: 24px;
+    }
+
+    .tool-name {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 3px;
+      line-height: 1.3;
+    }
+
+    .tool-examples {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+    }
+
+    .insight-col {
+      padding-right: 24px;
+    }
+
+    .insight-text {
+      font-size: 0.82rem;
+      line-height: 1.65;
+      color: var(--text-secondary);
+    }
+
+    .gap-col {
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .gap-tag {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.56rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 5px 10px;
+      line-height: 1.4;
+    }
+
+    /* Mobile stacked */
+    @media (max-width: 640px) {
+      .table-header { display: none; }
+      .table-row {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+      .tool-col, .insight-col { padding-right: 0; }
+    }
+
+    /* Summary */
+    .summary-row {
+      border-top: 1px solid var(--text-primary);
+      padding-top: 20px;
+      margin-top: 4px;
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+    }
+
+    .summary-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      white-space: nowrap;
+      padding-top: 2px;
+      min-width: 100px;
+    }
+
+    .summary-text {
+      font-size: 0.82rem;
+      line-height: 1.65;
+      color: var(--text-secondary);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="variation-badge">Variation B — Comparison Table</div>
+
+  <p class="section-label">Research</p>
+
+  <h2>What the Research Pointed To</h2>
+  <p class="section-intro">
+    We audited the tools teams already use to manage this problem — before designing anything new.
+    Each category solves part of it. Knowing which part let us design around the gap.
+  </p>
+
+  <!-- Table header -->
+  <div class="table-header">
+    <span class="col-label">Tool</span>
+    <span class="col-label">Where it falls short</span>
+    <span class="col-label">The gap</span>
+  </div>
+
+  <!-- Row 1 -->
+  <div class="table-row">
+    <div class="tool-col">
+      <p class="tool-name">Messaging Platforms</p>
+      <p class="tool-examples">Teams, Slack</p>
+    </div>
+    <div class="insight-col">
+      <p class="insight-text">
+        Built around conversation as the primary artifact. A decision buried inside a 40-message
+        thread is technically present — but practically inaccessible. You can search for keywords;
+        you can't search for structured reasoning.
+      </p>
+    </div>
+    <div class="gap-col">
+      <span class="gap-tag">Conversation,<br/>not decision</span>
+    </div>
+  </div>
+
+  <!-- Row 2 -->
+  <div class="table-row">
+    <div class="tool-col">
+      <p class="tool-name">Documentation Platforms</p>
+      <p class="tool-examples">Confluence, Notion</p>
+    </div>
+    <div class="insight-col">
+      <p class="insight-text">
+        Right format, wrong workflow. Switching tools, finding the right page, writing from scratch —
+        all of this after the decision, when context has already passed. Works for disciplined teams.
+        Doesn't work consistently for everyone else.
+      </p>
+    </div>
+    <div class="gap-col">
+      <span class="gap-tag">Friction<br/>at capture</span>
+    </div>
+  </div>
+
+  <!-- Row 3 -->
+  <div class="table-row">
+    <div class="tool-col">
+      <p class="tool-name">Video Tools</p>
+      <p class="tool-examples">Loom</p>
+    </div>
+    <div class="insight-col">
+      <p class="insight-text">
+        Excellent for explaining complexity with tone and context. But video is a communication
+        format — not a retrieval system. You can't query a library of Looms for a specific
+        piece of reasoning.
+      </p>
+    </div>
+    <div class="gap-col">
+      <span class="gap-tag">Not<br/>queryable</span>
+    </div>
+  </div>
+
+  <!-- Row 4 -->
+  <div class="table-row">
+    <div class="tool-col">
+      <p class="tool-name">Task Management</p>
+      <p class="tool-examples">Jira, Asana</p>
+    </div>
+    <div class="insight-col">
+      <p class="insight-text">
+        Track what is being done and whether it's done. The reasoning behind how the work
+        was scoped — why this direction over another — is absent by design.
+      </p>
+    </div>
+    <div class="gap-col">
+      <span class="gap-tag">What,<br/>never why</span>
+    </div>
+  </div>
+
+  <!-- Summary -->
+  <div class="summary-row">
+    <span class="summary-label">Consistent gap</span>
+    <span class="summary-text">
+      No existing tool captures a decision as a structured artifact at the moment it happens
+      and makes it retrievable from a central place later.
+    </span>
+  </div>
+
+</body>
+</html>

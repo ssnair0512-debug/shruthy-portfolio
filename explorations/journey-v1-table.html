@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Journey Map — V1: Refined Swim Lanes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: #F4F4F2;
+  padding: 60px 40px;
+  min-height: 100vh;
+}
+
+.page { max-width: 1240px; margin: 0 auto; }
+
+/* ── Header ── */
+.header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 28px;
+  gap: 20px;
+}
+
+.header-left {}
+.eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #AAA;
+  margin-bottom: 6px;
+}
+.title {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: -0.02em;
+}
+
+.phase-flow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.phase-pill {
+  padding: 7px 16px;
+  border-radius: 100px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  border: 1.5px solid #E0E0E0;
+  color: #AAA;
+  background: white;
+}
+.phase-pill.on {
+  background: #111;
+  border-color: #111;
+  color: white;
+}
+.arr { color: #CCC; font-size: 14px; }
+
+/* ── Map shell ── */
+.map {
+  border: 1px solid #DEDED9;
+  border-radius: 16px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.06);
+}
+
+/* ── Rows ── */
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border-bottom: 1px solid #EAEAE6;
+}
+.row:last-child { border-bottom: none; }
+
+.cell {
+  padding: 24px 28px;
+  border-right: 1px solid #EAEAE6;
+  position: relative;
+  overflow: hidden;
+}
+.cell:last-child { border-right: none; }
+
+/* Row label */
+.rl {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #C8C8C4;
+  margin-bottom: 16px;
+}
+.rl.purple { color: #7C3AED; }
+
+/* ── Phase header row ── */
+.phase-row { background: #F8F8F6; }
+
+.ph-bg-num {
+  position: absolute;
+  right: -4px;
+  bottom: -14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 88px;
+  font-weight: 700;
+  color: #EFEFEC;
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+}
+
+.ph-phase-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #7C3AED;
+  margin-bottom: 6px;
+}
+.ph-name {
+  font-size: 17px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: -0.025em;
+  margin-bottom: 4px;
+}
+.ph-sub {
+  font-size: 11.5px;
+  color: #ABABAB;
+  line-height: 1.5;
+}
+
+/* ── Activities ── */
+.act-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.act-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.act-n {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: #D0D0CC;
+  padding-top: 1px;
+  min-width: 18px;
+  font-weight: 500;
+}
+.act-text {
+  font-size: 13px;
+  color: #444;
+  line-height: 1.45;
+}
+
+/* ── Emotion row (full width) ── */
+.curve-full {
+  grid-column: 1 / -1;
+  padding: 0;
+  background: #FAFAF8;
+  border-bottom: 1px solid #EAEAE6;
+}
+.curve-head {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 14px 28px 0;
+}
+.legend {
+  display: flex;
+  gap: 14px;
+}
+.leg {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+  color: #ABABAB;
+  font-family: 'JetBrains Mono', monospace;
+}
+.leg-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+}
+
+/* ── Moment cards ── */
+.moment {
+  border-radius: 8px;
+  padding: 11px 14px;
+  margin-bottom: 9px;
+}
+.moment:last-child { margin-bottom: 0; }
+
+.moment.lo {
+  background: #FEF2F2;
+  border-left: 3px solid #FCA5A5;
+}
+.moment.hi {
+  background: #F5F3FF;
+  border-left: 3px solid #7C3AED;
+}
+.mtag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.lo .mtag { color: #EF4444; }
+.hi .mtag { color: #7C3AED; }
+.mq {
+  font-family: 'Playfair Display', serif;
+  font-size: 12.5px;
+  color: #555;
+  line-height: 1.55;
+  font-style: italic;
+}
+
+/* ── Opportunities row ── */
+.opp-row { background: #F5F3FF; }
+
+.opp-list { display: flex; flex-direction: column; gap: 10px; }
+.opp-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.opp-badge {
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: #7C3AED;
+  color: white;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.opp-text {
+  font-size: 13px;
+  color: #4C1D95;
+  line-height: 1.45;
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="header">
+    <div class="header-left">
+      <div class="eyebrow">WUD! — User Journey Map · Exploration 01</div>
+      <div class="title">The Full Event Experience</div>
+    </div>
+    <div class="phase-flow">
+      <div class="phase-pill">01 Before</div>
+      <span class="arr">→</span>
+      <div class="phase-pill">02 During</div>
+      <span class="arr">→</span>
+      <div class="phase-pill">03 After</div>
+    </div>
+  </div>
+
+  <div class="map">
+
+    <!-- ── Phase headers ── -->
+    <div class="row phase-row">
+      <div class="cell">
+        <div class="ph-bg-num">01</div>
+        <div class="ph-phase-num">Phase 01</div>
+        <div class="ph-name">Before Event</div>
+        <div class="ph-sub">Discovery → Planning → Getting there</div>
+      </div>
+      <div class="cell">
+        <div class="ph-bg-num">02</div>
+        <div class="ph-phase-num">Phase 02</div>
+        <div class="ph-name">During Event</div>
+        <div class="ph-sub">Arrival → Participation → Socialising</div>
+      </div>
+      <div class="cell">
+        <div class="ph-bg-num">03</div>
+        <div class="ph-phase-num">Phase 03</div>
+        <div class="ph-name">After Event</div>
+        <div class="ph-sub">Departure → Reflection → Sharing</div>
+      </div>
+    </div>
+
+    <!-- ── Activities ── -->
+    <div class="row">
+      <div class="cell">
+        <div class="rl">Actions</div>
+        <ul class="act-list">
+          <li class="act-item"><span class="act-n">1.</span><span class="act-text">Hear about the event</span></li>
+          <li class="act-item"><span class="act-n">2.</span><span class="act-text">Research on Google / Social Media</span></li>
+          <li class="act-item"><span class="act-n">3.</span><span class="act-text">Coordinate with friends</span></li>
+          <li class="act-item"><span class="act-n">4.</span><span class="act-text">Buy tickets online</span></li>
+          <li class="act-item"><span class="act-n">5.</span><span class="act-text">Drive to event</span></li>
+        </ul>
+      </div>
+      <div class="cell">
+        <div class="rl">Actions</div>
+        <ul class="act-list">
+          <li class="act-item"><span class="act-n">1.</span><span class="act-text">See fashion shows on the runway</span></li>
+          <li class="act-item"><span class="act-n">2.</span><span class="act-text">Buy food &amp; drinks</span></li>
+          <li class="act-item"><span class="act-n">3.</span><span class="act-text">See live performances</span></li>
+          <li class="act-item"><span class="act-n">4.</span><span class="act-text">Buy merchandise from local brands</span></li>
+          <li class="act-item"><span class="act-n">5.</span><span class="act-text">Socialise with others</span></li>
+        </ul>
+      </div>
+      <div class="cell">
+        <div class="rl">Actions</div>
+        <ul class="act-list">
+          <li class="act-item"><span class="act-n">1.</span><span class="act-text">Leave event and drive home</span></li>
+          <li class="act-item"><span class="act-n">2.</span><span class="act-text">Look at pictures</span></li>
+          <li class="act-item"><span class="act-n">3.</span><span class="act-text">Talk about event with friends</span></li>
+          <li class="act-item"><span class="act-n">4.</span><span class="act-text">Post on social media</span></li>
+          <li class="act-item"><span class="act-n">5.</span><span class="act-text">Wear the things they bought</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ── Emotion curve (full width) ── -->
+    <div class="curve-full">
+      <div class="curve-head">
+        <div class="rl" style="margin:0;">Emotional Arc</div>
+        <div class="legend">
+          <span class="leg"><span class="leg-dot" style="background:#7C3AED"></span>Positive</span>
+          <span class="leg"><span class="leg-dot" style="background:#FCA5A5"></span>Negative</span>
+        </div>
+      </div>
+      <div style="padding: 6px 28px 16px;">
+        <svg viewBox="0 0 1184 178" style="width:100%;height:auto;display:block;" aria-label="Emotional journey arc across three phases">
+          <defs>
+            <linearGradient id="v1g-pos" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#7C3AED" stop-opacity="0.13"/>
+              <stop offset="100%" stop-color="#7C3AED" stop-opacity="0"/>
+            </linearGradient>
+            <linearGradient id="v1g-neg" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#FCA5A5" stop-opacity="0"/>
+              <stop offset="100%" stop-color="#FCA5A5" stop-opacity="0.16"/>
+            </linearGradient>
+            <clipPath id="v1above"><rect x="0" y="0" width="1184" height="89"/></clipPath>
+            <clipPath id="v1below"><rect x="0" y="89" width="1184" height="89"/></clipPath>
+          </defs>
+
+          <!-- Axis labels -->
+          <text x="6" y="24" font-size="9.5" fill="#D8D8D4" font-family="'JetBrains Mono', monospace">high</text>
+          <text x="6" y="166" font-size="9.5" fill="#D8D8D4" font-family="'JetBrains Mono', monospace">low</text>
+
+          <!-- Baseline -->
+          <line x1="40" y1="89" x2="1184" y2="89" stroke="#E8E8E4" stroke-width="1" stroke-dasharray="6 4"/>
+
+          <!-- Phase dividers -->
+          <line x1="395" y1="14" x2="395" y2="164" stroke="#DEDED9" stroke-width="1.5"/>
+          <line x1="790" y1="14" x2="790" y2="164" stroke="#DEDED9" stroke-width="1.5"/>
+
+          <!-- Positive fill -->
+          <path d="M 40,89 C 68,89 100,140 138,145 C 172,150 200,165 228,168 C 255,168 278,26 318,22 C 354,18 375,85 395,92 C 410,98 428,14 468,12 C 498,10 522,72 545,76 C 565,80 584,100 600,102 C 618,102 642,24 672,20 C 700,16 720,72 742,76 C 754,78 772,85 790,90 C 808,96 828,118 858,124 C 886,130 914,18 950,14 C 980,10 1010,22 1040,22 C 1066,22 1100,44 1184,56 L 1184,89 L 40,89 Z"
+            fill="url(#v1g-pos)" clip-path="url(#v1above)"/>
+
+          <!-- Negative fill -->
+          <path d="M 40,89 C 68,89 100,140 138,145 C 172,150 200,165 228,168 C 255,168 278,26 318,22 C 354,18 375,85 395,92 C 410,98 428,14 468,12 C 498,10 522,72 545,76 C 565,80 584,100 600,102 C 618,102 642,24 672,20 C 700,16 720,72 742,76 C 754,78 772,85 790,90 C 808,96 828,118 858,124 C 886,130 914,18 950,14 C 980,10 1010,22 1040,22 C 1066,22 1100,44 1184,56 L 1184,89 L 40,89 Z"
+            fill="url(#v1g-neg)" clip-path="url(#v1below)"/>
+
+          <!-- Curve -->
+          <path d="M 40,89 C 68,89 100,140 138,145 C 172,150 200,165 228,168 C 255,168 278,26 318,22 C 354,18 375,85 395,92 C 410,98 428,14 468,12 C 498,10 522,72 545,76 C 565,80 584,100 600,102 C 618,102 642,24 672,20 C 700,16 720,72 742,76 C 754,78 772,85 790,90 C 808,96 828,118 858,124 C 886,130 914,18 950,14 C 980,10 1010,22 1040,22 C 1066,22 1100,44 1184,56"
+            fill="none" stroke="#7C3AED" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+          <!-- Low dots -->
+          <circle cx="228" cy="168" r="5.5" fill="white" stroke="#FCA5A5" stroke-width="2.5"/>
+          <circle cx="395" cy="92" r="5.5" fill="white" stroke="#FCA5A5" stroke-width="2.5"/>
+          <circle cx="858" cy="124" r="5.5" fill="white" stroke="#FCA5A5" stroke-width="2.5"/>
+
+          <!-- High dots -->
+          <circle cx="318" cy="22" r="5.5" fill="white" stroke="#7C3AED" stroke-width="2.5"/>
+          <circle cx="468" cy="12" r="5.5" fill="white" stroke="#7C3AED" stroke-width="2.5"/>
+          <circle cx="672" cy="20" r="5.5" fill="white" stroke="#7C3AED" stroke-width="2.5"/>
+          <circle cx="950" cy="14" r="5.5" fill="white" stroke="#7C3AED" stroke-width="2.5"/>
+
+          <!-- Low annotations -->
+          <text x="228" y="178" text-anchor="middle" font-size="9" fill="#EF4444" font-family="'JetBrains Mono', monospace" font-weight="700">↓ coord chaos</text>
+          <text x="410" y="108" text-anchor="start" font-size="9" fill="#EF4444" font-family="'JetBrains Mono', monospace" font-weight="700">↓ parking</text>
+          <text x="858" y="140" text-anchor="middle" font-size="9" fill="#EF4444" font-family="'JetBrains Mono', monospace" font-weight="700">↓ exit crowds</text>
+
+          <!-- High annotations -->
+          <text x="318" y="13" text-anchor="middle" font-size="9" fill="#7C3AED" font-family="'JetBrains Mono', monospace" font-weight="700">↑ ticket excitement</text>
+          <text x="468" y="4" text-anchor="middle" font-size="9" fill="#7C3AED" font-family="'JetBrains Mono', monospace" font-weight="700">↑ fashion wow</text>
+          <text x="672" y="11" text-anchor="middle" font-size="9" fill="#7C3AED" font-family="'JetBrains Mono', monospace" font-weight="700">↑ social high</text>
+          <text x="950" y="5" text-anchor="middle" font-size="9" fill="#7C3AED" font-family="'JetBrains Mono', monospace" font-weight="700">↑ nostalgia</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- ── Key moments ── -->
+    <div class="row">
+      <div class="cell">
+        <div class="rl">Key Moments</div>
+        <div class="moment lo">
+          <div class="mtag">↓ Low point</div>
+          <div class="mq">"How can I plan if I don't have info and planning with friends is HARD!!"</div>
+        </div>
+        <div class="moment hi">
+          <div class="mtag">↑ High point</div>
+          <div class="mq">"I can't wait to go now that I have a ticket!"</div>
+        </div>
+      </div>
+      <div class="cell">
+        <div class="rl">Key Moments</div>
+        <div class="moment lo">
+          <div class="mtag">↓ Low point</div>
+          <div class="mq">"There's so much traffic and I don't know where to find parking?"</div>
+        </div>
+        <div class="moment hi">
+          <div class="mtag">↑ High point</div>
+          <div class="mq">"WOW, I love these clothes!" / "I made a new friend."</div>
+        </div>
+      </div>
+      <div class="cell">
+        <div class="rl">Key Moments</div>
+        <div class="moment lo">
+          <div class="mtag">↓ Low point</div>
+          <div class="mq">"There's traffic and crowds when leaving."</div>
+        </div>
+        <div class="moment hi">
+          <div class="mtag">↑ High point</div>
+          <div class="mq">"That was so much fun!" / "I'm so glad I bought this shirt."</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Opportunities ── -->
+    <div class="row opp-row">
+      <div class="cell">
+        <div class="rl purple">Opportunities</div>
+        <div class="opp-list">
+          <div class="opp-item"><span class="opp-badge">1</span><span class="opp-text">Organise planning tools in one place</span></div>
+          <div class="opp-item"><span class="opp-badge">2</span><span class="opp-text">Consolidate event info so nothing is scattered</span></div>
+          <div class="opp-item"><span class="opp-badge">3</span><span class="opp-text">Make coordination feel less chaotic than a group chat</span></div>
+        </div>
+      </div>
+      <div class="cell">
+        <div class="rl purple">Opportunities</div>
+        <div class="opp-list">
+          <div class="opp-item"><span class="opp-badge">1</span><span class="opp-text">Provide an organised itinerary and map</span></div>
+          <div class="opp-item"><span class="opp-badge">2</span><span class="opp-text">Surface local food and brand alternatives</span></div>
+          <div class="opp-item"><span class="opp-badge">3</span><span class="opp-text">Enable in-event social discovery</span></div>
+        </div>
+      </div>
+      <div class="cell">
+        <div class="rl purple">Opportunities</div>
+        <div class="opp-list">
+          <div class="opp-item"><span class="opp-badge">1</span><span class="opp-text">Provide exit route options</span></div>
+          <div class="opp-item"><span class="opp-badge">2</span><span class="opp-text">Enable post-event sharing and reflection</span></div>
+          <div class="opp-item"><span class="opp-badge">3</span><span class="opp-text">Give users a social record of their experience</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /map -->
+</div><!-- /page -->
+
+</body>
+</html>

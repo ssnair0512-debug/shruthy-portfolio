@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Why. — Case Study Sample</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Press+Start+2P&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=Space+Mono&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white:  #ffffff;
+      --bg:     #f9f9f7;
+      --ink:    #111111;
+      --mute:   #888;
+      --rule:   #e4e4e4;
+      --green:  #3dc98a;
+      --yellow: #f5c840;
+      --pink:   #e0396e;
+      --blue:   #3b8fe8;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--white);
+      color: var(--ink);
+      font-family: 'Inter', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ─────────────── SKIP LINK ─────────────── */
+    .skip {
+      position: absolute; top: -60px; left: 16px;
+      background: var(--yellow); color: var(--ink);
+      padding: 8px 16px; border-radius: 4px;
+      font-size: 12px; font-weight: 600; z-index: 9999;
+      transition: top .15s;
+    }
+    .skip:focus { top: 16px; }
+
+    /* ─────────────── NAV ─────────────── */
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--ink);
+      height: 48px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 clamp(16px, 4vw, 52px);
+      gap: 12px;
+    }
+
+    .nav-left { display: flex; align-items: center; gap: 14px; }
+
+    /* small square logo icon */
+    .nav-icon {
+      width: 28px; height: 28px;
+      border: 1.5px solid rgba(255,255,255,0.3);
+      border-radius: 5px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .nav-icon svg { display: block; }
+
+    .nav-tabs { display: flex; gap: 3px; }
+
+    .nav-tab {
+      font-family: 'Inter', sans-serif;
+      font-size: 10.5px; font-weight: 500;
+      letter-spacing: 0.04em; text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      padding: 5px 12px; border-radius: 4px;
+      transition: background .15s, color .15s;
+    }
+    .nav-tab:hover { color: #fff; }
+    .nav-tab.active { background: var(--yellow); color: var(--ink); font-weight: 600; }
+
+    .nav-right { display: flex; align-items: center; gap: 8px; }
+
+    /* two small icon pills */
+    .nav-pill {
+      width: 28px; height: 28px; border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,0.2);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .nav-pill svg { display: block; }
+
+    .nav-contact {
+      font-family: 'Inter', sans-serif;
+      font-size: 10.5px; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--ink); background: #fff;
+      padding: 6px 14px; border-radius: 4px;
+      transition: background .15s;
+    }
+    .nav-contact:hover { background: var(--yellow); }
+
+    /* ─────────────── CASE STUDY HEADER ─────────────── */
+    .cs-header {
+      padding: clamp(40px, 6vw, 80px) clamp(16px, 5vw, 60px) 0;
+    }
+
+    /* top row: meta left, stat boxes right */
+    .cs-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .cs-breadcrumb {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--mute);
+      margin-bottom: 14px;
+    }
+
+    /* tag pills above title */
+    .cs-tags {
+      display: flex; gap: 8px; flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .cs-tag {
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 5px 13px;
+      border: 1.5px solid var(--rule);
+      border-radius: 999px;
+      color: var(--mute);
+    }
+
+    /* The big title */
+    .cs-title {
+      font-family: 'Bebas Neue', 'Arial Black', sans-serif;
+      font-size: clamp(72px, 14vw, 160px);
+      line-height: 0.92;
+      letter-spacing: 0.03em;
+      color: var(--ink);
+      margin-bottom: 22px;
+    }
+
+    /* description below title */
+    .cs-desc {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-style: italic;
+      font-size: clamp(16px, 1.8vw, 22px);
+      color: var(--mute);
+      max-width: 52ch;
+      line-height: 1.55;
+      margin-bottom: 28px;
+    }
+
+    .cs-view-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--ink);
+      border-bottom: 1.5px solid var(--ink);
+      padding-bottom: 2px;
+      transition: color .15s, border-color .15s;
+    }
+    .cs-view-link:hover { color: var(--green); border-color: var(--green); }
+
+    /* right: two stacked colored boxes */
+    .cs-meta-stack {
+      display: flex; flex-direction: column; gap: 8px;
+      flex-shrink: 0; min-width: 164px;
+    }
+    .cs-meta-box {
+      padding: 13px 18px; border-radius: 8px;
+    }
+    .cs-meta-box.pink { background: var(--pink); }
+    .cs-meta-box.blue { background: var(--blue); }
+    .cs-meta-box-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(255,255,255,0.65); margin-bottom: 5px;
+    }
+    .cs-meta-box-val {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px; font-weight: 600; color: #fff;
+    }
+
+    /* ─────────────── HERO IMAGE ─────────────── */
+    .hero {
+      width: 100%;
+      height: clamp(280px, 44vw, 560px);
+      margin-top: clamp(36px, 5vw, 60px);
+      position: relative; overflow: hidden;
+    }
+
+    /* Full-bleed editorial photo simulation — dark green tint for Why */
+    .hero-fill {
+      width: 100%; height: 100%;
+      background: linear-gradient(
+        150deg,
+        #0c2416 0%,
+        #183628 45%,
+        #091a0f 100%
+      );
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+
+    /* Faint grid overlay */
+    .hero-fill::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 47px, rgba(61,201,138,.05) 48px),
+                  repeating-linear-gradient(90deg, transparent, transparent 47px, rgba(61,201,138,.03) 48px);
+    }
+
+    /* Floating UI window */
+    .win {
+      width: min(560px, 84%);
+      background: rgba(10,22,14,.95);
+      border: 1px solid rgba(61,201,138,.22);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 48px 100px rgba(0,0,0,.55);
+      position: relative; z-index: 2;
+    }
+    .win-bar {
+      background: #070f09;
+      border-bottom: 1px solid rgba(61,201,138,.15);
+      padding: 10px 14px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .win-dots { display: flex; gap: 5px; }
+    .win-dot { width: 9px; height: 9px; border-radius: 50%; }
+    .win-dot.r { background: #ff5f57; }
+    .win-dot.y { background: #febc2e; }
+    .win-dot.g { background: #28c840; }
+    .win-url {
+      font-family: 'Space Mono', monospace;
+      font-size: 9.5px; color: rgba(61,201,138,.4);
+    }
+    .win-body { padding: 2px 0; }
+    .win-row {
+      display: flex; align-items: center; gap: 10px;
+      padding: 11px 14px;
+      border-bottom: 1px solid rgba(61,201,138,.07);
+    }
+    .win-row:last-child { border-bottom: none; }
+    .win-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 9.5px; color: rgba(61,201,138,.35);
+      width: 28px; flex-shrink: 0;
+    }
+    .win-text {
+      font-size: 12px; color: rgba(240,240,240,.82);
+      flex: 1; font-family: 'Inter', sans-serif;
+    }
+    .win-badge {
+      font-size: 9px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase;
+      padding: 2px 8px; border-radius: 3px; flex-shrink: 0;
+    }
+    .win-badge.i { background: rgba(59,143,232,.13); color: #5badff; }
+    .win-badge.h { background: rgba(245,200,64,.1); color: #e8c040; }
+    .win-badge.p { background: rgba(61,201,138,.12); color: var(--green); }
+    .win-time {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px; color: rgba(240,240,240,.28); flex-shrink: 0;
+    }
+
+    /* ─────────────── TEXT SECTIONS ─────────────── */
+    .cs-section {
+      padding: clamp(60px, 8vw, 100px) clamp(16px, 5vw, 60px);
+    }
+    .cs-section-inner {
+      max-width: 820px; margin: 0 auto;
+    }
+
+    .s-heading {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 400;
+      line-height: 1.15;
+      letter-spacing: -.01em;
+      margin-bottom: 28px;
+    }
+
+    .s-body {
+      font-size: clamp(14px, 1.45vw, 16px);
+      color: #444;
+      line-height: 1.82;
+      max-width: 64ch;
+      margin-bottom: 18px;
+    }
+    .s-body:last-child { margin-bottom: 0; }
+
+    /* bullet list */
+    .s-list {
+      list-style: none;
+      margin: 16px 0 20px;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .s-list li {
+      font-size: 15px; color: #444; line-height: 1.72;
+      padding-left: 22px; position: relative;
+    }
+    .s-list li::before {
+      content: '—';
+      position: absolute; left: 0;
+      color: var(--green); font-weight: 700;
+    }
+
+    /* bold colored constraint lines — mirrors Meridian's "No direct access…" */
+    .s-constraint { margin-bottom: 28px; }
+    .s-constraint-head {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(18px, 2.4vw, 26px);
+      font-weight: 700; line-height: 1.3;
+      margin-bottom: 8px;
+    }
+    .s-constraint-head.red  { color: #d63030; }
+    .s-constraint-head.blue { color: #2f86e0; }
+    .s-constraint-head.grn  { color: var(--green); }
+    .s-constraint-body {
+      font-size: 14px; color: #666; line-height: 1.72; max-width: 60ch;
+    }
+
+    /* ─────────────── EDITORIAL IMAGE BREAKS ─────────────── */
+    .editorial {
+      width: 100%; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+    .editorial-inner {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .editorial-caption {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
+      color: rgba(255,255,255,.22);
+    }
+    /* each editorial image gets a unique tonal treatment */
+    .ed1 { height: clamp(220px,34vw,460px); background: linear-gradient(140deg,#0d2016 0%,#1c3a26 100%); }
+    .ed2 { height: clamp(220px,34vw,460px); background: linear-gradient(140deg,#1a120a 0%,#2e200d 100%); }
+    .ed3 { height: clamp(220px,34vw,460px); background: linear-gradient(140deg,#09101a 0%,#12192e 100%); }
+    .ed4 { height: clamp(220px,34vw,460px); background: linear-gradient(140deg,#16090f 0%,#280d18 100%); }
+    .ed5 { height: clamp(220px,34vw,460px); background: linear-gradient(140deg,#0f1a09 0%,#1c2e0d 100%); }
+    .ed6 { height: clamp(220px,34vw,460px); background: linear-gradient(140deg,#080914 0%,#10112a 100%); }
+
+    /* ─────────────── PREV / NEXT ─────────────── */
+    .proj-nav {
+      padding: clamp(32px,5vw,48px) clamp(16px,5vw,60px);
+      border-top: 1px solid var(--rule);
+      background: var(--bg);
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 16px;
+    }
+    .pn-link { display: flex; flex-direction: column; gap: 5px; }
+    .pn-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--mute);
+    }
+    .pn-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(20px,2.5vw,30px);
+      letter-spacing: .04em;
+      color: var(--ink);
+      transition: color .15s;
+    }
+    .pn-link:hover .pn-title { color: var(--green); }
+
+    /* ─────────────── LET'S TALK ─────────────── */
+    .lets-talk {
+      padding: clamp(60px,9vw,110px) clamp(16px,5vw,60px);
+      background: var(--white);
+    }
+    .lt-inner {
+      max-width: 1080px; margin: 0 auto;
+      display: flex; align-items: center;
+      gap: clamp(32px,6vw,72px);
+      flex-wrap: wrap;
+    }
+
+    /* 4-lobe ghost/clover mascot — matches Nudge green mascot */
+    .mascot {
+      flex-shrink: 0;
+      width: clamp(100px,14vw,158px);
+      height: clamp(100px,14vw,158px);
+    }
+
+    .lt-content { flex: 1; min-width: 240px; }
+
+    .lt-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(60px,9vw,120px);
+      letter-spacing: .06em;
+      line-height: .93;
+      color: var(--ink);
+      margin-bottom: 18px;
+    }
+
+    .lt-body {
+      font-size: clamp(13px,1.4vw,15px);
+      color: #666;
+      max-width: 50ch;
+      line-height: 1.78;
+      margin-bottom: 24px;
+    }
+
+    /* Faux tweet card */
+    .tweet-card {
+      display: inline-flex; align-items: flex-start; gap: 10px;
+      background: var(--bg);
+      border: 1px solid var(--rule);
+      border-radius: 10px;
+      padding: 14px 18px;
+      max-width: 320px;
+    }
+    .tweet-avatar {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: var(--green); flex-shrink: 0;
+    }
+    .tweet-body { }
+    .tweet-handle {
+      font-size: 12px; font-weight: 600; color: var(--ink);
+      margin-bottom: 4px;
+    }
+    .tweet-text {
+      font-size: 12px; color: #555; line-height: 1.55;
+    }
+
+    /* ─────────────── CONTACT STRIP ─────────────── */
+    .contact-strip {
+      background: var(--yellow);
+      position: relative; overflow: hidden;
+      padding: clamp(36px,6vw,68px) clamp(16px,5vw,60px);
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 24px; flex-wrap: wrap;
+    }
+    /* diagonal hazard stripes */
+    .contact-strip::before {
+      content: '';
+      position: absolute; inset: 0; pointer-events: none;
+      background: repeating-linear-gradient(
+        -45deg,
+        transparent 0, transparent 22px,
+        rgba(0,0,0,.055) 22px, rgba(0,0,0,.055) 23px
+      );
+    }
+
+    /* CONT4CT with circuit-board decoration */
+    .ct-label-wrap {
+      position: relative; z-index: 1;
+      display: inline-block;
+    }
+    .ct-label {
+      font-family: 'Press Start 2P', monospace;
+      font-size: clamp(18px,4vw,52px);
+      color: var(--ink);
+      display: block;
+      /* outer border box */
+      border: 2px solid rgba(0,0,0,.22);
+      padding: 8px 16px;
+      border-radius: 4px;
+      position: relative;
+    }
+    /* corner circuit dots */
+    .ct-label::before,
+    .ct-label::after {
+      content: '';
+      position: absolute;
+      width: 8px; height: 8px;
+      background: var(--green);
+      border-radius: 50%;
+    }
+    .ct-label::before { top: -5px; left: -5px; }
+    .ct-label::after  { bottom: -5px; right: -5px; }
+
+    /* trace lines */
+    .ct-trace-tl,
+    .ct-trace-br {
+      position: absolute;
+      background: var(--green);
+    }
+    .ct-trace-tl {
+      width: 24px; height: 2px;
+      top: -1px; left: -28px;
+    }
+    .ct-trace-br {
+      width: 24px; height: 2px;
+      bottom: -1px; right: -28px;
+    }
+
+    .ct-right {
+      position: relative; z-index: 1;
+      display: flex; flex-direction: column; align-items: flex-end; gap: 10px;
+    }
+    .ct-email {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px; color: rgba(0,0,0,.5);
+    }
+    .ct-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--ink); color: #fff;
+      font-family: 'Inter', sans-serif; font-weight: 600;
+      font-size: 12px; letter-spacing: .06em; text-transform: uppercase;
+      padding: 12px 24px; border-radius: 4px;
+      transition: opacity .15s;
+    }
+    .ct-btn:hover { opacity: .82; }
+
+    /* ─────────────── FOOTER ─────────────── */
+    footer {
+      background: var(--ink);
+      padding: 20px clamp(16px,5vw,60px);
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .ft-name {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px; color: rgba(255,255,255,.4);
+    }
+    .ft-links { display: flex; gap: 20px; }
+    .ft-links a {
+      font-size: 11px; color: rgba(255,255,255,.38);
+      transition: color .15s;
+    }
+    .ft-links a:hover { color: #fff; }
+
+    /* ─────────────── RESPONSIVE ─────────────── */
+    @media (max-width: 600px) {
+      .nav-tabs { display: none; }
+      .cs-meta-stack { flex-direction: row; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+
+<a href="#main-content" class="skip">Skip to main content</a>
+
+<!-- ── NAV ── -->
+<nav class="nav" aria-label="Site navigation">
+  <div class="nav-left">
+    <div class="nav-icon" aria-hidden="true">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <rect x="1" y="1" width="5" height="5" rx="1" fill="rgba(255,255,255,.45)"/>
+        <rect x="8" y="1" width="5" height="5" rx="1" fill="rgba(255,255,255,.45)"/>
+        <rect x="1" y="8" width="5" height="5" rx="1" fill="rgba(255,255,255,.45)"/>
+        <rect x="8" y="8" width="5" height="5" rx="1" fill="rgba(255,255,255,.45)"/>
+      </svg>
+    </div>
+    <div class="nav-tabs">
+      <a href="#" class="nav-tab">Home</a>
+      <a href="#" class="nav-tab">About</a>
+      <a href="#" class="nav-tab active" aria-current="page">Case Study</a>
+      <a href="#" class="nav-tab">Playground</a>
+    </div>
+  </div>
+  <div class="nav-right">
+    <div class="nav-pill" aria-hidden="true">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+        <circle cx="6" cy="6" r="4" stroke="rgba(255,255,255,.4)" stroke-width="1.2"/>
+      </svg>
+    </div>
+    <div class="nav-pill" aria-hidden="true">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+        <path d="M2 6h8M6 2l4 4-4 4" stroke="rgba(255,255,255,.4)" stroke-width="1.2" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <a href="mailto:sndesigns50@gmail.com" class="nav-contact">▷ Contact</a>
+  </div>
+</nav>
+
+<main id="main-content">
+
+  <!-- ── CASE STUDY HEADER ── -->
+  <header class="cs-header">
+
+    <div class="cs-header-row">
+
+      <!-- LEFT COLUMN: breadcrumb, tags, title, desc -->
+      <div style="flex:1; min-width:260px;">
+        <p class="cs-breadcrumb">Apr 2025 &nbsp;·&nbsp; Project #01</p>
+
+        <div class="cs-tags">
+          <span class="cs-tag">Feature Design</span>
+          <span class="cs-tag">Decision Systems</span>
+        </div>
+
+        <h1 class="cs-title">WHY.</h1>
+
+        <p class="cs-desc">
+          When teams have less time relitigating old decisions,<br/>
+          they have more time to make new ones.
+        </p>
+
+        <a href="#" class="cs-view-link">
+          View project
+          <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true">
+            <path d="M2 9L9 2M9 2H4M9 2V7" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- RIGHT COLUMN: colored metadata boxes -->
+      <div class="cs-meta-stack">
+        <div class="cs-meta-box pink">
+          <div class="cs-meta-box-label">Role</div>
+          <div class="cs-meta-box-val">Product Designer</div>
+        </div>
+        <div class="cs-meta-box blue">
+          <div class="cs-meta-box-label">Timeline</div>
+          <div class="cs-meta-box-val">8 wks · Q1 2025</div>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ── HERO IMAGE ── -->
+  <div class="hero" role="img" aria-label="Why. decision ledger interface — numbered list of engineering and product decisions">
+    <div class="hero-fill">
+      <div class="win">
+        <div class="win-bar">
+          <div class="win-dots">
+            <div class="win-dot r"></div>
+            <div class="win-dot y"></div>
+            <div class="win-dot g"></div>
+          </div>
+          <span class="win-url">why.relay.app — Decision Ledger</span>
+        </div>
+        <div class="win-body">
+          <div class="win-row">
+            <span class="win-num">#48</span>
+            <span class="win-text">Move onboarding email out of Mailchimp</span>
+            <span class="win-badge i">infra</span>
+            <span class="win-time">Drafting</span>
+          </div>
+          <div class="win-row">
+            <span class="win-num">#47</span>
+            <span class="win-text">Audit log stays in Postgres — no Elasticsearch</span>
+            <span class="win-badge i">infra</span>
+            <span class="win-time">5d ago</span>
+          </div>
+          <div class="win-row">
+            <span class="win-num">#46</span>
+            <span class="win-text">Drop system design round from hiring loop</span>
+            <span class="win-badge h">hiring</span>
+            <span class="win-time">9d ago</span>
+          </div>
+          <div class="win-row">
+            <span class="win-num">#45</span>
+            <span class="win-text">Decisions are public by default inside the org</span>
+            <span class="win-badge p">product</span>
+            <span class="win-time">13d ago</span>
+          </div>
+          <div class="win-row" style="opacity:.38">
+            <span class="win-num">#44</span>
+            <span class="win-text">Postgres over DynamoDB for the primary workload</span>
+            <span class="win-badge i">infra</span>
+            <span class="win-time">3wk ago</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── THE REAL PROBLEM ── -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <h2 class="s-heading">The Real Problem</h2>
+
+      <p class="s-body">Companies at Relay's scale were becoming 2–5× slower because they kept revisiting decisions they'd already made. Teams would rebuild the same system twice because nobody remembered why the original approach was chosen. The reasoning had evaporated.</p>
+
+      <p class="s-body">There wasn't a single source of truth for decisions — and no one had a system for capturing them in the moment they were made.</p>
+
+      <p class="s-body">The problems were consistent across every team I spoke with:</p>
+
+      <ul class="s-list">
+        <li>No way to find a decision after the fact, or understand why it was made</li>
+        <li>Decisions lived in Slack threads, meeting notes, and people's heads</li>
+        <li>New engineers inherited choices with no context — and had no way to get it</li>
+      </ul>
+
+      <p class="s-body">I ran a deep-dive across 13 directions over 3 timing shapes. Individual contributors, managers, and lead stakeholders all described the same pattern: the decision happens fast, and the reasoning disappears faster. Before this project, several internal attempts had been made — none had shipped.</p>
+    </div>
+  </section>
+
+  <!-- ── EDITORIAL IMAGE 1 ── -->
+  <div class="editorial ed1" role="img" aria-label="Research wall — affinity map from 13 interviews about decision workflows">
+    <div class="editorial-inner">
+      <span class="editorial-caption">Research synthesis &nbsp;·&nbsp; Affinity mapping &nbsp;·&nbsp; 13 interviews</span>
+    </div>
+  </div>
+
+  <!-- ── FINDING THE FIX ── -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <h2 class="s-heading">Finding the Fix</h2>
+
+      <p class="s-body">Every existing tool I audited shared the same fatal flaw: they required a context switch. You had to stop what you were doing, open a wiki, fill in a template, and then remember to link it back to the conversation. Nobody did this consistently — especially not under time pressure.</p>
+
+      <p class="s-body"><strong>My bet:</strong> the tool had to live where the decision happened, not two tabs away.</p>
+
+      <p class="s-body">I identified three distinct moments when teams naturally pause after making a decision: in-thread (right after alignment), post-meeting (within 10 minutes of wrapping), and async-retrospective (when someone needs to explain past reasoning). Each timing shape needed a different entry point.</p>
+
+      <ul class="s-list">
+        <li>Round 1 — Slack bot that intercepted decision signals and prompted logging. Tested with two teams. Turned off by day three (too interruptive).</li>
+        <li>Round 2 — Passive digest. Better, but nobody read it. Discoverability wasn't the problem.</li>
+        <li>Round 3 — Persistent, numbered, org-visible ledger. 30-second capture. Fixed format: what, why, who, when.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ── EDITORIAL IMAGE 2 ── -->
+  <div class="editorial ed2" role="img" aria-label="Prototype — Slack bot capture flow, iteration 2">
+    <div class="editorial-inner">
+      <span class="editorial-caption">Prototype &nbsp;·&nbsp; Slack capture flow &nbsp;·&nbsp; Iteration 2</span>
+    </div>
+  </div>
+
+  <!-- ── WHAT ACTUALLY HAPPENED ── -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <h2 class="s-heading">What Actually Happened</h2>
+
+      <p class="s-body">The bot-driven model failed faster than I expected — and that was useful. 40 prompts in the first day. Everything turned off by day three. The signal was clear: interruption was worse than the problem we were solving.</p>
+
+      <p class="s-body">The digest approach had a subtler failure. People checked it once, found it interesting, and never went back. The friction wasn't in the logging — it was in the habit formation. Nobody builds a habit around a digest.</p>
+
+      <p class="s-body">The ledger model worked because it removed both failure modes. No interruptions during work. No separate inbox to maintain. You write a decision into the ledger when you're ready, and it's there when anyone needs it — searchable, linkable, numbered.</p>
+
+      <ul class="s-list">
+        <li>"It doesn't interrupt me — it's just there when I need it"</li>
+        <li>"I stopped asking 'why did we do this' in every standup"</li>
+        <li>"New engineers actually read these before asking questions"</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ── EDITORIAL IMAGE 3 ── -->
+  <div class="editorial ed3" role="img" aria-label="Final design — Why. decision ledger on desktop">
+    <div class="editorial-inner">
+      <span class="editorial-caption">Final design &nbsp;·&nbsp; Why. ledger &nbsp;·&nbsp; Desktop</span>
+    </div>
+  </div>
+
+  <!-- ── WHAT CHANGED ── -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <h2 class="s-heading">What Changed</h2>
+
+      <p class="s-body">Three weeks after launching Why. with the Relay team, the behaviour shifted. New engineers started linking decisions in PR descriptions. Post-mortems referenced specific ledger entries by number. The most common feedback was not about the feature — it was about what they'd been missing.</p>
+
+      <ul class="s-list">
+        <li>60+ decisions logged in the first 3 weeks without any prompting or mandate</li>
+        <li>4 teams adopted it across the org without being asked</li>
+        <li>Zero support requests or friction complaints in the capture flow</li>
+      </ul>
+
+      <p class="s-body">The key insight: low-friction beats comprehensive. A decision with four fields that actually gets logged beats a 12-field template that sits empty. The format was the feature.</p>
+    </div>
+  </section>
+
+  <!-- ── EDITORIAL IMAGE 4 ── -->
+  <div class="editorial ed4" role="img" aria-label="Sprint review — team using Why. as the source of truth">
+    <div class="editorial-inner">
+      <span class="editorial-caption">Sprint review &nbsp;·&nbsp; Team using Why. as source of truth</span>
+    </div>
+  </div>
+
+  <!-- ── WHAT I HAD TO WORK WITH ── -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <h2 class="s-heading">What I Had to Work With</h2>
+
+      <p class="s-body">No direct access to most stakeholders. Which questions surface required working against constraints without reworking the core infrastructure — everything had to sit on top of existing Postgres tables and the Slack integration already in place.</p>
+
+      <p class="s-body"><strong>A real design system,</strong> available and fully documented. The new surface had to feel native to it from day one — no new patterns, no new components without strong justification.</p>
+
+      <p class="s-body"><strong>An N of 1</strong> available for co-design. Only a single power user accessible for live sessions. All broader signal came through interview notes and async feedback loops.</p>
+
+      <div style="margin-top: 32px;">
+        <div class="s-constraint">
+          <div class="s-constraint-head red">No direct access to the engineering backlog.</div>
+          <p class="s-constraint-body">Prioritisation decisions had to be made with incomplete information. Everything shipped had to be reversible or additive — no breaking changes to existing patterns.</p>
+        </div>
+        <div class="s-constraint">
+          <div class="s-constraint-head blue">A real design system available.</div>
+          <p class="s-constraint-body">Full component library in production. The new capture surface had to slot in without introducing new primitives — a significant constraint on visual exploration.</p>
+        </div>
+        <div class="s-constraint">
+          <div class="s-constraint-head grn">An N of 1 co-design partner.</div>
+          <p class="s-constraint-body">Testing relied heavily on a single internal advocate. Validation cycles were longer, and I had to be more deliberate about when to observe versus when to ask.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── EDITORIAL IMAGE 5 ── -->
+  <div class="editorial ed5" role="img" aria-label="Constraints mapping — kickoff board with infrastructure notes">
+    <div class="editorial-inner">
+      <span class="editorial-caption">Kickoff &nbsp;·&nbsp; Constraints map &nbsp;·&nbsp; Infrastructure audit</span>
+    </div>
+  </div>
+
+  <!-- ── WHAT I'D DO DIFFERENTLY ── -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <h2 class="s-heading">What I'd Do Differently</h2>
+
+      <p class="s-body">I'd run the usability tests earlier — and with real decisions, not hypotheticals. The bot-driven approach failed not because the concept was wrong, but because I tested it with prompts that didn't carry the emotional weight of an actual architectural call. Real stakes surface real behaviour.</p>
+
+      <p class="s-body">I'd invest more time in the search and retrieval layer from the start. The ledger works as a write-only tool today. But the value compounds when you can retrieve fast — by date, by team, by topic, by outcome. That surface deserved more design attention than the timeline allowed.</p>
+
+      <p class="s-body">I'd also document the negative space better. I explored 13 directions before converging. Most of those directions were discarded quickly, and the reasoning for why only exists in my notes. That context should have been more legible to the team.</p>
+    </div>
+  </section>
+
+  <!-- ── EDITORIAL IMAGE 6 ── -->
+  <div class="editorial ed6" role="img" aria-label="Retrospective notes — what a second pass would look like">
+    <div class="editorial-inner">
+      <span class="editorial-caption">Retrospective &nbsp;·&nbsp; What a second pass would look like</span>
+    </div>
+  </div>
+
+  <!-- ── WHAT I LEARNED ── -->
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <h2 class="s-heading">What I Learned</h2>
+
+      <p class="s-body">Capture is a product problem. Teams don't fail to document decisions because they're lazy — they fail because the act of documentation is structurally disconnected from the act of deciding. Fix the timing and the format, and behaviour follows without a mandate.</p>
+
+      <p class="s-body">I also learned that visible numbers matter more than I expected. The fact that decisions were numbered — #45, #46, #47 — gave the ledger momentum and made entries citable in conversation. "We made this call — it's #47" is a sentence that only exists because the format made it natural.</p>
+
+      <p class="s-body">The best knowledge system is the one that asks for the least while delivering the most. Why. taught me to design for the moment of minimum friction, not the moment of maximum detail.</p>
+    </div>
+  </section>
+
+  <!-- ── PREV / NEXT ── -->
+  <nav class="proj-nav" aria-label="Project navigation">
+    <a href="#" class="pn-link" aria-label="Previous project: WUD!">
+      <span class="pn-label">← Previous</span>
+      <span class="pn-title">WUD!</span>
+    </a>
+    <a href="#" class="pn-link" style="text-align:right" aria-label="Next project">
+      <span class="pn-label">Next →</span>
+      <span class="pn-title">TBD</span>
+    </a>
+  </nav>
+
+  <!-- ── LET'S TALK ── -->
+  <section class="lets-talk" aria-labelledby="lt-heading">
+    <div class="lt-inner">
+
+      <!-- 4-lobe mascot (SVG so the shape is accurate to reference) -->
+      <div class="mascot" aria-hidden="true">
+        <svg viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- 4 overlapping circles form the clover/ghost body -->
+          <circle cx="48" cy="48" r="42" fill="#3dc98a"/>
+          <circle cx="92" cy="48" r="42" fill="#3dc98a"/>
+          <circle cx="48" cy="92" r="42" fill="#3dc98a"/>
+          <circle cx="92" cy="92" r="42" fill="#3dc98a"/>
+          <!-- eyes -->
+          <circle cx="54" cy="76" r="8" fill="#111"/>
+          <circle cx="86" cy="76" r="8" fill="#111"/>
+          <!-- eye shine -->
+          <circle cx="57" cy="73" r="2.5" fill="#fff"/>
+          <circle cx="89" cy="73" r="2.5" fill="#fff"/>
+        </svg>
+      </div>
+
+      <div class="lt-content">
+        <h2 class="lt-heading" id="lt-heading">LET'S<br/>TALK</h2>
+        <p class="lt-body">
+          I'm most energised by projects where I can dig into complex
+          problems, collaborate with smart people, and ship things that
+          genuinely improve someone's day.
+        </p>
+
+        <!-- faux tweet card -->
+        <div class="tweet-card">
+          <div class="tweet-avatar" aria-hidden="true"></div>
+          <div class="tweet-body">
+            <div class="tweet-handle">@shruthynair</div>
+            <div class="tweet-text">Open to contract work, full time roles, and interesting conversations about hard design problems. ♥ 3</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── CONTACT STRIP ── -->
+  <div class="contact-strip" role="complementary" aria-label="Contact">
+    <div class="ct-label-wrap">
+      <span class="ct-label">
+        CONT4CT
+        <span class="ct-trace-tl"></span>
+        <span class="ct-trace-br"></span>
+      </span>
+    </div>
+    <div class="ct-right">
+      <span class="ct-email">sndesigns50@gmail.com</span>
+      <a href="mailto:sndesigns50@gmail.com" class="ct-btn">
+        Send a message →
+      </a>
+    </div>
+  </div>
+
+</main>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <span class="ft-name">Shruthy Nair · Product Designer · 2025</span>
+  <nav class="ft-links" aria-label="Social links">
+    <a href="https://linkedin.com/in/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    <a href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHub</a>
+    <a href="/resume.pdf" target="_blank">Resume</a>
+  </nav>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Variation B — Side-by-Side Rows</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #ffffff; --surface: #f5f5f5;
+      --text-primary: #0a0a0a; --text-secondary: #555555; --text-muted: #999999;
+      --border: #e5e5e5;
+    }
+    body { background: var(--bg); font-family: 'IBM Plex Sans', sans-serif; padding: 48px 24px 80px; max-width: 880px; margin: 0 auto; }
+    .badge { display: inline-block; font-family: 'IBM Plex Mono', monospace; font-size: 0.58rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; background: #0a0a0a; color: #fff; padding: 4px 10px; border-radius: 4px; margin-bottom: 32px; }
+    .section-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 20px; }
+    h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 600; color: var(--text-primary); margin-bottom: 10px; line-height: 1.3; }
+    .intro { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 36px; max-width: 560px; }
+
+    /* Each tool row */
+    .tool-row {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 0;
+      border-top: 1px solid var(--border);
+    }
+    @media (max-width: 640px) {
+      .tool-row { grid-template-columns: 1fr; }
+    }
+
+    /* Left: screenshot panel */
+    .row-img {
+      position: relative;
+      min-height: 200px;
+      display: flex; align-items: center; justify-content: center;
+      border-right: 1px solid var(--border);
+      padding: 20px;
+    }
+    .row-img.slack  { background: linear-gradient(160deg, #f7f4ff 0%, #ede5ff 100%); }
+    .row-img.notion { background: linear-gradient(160deg, #f9f9f7 0%, #eeecea 100%); }
+    .row-img.loom   { background: linear-gradient(160deg, #fff5f2 0%, #ffe8e1 100%); }
+    .row-img.jira   { background: linear-gradient(160deg, #f2f6ff 0%, #e3ecff 100%); }
+
+    /* Mock UI */
+    .mock-ui { width: 100%; border-radius: 7px; background: white; box-shadow: 0 2px 14px rgba(0,0,0,0.09); overflow: hidden; }
+    .mock-topbar { height: 24px; background: #f5f5f5; border-bottom: 1px solid #e8e8e8; display: flex; align-items: center; padding: 0 10px; gap: 5px; }
+    .mock-dot { width: 7px; height: 7px; border-radius: 50%; }
+    .mock-body { padding: 12px; display: flex; flex-direction: column; gap: 5px; }
+    .mock-line { height: 6px; border-radius: 3px; background: #ebebeb; }
+    .mock-bubble { background: #ebebeb; border-radius: 10px 10px 10px 2px; padding: 7px 11px; max-width: 78%; display: flex; flex-direction: column; gap: 4px; }
+
+    /* Gap badge on image */
+    .gap-badge {
+      position: absolute; top: 12px; left: 12px;
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.5rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+      background: rgba(10,10,10,0.78); color: #fff;
+      padding: 4px 9px; border-radius: 4px;
+    }
+
+    /* Right: text panel */
+    .row-text {
+      padding: 28px 32px;
+      display: flex; flex-direction: column; gap: 10px;
+      justify-content: center;
+    }
+
+    .row-num-title { display: flex; align-items: baseline; gap: 10px; }
+    .row-num { font-family: 'IBM Plex Mono', monospace; font-size: 0.58rem; color: var(--text-muted); }
+    .row-title { font-size: 1rem; font-weight: 600; color: var(--text-primary); }
+    .row-platforms { font-family: 'IBM Plex Mono', monospace; font-size: 0.58rem; color: var(--text-muted); }
+
+    /* Lucy-style: labelled "Why this matters" reasoning */
+    .row-reason-label {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.54rem; font-weight: 500;
+      letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted);
+      margin-top: 4px;
+    }
+    .row-headline {
+      font-family: 'Playfair Display', serif; font-style: italic;
+      font-size: 0.96rem; color: var(--text-primary); line-height: 1.5;
+    }
+    .row-body { font-size: 0.8rem; line-height: 1.7; color: var(--text-secondary); }
+
+    /* Last row border bottom */
+    .tool-rows-wrap { margin-bottom: 0; }
+    .last-row { border-bottom: 1px solid var(--border); margin-bottom: 24px; }
+
+    /* Summary */
+    .summary { background: var(--surface); border-radius: 8px; padding: 20px 24px; display: flex; gap: 16px; align-items: flex-start; }
+    .summary-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.56rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted); white-space: nowrap; padding-top: 2px; min-width: 90px; }
+    .summary-text { font-size: 0.82rem; line-height: 1.65; color: var(--text-secondary); }
+  </style>
+</head>
+<body>
+
+  <div class="badge">Variation B — Side-by-Side Rows</div>
+  <p class="section-label">Research</p>
+  <h2>What the Research Pointed To</h2>
+  <p class="intro">We audited the tools teams already use before designing anything new. Each solves part of the problem — understanding which part let us design around the gap, not into it.</p>
+
+  <div class="tool-rows-wrap">
+
+    <!-- Row 1: Slack -->
+    <div class="tool-row">
+      <div class="row-img slack">
+        <span class="gap-badge">Context buried</span>
+        <div class="mock-ui">
+          <div class="mock-topbar">
+            <div class="mock-dot" style="background:#ff5f57"></div>
+            <div class="mock-dot" style="background:#febc2e"></div>
+            <div class="mock-dot" style="background:#28c840"></div>
+          </div>
+          <div class="mock-body">
+            <div class="mock-bubble"><div class="mock-line" style="width:55%"></div></div>
+            <div class="mock-bubble"><div class="mock-line" style="width:75%"></div><div class="mock-line" style="width:45%"></div></div>
+            <div class="mock-bubble" style="background:#e8e0ff;"><div class="mock-line" style="width:90%; background:#c4b5fd;"></div><div class="mock-line" style="width:70%; background:#c4b5fd;"></div><div class="mock-line" style="width:55%; background:#c4b5fd;"></div></div>
+            <div class="mock-bubble"><div class="mock-line" style="width:40%"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="row-text">
+        <div class="row-num-title">
+          <span class="row-num">01</span>
+          <span class="row-title">Messaging Platforms</span>
+        </div>
+        <p class="row-platforms">Teams, Slack</p>
+        <p class="row-reason-label">Why it doesn't solve it</p>
+        <p class="row-headline">"The decision is in the thread — but which thread?"</p>
+        <p class="row-body">Built around conversation as the primary artifact. A decision buried inside a 40-message thread is technically present and practically inaccessible. You can search for keywords; you can't search for structured reasoning.</p>
+      </div>
+    </div>
+
+    <!-- Row 2: Notion -->
+    <div class="tool-row">
+      <div class="row-img notion">
+        <span class="gap-badge">Friction at capture</span>
+        <div class="mock-ui">
+          <div class="mock-topbar">
+            <div class="mock-dot" style="background:#ff5f57"></div>
+            <div class="mock-dot" style="background:#febc2e"></div>
+            <div class="mock-dot" style="background:#28c840"></div>
+          </div>
+          <div class="mock-body">
+            <div class="mock-line" style="width:55%; height:9px; background:#bbb; border-radius:3px; margin-bottom:4px;"></div>
+            <div class="mock-line" style="width:90%"></div>
+            <div class="mock-line" style="width:75%"></div>
+            <div style="height:4px"></div>
+            <div class="mock-line" style="width:40%; height:8px; background:#ccc;"></div>
+            <div class="mock-line" style="width:90%"></div>
+            <div class="mock-line" style="width:60%"></div>
+            <div style="display:flex; gap:6px; margin-top:2px;">
+              <div style="width:16px; height:16px; border-radius:3px; background:#e5e5e5;"></div>
+              <div class="mock-line" style="width:50%; align-self:center;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row-text">
+        <div class="row-num-title">
+          <span class="row-num">02</span>
+          <span class="row-title">Documentation Platforms</span>
+        </div>
+        <p class="row-platforms">Confluence, Notion</p>
+        <p class="row-reason-label">Why it doesn't solve it</p>
+        <p class="row-headline">"I'll write this up properly — right after this next meeting."</p>
+        <p class="row-body">Right format, wrong timing. Switching tools, finding the right page, writing from scratch — all of this happens after the decision, when context has passed. Works for disciplined teams. Doesn't work for most teams under real workload.</p>
+      </div>
+    </div>
+
+    <!-- Row 3: Loom -->
+    <div class="tool-row">
+      <div class="row-img loom">
+        <span class="gap-badge">Not queryable</span>
+        <div class="mock-ui">
+          <div class="mock-topbar">
+            <div class="mock-dot" style="background:#ff5f57"></div>
+            <div class="mock-dot" style="background:#febc2e"></div>
+            <div class="mock-dot" style="background:#28c840"></div>
+          </div>
+          <div class="mock-body" style="background:#111; padding:0; min-height:90px; align-items:center; justify-content:center; display:flex;">
+            <div style="display:flex; flex-direction:column; align-items:center; gap:10px; padding:16px;">
+              <div style="width:36px; height:36px; border-radius:50%; background:rgba(239,68,68,0.85); display:flex; align-items:center; justify-content:center;">
+                <div style="width:0; height:0; border-top:8px solid transparent; border-bottom:8px solid transparent; border-left:14px solid white; margin-left:3px;"></div>
+              </div>
+              <div style="display:flex; align-items:center; gap:4px; width:100%;">
+                <div style="width:28px; height:3px; border-radius:2px; background:rgba(239,68,68,0.7);"></div>
+                <div style="flex:1; height:3px; border-radius:2px; background:rgba(255,255,255,0.12);"></div>
+                <div style="width:24px; height:16px; border-radius:2px; background:rgba(255,255,255,0.08); font-family:monospace; font-size:8px; color:rgba(255,255,255,0.4); display:flex; align-items:center; justify-content:center;">12:34</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row-text">
+        <div class="row-num-title">
+          <span class="row-num">03</span>
+          <span class="row-title">Video Tools</span>
+        </div>
+        <p class="row-platforms">Loom</p>
+        <p class="row-reason-label">Why it doesn't solve it</p>
+        <p class="row-headline">"The context is in the recording — but you can't search a recording."</p>
+        <p class="row-body">Excellent for explaining complexity with tone and context. But a video is a communication format — not a retrieval system. You can't query a library of Looms for a specific piece of reasoning six months later.</p>
+      </div>
+    </div>
+
+    <!-- Row 4: Jira -->
+    <div class="tool-row last-row">
+      <div class="row-img jira">
+        <span class="gap-badge">What, never why</span>
+        <div class="mock-ui">
+          <div class="mock-topbar">
+            <div class="mock-dot" style="background:#ff5f57"></div>
+            <div class="mock-dot" style="background:#febc2e"></div>
+            <div class="mock-dot" style="background:#28c840"></div>
+          </div>
+          <div class="mock-body">
+            <div style="display:flex; gap:5px; margin-bottom:8px;">
+              <div style="padding:3px 8px; border-radius:3px; background:#dbeafe; font-family:monospace; font-size:7px; color:#3b82f6;">To Do</div>
+              <div style="padding:3px 8px; border-radius:3px; background:#fef9c3; font-family:monospace; font-size:7px; color:#ca8a04;">In Progress</div>
+              <div style="padding:3px 8px; border-radius:3px; background:#dcfce7; font-family:monospace; font-size:7px; color:#16a34a;">Done</div>
+            </div>
+            <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:4px;">
+              <div style="display:flex; flex-direction:column; gap:4px;">
+                <div style="background:#f1f5f9; border-radius:4px; padding:6px 7px;"><div class="mock-line" style="width:90%"></div><div class="mock-line" style="width:60%; margin-top:3px;"></div></div>
+                <div style="background:#f1f5f9; border-radius:4px; padding:6px 7px;"><div class="mock-line" style="width:80%"></div></div>
+              </div>
+              <div style="display:flex; flex-direction:column; gap:4px;">
+                <div style="background:#eff6ff; border-radius:4px; padding:6px 7px;"><div class="mock-line" style="width:90%; background:#bfdbfe;"></div><div class="mock-line" style="width:50%; margin-top:3px; background:#bfdbfe;"></div></div>
+              </div>
+              <div style="display:flex; flex-direction:column; gap:4px;">
+                <div style="background:#f0fdf4; border-radius:4px; padding:6px 7px;"><div class="mock-line" style="width:80%; background:#bbf7d0;"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row-text">
+        <div class="row-num-title">
+          <span class="row-num">04</span>
+          <span class="row-title">Task Management</span>
+        </div>
+        <p class="row-platforms">Jira, Asana</p>
+        <p class="row-reason-label">Why it doesn't solve it</p>
+        <p class="row-headline">"Ticket closed. No record of why it was scoped this way."</p>
+        <p class="row-body">Designed to track what is being done and whether it's done. The reasoning behind how the work was scoped — why one direction was chosen over another — is absent by design.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="summary">
+    <span class="summary-label">The gap</span>
+    <span class="summary-text">No existing tool captures a decision as a structured artifact at the moment it happens and makes it retrievable from a central place later.</span>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WYD — V2: Narrative Arc</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --color-bg: #f5f5f4;
+      --color-surface: #fafaf9;
+      --color-surface-2: #e7e5e4;
+      --color-border: #d7d3d1;
+      --color-text-primary: #1b1917;
+      --color-text-secondary: #45403c;
+      --color-text-muted: #78716b;
+      --color-text-ghost: #a6a09b;
+      --color-accent: #7C3AED;
+      --font-serif: 'Instrument Serif', Georgia, serif;
+      --font-sans: 'DM Sans', system-ui, sans-serif;
+    }
+
+    body {
+      background: var(--color-bg);
+      color: var(--color-text-primary);
+      font-family: var(--font-sans);
+      font-weight: 300;
+      line-height: 1.75;
+      font-size: 1rem;
+    }
+
+    /* ─── Layout ─── */
+    .page {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    .wide {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* ─── Nav ─── */
+    nav {
+      border-bottom: 1px solid var(--color-border);
+      padding: 1rem 0;
+    }
+    .nav-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav-inner a {
+      font-size: 0.82rem;
+      color: var(--color-text-muted);
+      text-decoration: none;
+    }
+    .nav-inner a:first-child {
+      color: var(--color-text-primary);
+      font-weight: 500;
+    }
+
+    /* ─── Hero ─── */
+    .hero {
+      padding: 5rem 0 3.5rem;
+    }
+
+    .project-tag {
+      display: inline-block;
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      border: 1px solid rgba(124,58,237,0.2);
+      background: rgba(124,58,237,0.05);
+      padding: 0.3rem 0.75rem;
+      border-radius: 100px;
+      margin-bottom: 1.75rem;
+    }
+
+    .hero h1 {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      color: var(--color-text-primary);
+      margin-bottom: 2rem;
+    }
+
+    /* ─── Contribution note ─── */
+    .contrib {
+      display: flex;
+      gap: 1.25rem;
+      align-items: flex-start;
+      padding: 1.25rem 1.5rem;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      margin-bottom: 3rem;
+    }
+    .contrib-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--color-surface-2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+      font-weight: 500;
+    }
+    .contrib-text p {
+      font-size: 0.82rem;
+      color: var(--color-text-secondary);
+      margin: 0;
+      line-height: 1.5;
+    }
+    .contrib-text strong {
+      color: var(--color-text-primary);
+      font-weight: 500;
+    }
+
+    /* ─── Image placeholder ─── */
+    .img-placeholder {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: var(--color-surface-2);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-text-ghost);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin: 2rem 0;
+    }
+    .img-placeholder.tall { aspect-ratio: 4 / 3; }
+    .img-placeholder.short { aspect-ratio: 21 / 9; }
+
+    /* ─── Story sections ─── */
+    .beat {
+      padding: 3.5rem 0;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .beat-label {
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-bottom: 1.25rem;
+    }
+
+    h2 {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(1.4rem, 3vw, 1.9rem);
+      letter-spacing: -0.01em;
+      color: var(--color-text-primary);
+      margin-bottom: 1.25rem;
+      line-height: 1.3;
+    }
+
+    p {
+      color: var(--color-text-secondary);
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+    p:last-child { margin-bottom: 0; }
+
+    /* ─── Pull quote ─── */
+    blockquote {
+      margin: 2rem 0;
+      padding: 1.5rem 2rem;
+      border-left: 3px solid var(--color-accent);
+      background: var(--color-surface);
+      border-radius: 0 8px 8px 0;
+    }
+    blockquote p {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--color-text-primary);
+      line-height: 1.6;
+      margin-bottom: 0.75rem;
+    }
+    blockquote cite {
+      font-size: 0.72rem;
+      color: var(--color-text-muted);
+      font-style: normal;
+      letter-spacing: 0.05em;
+    }
+
+    /* ─── Insight highlight ─── */
+    .insight {
+      background: var(--color-text-primary);
+      color: var(--color-surface);
+      padding: 2rem 2.5rem;
+      border-radius: 10px;
+      margin: 2rem 0;
+    }
+    .insight-label {
+      font-size: 0.58rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(250,250,249,0.4);
+      margin-bottom: 1rem;
+    }
+    .insight p {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1.2rem;
+      color: #fafaf9;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    /* ─── Stats inline ─── */
+    .stat-inline {
+      display: flex;
+      gap: 0.75rem;
+      align-items: baseline;
+      margin: 1.5rem 0;
+    }
+    .stat-inline-num {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 2.5rem;
+      color: var(--color-accent);
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .stat-inline-text {
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+      line-height: 1.5;
+    }
+
+    /* ─── Finding triplet ─── */
+    .finding-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin: 1.5rem 0;
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--color-surface);
+    }
+    .finding-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .finding-row:last-child { border-bottom: none; }
+    .finding-pct {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1.5rem;
+      color: var(--color-accent);
+      line-height: 1;
+      flex-shrink: 0;
+      min-width: 52px;
+    }
+    .finding-text {
+      font-size: 0.85rem;
+      color: var(--color-text-secondary);
+      padding-top: 0.2rem;
+      line-height: 1.5;
+    }
+
+    /* ─── Decision list ─── */
+    .choices {
+      margin: 1.5rem 0;
+    }
+    .choice {
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      gap: 1rem;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--color-border);
+      align-items: start;
+    }
+    .choice:last-child { border-bottom: none; }
+    .choice-n {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1.4rem;
+      color: var(--color-text-ghost);
+      line-height: 1;
+      padding-top: 0.15rem;
+    }
+    .choice-body {}
+    .choice-title {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--color-text-primary);
+      margin-bottom: 0.4rem;
+    }
+    .choice-body p {
+      font-size: 0.85rem;
+      margin: 0;
+    }
+
+    /* ─── Result bar ─── */
+    .result-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 2rem 0;
+    }
+    .result-half {
+      padding: 1.5rem;
+    }
+    .result-half.left { background: var(--color-surface); }
+    .result-half.right { background: var(--color-text-primary); border-left: 1px solid var(--color-border); }
+    .rh-label {
+      font-size: 0.58rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+    .result-half.left .rh-label { color: var(--color-text-ghost); }
+    .result-half.right .rh-label { color: rgba(250,250,249,0.4); }
+    .rh-num {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 2.5rem;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .result-half.left .rh-num { color: var(--color-text-muted); }
+    .result-half.right .rh-num { color: #fafaf9; }
+    .rh-desc {
+      font-size: 0.78rem;
+      line-height: 1.5;
+    }
+    .result-half.left .rh-desc { color: var(--color-text-muted); }
+    .result-half.right .rh-desc { color: rgba(250,250,249,0.55); }
+
+    /* ─── Reflection ─── */
+    .limit {
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .limit:last-child { border-bottom: none; }
+    .limit-title {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--color-text-primary);
+      margin-bottom: 0.35rem;
+    }
+    .limit-next {
+      font-size: 0.78rem;
+      color: var(--color-accent);
+      font-weight: 500;
+      margin-top: 0.6rem;
+      margin-bottom: 0;
+    }
+    .limit p {
+      font-size: 0.85rem;
+      margin: 0;
+    }
+
+    footer {
+      border-top: 1px solid var(--color-border);
+      padding: 2.5rem 0;
+      margin-top: 4rem;
+    }
+    .footer-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--color-text-ghost);
+    }
+
+    @media (max-width: 600px) {
+      .result-pair { grid-template-columns: 1fr; }
+      .result-half.right { border-left: none; border-top: 1px solid var(--color-border); }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#">Shruthy Nair</a>
+    <a href="#">← Back to work</a>
+  </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<div class="page">
+  <div class="hero">
+    <span class="project-tag">WYD — Social Event Planning</span>
+
+    <h1>I was asked to design an events app.<br>What I actually designed was a way for people to show up for each other.</h1>
+
+    <div class="contrib">
+      <div class="contrib-icon">SN</div>
+      <div class="contrib-text">
+        <p><strong>Solo project — I owned everything.</strong> Research design, user interviews, survey synthesis, journey mapping, IA, wireframing, prototyping, and usability testing. No handoffs, no design reviews until final presentation.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wide">
+  <div class="img-placeholder short">Project hero image placeholder</div>
+</div>
+
+<!-- ─── ACT 1: THE PROBLEM ─── -->
+<div class="page">
+  <div class="beat">
+    <p class="beat-label">Act 1 — The Problem</p>
+    <h2>Planning a hangout with friends used to take four apps</h2>
+    <p>
+      Instagram to find out what's happening. iMessage to coordinate with the group. Google Calendar to block the time. Snapchat to check if anyone was actually coming. Four apps, twenty minutes of context-switching, and you still weren't sure if people were going to show up.
+    </p>
+    <p>
+      The brief was deliberately open: "design an app for social event planning." I spent the first week trying to understand if this was actually a problem worth solving — or if the existing apps were good enough and people just had different preferences.
+    </p>
+    <p>
+      Turns out it was a real problem. And it was more specific than the brief implied.
+    </p>
+  </div>
+</div>
+
+<!-- ─── ACT 2: RESEARCH ─── -->
+<div class="page">
+  <div class="beat">
+    <p class="beat-label">Act 2 — What I Found</p>
+    <h2>The research changed what I thought the problem was</h2>
+    <p>
+      I surveyed <strong>48 people</strong> and ran <strong>10 moderated usability tests</strong> with existing event tools (Instagram Events, Facebook Events, iMessage group chats). I had hypotheses going in. Most of them were wrong, in instructive ways.
+    </p>
+
+    <blockquote>
+      <p>"There's no single place where I can see what my friends are doing this weekend. I have to check everywhere and still feel like I'm missing things."</p>
+      <cite>— Survey respondent, 23</cite>
+    </blockquote>
+
+    <div class="finding-list">
+      <div class="finding-row">
+        <span class="finding-pct">65%</span>
+        <p class="finding-text">couldn't easily see what friends were doing on any given weekend — even though everyone was posting constantly</p>
+      </div>
+      <div class="finding-row">
+        <span class="finding-pct">70%</span>
+        <p class="finding-text">had missed events because details were scattered — someone texted in one thread, posted on another, and the information never made it into one place</p>
+      </div>
+      <div class="finding-row">
+        <span class="finding-pct">80%</span>
+        <p class="finding-text">found creating events on existing apps too complicated or too public — the cost of posting felt higher than the value of coordination</p>
+      </div>
+    </div>
+
+    <div class="insight">
+      <p class="insight-label">Key Insight</p>
+      <p>The problem wasn't discovery — it was coordination overhead. People knew how to find events. They couldn't coordinate around them without the process feeling like work.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ─── ACT 3: REFRAME ─── -->
+<div class="page">
+  <div class="beat">
+    <p class="beat-label">Act 3 — Reframing the Question</p>
+    <h2>From "events app" to "coordination layer"</h2>
+    <p>
+      The original brief suggested I was designing an events discovery tool. The research suggested I was actually designing infrastructure for how small groups of close friends make plans.
+    </p>
+    <p>
+      That distinction changed everything about the architecture. Discovery-first apps (Eventbrite, Meetup, Facebook Events) optimize for breadth — helping you find things to do. What my users needed was depth — a place where their specific friend group could see each other's availability, coordinate around plans, and keep the social record of what they'd done together.
+    </p>
+
+    <blockquote>
+      <p>How might we design a single, intuitive platform that makes planning and discovering social events with close friends feel effortless — without the coordination overhead that currently makes people give up?</p>
+      <cite>— Reframed problem statement</cite>
+    </blockquote>
+  </div>
+</div>
+
+<!-- ─── ACT 4: DESIGN ─── -->
+<div class="page">
+  <div class="beat">
+    <p class="beat-label">Act 4 — Design Decisions</p>
+    <h2>Three choices I made and why I made them</h2>
+
+    <div class="choices">
+      <div class="choice">
+        <span class="choice-n">1</span>
+        <div class="choice-body">
+          <p class="choice-title">Private circles, not public feeds</p>
+          <p>I scoped the app to close friend groups, not open event discovery. This wasn't a compromise — it was the actual design insight. When the audience is your friends, posting feels natural. When it's the internet, it feels performative.</p>
+        </div>
+      </div>
+      <div class="choice">
+        <span class="choice-n">2</span>
+        <div class="choice-body">
+          <p class="choice-title">One-screen event creation</p>
+          <p>The existing flow required 4 steps: title, date/time, location, invite. 40% of users quit at the invite step during testing. I collapsed it into a single progressive form with smart defaults. You can create an event in under 30 seconds.</p>
+        </div>
+      </div>
+      <div class="choice">
+        <span class="choice-n">3</span>
+        <div class="choice-body">
+          <p class="choice-title">Availability as the home surface</p>
+          <p>Instead of a browse-and-discover feed, the home screen shows your friends' upcoming plans. You open the app and immediately see what's happening with your people — not a curated list of events from strangers.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="img-placeholder">Wireframe exploration — IA structure placeholder</div>
+    <div class="img-placeholder tall">High-fidelity solution screens placeholder</div>
+  </div>
+</div>
+
+<!-- ─── RESULT ─── -->
+<div class="page">
+  <div class="beat">
+    <p class="beat-label">Result</p>
+    <h2>What changed</h2>
+    <p>
+      I tested the redesigned create event flow against the original 4-step flow with the same usability test participants. The delta was significant enough to validate the core design decision.
+    </p>
+
+    <div class="result-pair">
+      <div class="result-half left">
+        <p class="rh-label">Before</p>
+        <p class="rh-num">60%</p>
+        <p class="rh-desc">completion rate — 4-step create event flow, existing pattern</p>
+      </div>
+      <div class="result-half right">
+        <p class="rh-label">After</p>
+        <p class="rh-num">91%</p>
+        <p class="rh-desc">completion rate — redesigned single-screen progressive flow</p>
+      </div>
+    </div>
+
+    <p>Beyond the headline metric: users reported the app replaced their use of 4 separate apps for social coordination. The "4 apps → 1" consolidation was the core promise of the reframe — and it held up in testing.</p>
+  </div>
+</div>
+
+<!-- ─── REFLECTION ─── -->
+<div class="page">
+  <div class="beat">
+    <p class="beat-label">Honest Reflection</p>
+    <h2>What I got wrong and what I'd do differently</h2>
+
+    <div class="limit">
+      <p class="limit-title">I built too much before testing the core concept</p>
+      <p>I had mid-fidelity wireframes of 7 screens before I tested whether the core model (availability-first home feed) resonated. I should have tested a concept sketch of just the home surface before building anything around it.</p>
+      <p class="limit-next">Next time → Paper prototype the core thesis in week 2, not week 6.</p>
+    </div>
+
+    <div class="limit">
+      <p class="limit-title">The "during event" section was scope creep I let happen</p>
+      <p>The journey map surfaced opportunities across before/during/after. I designed features for all three phases. The "during event" features (live map, shared itinerary) were interesting but not core to the problem statement I'd defined. I spent a week on them.</p>
+      <p class="limit-next">Next time → Define a clear scope boundary before the journey map exercise, not after.</p>
+    </div>
+
+    <div class="limit">
+      <p class="limit-title">My sample was too homogeneous</p>
+      <p>48 survey respondents were mostly 20–26, primarily iOS users, primarily urban. The coordination patterns for different demographics (families, older adults) could look very different — and I didn't test those assumptions.</p>
+      <p class="limit-next">Next time → Define minimum diversity criteria for the survey sample before launching it.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <span>Shruthy Nair — Portfolio 2024</span>
+    <span>V2: Narrative Arc</span>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Variation C — Tight List with Pulled Insight</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #ffffff;
+      --surface: #f5f5f5;
+      --text-primary: #0a0a0a;
+      --text-secondary: #555555;
+      --text-muted: #999999;
+      --border: #e5e5e5;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text-primary);
+      font-family: 'IBM Plex Sans', sans-serif;
+      padding: 48px 24px 80px;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .variation-badge {
+      display: inline-block;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      background: #0a0a0a;
+      color: #ffffff;
+      padding: 4px 10px;
+      border-radius: 4px;
+      margin-bottom: 32px;
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+
+    .section-intro {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 36px;
+      max-width: 580px;
+    }
+
+    /* List rows */
+    .tool-list {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 28px;
+    }
+
+    .tool-row {
+      display: grid;
+      grid-template-columns: 2.5rem 1fr;
+      gap: 20px;
+      border-top: 1px solid var(--border);
+      padding: 24px 0;
+    }
+
+    .row-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      padding-top: 3px;
+    }
+
+    .row-content {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .row-title-line {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .row-title {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .row-subtitle {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+    }
+
+    /* The pulled-out core insight — visually distinct */
+    .row-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.5;
+      border-left: 2px solid var(--text-primary);
+      padding-left: 12px;
+      margin: 2px 0;
+    }
+
+    .row-body {
+      font-size: 0.8rem;
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+
+    /* Summary */
+    .summary-box {
+      background: var(--surface);
+      border-radius: 8px;
+      padding: 20px 24px;
+    }
+
+    .summary-meta {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .summary-text {
+      font-size: 0.82rem;
+      line-height: 1.65;
+      color: var(--text-secondary);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="variation-badge">Variation C — Tight List + Pulled Insight</div>
+
+  <p class="section-label">Research</p>
+
+  <h2>What the Research Pointed To</h2>
+  <p class="section-intro">
+    We audited the tools teams already use to manage this problem — before designing anything new.
+    Each category solves part of it. Knowing which part let us design around the gap.
+  </p>
+
+  <div class="tool-list">
+
+    <div class="tool-row">
+      <span class="row-num">01</span>
+      <div class="row-content">
+        <div class="row-title-line">
+          <span class="row-title">Messaging Platforms</span>
+          <span class="row-subtitle">Teams, Slack</span>
+        </div>
+        <p class="row-headline">Decisions get buried in threads. The context is there — it just can't be found.</p>
+        <p class="row-body">
+          These platforms are built around conversation as the primary artifact, not decisions.
+          A call made inside a 40-message thread lives inside that thread. You can search for keywords,
+          but not for structured reasoning.
+        </p>
+      </div>
+    </div>
+
+    <div class="tool-row">
+      <span class="row-num">02</span>
+      <div class="row-content">
+        <div class="row-title-line">
+          <span class="row-title">Documentation Platforms</span>
+          <span class="row-subtitle">Confluence, Notion</span>
+        </div>
+        <p class="row-headline">The format is right. The timing is wrong.</p>
+        <p class="row-body">
+          Capturing a decision here means switching tools, finding a page, and writing from scratch —
+          after the moment has passed. For most teams under normal workload, it doesn't happen consistently.
+          Motivation collapses the moment the decision is made and everyone moves on.
+        </p>
+      </div>
+    </div>
+
+    <div class="tool-row">
+      <span class="row-num">03</span>
+      <div class="row-content">
+        <div class="row-title-line">
+          <span class="row-title">Video Tools</span>
+          <span class="row-subtitle">Loom</span>
+        </div>
+        <p class="row-headline">A communication format — not a retrieval system.</p>
+        <p class="row-body">
+          Excellent for explaining something complex with tone and context. But you can't query a
+          library of videos for a specific piece of reasoning. A Loom inside a structured decision
+          entry is a different story — but as a standalone artifact, it floats in a folder.
+        </p>
+      </div>
+    </div>
+
+    <div class="tool-row">
+      <span class="row-num">04</span>
+      <div class="row-content">
+        <div class="row-title-line">
+          <span class="row-title">Task Management</span>
+          <span class="row-subtitle">Jira, Asana</span>
+        </div>
+        <p class="row-headline">Tracks what. Doesn't track why.</p>
+        <p class="row-body">
+          Designed to track what is being done and whether it's done. The reasoning behind
+          how the work was scoped — why one direction was chosen over another — is absent by design.
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="summary-box">
+    <p class="summary-meta">The consistent gap</p>
+    <p class="summary-text">
+      No existing tool captures a decision as a structured artifact at the moment it happens
+      and makes it retrievable from a central place later.
+    </p>
+  </div>
+
+</body>
+</html>

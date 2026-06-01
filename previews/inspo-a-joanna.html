@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inspo A — Joanna Ni Style</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #141515;
+    --text: rgba(255,255,255,0.85);
+    --text-2: rgba(255,255,255,0.75);
+    --text-dim: rgba(255,255,255,0.41);
+    --border: rgba(255,255,255,0.1);
+    --accent: #FF0000;
+    --serif: 'Playfair Display', 'Apple Garamond', Georgia, serif;
+    --sans: 'IBM Plex Sans', system-ui, sans-serif;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text-2);
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    letter-spacing: -0.025em;
+    -webkit-font-smoothing: antialiased;
+    cursor: none;
+  }
+
+  /* Custom cursor */
+  .cursor-ring {
+    position: fixed;
+    width: 32px;
+    height: 32px;
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%,-50%);
+    top: 200px;
+    left: 200px;
+    transition: transform 0.08s, width 0.2s, height 0.2s;
+  }
+  .cursor-dot {
+    position: fixed;
+    width: 4px;
+    height: 4px;
+    background: white;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%,-50%);
+    top: 200px;
+    left: 200px;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    padding: 2rem 3rem;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+  }
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--text-2);
+    text-decoration: none;
+    letter-spacing: 0;
+  }
+  .nav-links {
+    display: flex;
+    gap: 0;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--text-dim);
+    text-decoration: none;
+    letter-spacing: 0;
+  }
+  .nav-links li::after { content: ','; color: var(--text-dim); margin-right: 0.5rem; }
+  .nav-links li:last-child::after { content: ''; }
+  .nav-links a:hover { color: var(--text-2); }
+
+  /* ── MAIN ── */
+  main { padding: 0 3rem; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 0 0 3rem; }
+
+  /* ── LANDING HERO ── */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    padding-bottom: 6rem;
+  }
+  .hero-left {}
+  h1.hero-h1 {
+    font-family: var(--serif);
+    font-size: 3rem;
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    margin-bottom: 2rem;
+  }
+  h1.hero-h1 em { font-style: italic; }
+  .hero-body {
+    font-size: 1.1rem;
+    font-weight: 300;
+    line-height: 1.5;
+    letter-spacing: -0.025em;
+    color: var(--text-2);
+    max-width: 400px;
+    margin-bottom: 2.5rem;
+  }
+  .hero-link {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--text-dim);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .hero-link:hover { color: var(--text-2); }
+
+  .hero-right {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .hero-right-label {
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    color: var(--text-dim);
+    margin-bottom: 0.75rem;
+  }
+  .exp-list { display: flex; flex-direction: column; gap: 0; }
+  .exp-entry {
+    display: grid;
+    grid-template-columns: 3.5rem 1fr;
+    gap: 1rem;
+    padding: 0.875rem 0;
+    border-top: 1px solid var(--border);
+  }
+  .exp-entry:last-child { border-bottom: 1px solid var(--border); }
+  .exp-year {
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    color: var(--text-dim);
+    padding-top: 0.05rem;
+  }
+  .exp-detail { display: flex; flex-direction: column; gap: 0.15rem; }
+  .exp-role {
+    font-family: var(--sans);
+    font-size: 1rem;
+    font-weight: 300;
+    letter-spacing: -0.025em;
+    color: var(--text-2);
+  }
+  .exp-company {
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    color: var(--text-dim);
+  }
+
+  /* ── PROJECTS ── */
+  .projects-label {
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    color: var(--text-dim);
+    margin-bottom: 2rem;
+  }
+  .project-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border-top: 1px solid var(--border);
+  }
+  .project-item {
+    padding: 2rem 2rem 2rem 0;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    transition: background 0.2s;
+  }
+  .project-item:nth-child(even) { padding: 2rem 0 2rem 2rem; border-right: none; }
+  .project-item:hover { background: rgba(255,255,255,0.02); }
+
+  .project-thumb {
+    width: 100%;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    position: relative;
+  }
+  .project-thumb-inner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .project-thumb-inner svg { opacity: 0.08; }
+
+  .project-meta {
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    color: var(--text-dim);
+  }
+  .project-h2 {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--text);
+  }
+  .project-desc {
+    font-size: 0.9rem;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    line-height: 1.55;
+    color: var(--text-dim);
+  }
+  .project-arrow {
+    font-family: var(--serif);
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    margin-top: auto;
+  }
+
+  /* ── FOOTER ── */
+  .site-footer {
+    padding: 3rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 4rem;
+  }
+  .footer-copy {
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    font-weight: 300;
+    color: var(--text-dim);
+    letter-spacing: -0.02em;
+  }
+  .footer-links { display: flex; gap: 1.5rem; }
+  .footer-links a {
+    font-family: var(--serif);
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: var(--text-dim);
+    text-decoration: none;
+  }
+  .footer-links a:hover { color: var(--text-2); }
+
+  /* ═══════════════════ WHY PAGE ═══════════════════ */
+  .page-break {
+    height: 3px;
+    background: linear-gradient(90deg, rgba(255,0,0,0.6), rgba(255,255,255,0.1), transparent);
+    margin: 5rem 0 0;
+  }
+  .page-break-label {
+    text-align: center;
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    padding: 1.5rem 0 3rem;
+  }
+
+  /* Case study sub-nav */
+  .case-subnav {
+    padding: 1rem 3rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .subnav-back {
+    font-family: var(--serif);
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: var(--text-dim);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .subnav-title {
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    color: var(--text-dim);
+  }
+
+  /* Case study main */
+  .case-main { padding: 0 3rem; }
+
+  /* Hero — pure type, no image */
+  .case-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    padding: 4rem 0 3rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .case-hero-left {}
+  .case-eyebrow {
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    color: var(--text-dim);
+    margin-bottom: 1.5rem;
+  }
+  h1.case-h1 {
+    font-family: var(--serif);
+    font-size: 3rem;
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--text);
+  }
+  h1.case-h1 em { font-style: italic; }
+
+  .case-hero-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 1.5rem;
+  }
+  .meta-group { display: flex; flex-direction: column; gap: 0.2rem; }
+  .meta-key {
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: var(--text-dim);
+  }
+  .meta-val {
+    font-family: var(--sans);
+    font-size: 1rem;
+    font-weight: 300;
+    letter-spacing: -0.025em;
+    color: var(--text-2);
+    line-height: 1.4;
+  }
+
+  /* Section — full editorial width */
+  .case-section {
+    padding: 4rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .case-section:last-of-type { border-bottom: none; }
+
+  h1.section-h1 {
+    font-family: var(--serif);
+    font-size: 2.5rem;
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    margin-bottom: 1.5rem;
+    max-width: 700px;
+  }
+  h1.section-h1 em { font-style: italic; }
+
+  .section-body {
+    font-size: 1.1rem;
+    font-weight: 300;
+    letter-spacing: -0.025em;
+    line-height: 1.6;
+    color: var(--text-2);
+    max-width: 640px;
+  }
+
+  /* Two-column split */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-top: 2.5rem;
+  }
+
+  /* Persona cards */
+  .persona-block {
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--border);
+  }
+  .persona-block:last-child { border-bottom: 1px solid var(--border); }
+  .persona-name {
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+  }
+  .persona-desc {
+    font-size: 0.9rem;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    line-height: 1.6;
+    color: var(--text-dim);
+  }
+
+  /* Media placeholder */
+  .media-block {
+    width: 100%;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2.5rem 0;
+  }
+  .media-block-label {
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    padding: 5rem 0;
+  }
+
+  /* Pull quote */
+  .pull-quote {
+    font-family: var(--serif);
+    font-size: 2rem;
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.25;
+    color: var(--text);
+    padding: 2rem 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin: 2rem 0;
+    max-width: 680px;
+  }
+
+  /* Direction tags */
+  .direction-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--border);
+    margin-top: 2rem;
+  }
+  .direction-col {
+    padding: 1.75rem 1.75rem 1.75rem 0;
+    border-right: 1px solid var(--border);
+  }
+  .direction-col:last-child { border-right: none; padding-right: 0; }
+  .direction-num {
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: var(--text-dim);
+    margin-bottom: 0.875rem;
+  }
+  .direction-title {
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--text);
+    line-height: 1.2;
+    margin-bottom: 0.75rem;
+  }
+  .direction-body {
+    font-size: 0.85rem;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    line-height: 1.55;
+    color: var(--text-dim);
+  }
+  .direction-verdict {
+    margin-top: 0.875rem;
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: var(--text-dim);
+    font-style: normal;
+  }
+  .chosen-mark { color: var(--text-2); }
+</style>
+</head>
+<body>
+
+<div class="cursor-ring" id="ring"></div>
+<div class="cursor-dot" id="dot"></div>
+<script>
+  const ring = document.getElementById('ring');
+  const dot = document.getElementById('dot');
+  document.addEventListener('mousemove', e => {
+    ring.style.left = e.clientX + 'px';
+    ring.style.top = e.clientY + 'px';
+    dot.style.left = e.clientX + 'px';
+    dot.style.top = e.clientY + 'px';
+  });
+</script>
+
+<!-- ───────────────── LANDING PAGE ───────────────── -->
+
+<nav>
+  <a href="#" class="nav-logo">Shruthy Ni</a>
+  <ul class="nav-links">
+    <li><a href="#">Work</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Resume</a></li>
+  </ul>
+</nav>
+
+<main>
+  <hr>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <h1 class="hero-h1">
+        Designer who<br>
+        <em>engineers.</em><br>
+        Four internships<br>
+        deep.
+      </h1>
+      <p class="hero-body">
+        I'm Shruthy. Product designer who writes production code. Currently looking for full-time roles in product design and design engineering.
+      </p>
+      <a href="#" class="hero-link">Selected work ↓</a>
+    </div>
+
+    <div class="hero-right">
+      <div>
+        <p class="hero-right-label">Experience</p>
+        <div class="exp-list">
+          <div class="exp-entry">
+            <span class="exp-year">2025</span>
+            <div class="exp-detail">
+              <span class="exp-role">Product Design Intern</span>
+              <span class="exp-company">Company Name</span>
+            </div>
+          </div>
+          <div class="exp-entry">
+            <span class="exp-year">2024</span>
+            <div class="exp-detail">
+              <span class="exp-role">Software Engineering Intern</span>
+              <span class="exp-company">Company Name</span>
+            </div>
+          </div>
+          <div class="exp-entry">
+            <span class="exp-year">2023</span>
+            <div class="exp-detail">
+              <span class="exp-role">Design + Engineering Intern</span>
+              <span class="exp-company">Company Name</span>
+            </div>
+          </div>
+          <div class="exp-entry">
+            <span class="exp-year">2022</span>
+            <div class="exp-detail">
+              <span class="exp-role">Product Design Intern</span>
+              <span class="exp-company">Company Name</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div style="height:4rem;"></div>
+  <p class="projects-label">Selected work, 2022–2025</p>
+
+  <!-- PROJECT GRID -->
+  <div class="project-grid">
+
+    <a href="#" class="project-item">
+      <div class="project-thumb" style="background:linear-gradient(145deg,#1a1530,#241a40);">
+        <div class="project-thumb-inner">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <rect x="4" y="8" width="40" height="30" rx="2" stroke="#fff" stroke-width="1.5"/>
+            <path d="M14 24h20M14 30h14" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+      <p class="project-meta">Relay · Feature Design · 2024</p>
+      <h2 class="project-h2">Why — The Decision Ledger</h2>
+      <p class="project-desc">A dedicated space where teams log, organize, and retrieve the reasoning behind decisions so context survives handoffs.</p>
+      <span class="project-arrow">↗</span>
+    </a>
+
+    <a href="#" class="project-item">
+      <div class="project-thumb" style="background:linear-gradient(145deg,#0f1f15,#152b1d);">
+        <div class="project-thumb-inner">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <circle cx="24" cy="24" r="16" stroke="#fff" stroke-width="1.5"/>
+            <path d="M16 24l5 5 11-11" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+      <p class="project-meta">Poker AI · Product Design · 2023</p>
+      <h2 class="project-h2">AI Poker Coaching</h2>
+      <p class="project-desc">Leveraging AI to provide personalized poker coaching to beginner-to-intermediate players.</p>
+      <span class="project-arrow">↗</span>
+    </a>
+
+    <a href="#" class="project-item">
+      <div class="project-thumb" style="background:linear-gradient(145deg,#1a1010,#2a1510);">
+        <div class="project-thumb-inner">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <rect x="4" y="4" width="40" height="40" rx="8" stroke="#fff" stroke-width="1.5" stroke-dasharray="4 3"/>
+            <path d="M16 24h16M24 16v16" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+      <p class="project-meta">OpenAI · Hardware Concept · 2025</p>
+      <h2 class="project-h2">The Future of AI & Hardware</h2>
+      <p class="project-desc">A concept exploring what AI-native hardware interfaces could look like.</p>
+      <span class="project-arrow">↗</span>
+    </a>
+
+    <a href="#" class="project-item">
+      <div class="project-thumb" style="background:linear-gradient(145deg,#10101a,#15152a);">
+        <div class="project-thumb-inner">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <rect x="4" y="10" width="40" height="28" rx="4" stroke="#fff" stroke-width="1.5"/>
+            <path d="M24 10v28M4 24h40" stroke="#fff" stroke-width="1" stroke-dasharray="2 2"/>
+          </svg>
+        </div>
+      </div>
+      <p class="project-meta">1Password · Security UX · 2022</p>
+      <h2 class="project-h2">Security Onboarding</h2>
+      <p class="project-desc">Redesigning security onboarding to reduce friction while maintaining trust signals.</p>
+      <span class="project-arrow">↗</span>
+    </a>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <span class="footer-copy">© Shruthy Nair 2025</span>
+  <div class="footer-links">
+    <a href="#">LinkedIn ↗</a>
+    <a href="#">GitHub ↗</a>
+  </div>
+</footer>
+
+
+<!-- ═══════════════════════════════════════════════════
+     WHY PAGE
+═══════════════════════════════════════════════════ -->
+
+<div class="page-break"></div>
+<p class="page-break-label">↓ "Why" case study page — same direction</p>
+
+<nav>
+  <a href="#" class="nav-logo">Shruthy Ni</a>
+  <ul class="nav-links">
+    <li><a href="#">Work</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Resume</a></li>
+  </ul>
+</nav>
+
+<div class="case-subnav">
+  <a href="#" class="subnav-back">← Work</a>
+  <span class="subnav-title">Why — The Decision Ledger · Relay</span>
+  <span style="width:60px;"></span>
+</div>
+
+<div class="case-main">
+  <hr style="margin-top:0;">
+
+  <!-- Case hero — pure type, 12-col editorial -->
+  <div class="case-hero">
+    <div class="case-hero-left">
+      <p class="case-eyebrow">Case Study · Relay · Feature Design</p>
+      <h1 class="case-h1">
+        Why —<br>
+        The Decision<br>
+        <em>Ledger.</em>
+      </h1>
+    </div>
+    <div class="case-hero-right">
+      <div class="meta-group">
+        <span class="meta-key">Role</span>
+        <span class="meta-val">UX Designer (Team of 2)</span>
+      </div>
+      <div class="meta-group">
+        <span class="meta-key">Timeline</span>
+        <span class="meta-val">8 Weeks</span>
+      </div>
+      <div class="meta-group">
+        <span class="meta-key">Skills</span>
+        <span class="meta-val">User Research, Competitive Analysis, Interaction Design, Prototyping, AI-Assisted UX</span>
+      </div>
+      <div class="meta-group">
+        <span class="meta-key">Tools</span>
+        <span class="meta-val">Figma, Adobe Creative Suite</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Overview section -->
+  <div class="case-section">
+    <h1 class="section-h1">Built for teams who lose context every time someone leaves.</h1>
+    <p class="section-body">
+      Relay is a workplace async communication platform built for teams operating across different time zones, schedules, and working patterns. <em>Why</em> is a feature inside Relay — a decision ledger where teams log, organize, and retrieve the reasoning behind decisions, so context survives handoffs and onboarding.
+    </p>
+  </div>
+
+  <!-- Problem section -->
+  <div class="case-section">
+    <h1 class="section-h1"><em>Information lives everywhere.</em> None of it is findable when it matters.</h1>
+    <p class="section-body" style="margin-bottom:2rem;">
+      Decisions scatter across many surfaces at once — a message in chat, a comment in a design file, an email reply. Each captures a piece. None of them make context retrievable later.
+    </p>
+
+    <div class="two-col">
+      <div>
+        <div class="persona-block">
+          <p class="persona-name">The New Joiner</p>
+          <p class="persona-desc">Needs to understand why things are the way they are before contributing. Gets partial answers. The ramp-up is longer than it needs to be.</p>
+        </div>
+        <div class="persona-block">
+          <p class="persona-name">The Mid-Project Inheritor</p>
+          <p class="persona-desc">Picks up work already in motion. Inherits the output of past decisions — not the reasoning behind them. Getting it wrong shows up in rework.</p>
+        </div>
+        <div class="persona-block">
+          <p class="persona-name">The Manager</p>
+          <p class="persona-desc">Holds more context than anyone. Gets messaged constantly to provide it. Every interruption is time pulled from their own work.</p>
+        </div>
+      </div>
+      <div>
+        <div style="display:flex;flex-direction:column;gap:0.875rem;">
+          <div style="padding:1.5rem;border:1px solid var(--border);display:flex;flex-direction:column;gap:0.875rem;">
+            <p style="font-size:0.75rem;font-weight:400;color:var(--text-dim);letter-spacing:-0.01em;">Where decisions end up</p>
+            <div style="display:flex;flex-direction:column;gap:0.625rem;">
+              <div style="display:flex;align-items:center;gap:0.875rem;">
+                <div style="width:5px;height:5px;border-radius:50%;background:rgba(196,181,253,0.7);flex-shrink:0;"></div>
+                <span style="font-size:0.875rem;font-weight:300;letter-spacing:-0.02em;color:var(--text-2);flex:1;">Chat messages</span>
+                <span style="font-size:0.7rem;font-weight:300;color:var(--text-dim);font-style:italic;">msg 23/40</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:0.875rem;">
+                <div style="width:5px;height:5px;border-radius:50%;background:rgba(122,240,200,0.7);flex-shrink:0;"></div>
+                <span style="font-size:0.875rem;font-weight:300;letter-spacing:-0.02em;color:var(--text-2);flex:1;">Design file comments</span>
+                <span style="font-size:0.7rem;font-weight:300;color:var(--text-dim);font-style:italic;">buried</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:0.875rem;">
+                <div style="width:5px;height:5px;border-radius:50%;background:rgba(252,165,165,0.7);flex-shrink:0;"></div>
+                <span style="font-size:0.875rem;font-weight:300;letter-spacing:-0.02em;color:var(--text-2);flex:1;">Email threads</span>
+                <span style="font-size:0.7rem;font-weight:300;color:var(--text-dim);font-style:italic;">reply 8/14</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:0.875rem;">
+                <div style="width:5px;height:5px;border-radius:50%;background:rgba(253,230,138,0.7);flex-shrink:0;"></div>
+                <span style="font-size:0.875rem;font-weight:300;letter-spacing:-0.02em;color:var(--text-2);flex:1;">Stray notes</span>
+                <span style="font-size:0.7rem;font-weight:300;color:var(--text-dim);font-style:italic;">unsynced</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Media block -->
+  <div class="media-block" style="aspect-ratio:16/9;">
+    <span class="media-block-label">Hero — Why Feature Overview / Ledger UI Mockup</span>
+  </div>
+
+  <!-- Pull quote -->
+  <div class="pull-quote">
+    "Any solution that requires significant effort at the point of capture will not be used consistently. That is not a discipline problem. It is a design problem."
+  </div>
+
+  <!-- Ideation -->
+  <div class="case-section">
+    <h1 class="section-h1">Three directions. <em>One chosen.</em></h1>
+    <p class="section-body" style="margin-bottom:0;">We worked backwards from retrieval — what is the minimum someone needs to provide for a decision record to be genuinely useful six months later?</p>
+
+    <div class="direction-row">
+      <div class="direction-col">
+        <p class="direction-num">01</p>
+        <p class="direction-title">Single Structured Form</p>
+        <p class="direction-body">One form, all fields visible upfront. Clear structure — but 9 fields at once feels like homework. Easy to close, rarely returned to.</p>
+        <p class="direction-verdict">Ruled out — barrier too high at capture.</p>
+      </div>
+      <div class="direction-col" style="padding-left:1.75rem;">
+        <p class="direction-num">02</p>
+        <p class="direction-title">Progressive Disclosure</p>
+        <p class="direction-body">Start with a single field. Reveal more as the user continues. Near-zero barrier to starting — but disorienting. "The form that keeps going."</p>
+        <p class="direction-verdict">Ruled out — users unsure when done.</p>
+      </div>
+      <div class="direction-col" style="padding-left:1.75rem;">
+        <p class="direction-num">03</p>
+        <p class="direction-title chosen-mark"><em>Two Modes — Quick & Full</em></p>
+        <p class="direction-body">Quick Capture: 3 fields, under a minute. Full Entry: complete structured record. Both outputs land in the same searchable ledger.</p>
+        <p class="direction-verdict chosen-mark">Chosen — respects where the user actually is.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="height:4rem;"></div>
+</div>
+
+<footer class="site-footer">
+  <span class="footer-copy">© Shruthy Nair 2025</span>
+  <div class="footer-links">
+    <a href="#">LinkedIn ↗</a>
+    <a href="#">GitHub ↗</a>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>WYD — Variation 2: Impact-Forward</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --color-bg: #f5f5f4;
+    --color-surface: #fafaf9;
+    --color-surface-2: #e7e5e4;
+    --color-border: #d7d3d1;
+    --color-border-2: #e7e5e4;
+    --color-text-primary: #1b1917;
+    --color-text-secondary: #45403c;
+    --color-text-muted: #78716b;
+    --color-text-ghost: #a6a09b;
+    --font-serif: 'Instrument Serif', Georgia, serif;
+    --font-sans: 'DM Sans', system-ui, sans-serif;
+    --purple: #7C3AED;
+    --purple-light: #ede9fe;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-sans); font-weight: 300;
+    background: var(--color-bg); color: var(--color-text-primary);
+    line-height: 1.5; font-size: 1rem; -webkit-font-smoothing: antialiased;
+  }
+
+  .var-pill {
+    position: fixed; top: 16px; right: 16px; z-index: 200;
+    background: var(--color-text-primary); color: var(--color-bg);
+    font-size: 11px; font-weight: 500; letter-spacing: 0.06em;
+    padding: 5px 12px; border-radius: 100px;
+  }
+
+  .page { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 176px 1fr; }
+
+  aside {
+    position: sticky; top: 48px; height: fit-content;
+    padding: 48px 20px 48px 0;
+  }
+  .toc-label {
+    font-size: 0.65rem; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--color-text-ghost); margin-bottom: 12px; display: block;
+  }
+  aside nav { display: flex; flex-direction: column; }
+  aside nav a {
+    font-size: 0.8rem; font-weight: 300; color: var(--color-text-muted);
+    text-decoration: none; padding: 0.35rem 0;
+    border-bottom: 1px solid var(--color-border-2); line-height: 1.3; transition: color 0.15s;
+  }
+  aside nav a:hover { color: var(--color-text-secondary); }
+
+  main { padding: 48px 0 80px 48px; border-left: 1px solid var(--color-border-2); }
+
+  .section-label {
+    font-size: 0.65rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--color-text-muted); margin-bottom: 20px; display: block;
+  }
+  .divider { border: none; border-top: 1px solid var(--color-border); margin: 64px 0; }
+  section { padding-bottom: 64px; }
+
+  h1 {
+    font-family: var(--font-serif); font-weight: 400; font-style: italic;
+    font-size: clamp(2rem, 4vw, 3rem); line-height: 1.1; letter-spacing: -0.01em;
+    color: var(--color-text-primary); margin-bottom: 24px;
+  }
+  h2 {
+    font-family: var(--font-serif); font-weight: 400;
+    font-size: clamp(1.4rem, 2.5vw, 1.9rem); line-height: 1.15;
+    color: var(--color-text-primary); margin-bottom: 20px;
+  }
+  h3 {
+    font-family: var(--font-serif); font-weight: 400;
+    font-size: clamp(1rem, 1.8vw, 1.3rem); line-height: 1.25;
+    color: var(--color-text-primary); margin-bottom: 12px;
+  }
+  p { font-size: 0.95rem; color: var(--color-text-secondary); line-height: 1.75; }
+  p + p { margin-top: 14px; }
+
+  .meta-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+    padding-top: 20px; border-top: 1px solid var(--color-border); margin-top: 8px;
+  }
+  .meta-label {
+    font-size: 0.62rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--color-text-muted); margin-bottom: 5px; display: block;
+  }
+  .meta-value { font-size: 0.85rem; color: var(--color-text-secondary); line-height: 1.5; }
+
+  .split { display: grid; grid-template-columns: 1fr 220px; gap: 40px; align-items: start; }
+
+  .callout {
+    background: var(--color-surface); border: 1px solid var(--color-border);
+    border-radius: 10px; padding: 16px; margin-bottom: 12px;
+  }
+  .callout-label {
+    font-size: 0.58rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--color-text-muted); margin-bottom: 6px; display: block;
+  }
+  .callout-value {
+    font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 400; font-family: var(--font-serif);
+    color: var(--color-text-primary); line-height: 1; margin-bottom: 6px; display: block;
+  }
+  .callout-body { font-size: 0.75rem; color: var(--color-text-secondary); line-height: 1.55; }
+
+  img { width: 100%; height: auto; border-radius: 10px; display: block; }
+  .img-wrap { margin: 24px 0; }
+
+  .annotation { display: flex; gap: 12px; margin-top: 18px; }
+  .ann-label {
+    font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 500;
+    color: var(--color-text-muted); white-space: nowrap; padding-top: 2px;
+  }
+  .ann-text {
+    font-size: 0.78rem; color: var(--color-text-secondary); line-height: 1.65;
+    border-left: 2px solid var(--color-border); padding-left: 12px;
+  }
+
+  /* ── Impact-forward hero ── */
+  .outcome-trio {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+    background: var(--color-border); border: 1px solid var(--color-border);
+    border-radius: 10px; overflow: hidden; margin: 32px 0;
+  }
+  .outcome-cell { padding: 24px; background: var(--color-surface); }
+  .outcome-n {
+    font-family: var(--font-serif); font-size: 3rem; font-weight: 400;
+    line-height: 1; color: var(--color-text-primary); margin-bottom: 8px; display: block;
+  }
+  .outcome-desc { font-size: 0.8rem; color: var(--color-text-secondary); line-height: 1.55; }
+
+  /* ── Contribution band ── */
+  .contrib-band {
+    border: 1px solid var(--color-border); border-radius: 10px; overflow: hidden;
+    margin: 28px 0; display: grid; grid-template-columns: 140px 1fr; background: var(--color-surface);
+  }
+  .contrib-left {
+    padding: 18px; border-right: 1px solid var(--color-border);
+    background: var(--color-surface-2); display: flex; flex-direction: column; justify-content: center;
+  }
+  .contrib-left-label {
+    font-size: 0.62rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--color-text-muted); margin-bottom: 6px; display: block;
+  }
+  .contrib-left-value {
+    font-family: var(--font-serif); font-size: 1.1rem; color: var(--color-text-primary); line-height: 1.2;
+  }
+  .contrib-right { padding: 18px; }
+  .contrib-right p { font-size: 0.875rem; color: var(--color-text-secondary); line-height: 1.65; }
+
+  /* ── Research evidence chain ── */
+  .evidence-chain { margin: 28px 0; }
+  .ev-row {
+    display: grid; grid-template-columns: 1fr 24px 1fr 24px 1fr; gap: 0; align-items: start;
+    margin-bottom: 16px;
+  }
+  .ev-cell {
+    padding: 14px 16px; border: 1px solid var(--color-border); border-radius: 8px;
+    background: var(--color-surface);
+  }
+  .ev-label {
+    font-size: 0.6rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
+    margin-bottom: 6px; display: block;
+  }
+  .ev-cell.evidence .ev-label { color: var(--color-text-muted); }
+  .ev-cell.insight .ev-label { color: var(--purple); }
+  .ev-cell.decision .ev-label { color: #16a34a; }
+  .ev-body { font-size: 0.78rem; color: var(--color-text-secondary); line-height: 1.55; }
+  .ev-arrow { display: flex; align-items: flex-start; justify-content: center; padding-top: 22px; color: var(--color-text-muted); font-size: 14px; }
+
+  /* ── Method cards ── */
+  .method-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 24px 0; }
+  .method-card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 10px; padding: 18px; }
+  .mc-badge {
+    font-size: 0.65rem; font-weight: 500; background: var(--color-surface-2);
+    border-radius: 4px; padding: 2px 7px; color: var(--color-text-muted); margin-bottom: 8px; display: inline-block;
+  }
+  .mc-num {
+    font-size: 0.62rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--color-text-muted); margin-bottom: 8px; display: block;
+  }
+  .mc-title { font-size: 0.875rem; font-weight: 500; color: var(--color-text-primary); margin-bottom: 6px; }
+  .mc-body { font-size: 0.8rem; color: var(--color-text-secondary); line-height: 1.6; }
+
+  /* ── Pull quote ── */
+  .pull-quote {
+    font-family: var(--font-serif); font-style: italic;
+    font-size: 1.1rem; color: var(--color-text-primary); line-height: 1.65;
+    padding: 20px 0; border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);
+    margin: 24px 0;
+  }
+  .pull-attr {
+    font-family: var(--font-sans); font-style: normal;
+    font-size: 0.72rem; color: var(--color-text-muted); margin-top: 10px; display: block;
+  }
+
+  /* ── Stat row ── */
+  .stat-row {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+    background: var(--color-border); border: 1px solid var(--color-border);
+    border-radius: 10px; overflow: hidden; margin: 24px 0;
+  }
+  .stat-cell { padding: 20px; background: var(--color-surface); }
+  .stat-n {
+    font-size: 2.2rem; font-weight: 400; font-family: var(--font-serif);
+    line-height: 1; margin-bottom: 8px; color: var(--color-text-primary); display: block;
+  }
+  .stat-desc { font-size: 0.78rem; color: var(--color-text-secondary); line-height: 1.55; }
+
+  /* ── HMW ── */
+  .brief-compare { margin: 24px 0; border-radius: 10px; overflow: hidden; border: 1px solid var(--color-border); }
+  .brief-original { padding: 16px 18px; background: var(--color-surface-2); border-bottom: 1px solid var(--color-border); }
+  .brief-tag { font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 500; margin-bottom: 6px; display: block; }
+  .brief-original .brief-tag { color: var(--color-text-muted); }
+  .brief-reframed { padding: 18px; background: var(--color-surface); border-left: 3px solid var(--purple); }
+  .brief-reframed .brief-tag { color: var(--purple); }
+  .brief-text { font-size: 0.875rem; color: var(--color-text-secondary); line-height: 1.65; font-style: italic; }
+
+  /* ── Principles ── */
+  .principle { display: grid; grid-template-columns: 28px 1fr; gap: 16px; border-top: 1px solid var(--color-border); padding: 24px 0; }
+  .p-num { font-size: 0.8rem; font-weight: 400; color: var(--color-text-muted); padding-top: 2px; }
+  .p-title { font-size: 0.925rem; font-weight: 500; color: var(--color-text-primary); margin-bottom: 6px; }
+  .p-body { font-size: 0.83rem; color: var(--color-text-secondary); line-height: 1.65; }
+
+  /* ── IA ── */
+  .ia-table { display: grid; grid-template-columns: repeat(5, 1fr); border: 1px solid var(--color-border); border-radius: 10px; overflow: hidden; margin-bottom: 20px; }
+  .ia-cell { padding: 14px; background: var(--color-surface); border-right: 1px solid var(--color-border); }
+  .ia-cell:last-child { border-right: none; }
+  .ia-cell.center { background: var(--purple-light); }
+  .ia-icon { font-size: 0.8rem; font-weight: 500; margin-bottom: 3px; color: var(--color-text-primary); }
+  .ia-cell.center .ia-icon { color: var(--purple); }
+  .ia-sub { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--color-text-muted); margin-bottom: 6px; }
+  .ia-cell.center .ia-sub { color: var(--purple); }
+  .ia-note { font-size: 0.72rem; color: var(--color-text-secondary); line-height: 1.5; }
+
+  /* ── Metric pair ── */
+  .metric-pair {
+    display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--color-border);
+    border-radius: 10px; overflow: hidden; margin: 24px 0;
+  }
+  .metric-before { padding: 22px; background: var(--color-surface); }
+  .metric-after { padding: 22px; background: var(--color-surface); border-left: 1px solid var(--color-border); }
+  .metric-tag { font-size: 0.62rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 8px; display: block; }
+  .metric-before .metric-tag { color: var(--color-text-muted); }
+  .metric-after .metric-tag { color: var(--purple); }
+  .metric-n { font-family: var(--font-serif); font-size: 2.5rem; font-weight: 400; line-height: 1; color: var(--color-text-primary); margin-bottom: 6px; display: block; }
+  .metric-after .metric-n { color: var(--purple); }
+  .metric-desc { font-size: 0.75rem; color: var(--color-text-secondary); line-height: 1.5; }
+
+  /* ── Iteration ── */
+  .iter { border-top: 1px solid var(--color-border); padding: 24px 0 0; margin-bottom: 28px; }
+  .iter-label { font-size: 0.62rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-text-muted); margin-bottom: 10px; display: block; }
+  .iter-problem { font-size: 0.875rem; color: var(--color-text-secondary); line-height: 1.7; margin-bottom: 14px; }
+  .iter-fix { display: flex; gap: 12px; }
+  .iter-arrow { color: var(--color-text-muted); flex-shrink: 0; padding-top: 1px; }
+  .iter-fix-label { font-size: 0.62rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-text-muted); margin-bottom: 6px; display: block; }
+  .iter-fix-body { font-size: 0.875rem; color: var(--color-text-secondary); line-height: 1.7; }
+
+  /* ── Limitation ── */
+  .limit { margin-bottom: 24px; }
+  .l-title { font-size: 0.9rem; font-weight: 500; color: var(--color-text-primary); margin-bottom: 6px; }
+  .l-body { font-size: 0.875rem; color: var(--color-text-secondary); line-height: 1.75; }
+</style>
+</head>
+<body>
+
+<span class="var-pill">Variation 2 — Impact Forward</span>
+
+<div class="page">
+
+  <aside>
+    <span class="toc-label">Contents</span>
+    <nav>
+      <a href="#impact">Impact</a>
+      <a href="#context">Context</a>
+      <a href="#research">Research</a>
+      <a href="#findings">Findings</a>
+      <a href="#reframe">Reframe</a>
+      <a href="#design">Design</a>
+      <a href="#ia">Architecture</a>
+      <a href="#process">Iteration</a>
+      <a href="#solution">Solution</a>
+      <a href="#reflection">Reflection</a>
+    </nav>
+  </aside>
+
+  <main>
+
+    <!-- HERO — impact numbers first -->
+    <section id="impact" style="padding-top: 48px;">
+      <span class="section-label">Case Study</span>
+      <h1>WUD! — Reimagining the Social Event Lifecycle</h1>
+
+      <div class="meta-grid">
+        <div>
+          <span class="meta-label">Role</span>
+          <p class="meta-value">Product Designer — Research, Journey Mapping, Concept Ideation, Prototyping, High-Fidelity Design</p>
+        </div>
+        <div>
+          <span class="meta-label">Timeline</span>
+          <p class="meta-value">July – December 2025</p>
+        </div>
+        <div>
+          <span class="meta-label">Tools</span>
+          <p class="meta-value">Figma, Adobe Creative Suite</p>
+        </div>
+      </div>
+
+      <!-- Contribution band -->
+      <div class="contrib-band">
+        <div class="contrib-left">
+          <span class="contrib-left-label">Project ownership</span>
+          <p class="contrib-left-value">Solo — full ownership</p>
+        </div>
+        <div class="contrib-right">
+          <p>I owned every stage independently — from designing the research instruments and running all 5 qualitative interviews through to defining the IA, running two rounds of usability testing, and delivering all final hi-fi screens. Every design decision on this page was mine.</p>
+        </div>
+      </div>
+
+      <!-- NEW: Outcomes at the top -->
+      <div class="outcome-trio">
+        <div class="outcome-cell">
+          <span class="outcome-n">4→1</span>
+          <p class="outcome-desc">Apps consolidated — Eventbrite, WhatsApp, Google Calendar, and Instagram replaced by a single platform</p>
+        </div>
+        <div class="outcome-cell">
+          <span class="outcome-n">60→91%</span>
+          <p class="outcome-desc">Event creation completion rate — after redesigning the form as a progressive disclosure flow</p>
+        </div>
+        <div class="outcome-cell">
+          <span class="outcome-n">3</span>
+          <p class="outcome-desc">Core friction points eliminated across the full event lifecycle: discovery, coordination, and identity</p>
+        </div>
+      </div>
+
+      <div class="img-wrap" style="margin-top: 0;">
+        <img src="../public/images/projects/wyd/FlpA8j2MB68VhSeOYUrjf9abgtM.jpg.webp"
+          alt="WUD! final design — six key screens" />
+      </div>
+
+      <p>Event planning is social. The tools people use to plan events aren't. Users were already juggling Eventbrite for discovery, WhatsApp for coordination, Google Calendar for tracking, and Instagram for social proof — and none of these talked to each other. WUD! was the connective tissue that was missing.</p>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- CONTEXT -->
+    <section id="context">
+      <span class="section-label">Context</span>
+      <div class="split">
+        <div>
+          <h2>The Brief I Was Given — and the One I Chose to Answer</h2>
+          <p>Design an intuitive event app that simplifies discovery, planning, and participation. That brief had an assumption baked in — that discovery was the problem. Before designing anything, I wanted to verify whether that was actually true.</p>
+          <p>The brief also didn't specify whether "planning" meant the host's experience or the attendee's — a distinction that turned out to be central to the entire design.</p>
+
+          <!-- evidence chain for the ambiguity -->
+          <div class="evidence-chain" style="margin-top: 28px;">
+            <div class="ev-row">
+              <div class="ev-cell evidence">
+                <span class="ev-label">Ambiguity in brief</span>
+                <p class="ev-body">"Planning" unspecified — host vs. attendee perspective unclear. Assumed discovery was the core problem.</p>
+              </div>
+              <div class="ev-arrow">→</div>
+              <div class="ev-cell insight">
+                <span class="ev-label">What I questioned</span>
+                <p class="ev-body">Is discovery actually the bottleneck? Who is this app primarily for — the person hosting or the person attending?</p>
+              </div>
+              <div class="ev-arrow">→</div>
+              <div class="ev-cell decision">
+                <span class="ev-label">First decision</span>
+                <p class="ev-body">Run research before accepting the brief. Design for dual persona — same account, distinct host and attendee modes.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="callout">
+            <span class="callout-label">Starting assumption</span>
+            <p class="callout-body">The biggest barrier was discoverability. Research confirmed this was only partially true.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- RESEARCH -->
+    <section id="research">
+      <span class="section-label">Research</span>
+      <div class="split">
+        <div>
+          <h2>Navigating the "Obvious" Problem</h2>
+          <p>My initial assumption was that discoverability was the core problem. I designed a mixed-methods study specifically to challenge that assumption — because designing for the wrong problem at full fidelity is expensive.</p>
+
+          <div class="method-grid" style="margin-top: 24px;">
+            <div class="method-card">
+              <span class="mc-badge">n = 10</span>
+              <span class="mc-num">01 · Observation Study</span>
+              <p class="mc-title">Naturalistic navigation</p>
+              <p class="mc-body">Shadowed 10 users without prompting. Behavior in context — not in a test scenario — revealed real drop-off points, including that users frequently opened other apps to coordinate while browsing events.</p>
+            </div>
+            <div class="method-card">
+              <span class="mc-badge">7 platforms</span>
+              <span class="mc-num">02 · Competitor Audit</span>
+              <p class="mc-title">Market gap analysis</p>
+              <p class="mc-body">Eventbrite and Meetup had solved centralized discovery reasonably well. Everything that happens after finding an event — coordination, social validation, post-event identity — was consistently failing across all 7 platforms.</p>
+            </div>
+            <div class="method-card">
+              <span class="mc-badge">n = 5</span>
+              <span class="mc-num">03 · Qualitative Interviews</span>
+              <p class="mc-title">The emotional dimension</p>
+              <p class="mc-body">In-depth sessions focused on coordination frustrations. These surfaced the anxiety dimension — the social risk of attending alone — that a survey alone wouldn't have captured.</p>
+            </div>
+            <div class="method-card">
+              <span class="mc-badge">n = 48</span>
+              <span class="mc-num">04 · Quantitative Survey</span>
+              <p class="mc-title">Pattern validation</p>
+              <p class="mc-body">Validated interview findings at scale to distinguish personal frustrations from systemic patterns shared across the user base.</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="callout">
+            <span class="callout-label">Observed</span>
+            <span class="callout-value">10</span>
+            <p class="callout-body">Users in natural navigation contexts, without prompting.</p>
+          </div>
+          <div class="callout">
+            <span class="callout-label">Platforms audited</span>
+            <span class="callout-value">7</span>
+            <p class="callout-body">Including Eventbrite and Meetup.</p>
+          </div>
+          <div class="callout">
+            <span class="callout-label">Survey respondents</span>
+            <span class="callout-value">48</span>
+            <p class="callout-body">To validate qualitative findings at scale.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- FINDINGS -->
+    <section id="findings">
+      <span class="section-label">Findings</span>
+      <div class="split">
+        <div>
+          <h2>What the Data Actually Said</h2>
+
+          <div class="pull-quote">
+            "I know there are cool things happening — I just never know if my friends are going, so I don't bother."
+            <span class="pull-attr">— Interview participant, age 24</span>
+          </div>
+
+          <div class="stat-row">
+            <div class="stat-cell">
+              <span class="stat-n">65%</span>
+              <p class="stat-desc">wanted better personalisation — felt buried under irrelevant suggestions</p>
+            </div>
+            <div class="stat-cell">
+              <span class="stat-n">70%</span>
+              <p class="stat-desc">found coordinating with friends difficult; regularly forced to WhatsApp off-platform</p>
+            </div>
+            <div class="stat-cell">
+              <span class="stat-n">80%</span>
+              <p class="stat-desc">wanted to showcase event history socially — a need no platform was addressing</p>
+            </div>
+          </div>
+
+          <p>Discovery was real but solvable. Coordination was where the experience truly broke down — and it was being almost entirely ignored by competitors. The 80% identity result was the biggest surprise: users weren't just trying to attend events. They were trying to be seen as people who do interesting things.</p>
+
+          <!-- findings to design decision chain -->
+          <div class="evidence-chain" style="margin-top: 24px;">
+            <div class="ev-row">
+              <div class="ev-cell evidence">
+                <span class="ev-label">70% finding</span>
+                <p class="ev-body">Most users coordinated via WhatsApp. The social risk of attending alone caused event abandonment.</p>
+              </div>
+              <div class="ev-arrow">→</div>
+              <div class="ev-cell insight">
+                <span class="ev-label">Insight</span>
+                <p class="ev-body">The app isn't failing at finding events — it's failing at the social work required to actually attend them.</p>
+              </div>
+              <div class="ev-arrow">→</div>
+              <div class="ev-cell decision">
+                <span class="ev-label">Design response</span>
+                <p class="ev-body">Surface who from your network is attending directly on the event detail page — no separate feature needed.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="callout">
+            <span class="callout-label">Key stat</span>
+            <span class="callout-value">65%</span>
+            <p class="callout-body">Of users explicitly wanted better personalisation.</p>
+          </div>
+          <div class="callout">
+            <span class="callout-label">Key stat</span>
+            <span class="callout-value">70%</span>
+            <p class="callout-body">Found coordinating with friends difficult; regularly went off-platform.</p>
+          </div>
+          <div class="callout">
+            <span class="callout-label">Most surprising</span>
+            <span class="callout-value">80%</span>
+            <p class="callout-body">Wanted to showcase event history socially — no platform addressed this.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- REFRAME -->
+    <section id="reframe">
+      <span class="section-label">Reframe</span>
+      <h2>From "Better Search" to a Human Problem</h2>
+
+      <div class="brief-compare">
+        <div class="brief-original">
+          <span class="brief-tag">Original brief</span>
+          <p class="brief-text">"Design an intuitive event app that simplifies discovery, planning, and participation."</p>
+        </div>
+        <div class="brief-reframed">
+          <span class="brief-tag">Reframed How Might We</span>
+          <p class="brief-text">"How might we reduce the friction of group coordination and social validation in event planning, so that users never need to leave the app to do the social work that makes events actually happen?"</p>
+        </div>
+      </div>
+
+      <p style="margin-top: 20px;">This reframe shifted the entire design target. From solo discovery to group participation. From finding events to making attendance feel socially safe and practically frictionless. The three design pillars — personalised discovery, social coordination, and identity — came directly from this reframe.</p>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- DESIGN PRINCIPLES -->
+    <section id="design">
+      <span class="section-label">Design</span>
+      <div class="split">
+        <div>
+          <h2>The Three Principles I Designed Against</h2>
+          <p>Before touching screens, I defined three principles grounded directly in the research — and one structural constraint that shaped the entire IA: the same user could be both attendee and host simultaneously. The design had to support both modes without requiring separate apps or accounts.</p>
+
+          <div style="margin-top: 24px;">
+            <div class="principle">
+              <p class="p-num">1</p>
+              <div>
+                <p class="p-title">Keep the group together.</p>
+                <p class="p-body">Any coordination that happens off-platform is a product failure. The app needs to make group planning feel less chaotic than a group chat.</p>
+              </div>
+            </div>
+            <div class="principle">
+              <p class="p-num">2</p>
+              <div>
+                <p class="p-title">Earn relevance, don't assume it.</p>
+                <p class="p-body">Surfacing irrelevant events erodes trust faster than having no recommendations at all. Personalization must feel intentional — collected upfront, not inferred silently.</p>
+              </div>
+            </div>
+            <div class="principle">
+              <p class="p-num">3</p>
+              <div>
+                <p class="p-title">Let users build an identity.</p>
+                <p class="p-body">Social proof isn't vanity — it's how people decide who to trust. The profile isn't an afterthought; it's a social signal and a record of lived experience.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="callout">
+            <span class="callout-label">Grounding filter</span>
+            <p class="callout-body">Every design decision was tested against one question: does this reduce the need to go off-platform?</p>
+          </div>
+          <div class="callout">
+            <span class="callout-label">Dual persona constraint</span>
+            <p class="callout-body">Same account, but two distinct modes — Attendee and Host. This structural decision shaped the entire IA.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- IA -->
+    <section id="ia">
+      <span class="section-label">Architecture</span>
+      <h2>Navigation as a Design Statement</h2>
+
+      <div class="ia-table">
+        <div class="ia-cell"><p class="ia-icon">Explore</p><p class="ia-sub">Social + geo</p><p class="ia-note">Social invitations (warm) above neighbourhood events (cold).</p></div>
+        <div class="ia-cell"><p class="ia-icon">Calendar</p><p class="ia-sub">Committed</p><p class="ia-note">Replaces Google Calendar for committed events.</p></div>
+        <div class="ia-cell center"><p class="ia-icon" style="color:var(--purple);">+ Create</p><p class="ia-sub" style="color:var(--purple);">Host entry</p><p class="ia-note">Centre tab — hosting is first-class, never buried.</p></div>
+        <div class="ia-cell"><p class="ia-icon">Map</p><p class="ia-sub">Geo discovery</p><p class="ia-note">Event pins by category. Preview without leaving the map.</p></div>
+        <div class="ia-cell"><p class="ia-icon">Profile</p><p class="ia-sub">Identity</p><p class="ia-note">Social footprint, tickets, bookmarks, and settings.</p></div>
+      </div>
+
+      <!-- IA decision chain -->
+      <div class="evidence-chain">
+        <div class="ev-row">
+          <div class="ev-cell evidence">
+            <span class="ev-label">Finding</span>
+            <p class="ev-body">70% found coordination difficult. Creating events felt like a power-user feature in competitor apps.</p>
+          </div>
+          <div class="ev-arrow">→</div>
+          <div class="ev-cell insight">
+            <span class="ev-label">Insight</span>
+            <p class="ev-body">Hosting needs to feel as accessible as browsing — not 3 taps deep in a settings menu.</p>
+          </div>
+          <div class="ev-arrow">→</div>
+          <div class="ev-cell decision">
+            <span class="ev-label">IA decision</span>
+            <p class="ev-body">Place "Create" as the center tab — a permanent top-level CTA at the same level as browsing.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- PROCESS -->
+    <section id="process">
+      <span class="section-label">Process</span>
+      <div class="split">
+        <div>
+          <h2>What Failed, and What Changed</h2>
+          <p>Two prototype rounds, 10 users each. Three core tasks: discover an event, coordinate attendance with friends, create and manage as a host.</p>
+
+          <div style="margin-top: 28px;">
+            <div class="iter">
+              <span class="iter-label">RSVP status — functionally ambiguous</span>
+              <p class="iter-problem">The initial RSVP tracking UI used subtle status indicators that 4 of 10 users regularly misread. The design was visually clean. It was functionally ambiguous — users couldn't tell if a friend had confirmed or was still pending without reading carefully.</p>
+              <div class="iter-fix">
+                <span class="iter-arrow">→</span>
+                <div>
+                  <span class="iter-fix-label">What changed</span>
+                  <p class="iter-fix-body">Redesigned with distinct color, iconography, and explicit label — status readable at a glance, not deduced.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="iter">
+              <span class="iter-label">Animation — the UI competing with its own content</span>
+              <p class="iter-problem">The first pass at animations was too aggressive. Users described the interface as "busy" and "distracting." Counterintuitively, the UI was competing with the social content it was meant to surface.</p>
+              <div class="iter-fix">
+                <span class="iter-arrow">→</span>
+                <div>
+                  <span class="iter-fix-label">What changed</span>
+                  <p class="iter-fix-body">Pulled back animation intensity significantly. The rule I landed on: motion should confirm an action, not announce it.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="iter">
+              <span class="iter-label">Create Event — single scroll causing abandonment</span>
+              <p class="iter-problem">The creation form was a single long scroll covering 14 fields across image, title, timing, location, social links, capacity, category, co-host, visibility, RSVP settings, dietary restrictions, and cancellation policy. Hosts lost orientation mid-form and abandoned before completing.</p>
+              <div class="iter-fix">
+                <span class="iter-arrow">→</span>
+                <div>
+                  <span class="iter-fix-label">What changed</span>
+                  <p class="iter-fix-body">Split into a 4-step progressive disclosure flow with a persistent progress indicator. Each step groups related decisions. Step completion improved from 60% to 91%.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="metric-pair">
+            <div class="metric-before">
+              <span class="metric-tag">Before — v1</span>
+              <span class="metric-n">60%</span>
+              <p class="metric-desc">Event creation completion — single long scroll</p>
+            </div>
+            <div class="metric-after">
+              <span class="metric-tag">After — v2</span>
+              <span class="metric-n">91%</span>
+              <p class="metric-desc">Event creation completion — 4-step progressive disclosure</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="callout">
+            <span class="callout-label">Test rounds</span>
+            <span class="callout-value">2</span>
+            <p class="callout-body">Low-fi prototype, then high-fi — 10 users each time.</p>
+          </div>
+          <div class="callout">
+            <span class="callout-label">Core tasks tested</span>
+            <span class="callout-value">3</span>
+            <p class="callout-body">Discover · Coordinate with friends · Create and manage as a host.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- SOLUTION -->
+    <section id="solution">
+      <span class="section-label">Solution</span>
+      <h2>The Three Problems, Solved</h2>
+
+      <div style="margin-bottom: 52px;">
+        <div class="split" style="margin-bottom: 20px;">
+          <div>
+            <span class="section-label" style="color: var(--purple);">Problem 01 · Clutter and Irrelevant Discovery</span>
+            <h3>Earn relevance, don't assume it</h3>
+            <p>Profile Preferences lets users define interests upfront during onboarding — so recommendations are earned rather than guessed. Explore splits into social invitations (warm) above neighbourhood events (cold), prioritizing social context over algorithmic suggestion. Map and Calendar give users additional lenses: spatial discovery and time-based commitment tracking.</p>
+          </div>
+          <div>
+            <div class="callout">
+              <span class="callout-label">Key feature</span>
+              <p class="callout-body">Profile Preferences collected upfront — covers event types, travel distance, and preferred time of day.</p>
+            </div>
+          </div>
+        </div>
+        <div class="img-wrap">
+          <img src="../public/images/projects/wyd/FlpA8j2MB68VhSeOYUrjf9abgtM.jpg.webp"
+            alt="Discovery screens — Event Details, RSVP flow, Map with event pins, Filters panel, Calendar view" />
+        </div>
+        <div class="annotation">
+          <span class="ann-label">Note</span>
+          <p class="ann-text">The filter panel covers 5 dimensions: Distance, Date, Category, Price, and Social filters — each mapping directly to a gap in the competitor audit. Existing platforms offered at most 2 of these filters.</p>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 52px;">
+        <div class="split" style="margin-bottom: 20px;">
+          <div>
+            <span class="section-label" style="color: var(--purple);">Problem 02 · The Coordination Gap</span>
+            <h3>Answering "is anyone I know going?" without a group chat</h3>
+            <p>Event Details surfaces network data directly: attendee avatars, follow-status badges, and tickets remaining. The RSVP flow is three steps and ends with a clear confirmation state — reinforcing that the social coordination work is done. For hosts, the attendee management screen uses checkbox-based bulk removal rather than swipe-to-delete, which tested significantly better for lists over 10 people.</p>
+          </div>
+          <div>
+            <div class="callout">
+              <span class="callout-label">Key insight</span>
+              <p class="callout-body">Surfacing network context on the event detail page itself eliminated the primary reason users abandoned events mid-planning.</p>
+            </div>
+          </div>
+        </div>
+        <div class="img-wrap">
+          <img src="../public/images/projects/wyd/LogLezJ2rx8UNGweEhEVlKYY0kE.jpg.webp"
+            alt="Event Details screen — Food Festival showing host info, attendees, and network context" />
+        </div>
+      </div>
+
+      <div>
+        <div class="split" style="margin-bottom: 20px;">
+          <div>
+            <span class="section-label" style="color: var(--purple);">Problem 03 · Identity and Social Validation</span>
+            <h3>The profile as a social record, not an afterthought</h3>
+            <p>Profile displays Following, Followers, and Events Attended as equal social stats — treating participation as social currency on par with relationships. My Events uses three tabs: Event Tickets (QR codes for physical check-in), Saved Events (bookmarked but not registered), and Hosted Events (with inline editing). The Following list appends event context to each connection — turning it into a live feed of what people you know are doing.</p>
+          </div>
+          <div>
+            <div class="callout">
+              <span class="callout-label">Key insight</span>
+              <p class="callout-body">80% of users wanted event history as social identity. No existing platform was designing for this need.</p>
+            </div>
+          </div>
+        </div>
+        <div class="img-wrap">
+          <img src="../public/images/projects/wyd/xIQ4JSwHa2Mo5qDcivQYzneVong.jpg.webp"
+            alt="Identity screens — onboarding preferences, profile with stats, followers with event context" />
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- REFLECTION -->
+    <section id="reflection" style="padding-bottom: 80px;">
+      <span class="section-label">Reflection</span>
+      <div class="split">
+        <div>
+          <h2>What I'd Do Differently</h2>
+
+          <div class="limit" style="margin-top: 4px;">
+            <p class="l-title">Go deeper on group consensus dynamics</p>
+            <p class="l-body">The coordination features I designed addressed the problem at the interaction level. Looking back, the hardest part of planning with friends isn't tracking RSVPs — it's reaching consensus on what to attend in the first place. A vote-on-options or shared shortlisting tool would have targeted that friction more directly. I'd run a dedicated co-design session around group decision-making before finalizing the coordination feature set.</p>
+          </div>
+
+          <div class="limit">
+            <p class="l-title">Instrument the prototype earlier</p>
+            <p class="l-body">Usability testing captured task completion rates, but I didn't have metrics on where users slowed down within a flow. That behavioral data would have identified micro-friction before the final round. Even simple time-on-task logging per step would have surfaced bottlenecks in round one.</p>
+          </div>
+
+          <div class="limit">
+            <p class="l-title">Give the host experience equal research weight</p>
+            <p class="l-body">Most of my interview participants were event attendees. With more host-side research, the Create Event flow might have been structured differently — particularly the visibility and capacity settings, which hosts found most difficult to configure in testing. The host experience was deprioritized in the research phase, and it shows in places.</p>
+          </div>
+        </div>
+        <div>
+          <div class="callout">
+            <span class="callout-label">Limitation</span>
+            <p class="callout-body">Host-side experience deprioritized — designed late and tested in only one round.</p>
+          </div>
+          <div class="callout">
+            <span class="callout-label">Bigger lesson</span>
+            <p class="callout-body">Functional and emotional problems require different design responses. Don't mistake one for the other.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+</body>
+</html>

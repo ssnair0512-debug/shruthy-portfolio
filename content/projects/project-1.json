@@ -1,0 +1,11 @@
+{
+  "slug": "project-1",
+  "title": "Project Title One",
+  "label": "Company · Product Design · 2025",
+  "coverImage": "",
+  "tags": ["Product Design", "Research", "Prototyping"],
+  "year": 2025,
+  "featured": true,
+  "description": "A short description of what this project was about and the impact it had.",
+  "role": "Product Design Intern"
+}

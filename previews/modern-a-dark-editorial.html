@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Direction A — Dark Editorial</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0c0c0d;
+    --surface: #161618;
+    --surface2: #1e1e21;
+    --border: #2a2a2e;
+    --text: #f0efeb;
+    --text-2: #a8a6a0;
+    --text-3: #5a5856;
+    --accent: #c8b8ff;
+    --accent2: #7af0c8;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'IBM Plex Sans', system-ui, sans-serif;
+    --display: 'Playfair Display', Georgia, serif;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+
+  /* ── NAV ── */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    border-bottom: 1px solid var(--border);
+    background: rgba(12,12,13,0.85);
+    backdrop-filter: blur(12px);
+  }
+  .nav-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+  }
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.8rem;
+    color: var(--text-2);
+    text-decoration: none;
+    font-family: var(--mono);
+    letter-spacing: 0.04em;
+    transition: color 0.15s;
+  }
+  .nav-links a.active { color: var(--text); }
+
+  /* ── MAIN ── */
+  main {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 5rem 0 3rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 3rem;
+    align-items: end;
+  }
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.25rem;
+  }
+  h1 {
+    font-family: var(--display);
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--text);
+  }
+  h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .hero-sub {
+    margin-top: 1.5rem;
+    font-size: 0.875rem;
+    line-height: 1.7;
+    color: var(--text-2);
+    max-width: 420px;
+  }
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text);
+    text-decoration: none;
+    border: 1px solid var(--border);
+    padding: 0.625rem 1.25rem;
+    border-radius: 2px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .hero-cta:hover { border-color: var(--text-2); background: var(--surface); }
+
+  /* Experience sidebar */
+  .exp-sidebar {
+    padding-bottom: 0.5rem;
+  }
+  .exp-label {
+    font-family: var(--mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    margin-bottom: 1rem;
+  }
+  .exp-item {
+    display: flex;
+    gap: 1rem;
+    align-items: baseline;
+    padding: 0.625rem 0;
+    border-top: 1px solid var(--border);
+  }
+  .exp-year {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--accent);
+    width: 32px;
+    flex-shrink: 0;
+  }
+  .exp-role { font-size: 0.75rem; color: var(--text-2); line-height: 1.4; }
+  .exp-company { font-size: 0.65rem; color: var(--text-3); margin-top: 0.15rem; font-family: var(--mono); }
+
+  /* ── STATUS ROW ── */
+  .status-row {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 0.875rem 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 3rem;
+  }
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent2);
+    flex-shrink: 0;
+    box-shadow: 0 0 6px var(--accent2);
+  }
+  .status-text {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    color: var(--text-3);
+  }
+  .status-tag {
+    margin-left: auto;
+    font-family: var(--mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    border: 1px solid var(--border);
+    padding: 0.2rem 0.6rem;
+    border-radius: 100px;
+  }
+
+  /* ── PROJECTS SECTION ── */
+  .section-label {
+    font-family: var(--mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* Bento grid */
+  .bento-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-auto-rows: 80px;
+    gap: 12px;
+    margin-bottom: 6rem;
+  }
+
+  .bento-card {
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    position: relative;
+    cursor: pointer;
+    transition: border-color 0.2s;
+  }
+  .bento-card:hover { border-color: var(--text-3); }
+
+  .bento-card.large { grid-column: span 7; grid-row: span 4; }
+  .bento-card.medium { grid-column: span 5; grid-row: span 4; }
+  .bento-card.wide { grid-column: span 7; grid-row: span 3; }
+  .bento-card.side { grid-column: span 5; grid-row: span 3; }
+
+  .bento-img {
+    width: 100%;
+    height: 58%;
+    background: var(--surface2);
+    position: relative;
+    overflow: hidden;
+  }
+  .bento-img-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .bento-img-placeholder svg { opacity: 0.12; }
+
+  /* Different gradient moods for each card */
+  .bento-card:nth-child(1) .bento-img { background: linear-gradient(135deg, #1a1530, #2d2040); }
+  .bento-card:nth-child(2) .bento-img { background: linear-gradient(135deg, #0f1f1a, #132b22); }
+  .bento-card:nth-child(3) .bento-img { background: linear-gradient(135deg, #1a1020, #281535); }
+  .bento-card:nth-child(4) .bento-img { background: linear-gradient(135deg, #1a1010, #2b1a10); }
+
+  /* Subtle pattern overlay */
+  .bento-card:nth-child(1) .bento-img::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(200,184,255,0.15) 0%, transparent 60%);
+  }
+  .bento-card:nth-child(2) .bento-img::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 70% 30%, rgba(122,240,200,0.12) 0%, transparent 60%);
+  }
+
+  .bento-info {
+    padding: 0.875rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    height: 42%;
+  }
+  .bento-tag {
+    font-family: var(--mono);
+    font-size: 0.5rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-3);
+  }
+  .bento-title {
+    font-family: var(--display);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.25;
+  }
+  .bento-arrow {
+    margin-left: auto;
+    margin-top: auto;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--text-3);
+  }
+  .bento-info-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 0;
+  }
+  .footer-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-text {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--text-3);
+    letter-spacing: 0.04em;
+  }
+  .footer-links {
+    display: flex;
+    gap: 1.25rem;
+  }
+  .footer-links a {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--text-3);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+  }
+
+  /* ═══════════════════════════════════════
+     WHY PAGE
+  ═══════════════════════════════════════ */
+  .page-divider {
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2), transparent);
+    margin: 4rem 0;
+    border-radius: 2px;
+  }
+
+  .page-title {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(200,184,255,0.06);
+    border: 1px solid rgba(200,184,255,0.15);
+    border-radius: 4px;
+    display: inline-block;
+  }
+
+  /* Sub-nav */
+  .sub-nav {
+    background: rgba(12,12,13,0.9);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0;
+  }
+  .sub-nav-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .sub-nav-back {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--text-3);
+    text-decoration: none;
+  }
+  .sub-nav-title {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--text-2);
+  }
+
+  /* Case study sidebar nav */
+  .case-study-layout {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 4rem;
+    padding-top: 3rem;
+  }
+  .sidebar-nav {
+    position: sticky;
+    top: 100px;
+    height: fit-content;
+  }
+  .sidebar-section {
+    font-family: var(--mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    margin-bottom: 1rem;
+  }
+  .sidebar-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+  .sidebar-links a {
+    font-size: 0.75rem;
+    color: var(--text-3);
+    text-decoration: none;
+    padding: 0.35rem 0.75rem;
+    border-radius: 4px;
+    border-left: 2px solid transparent;
+    transition: all 0.15s;
+    font-family: var(--sans);
+  }
+  .sidebar-links a:hover { color: var(--text-2); }
+  .sidebar-links a.active {
+    color: var(--accent);
+    border-left-color: var(--accent);
+    background: rgba(200,184,255,0.06);
+  }
+
+  /* Case study content */
+  .case-hero-tag {
+    font-family: var(--mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+  .case-h1 {
+    font-family: var(--display);
+    font-size: clamp(2rem, 4vw, 3.25rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 2rem;
+  }
+
+  .meta-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--border);
+    margin-bottom: 2.5rem;
+  }
+  .meta-item {}
+  .meta-label {
+    font-family: var(--mono);
+    font-size: 0.52rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    margin-bottom: 0.35rem;
+  }
+  .meta-value {
+    font-size: 0.8rem;
+    color: var(--text-2);
+    line-height: 1.5;
+  }
+
+  .hero-image-block {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: var(--surface);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    margin-bottom: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-image-block::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(200,184,255,0.08) 0%, rgba(122,240,200,0.05) 100%);
+  }
+  .hero-image-label {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    position: relative;
+  }
+
+  /* Stats cluster */
+  .stats-cluster {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    margin-bottom: 3rem;
+  }
+  .stat-cell {
+    background: var(--surface);
+    padding: 1.25rem 1rem;
+  }
+  .stat-num {
+    font-family: var(--mono);
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    line-height: 1.4;
+  }
+
+  /* Overview text */
+  .overview-text {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--text-2);
+    margin-bottom: 1rem;
+    max-width: 640px;
+  }
+
+  /* Problem section */
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+  }
+  .section-num {
+    font-family: var(--mono);
+    font-size: 0.55rem;
+    color: var(--text-3);
+    letter-spacing: 0.1em;
+  }
+  .section-h2 {
+    font-family: var(--display);
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.2;
+    margin-bottom: 0.75rem;
+    max-width: 540px;
+  }
+  .section-p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--text-2);
+    max-width: 560px;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Problem cards */
+  .problem-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+  .problem-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem;
+  }
+  .problem-card-label {
+    font-family: var(--mono);
+    font-size: 0.5rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    margin-bottom: 0.75rem;
+  }
+  .problem-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+  }
+  .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+  .problem-row-text { font-size: 0.7rem; color: var(--text-2); }
+  .problem-badge {
+    margin-left: auto;
+    font-family: var(--mono);
+    font-size: 0.48rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+
+  /* Insight quote */
+  .insight-quote {
+    border-left: 2px solid var(--accent);
+    padding: 1.25rem 1.5rem;
+    margin: 2rem 0;
+    background: rgba(200,184,255,0.04);
+    border-radius: 0 8px 8px 0;
+  }
+  .insight-quote p {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--text);
+  }
+
+  /* Design mode cards */
+  .direction-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+  .direction-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .direction-card.chosen {
+    border-color: var(--accent);
+    background: rgba(200,184,255,0.04);
+  }
+  .direction-preview {
+    height: 100px;
+    background: var(--surface2);
+    padding: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.4rem;
+  }
+  .preview-line { border-radius: 100px; }
+  .direction-info { padding: 0.875rem; }
+  .direction-num {
+    font-family: var(--mono);
+    font-size: 0.48rem;
+    letter-spacing: 0.14em;
+    color: var(--text-3);
+    margin-bottom: 0.25rem;
+  }
+  .direction-title {
+    font-family: var(--display);
+    font-size: 0.85rem;
+    color: var(--text);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  .direction-body { font-size: 0.68rem; line-height: 1.5; color: var(--text-2); }
+  .chosen-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: var(--mono);
+    font-size: 0.48rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: rgba(200,184,255,0.08);
+    border: 1px solid rgba(200,184,255,0.2);
+    padding: 0.2rem 0.5rem;
+    border-radius: 100px;
+    margin-bottom: 0.5rem;
+  }
+</style>
+</head>
+<body>
+
+<!-- ──────────────────────────────────────────
+     LANDING PAGE
+────────────────────────────────────────── -->
+
+<header>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">SN_</a>
+    <ul class="nav-links">
+      <li><a href="#" class="active">Work</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Resume ↗</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="hero-grid">
+      <div>
+        <p class="hero-eyebrow">Product Designer & Engineer</p>
+        <h1>
+          I'm Shruthy —<br>
+          I design <em>and</em><br>
+          engineer.
+        </h1>
+        <p class="hero-sub">
+          Building products at the intersection of craft and code.
+          Currently open to full-time roles in product design.
+        </p>
+        <a href="#" class="hero-cta">
+          View selected work
+          <span>→</span>
+        </a>
+      </div>
+
+      <div class="exp-sidebar">
+        <p class="exp-label">Experience</p>
+        <div class="exp-item">
+          <span class="exp-year">2025</span>
+          <div>
+            <div class="exp-role">Product Design Intern</div>
+            <div class="exp-company">Company Name</div>
+          </div>
+        </div>
+        <div class="exp-item">
+          <span class="exp-year">2024</span>
+          <div>
+            <div class="exp-role">Software Engineering Intern</div>
+            <div class="exp-company">Company Name</div>
+          </div>
+        </div>
+        <div class="exp-item">
+          <span class="exp-year">2023</span>
+          <div>
+            <div class="exp-role">Design + Engineering Intern</div>
+            <div class="exp-company">Company Name</div>
+          </div>
+        </div>
+        <div class="exp-item">
+          <span class="exp-year">2022</span>
+          <div>
+            <div class="exp-role">Product Design Intern</div>
+            <div class="exp-company">Company Name</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="status-row">
+    <div class="status-dot"></div>
+    <span class="status-text">Available for full-time roles — May 2025</span>
+    <span class="status-tag">Selected Work</span>
+  </div>
+
+  <p class="section-label">Projects</p>
+
+  <!-- Bento grid -->
+  <div class="bento-grid">
+
+    <!-- Card 1 — Large -->
+    <div class="bento-card large">
+      <div class="bento-img">
+        <div class="bento-img-placeholder">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <rect x="4" y="4" width="32" height="24" rx="2" stroke="#fff" stroke-width="1.5"/>
+            <circle cx="20" cy="16" r="5" stroke="#fff" stroke-width="1.5"/>
+            <path d="M4 32l8-8 6 6 6-8 12 10" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+      <div class="bento-info">
+        <div class="bento-info-row">
+          <div>
+            <p class="bento-tag">Relay · Feature Design · 2024</p>
+            <h3 class="bento-title">Why — The Decision Ledger</h3>
+          </div>
+          <span class="bento-arrow">↗</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 — Medium -->
+    <div class="bento-card medium">
+      <div class="bento-img">
+        <div class="bento-img-placeholder">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+            <rect x="3" y="8" width="30" height="20" rx="2" stroke="#fff" stroke-width="1.5"/>
+            <path d="M12 18h12M12 22h8" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="28" cy="8" r="4" fill="#7af0c8" opacity="0.7"/>
+          </svg>
+        </div>
+      </div>
+      <div class="bento-info">
+        <div class="bento-info-row">
+          <div>
+            <p class="bento-tag">Poker AI · Product Design · 2023</p>
+            <h3 class="bento-title">AI Poker Coaching</h3>
+          </div>
+          <span class="bento-arrow">↗</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 — Wide -->
+    <div class="bento-card wide">
+      <div class="bento-img">
+        <div class="bento-img-placeholder">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+            <rect x="3" y="3" width="30" height="30" rx="4" stroke="#fff" stroke-width="1.5" stroke-dasharray="4 2"/>
+            <path d="M10 18l5 5 11-11" stroke="#c8b8ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+      <div class="bento-info">
+        <div class="bento-info-row">
+          <div>
+            <p class="bento-tag">OpenAI · Hardware Concept · 2025</p>
+            <h3 class="bento-title">The Future of AI & Hardware</h3>
+          </div>
+          <span class="bento-arrow">↗</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4 — Side -->
+    <div class="bento-card side">
+      <div class="bento-img">
+        <div class="bento-img-placeholder">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <circle cx="16" cy="16" r="10" stroke="#fff" stroke-width="1.5"/>
+            <path d="M16 10v6l4 4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+      <div class="bento-info">
+        <div class="bento-info-row">
+          <div>
+            <p class="bento-tag">1Password · 2022</p>
+            <h3 class="bento-title">Security Onboarding</h3>
+          </div>
+          <span class="bento-arrow">↗</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-text">Designed & built by Shruthy Nair · 2025</span>
+    <div class="footer-links">
+      <a href="#">LinkedIn ↗</a>
+      <a href="#">GitHub ↗</a>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ══════════════════════════════════════════════
+     PAGE BREAK — WHY PROJECT PAGE
+══════════════════════════════════════════════ -->
+
+<div class="page-divider"></div>
+<div style="text-align:center; padding: 1rem 2rem 2rem;">
+  <div class="page-title">↓ Project Case Study — "Why" page in Direction A</div>
+</div>
+
+<header style="position:relative;">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">SN_</a>
+    <ul class="nav-links">
+      <li><a href="#" class="active">Work</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Resume ↗</a></li>
+    </ul>
+  </div>
+</header>
+
+<div class="sub-nav">
+  <div class="sub-nav-inner">
+    <a href="#" class="sub-nav-back">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 11L5 7L9 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Back
+    </a>
+    <span class="sub-nav-title">Why — The Decision Ledger · Relay</span>
+    <div style="width:40px;"></div>
+  </div>
+</div>
+
+<main style="padding-top:0;">
+  <div class="case-study-layout">
+
+    <!-- Sidebar nav -->
+    <div class="sidebar-nav">
+      <p class="sidebar-section">Contents</p>
+      <div class="sidebar-links">
+        <a href="#" class="active">Overview</a>
+        <a href="#">Problem Space</a>
+        <a href="#">Research</a>
+        <a href="#">Design Challenge</a>
+        <a href="#">Ideation</a>
+        <a href="#">Design Decisions</a>
+        <a href="#">Reflection</a>
+      </div>
+    </div>
+
+    <!-- Main content -->
+    <div>
+      <p class="case-hero-tag">Case Study · Relay · Feature Design</p>
+      <h1 class="case-h1">Why — The<br>Decision Ledger</h1>
+
+      <div class="meta-grid">
+        <div class="meta-item">
+          <p class="meta-label">Role</p>
+          <p class="meta-value">UX Designer<br>(Team of 2)</p>
+        </div>
+        <div class="meta-item">
+          <p class="meta-label">Timeline</p>
+          <p class="meta-value">8 Weeks</p>
+        </div>
+        <div class="meta-item">
+          <p class="meta-label">Skills</p>
+          <p class="meta-value">User Research · Interaction Design · Prototyping · AI-Assisted UX</p>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-cluster">
+        <div class="stat-cell">
+          <p class="stat-num">2</p>
+          <p class="stat-label">Person<br>design team</p>
+        </div>
+        <div class="stat-cell">
+          <p class="stat-num">4</p>
+          <p class="stat-label">User types<br>identified</p>
+        </div>
+        <div class="stat-cell">
+          <p class="stat-num">3</p>
+          <p class="stat-label">Directions<br>explored</p>
+        </div>
+        <div class="stat-cell">
+          <p class="stat-num">4</p>
+          <p class="stat-label">Tools<br>audited</p>
+        </div>
+      </div>
+
+      <!-- Hero image -->
+      <div class="hero-image-block">
+        <span class="hero-image-label">Hero — Why Feature Overview / Ledger UI Mockup</span>
+      </div>
+
+      <!-- Overview -->
+      <p class="section-label">Overview</p>
+      <p class="overview-text">
+        Relay is a workplace async communication platform built for teams across time zones.
+        <em>Why</em> is a feature inside Relay — a decision ledger where teams log and retrieve
+        the reasoning behind decisions, so context survives handoffs and onboarding.
+      </p>
+
+      <div style="height:2rem;"></div>
+
+      <!-- Problem section -->
+      <p class="section-label">Problem Space</p>
+      <h2 class="section-h2">Information lives everywhere. None of it is findable when it actually matters.</h2>
+      <p class="section-p">Decisions scatter across many surfaces at once — a message in chat, a comment in a design file, an email reply. Each captures a piece. None of them make context retrievable later.</p>
+
+      <!-- Problem cards -->
+      <div class="problem-cards">
+        <div class="problem-card">
+          <p class="problem-card-label">Where decisions end up</p>
+          <div class="problem-row">
+            <div class="dot" style="background:#c4b5fd;"></div>
+            <span class="problem-row-text">Chat</span>
+            <span class="problem-badge" style="background:rgba(196,181,253,0.1);color:#c4b5fd;border:1px solid rgba(196,181,253,0.2);">msg 23 of 40</span>
+          </div>
+          <div class="problem-row">
+            <div class="dot" style="background:#7af0c8;"></div>
+            <span class="problem-row-text">Design file</span>
+            <span class="problem-badge" style="background:rgba(122,240,200,0.1);color:#7af0c8;border:1px solid rgba(122,240,200,0.2);">buried comment</span>
+          </div>
+          <div class="problem-row">
+            <div class="dot" style="background:#fca5a5;"></div>
+            <span class="problem-row-text">Email</span>
+            <span class="problem-badge" style="background:rgba(252,165,165,0.1);color:#fca5a5;border:1px solid rgba(252,165,165,0.2);">reply 8 of 14</span>
+          </div>
+          <div class="problem-row">
+            <div class="dot" style="background:#fde68a;"></div>
+            <span class="problem-row-text">Notes</span>
+            <span class="problem-badge" style="background:rgba(253,230,138,0.1);color:#fde68a;border:1px solid rgba(253,230,138,0.2);">unsynced</span>
+          </div>
+        </div>
+        <div class="problem-card">
+          <p class="problem-card-label">Who pays the cost</p>
+          <div style="display:flex;flex-direction:column;gap:0.5rem;">
+            <div style="border-left:2px solid #c4b5fd;padding:0.625rem 0.75rem;background:rgba(196,181,253,0.04);border-radius:0 4px 4px 0;">
+              <p style="font-size:0.75rem;font-weight:600;color:var(--text);margin-bottom:0.2rem;">The New Joiner</p>
+              <p style="font-size:0.65rem;line-height:1.5;color:var(--text-2);">Gets partial answers. Ramp-up is longer than it needs to be.</p>
+            </div>
+            <div style="border-left:2px solid #7af0c8;padding:0.625rem 0.75rem;background:rgba(122,240,200,0.04);border-radius:0 4px 4px 0;">
+              <p style="font-size:0.75rem;font-weight:600;color:var(--text);margin-bottom:0.2rem;">The Mid-Project Inheritor</p>
+              <p style="font-size:0.65rem;line-height:1.5;color:var(--text-2);">Inherits outputs, not reasoning. Wrong assumptions show up as rework.</p>
+            </div>
+            <div style="border-left:2px solid #fde68a;padding:0.625rem 0.75rem;background:rgba(253,230,138,0.04);border-radius:0 4px 4px 0;">
+              <p style="font-size:0.75rem;font-weight:600;color:var(--text);margin-bottom:0.2rem;">The Manager</p>
+              <p style="font-size:0.65rem;line-height:1.5;color:var(--text-2);">Gets messaged constantly to provide context. The pattern repeats.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="insight-quote">
+        <p>"Any solution that requires significant effort at the point of capture will not be used consistently. That is not a discipline problem. It is a design problem."</p>
+      </div>
+
+      <div style="height:2rem;"></div>
+
+      <!-- Ideation -->
+      <p class="section-label">Ideation — 3 Directions Explored</p>
+      <h2 class="section-h2">What we explored before landing on a direction</h2>
+
+      <div class="direction-cards">
+        <!-- Direction 1 -->
+        <div class="direction-card">
+          <div class="direction-preview" style="background:linear-gradient(135deg,#1e1e21,#161618);">
+            <div class="preview-line" style="height:5px;width:60%;background:#2a2a2e;"></div>
+            <div class="preview-line" style="height:20px;background:#222;border:1px solid #333;"></div>
+            <div class="preview-line" style="height:5px;width:50%;background:#2a2a2e;"></div>
+            <div class="preview-line" style="height:20px;background:#222;border:1px solid #333;"></div>
+            <div class="preview-line" style="height:14px;width:70%;background:#333;border-radius:2px;align-self:center;"></div>
+          </div>
+          <div class="direction-info">
+            <p class="direction-num">Direction 01</p>
+            <p class="direction-title">Single Structured Form</p>
+            <p class="direction-body">One form, all fields visible upfront. Clear structure — but 9 fields at once feels like homework.</p>
+          </div>
+        </div>
+        <!-- Direction 2 -->
+        <div class="direction-card">
+          <div class="direction-preview" style="background:linear-gradient(135deg,#1e1e21,#161618);">
+            <div class="preview-line" style="height:5px;width:55%;background:#2a2a2e;"></div>
+            <div class="preview-line" style="height:18px;background:#222;border:1.5px solid #555;"></div>
+            <div class="preview-line" style="height:5px;width:45%;background:#2a2a2e;opacity:0.5;"></div>
+            <div class="preview-line" style="height:18px;background:#1a1a1d;border:1px solid #2a2a2e;opacity:0.5;"></div>
+            <div style="display:flex;gap:4px;justify-content:center;">
+              <div style="width:5px;height:5px;border-radius:50%;background:#555;"></div>
+              <div style="width:5px;height:5px;border-radius:50%;background:#333;"></div>
+              <div style="width:5px;height:5px;border-radius:50%;background:#2a2a2e;"></div>
+            </div>
+          </div>
+          <div class="direction-info">
+            <p class="direction-num">Direction 02</p>
+            <p class="direction-title">Progressive Disclosure</p>
+            <p class="direction-body">Start with one field, reveal more. Low barrier — but disorienting. "The form that keeps going."</p>
+          </div>
+        </div>
+        <!-- Direction 3 — Chosen -->
+        <div class="direction-card chosen">
+          <div class="direction-preview" style="background:linear-gradient(135deg,#1a1530,#1e1e21);">
+            <div style="display:flex;gap:4px;margin-bottom:4px;">
+              <div style="flex:1;height:14px;background:rgba(200,184,255,0.5);border-radius:3px;"></div>
+              <div style="flex:1;height:14px;background:#2a2a2e;border-radius:3px;border:1px solid #333;"></div>
+            </div>
+            <div class="preview-line" style="height:14px;background:#2a2a2e;border:1px solid #333;"></div>
+            <div class="preview-line" style="height:20px;background:#2a2a2e;border:1px solid #333;"></div>
+            <div class="preview-line" style="height:5px;width:40%;background:#2a2a2e;border:1px dashed #444;border-radius:2px;"></div>
+            <div style="display:flex;justify-content:flex-end;">
+              <div style="height:12px;width:40px;background:rgba(200,184,255,0.6);border-radius:3px;"></div>
+            </div>
+          </div>
+          <div class="direction-info">
+            <div class="chosen-badge">★ Chosen direction</div>
+            <p class="direction-num">Direction 03</p>
+            <p class="direction-title">Two Modes — Quick & Full</p>
+            <p class="direction-body">Quick Capture: 3 fields, under a minute. Full Entry: complete structured record. Both land in the same searchable ledger.</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="height:4rem;"></div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-text">Designed & built by Shruthy Nair · 2025</span>
+    <div class="footer-links">
+      <a href="#">LinkedIn ↗</a>
+      <a href="#">GitHub ↗</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

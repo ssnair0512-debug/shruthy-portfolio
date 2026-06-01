@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Preview — Why Redesign · Shruthy Nair</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+<style>
+
+/* ─── Design tokens — exact match to globals.css ─── */
+:root {
+  --color-bg:             #f5f5f4;
+  --color-surface:        #fafaf9;
+  --color-surface-2:      #e7e5e4;
+  --color-border:         #d7d3d1;
+  --color-border-2:       #e7e5e4;
+  --color-text-primary:   #1b1917;
+  --color-text-secondary: #45403c;
+  --color-text-muted:     #78716b;
+  --color-text-ghost:     #a6a09b;
+  --font-serif: 'Instrument Serif', Georgia, serif;
+  --font-sans:  'DM Sans', system-ui, sans-serif;
+}
+
+/* ─── Base ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: var(--color-bg); }
+body {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-text-primary);
+  background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Layout ─── */
+.page { max-width: 56rem; margin: 0 auto; padding: 5rem 2rem 8rem; }
+
+/* ─── Typography helpers ─── */
+.serif  { font-family: var(--font-serif); font-weight: 400; }
+.label  {
+  font-family: var(--font-sans);
+  font-size: 0.62rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+/* ─── Section label (matches SectionLabel component) ─── */
+.section-label {
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: 1.25rem;
+}
+
+/* ─── Divider ─── */
+.divider {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  margin: 4rem 0;
+}
+
+/* ─── Image placeholder ─── */
+.img-placeholder {
+  width: 100%;
+  border: 2px dashed var(--color-border);
+  border-radius: 8px;
+  background: var(--color-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-ghost);
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 2rem;
+  line-height: 1.8;
+}
+
+/* ─── Meta row ─── */
+.meta-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-border);
+}
+.meta-value {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+/* ─── My Contribution block ─── */
+.contribution-block {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 1.5rem;
+}
+.contribution-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+.contribution-col-label {
+  font-family: var(--font-sans);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: 0.75rem;
+}
+.contribution-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.contribution-list li {
+  font-size: 0.82rem;
+  color: var(--color-text-secondary);
+  display: flex;
+  gap: 0.5rem;
+  line-height: 1.5;
+}
+.contribution-list li::before {
+  content: '—';
+  color: var(--color-text-ghost);
+  flex-shrink: 0;
+}
+
+/* ─── Body text ─── */
+.body-text {
+  font-size: 0.95rem;
+  color: var(--color-text-secondary);
+  line-height: 1.8;
+  font-weight: 300;
+  max-width: 68ch;
+}
+.body-text + .body-text { margin-top: 1rem; }
+
+/* ─── Section heading (h2 — matches page) ─── */
+.section-heading {
+  font-family: var(--font-serif);
+  font-size: clamp(1.35rem, 2.5vw, 1.9rem);
+  font-weight: 400;
+  color: var(--color-text-primary);
+  line-height: 1.25;
+  margin-bottom: 1rem;
+}
+
+/* ─── Subsection heading (h3) ─── */
+.sub-heading {
+  font-family: var(--font-serif);
+  font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+  font-weight: 400;
+  color: var(--color-text-primary);
+  line-height: 1.3;
+  margin-bottom: 0.75rem;
+}
+
+/* ─── INLINE CALLOUT — replaces the side column ─── */
+/*
+   Key design decision: instead of a 240px right sidebar that
+   reduces reading width, these callouts sit inline in the main
+   flow — visually distinct but not competing with body text.
+   They use a left-border accent and surface tint.
+*/
+.inline-callout {
+  border-left: 2px solid var(--color-border);
+  background: var(--color-surface);
+  border-radius: 0 8px 8px 0;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+}
+.inline-callout .callout-label {
+  font-family: var(--font-sans);
+  font-size: 0.58rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-text-ghost);
+  margin-bottom: 0.4rem;
+}
+.inline-callout p {
+  font-size: 0.82rem;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+/* ─── INLINE CALLOUT — emphasis variant (for key decisions) ─── */
+.inline-callout-em {
+  border-left: 2px solid var(--color-text-primary);
+  background: var(--color-surface);
+  border-radius: 0 8px 8px 0;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+}
+.inline-callout-em .callout-label {
+  font-family: var(--font-sans);
+  font-size: 0.58rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: 0.4rem;
+}
+.inline-callout-em p {
+  font-size: 0.82rem;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+/* ─── Quote block (matches page insight quote) ─── */
+.insight-quote {
+  border-left: 3px solid var(--color-text-primary);
+  padding: 1.25rem 1.5rem;
+  background: var(--color-surface);
+  border-radius: 0 8px 8px 0;
+  margin: 1.5rem 0;
+}
+.insight-quote p {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  color: var(--color-text-primary);
+  line-height: 1.7;
+}
+
+/* ─── Root cause / summary callout ─── */
+.summary-block {
+  background: var(--color-surface);
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  margin-top: 1.5rem;
+}
+.summary-block p {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+/* ─── Outcome tags (worked / moved-on / chosen) — from page ─── */
+.outcome {
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin-top: 1rem;
+}
+.outcome .outcome-label {
+  font-size: 0.58rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+.outcome p { font-size: 0.82rem; line-height: 1.7; font-weight: 300; }
+.outcome-worked   { background: #f0fdf4; border: 1px solid #bbf7d0; }
+.outcome-worked   .outcome-label, .outcome-worked p { color: #166534; }
+.outcome-moved    { background: #fff7ed; border: 1px solid #fed7aa; }
+.outcome-moved    .outcome-label, .outcome-moved p  { color: #9a3412; }
+.outcome-chosen   { background: #eff6ff; border: 1px solid #bfdbfe; }
+.outcome-chosen   .outcome-label, .outcome-chosen p { color: #1e40af; }
+
+/* ─── Research card grid ─── */
+.research-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin: 1.5rem 0;
+}
+.research-card {
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.research-card-visual {
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: var(--color-surface-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-ghost);
+  font-family: var(--font-sans);
+}
+.research-card-body { padding: 1rem; }
+.research-card-body .card-tag {
+  font-size: 0.5rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-text-ghost);
+  border: 1px solid var(--color-border);
+  border-radius: 99px;
+  padding: 2px 8px;
+  background: var(--color-surface);
+}
+.research-card-body h4 {
+  font-size: 0.88rem;
+  font-weight: 400;
+  color: var(--color-text-primary);
+  margin: 0.5rem 0 0.35rem;
+}
+.research-card-body p {
+  font-size: 0.78rem;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+/* ─── Direction cards ─── */
+.direction-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+.direction-card {
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.direction-card.chosen {
+  border-color: var(--color-text-primary);
+  border-width: 1.5px;
+}
+.direction-card-sketch {
+  background: var(--color-surface-2);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-height: 100px;
+  justify-content: center;
+}
+.sketch-line {
+  height: 6px;
+  background: var(--color-border);
+  border-radius: 3px;
+}
+.sketch-field {
+  height: 14px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 3px;
+}
+.sketch-field-active {
+  height: 14px;
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-text-muted);
+  border-radius: 3px;
+}
+.sketch-btn {
+  height: 12px;
+  background: var(--color-text-primary);
+  border-radius: 3px;
+  width: 56px;
+  align-self: flex-end;
+}
+.direction-card-body { padding: 0.9rem; }
+.direction-card-body .dir-num {
+  font-size: 0.5rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-text-ghost);
+  margin-bottom: 3px;
+}
+.direction-card-body h4 {
+  font-family: var(--font-serif);
+  font-size: 0.88rem;
+  font-weight: 400;
+  color: var(--color-text-primary);
+  margin-bottom: 0.35rem;
+  line-height: 1.3;
+}
+.direction-card-body p {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+/* ─── Reflection list ─── */
+.reflection-item {
+  border-top: 1px solid var(--color-border);
+  padding: 1.5rem 0;
+}
+.reflection-item h4 {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--color-text-primary);
+  margin-bottom: 0.4rem;
+}
+.reflection-item p {
+  font-size: 0.82rem;
+  color: var(--color-text-secondary);
+  line-height: 1.75;
+  font-weight: 300;
+}
+
+/* ─── Preview annotation banner ─── */
+.preview-banner {
+  background: var(--color-text-primary);
+  color: var(--color-bg);
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  padding: 0.6rem 1.5rem;
+  text-align: center;
+}
+.preview-banner span {
+  opacity: 0.5;
+  margin: 0 0.75rem;
+}
+
+/* ─── Change annotations ─── */
+.change-note {
+  display: inline-block;
+  background: #fef9c3;
+  border: 1px solid #fde68a;
+  border-radius: 3px;
+  font-size: 0.55rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  color: #92400e;
+  margin-bottom: 0.75rem;
+  font-family: var(--font-sans);
+}
+
+</style>
+</head>
+<body>
+
+<!-- Preview banner -->
+<div class="preview-banner">
+  Preview — Why Case Study Redesign
+  <span>·</span>
+  Actual design system · Instrument Serif + DM Sans · Warm stone palette
+  <span>·</span>
+  No changes made to the real page
+</div>
+
+<div class="page">
+
+  <!-- ══════════════════════════════════════════════════════
+       HERO
+  ═══════════════════════════════════════════════════════════ -->
+  <section style="padding-top: 3rem; padding-bottom: 2.5rem;">
+
+    <p class="section-label">Case Study · Relay · Feature Design</p>
+
+    <h1 class="serif" style="font-size: clamp(2.2rem, 5vw, 3.75rem); line-height: 1.1; letter-spacing: 0; font-weight: 400; color: var(--color-text-primary); margin-bottom: 2rem; max-width: 20ch;">
+      Why — The Decision Ledger
+    </h1>
+
+    <!-- ① Hero image — full width, immediately after title -->
+    <div class="change-note">① Hero image first — shows final product before meta</div>
+    <div class="img-placeholder" style="height: 480px; margin-bottom: 2rem;">
+      Hero — Why Feature Overview · Decision Ledger UI
+    </div>
+
+    <!-- ② Meta row — Role, Timeline, Skills. No "At a Glance" -->
+    <div class="change-note">② Role / Timeline / Skills — no "At a Glance" column</div>
+    <div class="meta-row">
+      <div>
+        <span class="label">Role</span>
+        <p class="meta-value">UX Designer<br>Team of 2</p>
+      </div>
+      <div>
+        <span class="label">Timeline</span>
+        <p class="meta-value">8 Weeks</p>
+      </div>
+      <div>
+        <span class="label">Skills &amp; Tools</span>
+        <p class="meta-value">
+          User Research · Competitive Analysis<br>
+          Interaction Design · Prototyping<br>
+          AI-Assisted UX
+          <br><span style="color: var(--color-text-ghost);">Figma · Adobe Creative Suite</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ③ My Contribution -->
+  <section style="padding-bottom: 2.5rem;">
+    <div class="change-note">③ My Contribution — I led / We shared (new, from your notes)</div>
+    <div class="contribution-block">
+      <p class="section-label" style="margin-bottom: 0;">My Contribution</p>
+      <div class="contribution-grid">
+        <div>
+          <p class="contribution-col-label">I led</p>
+          <ul class="contribution-list">
+            <li>Competitive landscape audit across 4 tools</li>
+            <li>Ideation — generated and evaluated 3 directions</li>
+            <li>Quick Capture interaction design</li>
+            <li>Usability test facilitation (5 sessions)</li>
+          </ul>
+        </div>
+        <div>
+          <p class="contribution-col-label">We shared</p>
+          <ul class="contribution-list">
+            <li>Problem framing and HMW definition</li>
+            <li>Full Entry and Ledger View design</li>
+            <li>Stakeholder presentation</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ══════════════════════════════════════════════════════
+       OVERVIEW
+  ═══════════════════════════════════════════════════════════ -->
+  <section id="overview" style="padding-bottom: 3rem;">
+    <p class="section-label">Overview</p>
+    <p class="body-text">
+      Relay is a workplace async communication platform built for teams operating across time zones, schedules, and working patterns. It brings messaging, email, scheduling, and team coordination into one place — reducing the friction that comes from switching between disconnected tools.
+    </p>
+    <p class="body-text" style="margin-top: 1rem;">
+      Why is a feature inside Relay. It is the decision ledger — a dedicated space where teams can log, organize, and retrieve the reasoning behind decisions, so that context does not get lost as work moves between people, projects, and phases.
+    </p>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ══════════════════════════════════════════════════════
+       PROBLEM SPACE
+  ═══════════════════════════════════════════════════════════ -->
+  <section id="problem" style="padding-bottom: 3rem;">
+    <p class="section-label">Problem Space</p>
+
+    <h2 class="section-heading">
+      Information lives everywhere. None of it is findable when it actually matters.
+    </h2>
+    <p class="body-text">
+      Decisions scatter across many surfaces at once — a message in chat, a comment in a design file, an email reply, a note from a meeting. Each captures a piece. None of them make context retrievable later.
+    </p>
+
+    <!-- Who pays the cost — kept as visual cards from original page -->
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin: 1.75rem 0;">
+      <div style="display: flex; border: 1px solid var(--color-border); border-radius: 9px; overflow: hidden;">
+        <div style="width: 3px; flex-shrink: 0; background: #c4b5fd;"></div>
+        <div style="padding: 0.85rem 1rem;">
+          <p style="font-size: 0.82rem; font-weight: 500; color: var(--color-text-primary); margin-bottom: 4px;">The New Joiner</p>
+          <p style="font-size: 0.75rem; color: var(--color-text-secondary); line-height: 1.6; font-weight: 300;">Gets partial answers. Needs to reconstruct "why" before they can contribute. The ramp-up is longer than it needs to be.</p>
+        </div>
+      </div>
+      <div style="display: flex; border: 1px solid var(--color-border); border-radius: 9px; overflow: hidden;">
+        <div style="width: 3px; flex-shrink: 0; background: #a5f3fc;"></div>
+        <div style="padding: 0.85rem 1rem;">
+          <p style="font-size: 0.82rem; font-weight: 500; color: var(--color-text-primary); margin-bottom: 4px;">The Inheritor</p>
+          <p style="font-size: 0.75rem; color: var(--color-text-secondary); line-height: 1.6; font-weight: 300;">Inherits the output of past decisions — not the reasoning behind them. Getting it wrong shows up in rework.</p>
+        </div>
+      </div>
+      <div style="display: flex; border: 1px solid var(--color-border); border-radius: 9px; overflow: hidden;">
+        <div style="width: 3px; flex-shrink: 0; background: #fde68a;"></div>
+        <div style="padding: 0.85rem 1rem;">
+          <p style="font-size: 0.82rem; font-weight: 500; color: var(--color-text-primary); margin-bottom: 4px;">The Manager</p>
+          <p style="font-size: 0.75rem; color: var(--color-text-secondary); line-height: 1.6; font-weight: 300;">Holds more context than anyone. Gets messaged constantly to provide it. The pattern repeats indefinitely.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Root cause summary -->
+    <div class="summary-block">
+      <span class="label" style="margin-bottom: 0.4rem;">The root cause</span>
+      <p style="font-size: 0.875rem; color: var(--color-text-secondary); line-height: 1.75; font-weight: 300;">
+        A missing record of reasoning is invisible. Because it is invisible, it rarely gets identified or fixed. Time spent reconstructing known context is time not spent moving forward — and the cost compounds with every handoff.
+      </p>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ══════════════════════════════════════════════════════
+       RESEARCH
+  ═══════════════════════════════════════════════════════════ -->
+  <section id="research" style="padding-bottom: 3rem;">
+    <p class="section-label">Research</p>
+
+    <h2 class="section-heading">What the Research Pointed To</h2>
+    <p class="body-text">
+      We looked at the tools teams already use to manage this problem. Understanding where existing solutions fall short was essential before designing anything.
+    </p>
+
+    <!-- ④ Inline callout — replaces "WHY WE DID THIS FIRST" side box -->
+    <div class="change-note" style="margin-top: 1.5rem;">④ Inline callout — replaces side column box. Full reading width kept.</div>
+    <div class="inline-callout">
+      <p class="callout-label">Why we did this first</p>
+      <p>Before designing anything new, we needed to understand precisely where existing tools break down. Each category solves part of the problem — knowing which part lets us design around the gap, not into it.</p>
+    </div>
+
+    <!-- Research cards grid — matches original visual -->
+    <div class="research-grid">
+      <div class="research-card">
+        <div class="research-card-visual">Messaging platforms — context buried</div>
+        <div class="research-card-body">
+          <span class="card-tag">Context buried</span>
+          <h4>Messaging Platforms <span style="font-size:0.68rem; color: var(--color-text-ghost); font-family: var(--font-sans);">Teams, Slack</span></h4>
+          <p>Built around conversation, not decisions. A decision buried inside a 40-message thread is technically present — but you can search for keywords, not for structured reasoning.</p>
+        </div>
+      </div>
+      <div class="research-card">
+        <div class="research-card-visual">Documentation platforms — friction at capture</div>
+        <div class="research-card-body">
+          <span class="card-tag">Friction at capture</span>
+          <h4>Documentation Platforms <span style="font-size:0.68rem; color: var(--color-text-ghost); font-family: var(--font-sans);">Confluence, Notion</span></h4>
+          <p>Right format, wrong timing. Creating a document means switching tools after the decision — when energy and context have already passed. Under real workload, it doesn't happen consistently.</p>
+        </div>
+      </div>
+      <div class="research-card">
+        <div class="research-card-visual">Video tools — not queryable</div>
+        <div class="research-card-body">
+          <span class="card-tag">Not queryable</span>
+          <h4>Video Tools <span style="font-size:0.68rem; color: var(--color-text-ghost); font-family: var(--font-sans);">Loom</span></h4>
+          <p>Excellent for explaining complexity. But a video can't be queried across a library for a specific piece of reasoning — it's a communication format, not a retrieval system.</p>
+        </div>
+      </div>
+      <div class="research-card">
+        <div class="research-card-visual">Task management — what, never why</div>
+        <div class="research-card-body">
+          <span class="card-tag">What, never why</span>
+          <h4>Task Management Tools <span style="font-size:0.68rem; color: var(--color-text-ghost); font-family: var(--font-sans);">Jira, Asana</span></h4>
+          <p>Tracks what is being done and whether it is done. The reasoning behind decisions — how work was scoped — is absent by design.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ④ Inline callout — replaces "CONSISTENT GAP" side box -->
+    <div class="inline-callout">
+      <p class="callout-label">Consistent gap</p>
+      <p>No existing tool is designed to capture a decision as a structured artifact at the moment it happens and make it retrievable from a central place later.</p>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ══════════════════════════════════════════════════════
+       DESIGN CHALLENGE
+  ═══════════════════════════════════════════════════════════ -->
+  <section id="design-challenge" style="padding-bottom: 3rem;">
+    <p class="section-label">Design Challenge</p>
+
+    <h2 class="section-heading">
+      How do you make capturing a decision easier than not capturing it?
+    </h2>
+
+    <!-- Tension diagram — matches page layout, but full width now -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0;">
+      <div style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 10px; padding: 1.25rem 1.5rem;">
+        <p class="label" style="margin-bottom: 0.75rem;">Capture side — must be</p>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 6px;">
+          <li style="display: flex; gap: 0.5rem; font-size: 0.875rem; color: var(--color-text-secondary); font-weight: 300;"><span style="color: var(--color-text-ghost);">–</span>Instant — under 60 seconds</li>
+          <li style="display: flex; gap: 0.5rem; font-size: 0.875rem; color: var(--color-text-secondary); font-weight: 300;"><span style="color: var(--color-text-ghost);">–</span>No context switch required</li>
+          <li style="display: flex; gap: 0.5rem; font-size: 0.875rem; color: var(--color-text-secondary); font-weight: 300;"><span style="color: var(--color-text-ghost);">–</span>Works between meetings</li>
+          <li style="display: flex; gap: 0.5rem; font-size: 0.875rem; color: var(--color-text-secondary); font-weight: 300;"><span style="color: var(--color-text-ghost);">–</span>Feels as light as sending a message</li>
+        </ul>
+      </div>
+      <div style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 10px; padding: 1.25rem 1.5rem;">
+        <p class="label" style="margin-bottom: 0.75rem;">Retrieval side — must be</p>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 6px;">
+          <li style="display: flex; gap: 0.5rem; font-size: 0.875rem; color: var(--color-text-secondary); font-weight: 300;"><span style="color: var(--color-text-ghost);">–</span>Rich enough to be useful 6 months later</li>
+          <li style="display: flex; gap: 0.5rem; font-size: 0.875rem; color: var(--color-text-secondary); font-weight: 300;"><span style="color: var(--color-text-ghost);">–</span>Structured and searchable</li>
+          <li style="display: flex; gap: 0.5rem; font-size: 0.875rem; color: var(--color-text-secondary); font-weight: 300;"><span style="color: var(--color-text-ghost);">–</span>Includes what, why, and alternatives</li>
+          <li style="display: flex; gap: 0.5rem; font-size: 0.875rem; color: var(--color-text-secondary); font-weight: 300;"><span style="color: var(--color-text-ghost);">–</span>Understandable without the author present</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="insight-quote">
+      <p>"Any solution that requires significant effort at the point of capture will not be used consistently. That is not a discipline problem. It is a design problem."</p>
+    </div>
+    <p class="body-text">
+      The people who most need to fill it out are the people with the least motivation to do so in the moment. Documenting it feels like administrative work for someone else's future benefit.
+    </p>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ══════════════════════════════════════════════════════
+       IDEATION
+  ═══════════════════════════════════════════════════════════ -->
+  <section id="ideation" style="padding-bottom: 3rem;">
+    <p class="section-label">Ideation</p>
+
+    <h2 class="section-heading">What we explored before landing on a direction</h2>
+    <p class="body-text">
+      We worked backwards from retrieval: what is the minimum someone needs to provide for a decision record to be genuinely useful to someone else six months later? That question separated essential from nice-to-have — and showed us that not every decision needs the same documentation depth.
+    </p>
+
+    <div class="direction-grid">
+      <!-- Direction 1 -->
+      <div class="direction-card">
+        <div class="direction-card-sketch">
+          <div class="sketch-line" style="width: 48%;"></div>
+          <div class="sketch-field"></div>
+          <div class="sketch-line" style="width: 40%; margin-top: 4px;"></div>
+          <div class="sketch-field"></div>
+          <div class="sketch-line" style="width: 44%; margin-top: 4px;"></div>
+          <div class="sketch-field"></div>
+          <div class="sketch-line" style="width: 36%; margin-top: 4px;"></div>
+          <div class="sketch-field"></div>
+          <div class="sketch-btn" style="margin-top: 6px;"></div>
+        </div>
+        <div class="direction-card-body">
+          <p class="dir-num">Direction 01</p>
+          <h4>Single Structured Form</h4>
+          <p>One form, all fields visible upfront. Fill it completely or not at all.</p>
+          <div class="outcome outcome-moved" style="margin-top: 0.75rem;">
+            <p class="outcome-label">Why we moved on</p>
+            <p>9 fields at once feels like homework. Easy to close, rarely returned to.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Direction 2 -->
+      <div class="direction-card">
+        <div class="direction-card-sketch">
+          <div class="sketch-line" style="width: 44%;"></div>
+          <div class="sketch-field-active"></div>
+          <div class="sketch-line" style="width: 38%; margin-top: 4px; opacity: 0.4;"></div>
+          <div class="sketch-field" style="opacity: 0.4;"></div>
+          <div class="sketch-line" style="width: 40%; margin-top: 4px; opacity: 0.15;"></div>
+          <div class="sketch-field" style="opacity: 0.15; border-style: dashed;"></div>
+          <div style="display: flex; justify-content: center; gap: 5px; margin-top: 8px;">
+            <div style="width: 5px; height: 5px; border-radius: 50%; background: var(--color-border);"></div>
+            <div style="width: 5px; height: 5px; border-radius: 50%; background: var(--color-border); opacity: 0.4;"></div>
+            <div style="width: 5px; height: 5px; border-radius: 50%; background: var(--color-border); opacity: 0.15;"></div>
+          </div>
+        </div>
+        <div class="direction-card-body">
+          <p class="dir-num">Direction 02</p>
+          <h4>Progressive Disclosure</h4>
+          <p>Start with a single field. Reveal more as the user continues.</p>
+          <div class="outcome outcome-moved" style="margin-top: 0.75rem;">
+            <p class="outcome-label">Why we moved on</p>
+            <p>Disorienting — users unsure if done. "The form that keeps going."</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Direction 3 — Chosen -->
+      <div class="direction-card chosen">
+        <div class="direction-card-sketch" style="position: relative;">
+          <span style="position: absolute; top: 8px; right: 8px; font-size: 0.42rem; letter-spacing: 0.1em; text-transform: uppercase; background: var(--color-text-primary); color: var(--color-bg); padding: 2px 6px; border-radius: 3px; font-family: var(--font-sans);">★ Chosen</span>
+          <div style="display: flex; gap: 4px; margin-bottom: 6px;">
+            <div style="flex: 1; height: 14px; background: var(--color-text-primary); border-radius: 3px; display: flex; align-items: center; justify-content: center;">
+              <span style="font-size: 5px; color: var(--color-bg); letter-spacing: 0.06em; font-family: var(--font-sans); font-weight: 400;">Quick</span>
+            </div>
+            <div style="flex: 1; height: 14px; border: 1px solid var(--color-border); border-radius: 3px; display: flex; align-items: center; justify-content: center;">
+              <span style="font-size: 5px; color: var(--color-text-ghost); letter-spacing: 0.06em; font-family: var(--font-sans); font-weight: 400;">Full</span>
+            </div>
+          </div>
+          <div class="sketch-field"></div>
+          <div class="sketch-field" style="margin-top: 4px; height: 20px;"></div>
+          <div style="height: 10px; border: 1px dashed var(--color-border); border-radius: 3px; margin-top: 4px;"></div>
+          <div class="sketch-btn" style="margin-top: 6px;"></div>
+        </div>
+        <div class="direction-card-body">
+          <p class="dir-num" style="color: var(--color-text-primary);">Direction 03 — Chosen</p>
+          <h4>Two Modes — Quick &amp; Full</h4>
+          <p>Quick Capture: 3 fields, under a minute. Full Entry: complete structured record. Same ledger destination regardless of mode.</p>
+          <div class="outcome outcome-chosen" style="margin-top: 0.75rem;">
+            <p class="outcome-label">Why this direction worked</p>
+            <p>Respects where the user actually is. Neither mode penalizes. A partial record that exists is more valuable than a complete record never written.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ══════════════════════════════════════════════════════
+       DESIGN DECISIONS
+  ═══════════════════════════════════════════════════════════ -->
+  <section id="design-decisions" style="padding-bottom: 3rem;">
+    <p class="section-label">Design Decisions</p>
+    <h2 class="section-heading" style="margin-bottom: 3rem;">How each piece of the experience was built</h2>
+
+    <!-- Quick Capture -->
+    <div style="margin-bottom: 3.5rem;">
+      <span class="label">The Quick Capture Flow</span>
+      <h3 class="sub-heading">Designed to feel like sending a message</h3>
+      <p class="body-text">
+        We designed Quick Capture to feel close to sending a message — familiar, low-commitment, fast. The three fields are stacked simply. No labels cluttering the view. Placeholder text does the work of guiding input. A single tag selector lets the entry land in the right area of the ledger without requiring the user to think hard about categorization.
+      </p>
+
+      <!-- ④ Inline callout — replaces "KEY DECISION" side box -->
+      <div class="change-note" style="margin-top: 1.5rem;">④ "Key decision" inline — was in 240px side column, now readable in main flow</div>
+      <div class="inline-callout-em">
+        <p class="callout-label">Key decision</p>
+        <p>Quick Capture can expand to Full Entry at any point — one tap, no loss of what was already typed. We did not force users to choose upfront; we let them start small and add more if the moment called for it.</p>
+      </div>
+
+      <p class="body-text">
+        The entry is saved with a "Quick Log" marker, which signals to future readers that this record may have less depth — but it is still searchable and still there. A partial record that exists is more valuable than a complete record that was never written.
+      </p>
+      <div class="img-placeholder" style="height: 400px; margin-top: 2rem;">
+        Quick Capture UI — Three-Field Entry Flow
+      </div>
+    </div>
+
+    <!-- Full Entry -->
+    <div style="margin-bottom: 3.5rem;">
+      <span class="label">The Full Entry Flow</span>
+      <h3 class="sub-heading">Structured but not overwhelming</h3>
+      <p class="body-text">
+        Full Entry is designed for decisions that carry more weight. Fields are grouped into two sections: the core record — what was decided, why, what else was considered — and the context layer — who was involved, what it links to, when to revisit.
+      </p>
+
+      <div class="inline-callout-em">
+        <p class="callout-label">Key decision</p>
+        <p>The context layer is collapsible. Filling only the core record produces a complete, useful entry. The collapsible section is an invitation, not a requirement.</p>
+      </div>
+
+      <p class="body-text">
+        We also built in support for linked references — so a decision entry can connect to a Figma file, a document, or a specific message thread. This addresses one of the real pain points from research: the context that surrounds a decision is often as important as the decision itself.
+      </p>
+
+      <div class="inline-callout">
+        <p class="callout-label">On rich media</p>
+        <p>Full entries support embedded video for additional context. A Loom inside a structured decision entry is a different story from a standalone video — it becomes context that lives alongside searchable information rather than a floating artifact in a folder.</p>
+      </div>
+
+      <div class="img-placeholder" style="height: 440px; margin-top: 2rem;">
+        Full Entry UI — Core Record + Collapsible Context Layer
+      </div>
+    </div>
+
+    <!-- AI Assistance -->
+    <div style="margin-bottom: 3.5rem;">
+      <span class="label">AI Assistance in the Capture Flow</span>
+      <h3 class="sub-heading">Reducing the blank-page problem</h3>
+      <p class="body-text">
+        Relay has AI capabilities that surface inside the Why feature in a specific way. When a decision is being logged, the AI can suggest a rationale draft based on recent relevant activity in the workspace — messages, threads, or meeting notes connected to the topic. The user reviews and edits the draft. Nothing is auto-saved without confirmation.
+      </p>
+
+      <div class="inline-callout-em">
+        <p class="callout-label">What AI does — and doesn't do</p>
+        <p>It is not AI doing the documentation for the user. It is AI reducing the blank-page problem. Starting from a suggested draft that is 60 percent right is meaningfully easier than starting from nothing. The user's judgment and the user's words still shape the final record.</p>
+      </div>
+
+      <div class="img-placeholder" style="height: 360px; margin-top: 2rem;">
+        AI Rationale Suggestion — Draft Review Flow
+      </div>
+    </div>
+
+    <!-- Ledger View -->
+    <div>
+      <span class="label">The Ledger View</span>
+      <h3 class="sub-heading">Built for retrieval, not just storage</h3>
+      <p class="body-text">
+        Entries in the ledger are browseable and searchable. The search experience is designed around the question someone actually asks: "why did we decide to do X?" Not keyword matching across full text, but structured retrieval by decision area, tag, stakeholder, and date range.
+      </p>
+
+      <div class="inline-callout">
+        <p class="callout-label">Search design logic</p>
+        <p>Designed around the question someone actually asks: "why did we decide to do X?" — not keyword matching across full text, but structured retrieval by decision area, tag, stakeholder, and date range. Full-text search is a secondary layer.</p>
+      </div>
+
+      <p class="body-text">
+        The ledger surfaces recent entries first, with filters for area, contributor, and date. Each entry shows a preview — the title and the decision — without requiring the user to open it to understand what it contains.
+      </p>
+      <div class="img-placeholder" style="height: 440px; margin-top: 2rem;">
+        Ledger View — Browse, Filter, and Search Experience
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ══════════════════════════════════════════════════════
+       SCOPE
+  ═══════════════════════════════════════════════════════════ -->
+  <section id="scope" style="padding-bottom: 3rem;">
+    <p class="section-label">Scope</p>
+    <h2 class="section-heading">What We Did Not Build (Yet)</h2>
+
+    <div class="inline-callout" style="margin-bottom: 1.75rem;">
+      <p class="callout-label">Why naming this matters</p>
+      <p>Scope decisions are design decisions. Naming what was deliberately left out — and why — makes the current version's priorities legible.</p>
+    </div>
+
+    <p class="body-text">
+      A few ideas that surfaced during the project are worth naming because they shaped our understanding of where this feature could go — even if they are outside the scope of this phase.
+    </p>
+
+    <div style="display: flex; flex-direction: column; margin-top: 1.5rem;">
+      <div class="reflection-item">
+        <h4>Free-form documentation within entries</h4>
+        <p>The current structure is intentionally guided. A future iteration could include a free-form section alongside the structured fields, giving contributors space to add screenshots, diagrams, or narrative context. This would make entries more complete without changing the capture experience.</p>
+      </div>
+      <div class="reflection-item">
+        <h4>Connections to design tools</h4>
+        <p>Several team members mentioned how useful it would be to link directly to specific Figma frames alongside a decision. This is a natural extension of the linked references feature.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ══════════════════════════════════════════════════════
+       REFLECTION
+  ═══════════════════════════════════════════════════════════ -->
+  <section id="reflection" style="padding-bottom: 5rem;">
+    <p class="section-label">Reflection</p>
+    <h2 class="section-heading">What this project clarified about the design process</h2>
+
+    <div style="display: flex; flex-direction: column; margin-top: 0.5rem;">
+      <div class="reflection-item">
+        <h4>Test your own design.</h4>
+        <p>The most important insight from this project came from testing the design on ourselves. We built the first version of the capture form, stepped back, and asked whether we would actually use it at the moment it mattered. The answer was no. That question reshaped everything that followed.</p>
+      </div>
+      <div class="reflection-item">
+        <h4>Design for motivation, not discipline.</h4>
+        <p>It is easy to design a tool that assumes users are organised and have time. The harder and more honest design challenge is building for users who are busy, slightly distracted, and who will choose the easier path every time one is available. Making the right action feel like the easiest action is the actual work.</p>
+      </div>
+      <div class="reflection-item">
+        <h4>Options explored and discarded are part of the story.</h4>
+        <p>Direction 1 and Direction 2 were not wasted effort. They sharpened our understanding of why Direction 3 worked. The tradeoffs made those decisions legible — to us, to the team, and to the stakeholders we presented to.</p>
+      </div>
+      <div class="reflection-item">
+        <h4>Let the retrieval experience drive the capture experience.</h4>
+        <p>We started by understanding what someone needs to find in the ledger six months from now, and then worked backwards to understand what has to go in at capture time for that retrieval to be possible. Starting from retrieval made it much easier to identify what was essential and what was optional.</p>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /page -->
+
+</body>
+</html>

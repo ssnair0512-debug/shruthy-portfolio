@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Journey Map — V2: Emotion Arc</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: #FAFAF8;
+  padding: 60px 40px;
+  min-height: 100vh;
+}
+
+.page { max-width: 1240px; margin: 0 auto; }
+
+/* ── Header ── */
+.header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 36px;
+  gap: 20px;
+}
+.eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #ABABAB;
+  margin-bottom: 8px;
+}
+.title {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: -0.02em;
+}
+.subtitle {
+  font-size: 13px;
+  color: #888;
+  margin-top: 5px;
+}
+.legend {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-shrink: 0;
+}
+.leg-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: #999;
+}
+.leg-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+/* ── Phase header bands ── */
+.phase-bands {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border-radius: 14px 14px 0 0;
+  overflow: hidden;
+  border: 1px solid #E4E4DF;
+  border-bottom: none;
+}
+.band {
+  padding: 20px 28px;
+  border-right: 1px solid rgba(0,0,0,0.07);
+}
+.band:last-child { border-right: none; }
+
+.band-before { background: #F2EFFE; }
+.band-during { background: #EDFAF6; }
+.band-after  { background: #FEF9EC; }
+
+.band-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.band-before .band-num { color: #7C3AED; }
+.band-during .band-num { color: #059669; }
+.band-after  .band-num { color: #D97706; }
+
+.band-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: -0.02em;
+  margin-bottom: 3px;
+}
+.band-sub {
+  font-size: 11px;
+  color: #999;
+}
+
+/* ── Arc container ── */
+.arc-wrap {
+  border: 1px solid #E4E4DF;
+  border-top: none;
+  border-bottom: none;
+  background: white;
+  position: relative;
+}
+
+.arc-axis {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 28px 0;
+}
+.axis-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: #CACAC6;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* ── Quote row ── */
+.quotes {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border: 1px solid #E4E4DF;
+  border-top: none;
+  border-bottom: none;
+}
+
+.q-col {
+  padding: 20px 28px;
+  border-right: 1px solid #E4E4DF;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.q-col:last-child { border-right: none; }
+
+.q-card {
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+.q-card.lo { background: #FEF2F2; border-left: 3px solid #FCA5A5; }
+.q-card.hi.purple { background: #F5F3FF; border-left: 3px solid #7C3AED; }
+.q-card.hi.teal   { background: #F0FDF9; border-left: 3px solid #34D399; }
+.q-card.hi.amber  { background: #FFFBEB; border-left: 3px solid #FBBF24; }
+
+.q-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.lo .q-tag { color: #EF4444; }
+.hi.purple .q-tag { color: #7C3AED; }
+.hi.teal   .q-tag { color: #059669; }
+.hi.amber  .q-tag { color: #D97706; }
+
+.q-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 12px;
+  font-style: italic;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* ── Activities: chip trail ── */
+.acts {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border: 1px solid #E4E4DF;
+  border-top: none;
+  border-bottom: none;
+}
+.act-col {
+  padding: 16px 28px;
+  border-right: 1px solid #E4E4DF;
+}
+.act-col:last-child { border-right: none; }
+
+.act-col-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #CACAC6;
+  margin-bottom: 12px;
+}
+
+.chip-trail {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  border-radius: 100px;
+  font-size: 11.5px;
+  color: #555;
+  border: 1px solid #E4E4DF;
+  background: white;
+  line-height: 1;
+}
+.chip-n {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: #CCC;
+  font-weight: 600;
+}
+
+/* ── Opportunities: HMW cards ── */
+.opps {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border: 1px solid #E4E4DF;
+  border-top: none;
+  border-radius: 0 0 14px 14px;
+  overflow: hidden;
+}
+
+.opp-col {
+  padding: 24px 28px;
+  border-right: 1px solid rgba(124,58,237,0.15);
+}
+.opp-col:last-child { border-right: none; }
+
+.opp-col-before { background: #F5F3FF; }
+.opp-col-during { background: #ECFDF5; }
+.opp-col-after  { background: #FFFBEB; }
+
+.opp-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.opp-col-before .opp-label { color: #7C3AED; }
+.opp-col-during .opp-label { color: #059669; }
+.opp-col-after  .opp-label { color: #D97706; }
+
+.hmw {
+  font-family: 'Playfair Display', serif;
+  font-size: 14px;
+  font-style: italic;
+  line-height: 1.65;
+  margin-bottom: 14px;
+}
+.opp-col-before .hmw { color: #4C1D95; }
+.opp-col-during .hmw { color: #065F46; }
+.opp-col-after  .hmw { color: #78350F; }
+
+.opp-bullets { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.opp-bullet {
+  font-size: 11.5px;
+  color: #666;
+  line-height: 1.4;
+  padding-left: 12px;
+  position: relative;
+}
+.opp-bullet::before {
+  content: '·';
+  position: absolute;
+  left: 0;
+  color: #BBB;
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ── Page header ── -->
+  <div class="header">
+    <div>
+      <div class="eyebrow">WUD! — User Journey Map · Exploration 02</div>
+      <div class="title">Emotion-First — The Arc is the Story</div>
+      <div class="subtitle">Emotional intensity across 3 phases · before → during → after</div>
+    </div>
+    <div class="legend">
+      <div class="leg-item"><span class="leg-dot" style="background:#7C3AED"></span>Positive</div>
+      <div class="leg-item"><span class="leg-dot" style="background:#FCA5A5"></span>Negative</div>
+      <div class="leg-item" style="gap:8px">
+        <svg width="28" height="2"><line x1="0" y1="1" x2="28" y2="1" stroke="#D8D8D4" stroke-width="1.5" stroke-dasharray="5 3"/></svg>
+        Neutral
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Phase header bands ── -->
+  <div class="phase-bands">
+    <div class="band band-before">
+      <div class="band-num">Phase 01</div>
+      <div class="band-name">Before Event</div>
+      <div class="band-sub">Discovery · Coordination · Travel</div>
+    </div>
+    <div class="band band-during">
+      <div class="band-num">Phase 02</div>
+      <div class="band-name">During Event</div>
+      <div class="band-sub">Arrival · Participation · Socialising</div>
+    </div>
+    <div class="band band-after">
+      <div class="band-num">Phase 03</div>
+      <div class="band-name">After Event</div>
+      <div class="band-sub">Departure · Reflection · Sharing</div>
+    </div>
+  </div>
+
+  <!-- ── The arc ── -->
+  <div class="arc-wrap">
+    <div class="arc-axis">
+      <span class="axis-label">↑ positive</span>
+      <span class="axis-label">↓ negative</span>
+    </div>
+    <div style="padding: 0 28px 10px;">
+      <svg viewBox="0 0 1184 230" style="width:100%;height:auto;display:block;" aria-label="Emotional journey arc">
+        <defs>
+          <linearGradient id="v2gpos" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#7C3AED" stop-opacity="0.14"/>
+            <stop offset="100%" stop-color="#7C3AED" stop-opacity="0"/>
+          </linearGradient>
+          <linearGradient id="v2gneg" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#FCA5A5" stop-opacity="0"/>
+            <stop offset="100%" stop-color="#FCA5A5" stop-opacity="0.2"/>
+          </linearGradient>
+          <clipPath id="v2above"><rect x="0" y="0" width="1184" height="115"/></clipPath>
+          <clipPath id="v2below"><rect x="0" y="115" width="1184" height="115"/></clipPath>
+
+          <!-- Phase band clip masks -->
+          <linearGradient id="v2-before-fade" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="85%" stop-color="#F2EFFE" stop-opacity="0.55"/>
+            <stop offset="100%" stop-color="#F2EFFE" stop-opacity="0"/>
+          </linearGradient>
+          <linearGradient id="v2-after-fade" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#FEF9EC" stop-opacity="0"/>
+            <stop offset="15%" stop-color="#FEF9EC" stop-opacity="0.55"/>
+          </linearGradient>
+        </defs>
+
+        <!-- Phase tinted background bands -->
+        <rect x="0"   y="0" width="395"  height="230" fill="#F2EFFE" opacity="0.45" rx="0"/>
+        <rect x="395" y="0" width="395"  height="230" fill="#EDFAF6" opacity="0.45"/>
+        <rect x="790" y="0" width="394"  height="230" fill="#FEF9EC" opacity="0.45"/>
+
+        <!-- Baseline -->
+        <line x1="0" y1="115" x2="1184" y2="115" stroke="#DEDED9" stroke-width="1" stroke-dasharray="7 5"/>
+
+        <!-- Phase dividers -->
+        <line x1="395" y1="0" x2="395" y2="230" stroke="rgba(0,0,0,0.08)" stroke-width="1.5"/>
+        <line x1="790" y1="0" x2="790" y2="230" stroke="rgba(0,0,0,0.08)" stroke-width="1.5"/>
+
+        <!-- Positive fill -->
+        <path d="M 0,115 C 35,115 75,172 120,178 C 158,184 190,200 228,204 C 262,204 288,30 330,26 C 364,22 384,108 395,118 C 410,126 428,16 472,12 C 504,8 526,88 550,92 C 572,96 592,120 610,124 C 630,124 656,28 688,22 C 716,16 736,88 756,92 C 766,94 778,105 790,112 C 808,120 830,148 862,156 C 894,164 924,18 962,12 C 994,8 1022,24 1054,24 C 1082,24 1118,52 1184,66 L 1184,115 L 0,115 Z"
+          fill="url(#v2gpos)" clip-path="url(#v2above)"/>
+
+        <!-- Negative fill -->
+        <path d="M 0,115 C 35,115 75,172 120,178 C 158,184 190,200 228,204 C 262,204 288,30 330,26 C 364,22 384,108 395,118 C 410,126 428,16 472,12 C 504,8 526,88 550,92 C 572,96 592,120 610,124 C 630,124 656,28 688,22 C 716,16 736,88 756,92 C 766,94 778,105 790,112 C 808,120 830,148 862,156 C 894,164 924,18 962,12 C 994,8 1022,24 1054,24 C 1082,24 1118,52 1184,66 L 1184,115 L 0,115 Z"
+          fill="url(#v2gneg)" clip-path="url(#v2below)"/>
+
+        <!-- Curve line -->
+        <path d="M 0,115 C 35,115 75,172 120,178 C 158,184 190,200 228,204 C 262,204 288,30 330,26 C 364,22 384,108 395,118 C 410,126 428,16 472,12 C 504,8 526,88 550,92 C 572,96 592,120 610,124 C 630,124 656,28 688,22 C 716,16 736,88 756,92 C 766,94 778,105 790,112 C 808,120 830,148 862,156 C 894,164 924,18 962,12 C 994,8 1022,24 1054,24 C 1082,24 1118,52 1184,66"
+          fill="none" stroke="#7C3AED" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+
+        <!-- ── Annotation callouts: LOW ── -->
+        <!-- Low 1: Coord chaos -->
+        <circle cx="228" cy="204" r="6" fill="white" stroke="#FCA5A5" stroke-width="2.5"/>
+        <line x1="228" y1="197" x2="228" y2="175" stroke="#FCA5A5" stroke-width="1" stroke-dasharray="3 2"/>
+        <rect x="144" y="152" width="168" height="22" rx="4" fill="#FEF2F2" stroke="#FCA5A5" stroke-width="1"/>
+        <text x="228" y="167" text-anchor="middle" font-size="9.5" fill="#EF4444" font-family="'JetBrains Mono', monospace" font-weight="700">↓ coordination chaos</text>
+
+        <!-- Low 2: Parking -->
+        <circle cx="395" cy="118" r="6" fill="white" stroke="#FCA5A5" stroke-width="2.5"/>
+        <line x1="395" y1="124" x2="395" y2="148" stroke="#FCA5A5" stroke-width="1" stroke-dasharray="3 2"/>
+        <rect x="325" y="148" width="140" height="22" rx="4" fill="#FEF2F2" stroke="#FCA5A5" stroke-width="1"/>
+        <text x="395" y="163" text-anchor="middle" font-size="9.5" fill="#EF4444" font-family="'JetBrains Mono', monospace" font-weight="700">↓ parking &amp; traffic</text>
+
+        <!-- Low 3: Exit crowds -->
+        <circle cx="862" cy="156" r="6" fill="white" stroke="#FCA5A5" stroke-width="2.5"/>
+        <line x1="862" y1="162" x2="862" y2="184" stroke="#FCA5A5" stroke-width="1" stroke-dasharray="3 2"/>
+        <rect x="790" y="184" width="144" height="22" rx="4" fill="#FEF2F2" stroke="#FCA5A5" stroke-width="1"/>
+        <text x="862" y="199" text-anchor="middle" font-size="9.5" fill="#EF4444" font-family="'JetBrains Mono', monospace" font-weight="700">↓ exit traffic &amp; crowds</text>
+
+        <!-- ── Annotation callouts: HIGH ── -->
+        <!-- High 1: Ticket excitement -->
+        <circle cx="330" cy="26" r="6" fill="white" stroke="#7C3AED" stroke-width="2.5"/>
+        <line x1="330" y1="20" x2="330" y2="8" stroke="#7C3AED" stroke-width="1" stroke-dasharray="3 2"/>
+        <rect x="235" y="0" width="190" height="20" rx="4" fill="#F5F3FF" stroke="#7C3AED" stroke-width="1"/>
+        <text x="330" y="14" text-anchor="middle" font-size="9.5" fill="#7C3AED" font-family="'JetBrains Mono', monospace" font-weight="700">↑ ticket bought — can't wait!</text>
+
+        <!-- High 2: Fashion wow -->
+        <circle cx="472" cy="12" r="6" fill="white" stroke="#7C3AED" stroke-width="2.5"/>
+        <rect x="388" y="0" width="168" height="20" rx="4" fill="#F5F3FF" stroke="#7C3AED" stroke-width="1"/>
+        <text x="472" y="14" text-anchor="middle" font-size="9.5" fill="#7C3AED" font-family="'JetBrains Mono', monospace" font-weight="700">↑ fashion wow moment</text>
+
+        <!-- High 3: Social / friends -->
+        <circle cx="688" cy="22" r="6" fill="white" stroke="#7C3AED" stroke-width="2.5"/>
+        <rect x="596" y="0" width="184" height="20" rx="4" fill="#F5F3FF" stroke="#7C3AED" stroke-width="1"/>
+        <text x="688" y="14" text-anchor="middle" font-size="9.5" fill="#7C3AED" font-family="'JetBrains Mono', monospace" font-weight="700">↑ made a new friend</text>
+
+        <!-- High 4: Nostalgia / sharing -->
+        <circle cx="962" cy="12" r="6" fill="white" stroke="#7C3AED" stroke-width="2.5"/>
+        <rect x="872" y="0" width="180" height="20" rx="4" fill="#F5F3FF" stroke="#7C3AED" stroke-width="1"/>
+        <text x="962" y="14" text-anchor="middle" font-size="9.5" fill="#7C3AED" font-family="'JetBrains Mono', monospace" font-weight="700">↑ memories &amp; nostalgia</text>
+
+      </svg>
+    </div>
+  </div>
+
+  <!-- ── Quotes ── -->
+  <div class="quotes" style="background:white;">
+    <div class="q-col">
+      <div class="q-card lo">
+        <div class="q-tag">↓ low point</div>
+        <div class="q-text">"How can I plan if I don't have info and planning with friends is HARD!!"</div>
+      </div>
+      <div class="q-card hi purple">
+        <div class="q-tag">↑ high point</div>
+        <div class="q-text">"I can't wait to go now that I have a ticket!"</div>
+      </div>
+    </div>
+    <div class="q-col" style="background:#FAFFFE;">
+      <div class="q-card lo">
+        <div class="q-tag">↓ low point</div>
+        <div class="q-text">"There's so much traffic and I don't know where to find parking?"</div>
+      </div>
+      <div class="q-card hi teal">
+        <div class="q-tag">↑ high point</div>
+        <div class="q-text">"WOW, I love these clothes!" / "I made a new friend."</div>
+      </div>
+    </div>
+    <div class="q-col" style="background:#FFFDF5;">
+      <div class="q-card lo">
+        <div class="q-tag">↓ low point</div>
+        <div class="q-text">"There's traffic and crowds when leaving."</div>
+      </div>
+      <div class="q-card hi amber">
+        <div class="q-tag">↑ high point</div>
+        <div class="q-text">"That was so much fun!" / "I'm so glad I bought this shirt."</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Activities chip trail ── -->
+  <div class="acts" style="background:white;">
+    <div class="act-col">
+      <div class="act-col-label">Actions</div>
+      <div class="chip-trail">
+        <span class="chip"><span class="chip-n">1</span> Hear about event</span>
+        <span class="chip"><span class="chip-n">2</span> Research online</span>
+        <span class="chip"><span class="chip-n">3</span> Coordinate friends</span>
+        <span class="chip"><span class="chip-n">4</span> Buy tickets</span>
+        <span class="chip"><span class="chip-n">5</span> Drive to event</span>
+      </div>
+    </div>
+    <div class="act-col" style="background:#FAFFFE;">
+      <div class="act-col-label">Actions</div>
+      <div class="chip-trail">
+        <span class="chip"><span class="chip-n">1</span> See fashion shows</span>
+        <span class="chip"><span class="chip-n">2</span> Buy food &amp; drinks</span>
+        <span class="chip"><span class="chip-n">3</span> Live performances</span>
+        <span class="chip"><span class="chip-n">4</span> Buy merchandise</span>
+        <span class="chip"><span class="chip-n">5</span> Socialise</span>
+      </div>
+    </div>
+    <div class="act-col" style="background:#FFFDF5;">
+      <div class="act-col-label">Actions</div>
+      <div class="chip-trail">
+        <span class="chip"><span class="chip-n">1</span> Leave &amp; drive home</span>
+        <span class="chip"><span class="chip-n">2</span> Look at pictures</span>
+        <span class="chip"><span class="chip-n">3</span> Talk with friends</span>
+        <span class="chip"><span class="chip-n">4</span> Post on social</span>
+        <span class="chip"><span class="chip-n">5</span> Wear what they bought</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Opportunities: HMW ── -->
+  <div class="opps">
+    <div class="opp-col opp-col-before">
+      <div class="opp-label">Opportunities</div>
+      <div class="hmw">"How might we make event coordination feel as easy as a single tap?"</div>
+      <ul class="opp-bullets">
+        <li class="opp-bullet">Organise planning tools in one place</li>
+        <li class="opp-bullet">Consolidate event info so nothing is scattered</li>
+        <li class="opp-bullet">Replace the group chat with structured coordination</li>
+      </ul>
+    </div>
+    <div class="opp-col opp-col-during">
+      <div class="opp-label">Opportunities</div>
+      <div class="hmw">"How might we surface the right information exactly when the user needs it?"</div>
+      <ul class="opp-bullets">
+        <li class="opp-bullet">Provide an organised itinerary and live map</li>
+        <li class="opp-bullet">Surface local food and brand alternatives</li>
+        <li class="opp-bullet">Enable in-event social discovery</li>
+      </ul>
+    </div>
+    <div class="opp-col opp-col-after">
+      <div class="opp-label">Opportunities</div>
+      <div class="hmw">"How might we give users a social record of the experiences that shape their identity?"</div>
+      <ul class="opp-bullets">
+        <li class="opp-bullet">Provide exit route options</li>
+        <li class="opp-bullet">Enable post-event sharing and reflection</li>
+        <li class="opp-bullet">Build a social history users actually want to curate</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /page -->
+
+</body>
+</html>

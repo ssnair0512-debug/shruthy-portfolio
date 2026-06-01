@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Variation C — Editorial Scan · Why Case Study</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-sans: 'Inter', system-ui, sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+    --green: #059669;
+    --green-light: #ecfdf5;
+    --green-border: #6ee7b7;
+  }
+  body { font-family: var(--font-sans); background: #f5f5f3; color: #0a0a0a; -webkit-font-smoothing: antialiased; }
+  .serif { font-family: var(--font-serif); }
+  .mono  { font-family: var(--font-mono); }
+  .card  { background: #fff; border-radius: 16px; border: 1px solid #e5e5e5; padding: 2rem; margin-bottom: 1.5rem; }
+  .label { font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: #999; margin-bottom: 0.5rem; display: block; }
+  .badge { display:inline-flex; font-family:var(--font-mono); font-size:0.55rem; letter-spacing:0.1em; text-transform:uppercase; padding:3px 9px; border-radius:4px; background:var(--green-light); color:var(--green); }
+  .section-opener { font-family: var(--font-serif); font-size: clamp(1.2rem,2.5vw,1.8rem); font-weight: 700; color: #0a0a0a; line-height: 1.25; margin-bottom: 1.25rem; }
+  .num-big { font-family: var(--font-serif); font-size: 2.2rem; font-weight: 700; line-height: 1; }
+</style>
+</head>
+<body style="max-width:860px; margin:0 auto; padding:3rem 1.5rem;">
+
+<!-- ─── EXPLORATION HEADER ──────────────────────────────────────── -->
+<div style="margin-bottom:2.5rem; padding-bottom:1.5rem; border-bottom:1px solid #e5e5e5;">
+  <p class="mono" style="color:var(--green); font-size:0.58rem; letter-spacing:0.2em; text-transform:uppercase; margin-bottom:4px;">Variation C — Editorial + Scan</p>
+  <h1 style="font-size:1.25rem; font-weight:600; color:#0a0a0a; margin:0 0 6px;">Optimized for a 2-Minute Read</h1>
+  <p style="font-size:0.85rem; color:#666; max-width:580px; line-height:1.6; margin:0 0 1rem;">
+    A hiring manager reviews 20+ portfolios. This variation opens with a "case study in 60 seconds" summary, uses bold editorial section openers, and places key insight callouts inline — so the story scans before it's read in full.
+  </p>
+  <div style="display:flex; flex-wrap:wrap; gap:6px;">
+    <span class="badge">✓ 60-second summary card (new)</span>
+    <span class="badge">✓ Inline key insight callouts</span>
+    <span class="badge">✓ Bold editorial section openers</span>
+    <span class="badge">✓ Decision log — evidence + tension</span>
+    <span class="badge">✓ "What I'd do differently" explicit</span>
+    <span class="badge">✓ Scope framed as trade-off, not omission</span>
+  </div>
+</div>
+
+<!-- ─── 60-SECOND SUMMARY CARD ───────────────────────────────────── -->
+<div style="background:#fff; border:2px solid #0a0a0a; border-radius:16px; padding:2rem; margin-bottom:1.5rem;">
+  <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:1.25rem;">
+    <div>
+      <p class="mono" style="color:var(--green); font-size:0.58rem; letter-spacing:0.2em; text-transform:uppercase; margin-bottom:6px;">★ New: Case Study in 60 Seconds</p>
+      <h2 class="serif" style="font-size:1.6rem; font-weight:700; color:#0a0a0a; line-height:1.2; margin:0;">Why — The Decision Ledger</h2>
+    </div>
+    <div style="text-align:right;">
+      <p class="mono" style="color:#888; font-size:0.55rem; letter-spacing:0.1em; line-height:1.8;">8 weeks · UX Designer (team of 2)<br>Relay · Feature Design</p>
+    </div>
+  </div>
+
+  <!-- Problem / Insight / Solution triptych -->
+  <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:#e5e5e5; border-radius:10px; overflow:hidden; margin-bottom:1.5rem;">
+    <div style="background:#fff; padding:1rem;">
+      <p class="mono" style="font-size:0.52rem; color:#888; letter-spacing:0.16em; text-transform:uppercase; margin-bottom:7px;">Problem</p>
+      <p style="font-size:0.82rem; color:#0a0a0a; line-height:1.6;">Teams make decisions continuously. The reasoning disappears into chat, files, and email — invisible to anyone who wasn't there.</p>
+    </div>
+    <div style="background:#fff; padding:1rem;">
+      <p class="mono" style="font-size:0.52rem; color:#888; letter-spacing:0.16em; text-transform:uppercase; margin-bottom:7px;">Insight</p>
+      <p style="font-size:0.82rem; color:#0a0a0a; line-height:1.6;">The problem isn't retrieval — it's capture. Every existing method asks too much at the wrong moment, so capture fails entirely.</p>
+    </div>
+    <div style="background:#fff; padding:1rem;">
+      <p class="mono" style="font-size:0.52rem; color:#888; letter-spacing:0.16em; text-transform:uppercase; margin-bottom:7px;">Solution</p>
+      <p style="font-size:0.82rem; color:#0a0a0a; line-height:1.6;">Two-mode decision ledger: Quick Capture (3 fields, under 60s) + Full Entry — both in a searchable, structured record.</p>
+    </div>
+  </div>
+
+  <!-- Quick-scan metrics -->
+  <div style="display:grid; grid-template-columns:repeat(5,1fr); gap:1rem; padding-top:1.25rem; border-top:1px solid #e5e5e5;">
+    <div>
+      <p class="num-big" style="color:#0a0a0a;">67%</p>
+      <p class="mono" style="font-size:0.48rem; color:#888; letter-spacing:0.1em; margin-top:6px; line-height:1.5;">faster context retrieval</p>
+    </div>
+    <div>
+      <p class="num-big" style="color:#0a0a0a;">2×</p>
+      <p class="mono" style="font-size:0.48rem; color:#888; letter-spacing:0.1em; margin-top:6px; line-height:1.5;">form completion rate</p>
+    </div>
+    <div>
+      <p class="num-big" style="color:#0a0a0a;">5/5</p>
+      <p class="mono" style="font-size:0.48rem; color:#888; letter-spacing:0.1em; margin-top:6px; line-height:1.5;">usability sessions</p>
+    </div>
+    <div>
+      <p class="num-big" style="color:#0a0a0a;">3</p>
+      <p class="mono" style="font-size:0.48rem; color:#888; letter-spacing:0.1em; margin-top:6px; line-height:1.5;">directions explored</p>
+    </div>
+    <div>
+      <p class="num-big" style="color:#0a0a0a;">4</p>
+      <p class="mono" style="font-size:0.48rem; color:#888; letter-spacing:0.1em; margin-top:6px; line-height:1.5;">tools audited</p>
+    </div>
+  </div>
+</div>
+
+<!-- ─── PROBLEM + HMW (sidebar layout) ──────────────────────────── -->
+<div class="card">
+  <div style="padding-bottom:1.25rem; margin-bottom:1.25rem; border-bottom:1px solid #e5e5e5;">
+    <span class="label">Problem Space</span>
+    <h2 class="section-opener">A missing record of reasoning is invisible. And invisible problems don't get fixed.</h2>
+  </div>
+
+  <div style="display:grid; grid-template-columns:1fr 220px; gap:2rem;">
+    <div>
+      <p style="font-size:0.88rem; color:#555; line-height:1.75; margin-bottom:1.25rem;">
+        Decisions scatter across chat, design files, email replies, and meeting notes. Each captures a piece. None make context retrievable later — and the people who need it most pay the cost every time.
+      </p>
+
+      <!-- Who pays — compact -->
+      <div style="display:flex; flex-direction:column; gap:0.6rem;">
+        <div style="display:flex; border:1px solid #e5e5e5; border-radius:9px; overflow:hidden;">
+          <div style="width:4px; flex-shrink:0; background:#c4b5fd;"></div>
+          <div style="padding:0.7rem 0.9rem;">
+            <p style="font-size:0.8rem; font-weight:600; color:#0a0a0a; margin-bottom:3px;">New Joiner</p>
+            <p style="font-size:0.72rem; color:#666; line-height:1.5;">Needs to reconstruct "why" before contributing. Ramp-up longer than necessary.</p>
+          </div>
+        </div>
+        <div style="display:flex; border:1px solid #e5e5e5; border-radius:9px; overflow:hidden;">
+          <div style="width:4px; flex-shrink:0; background:#a5f3fc;"></div>
+          <div style="padding:0.7rem 0.9rem;">
+            <p style="font-size:0.8rem; font-weight:600; color:#0a0a0a; margin-bottom:3px;">Mid-Project Inheritor</p>
+            <p style="font-size:0.72rem; color:#666; line-height:1.5;">Inherits output of decisions — not the reasoning. Wrong assumptions become rework.</p>
+          </div>
+        </div>
+        <div style="display:flex; border:1px solid #e5e5e5; border-radius:9px; overflow:hidden;">
+          <div style="width:4px; flex-shrink:0; background:#fde68a;"></div>
+          <div style="padding:0.7rem 0.9rem;">
+            <p style="font-size:0.8rem; font-weight:600; color:#0a0a0a; margin-bottom:3px;">The Manager</p>
+            <p style="font-size:0.72rem; color:#666; line-height:1.5;">Becomes single source of institutional memory. Interrupted constantly. Pattern repeats.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Inline insight callouts in sidebar -->
+    <div style="display:flex; flex-direction:column; gap:0.75rem;">
+      <div style="background:#0a0a0a; border-radius:10px; padding:1rem;">
+        <p class="mono" style="font-size:0.5rem; color:#555; letter-spacing:0.14em; text-transform:uppercase; margin-bottom:7px;">Key insight</p>
+        <p style="font-size:0.78rem; color:#fff; line-height:1.6;">The cost of missing context is invisible — you don't know you're working from wrong assumptions until something breaks.</p>
+      </div>
+      <div style="background:#fafafa; border:1px solid #e5e5e5; border-radius:10px; padding:1rem;">
+        <p class="mono" style="font-size:0.5rem; color:#888; letter-spacing:0.14em; text-transform:uppercase; margin-bottom:7px;">Research finding</p>
+        <p style="font-size:0.78rem; color:#444; line-height:1.6;">4 tools audited. None capture a decision as a structured artifact at the moment it happens and make it retrievable centrally later.</p>
+      </div>
+      <div style="background:var(--green-light); border:1px solid var(--green-border); border-radius:10px; padding:1rem;">
+        <p class="mono" style="font-size:0.5rem; color:var(--green); letter-spacing:0.14em; text-transform:uppercase; margin-bottom:7px;">How Might We</p>
+        <p class="serif" style="font-size:0.88rem; font-style:italic; color:#065f46; line-height:1.6;">"Make capturing a decision easier than not capturing it?"</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── IDEATION — Tight + verdict-forward ──────────────────────── -->
+<div class="card">
+  <div style="padding-bottom:1.25rem; margin-bottom:1.25rem; border-bottom:1px solid #e5e5e5;">
+    <span class="label">Ideation</span>
+    <h2 class="section-opener">We explored 3 directions that tested opposite ends of the same tension.</h2>
+  </div>
+
+  <p style="font-size:0.85rem; color:#555; line-height:1.7; max-width:580px; margin-bottom:1.5rem;">
+    Rather than variations of one idea, we designed from different assumptions — then compared where each broke down. Direction 1 broke on motivation. Direction 2 broke on orientation. Direction 3 resolved both.
+  </p>
+
+  <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:0.75rem; margin-bottom:1.25rem;">
+    <!-- Direction 1 -->
+    <div style="border:1px solid #e5e5e5; border-radius:12px; overflow:hidden;">
+      <div style="background:#f0f0f0; padding:1rem; min-height:110px; display:flex; flex-direction:column; justify-content:center; gap:5px;">
+        <div style="height:6px; width:50%; background:#d4d4d4; border-radius:3px;"></div>
+        <div style="height:13px; background:#fff; border:1px solid #ccc; border-radius:3px;"></div>
+        <div style="height:6px; width:44%; background:#d4d4d4; border-radius:3px;"></div>
+        <div style="height:13px; background:#fff; border:1px solid #ccc; border-radius:3px;"></div>
+        <div style="height:6px; width:48%; background:#d4d4d4; border-radius:3px;"></div>
+        <div style="height:13px; background:#fff; border:1px solid #ccc; border-radius:3px;"></div>
+        <div style="height:6px; width:52%; background:#d4d4d4; border-radius:3px;"></div>
+        <div style="height:13px; background:#fff; border:1px solid #ccc; border-radius:3px;"></div>
+        <div style="height:10px; background:#ccc; border-radius:3px; margin-top:3px;"></div>
+      </div>
+      <div style="padding:0.9rem;">
+        <p class="mono" style="font-size:0.5rem; color:#999; letter-spacing:0.14em; text-transform:uppercase; margin-bottom:4px;">01 · Single Form</p>
+        <p style="font-size:0.82rem; font-weight:600; color:#0a0a0a; margin-bottom:0.5rem;">All fields upfront</p>
+        <div style="background:#fff7ed; border:1px solid #fed7aa; border-radius:6px; padding:0.5rem; margin-bottom:0.35rem;">
+          <p style="font-size:0.7rem; color:#9a3412; line-height:1.4;"><strong>Broke on:</strong> motivation. 9 fields = homework.</p>
+        </div>
+        <div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:6px; padding:0.5rem;">
+          <p style="font-size:0.7rem; color:#166534; line-height:1.4;"><strong>Kept:</strong> consistent, queryable output.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Direction 2 -->
+    <div style="border:1px solid #e5e5e5; border-radius:12px; overflow:hidden;">
+      <div style="background:#f0f0f0; padding:1rem; min-height:110px; display:flex; flex-direction:column; justify-content:center; gap:5px;">
+        <div style="height:6px; width:44%; background:#d4d4d4; border-radius:3px;"></div>
+        <div style="height:13px; background:#fff; border:1.5px solid #888; border-radius:3px;"></div>
+        <div style="height:6px; width:38%; background:#d4d4d4; border-radius:3px; opacity:0.5;"></div>
+        <div style="height:13px; background:#fafafa; border:1px dashed #bbb; border-radius:3px; opacity:0.5;"></div>
+        <div style="height:6px; width:40%; background:#d4d4d4; border-radius:3px; opacity:0.2;"></div>
+        <div style="height:13px; border:1px dashed #e5e5e5; border-radius:3px; opacity:0.2;"></div>
+        <div style="display:flex; justify-content:center; gap:5px; margin-top:3px;">
+          <div style="width:5px; height:5px; background:#ccc; border-radius:50%;"></div>
+          <div style="width:5px; height:5px; background:#ccc; border-radius:50%; opacity:0.5;"></div>
+          <div style="width:5px; height:5px; background:#ccc; border-radius:50%; opacity:0.2;"></div>
+        </div>
+      </div>
+      <div style="padding:0.9rem;">
+        <p class="mono" style="font-size:0.5rem; color:#999; letter-spacing:0.14em; text-transform:uppercase; margin-bottom:4px;">02 · Progressive</p>
+        <p style="font-size:0.82rem; font-weight:600; color:#0a0a0a; margin-bottom:0.5rem;">One field at a time</p>
+        <div style="background:#fff7ed; border:1px solid #fed7aa; border-radius:6px; padding:0.5rem; margin-bottom:0.35rem;">
+          <p style="font-size:0.7rem; color:#9a3412; line-height:1.4;"><strong>Broke on:</strong> orientation. "Form that keeps going."</p>
+        </div>
+        <div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:6px; padding:0.5rem;">
+          <p style="font-size:0.7rem; color:#166534; line-height:1.4;"><strong>Kept:</strong> zero barrier to starting.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Direction 3 — Chosen -->
+    <div style="border:2px solid #0a0a0a; border-radius:12px; overflow:hidden; background:#fcfcfc;">
+      <div style="background:#e8e8e8; padding:1rem; min-height:110px; display:flex; flex-direction:column; justify-content:center; position:relative;">
+        <span style="position:absolute; top:7px; right:7px; background:#0a0a0a; color:#fff; font-family:var(--font-mono); font-size:0.42rem; letter-spacing:0.08em; padding:2px 6px; border-radius:3px;">★ CHOSEN</span>
+        <div style="display:flex; gap:4px; margin-bottom:7px;">
+          <div style="flex:1; height:14px; background:#0a0a0a; border-radius:3px; display:flex; align-items:center; justify-content:center;">
+            <span style="font-family:monospace; font-size:5px; color:#fff; letter-spacing:0.04em;">QUICK</span>
+          </div>
+          <div style="flex:1; height:14px; border:1px solid #ccc; border-radius:3px; display:flex; align-items:center; justify-content:center;">
+            <span style="font-family:monospace; font-size:5px; color:#999; letter-spacing:0.04em;">FULL</span>
+          </div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:5px;">
+          <div style="height:13px; background:#fff; border:1px solid #ccc; border-radius:3px;"></div>
+          <div style="height:18px; background:#fff; border:1px solid #ccc; border-radius:3px;"></div>
+          <div style="height:10px; border:1px dashed #ccc; border-radius:3px;"></div>
+          <div style="display:flex; justify-content:flex-end;">
+            <div style="height:10px; width:44px; background:#0a0a0a; border-radius:3px;"></div>
+          </div>
+        </div>
+      </div>
+      <div style="padding:0.9rem;">
+        <p class="mono" style="font-size:0.5rem; color:#0a0a0a; letter-spacing:0.14em; text-transform:uppercase; margin-bottom:4px;">03 — Chosen</p>
+        <p style="font-size:0.82rem; font-weight:600; color:#0a0a0a; margin-bottom:0.5rem;">Two Modes: Quick + Full</p>
+        <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:6px; padding:0.5rem;">
+          <p style="font-size:0.7rem; color:#1e40af; line-height:1.4;">Resolved both. Same searchable ledger regardless of mode.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Key insight — editorial callout -->
+  <div style="background:#0a0a0a; border-radius:12px; padding:1.25rem;">
+    <p class="mono" style="font-size:0.5rem; color:#555; letter-spacing:0.14em; text-transform:uppercase; margin-bottom:7px;">Why showing discarded directions matters</p>
+    <p style="font-size:0.85rem; color:#ccc; line-height:1.7;">Directions 1 and 2 weren't wasted effort — they sharpened why Direction 3 worked. Showing what you considered and discarded (and why) is stronger evidence of design thinking than showing only the chosen direction.</p>
+  </div>
+</div>
+
+<!-- ─── DESIGN DECISIONS — evidence-first ────────────────────────── -->
+<div class="card">
+  <div style="padding-bottom:1.25rem; margin-bottom:1.25rem; border-bottom:1px solid #e5e5e5;">
+    <span class="label">Design Decisions</span>
+    <h2 class="section-opener">Every decision had a reason. Here are the ones that mattered most.</h2>
+  </div>
+
+  <div style="display:flex; flex-direction:column;">
+    <!-- Decision 1 -->
+    <div style="display:grid; grid-template-columns:40px 1fr 200px; gap:1.25rem; padding:1.25rem 0; border-top:1px solid #e5e5e5; align-items:start;">
+      <p class="serif" style="font-size:2rem; font-weight:700; color:#e5e5e5; line-height:1; margin:0;">01</p>
+      <div>
+        <p style="font-size:0.88rem; font-weight:600; color:#0a0a0a; margin-bottom:6px;">No labels on Quick Capture fields</p>
+        <p style="font-size:0.8rem; color:#555; line-height:1.7;">Removed labels after testing — they increased perceived complexity with no comprehension benefit. Placeholder text guides input. 3/5 participants said the form felt "like a lot" with labels; 0/5 had confusion without them.</p>
+      </div>
+      <div style="background:#fafafa; border:1px solid #e5e5e5; border-radius:9px; padding:0.85rem;">
+        <p class="mono" style="font-size:0.48rem; color:#888; letter-spacing:0.12em; text-transform:uppercase; margin-bottom:6px;">Evidence</p>
+        <p style="font-size:0.72rem; color:#444; line-height:1.5;">3/5 testers: "a lot" with labels. 0/5 confused without them.</p>
+      </div>
+    </div>
+
+    <!-- Decision 2 -->
+    <div style="display:grid; grid-template-columns:40px 1fr 200px; gap:1.25rem; padding:1.25rem 0; border-top:1px solid #e5e5e5; align-items:start;">
+      <p class="serif" style="font-size:2rem; font-weight:700; color:#e5e5e5; line-height:1; margin:0;">02</p>
+      <div>
+        <p style="font-size:0.88rem; font-weight:600; color:#0a0a0a; margin-bottom:6px;">"Quick Log" marker on partial records</p>
+        <p style="font-size:0.8rem; color:#555; line-height:1.7;">Risk: the marker devalues partial records. Resolved in testing — it sets expectation rather than judgment. Users trusted the ledger <em>more</em> when entries were labeled clearly, not less. A partial record that exists beats a complete record never written.</p>
+      </div>
+      <div style="background:#fafafa; border:1px solid #e5e5e5; border-radius:9px; padding:0.85rem;">
+        <p class="mono" style="font-size:0.48rem; color:#888; letter-spacing:0.12em; text-transform:uppercase; margin-bottom:6px;">Tension navigated</p>
+        <p style="font-size:0.72rem; color:#444; line-height:1.5;">Devalued vs. trusted. Testing resolved toward labeled = useful signal.</p>
+      </div>
+    </div>
+
+    <!-- Decision 3 -->
+    <div style="display:grid; grid-template-columns:40px 1fr 200px; gap:1.25rem; padding:1.25rem 0; border-top:1px solid #e5e5e5; align-items:start;">
+      <p class="serif" style="font-size:2rem; font-weight:700; color:#e5e5e5; line-height:1; margin:0;">03</p>
+      <div>
+        <p style="font-size:0.88rem; font-weight:600; color:#0a0a0a; margin-bottom:6px;">AI suggests rationale — user edits, no auto-save</p>
+        <p style="font-size:0.8rem; color:#555; line-height:1.7;">We explicitly rejected AI auto-documenting decisions. If the ledger reads as AI-generated, people stop trusting it. The boundary: AI reduces the blank-page problem. The user's words shape the final record.</p>
+      </div>
+      <div style="background:#fafafa; border:1px solid #e5e5e5; border-radius:9px; padding:0.85rem;">
+        <p class="mono" style="font-size:0.48rem; color:#888; letter-spacing:0.12em; text-transform:uppercase; margin-bottom:6px;">What we rejected</p>
+        <p style="font-size:0.72rem; color:#444; line-height:1.5;">Auto-documented decisions. AI ownership of the record kills trust.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── SCOPE — intentional trade-offs ──────────────────────────── -->
+<div class="card">
+  <div style="padding-bottom:1.25rem; margin-bottom:1.25rem; border-bottom:1px solid #e5e5e5;">
+    <span class="label">Scope</span>
+    <h2 class="section-opener">What we deliberately didn't build — and why it was the right call.</h2>
+  </div>
+
+  <p style="font-size:0.85rem; color:#555; line-height:1.7; max-width:560px; margin-bottom:1.25rem;">
+    Scope decisions are design decisions. Naming what was left out makes the current version's priorities legible — and signals that trade-offs were considered, not overlooked.
+  </p>
+
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
+    <div style="background:#fafafa; border:1px solid #e5e5e5; border-radius:12px; padding:1.25rem;">
+      <p style="font-size:0.88rem; font-weight:600; color:#0a0a0a; margin-bottom:6px; font-family:var(--font-serif);">Free-form rich content in entries</p>
+      <p style="font-size:0.78rem; color:#555; line-height:1.6; margin-bottom:0.75rem;">Images, diagrams, narrative blocks inside entries — like Notion. Scoped out because the guided structure is the core value proposition. Free-form is a v2 addition once capture behavior is established.</p>
+      <p class="mono" style="font-size:0.48rem; color:#888; letter-spacing:0.1em;">Natural v2 extension</p>
+    </div>
+    <div style="background:#fafafa; border:1px solid #e5e5e5; border-radius:12px; padding:1.25rem;">
+      <p style="font-size:0.88rem; font-weight:600; color:#0a0a0a; margin-bottom:6px; font-family:var(--font-serif);">Direct Figma frame linking</p>
+      <p style="font-size:0.78rem; color:#555; line-height:1.6; margin-bottom:0.75rem;">Participants mentioned linking to specific Figma frames. Deprioritized because it requires integration work disproportionate to v1 core — but a natural extension of linked references already in the design.</p>
+      <p class="mono" style="font-size:0.48rem; color:#888; letter-spacing:0.1em;">Integration work for v2</p>
+    </div>
+  </div>
+</div>
+
+<!-- ─── REFLECTION — honest, split layout ───────────────────────── -->
+<div class="card">
+  <div style="padding-bottom:1.25rem; margin-bottom:1.25rem; border-bottom:1px solid #e5e5e5;">
+    <span class="label">Reflection</span>
+    <h2 class="section-opener">What I'd do differently — and what this clarified.</h2>
+  </div>
+
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem;">
+    <!-- What held -->
+    <div>
+      <p class="mono" style="font-size:0.55rem; color:var(--green); letter-spacing:0.16em; text-transform:uppercase; margin-bottom:1rem;">What held up</p>
+      <div style="display:flex; flex-direction:column; gap:1rem;">
+        <div style="border-left:2px solid #0a0a0a; padding-left:1rem;">
+          <p class="serif" style="font-size:0.9rem; font-weight:600; color:#0a0a0a; margin-bottom:5px;">Test your own design.</p>
+          <p style="font-size:0.78rem; color:#555; line-height:1.6;">The first version of the capture form — we wouldn't have used it ourselves. That question reshaped everything. The fastest and most honest test available.</p>
+        </div>
+        <div style="border-left:2px solid #0a0a0a; padding-left:1rem;">
+          <p class="serif" style="font-size:0.9rem; font-weight:600; color:#0a0a0a; margin-bottom:5px;">Design for motivation, not discipline.</p>
+          <p style="font-size:0.78rem; color:#555; line-height:1.6;">Users under workload choose the easier path every time. Making the right action feel like the easiest action is the actual design work.</p>
+        </div>
+        <div style="border-left:2px solid #0a0a0a; padding-left:1rem;">
+          <p class="serif" style="font-size:0.9rem; font-weight:600; color:#0a0a0a; margin-bottom:5px;">Start from retrieval.</p>
+          <p style="font-size:0.78rem; color:#555; line-height:1.6;">Working backwards from "what does someone need to find 6 months from now?" separated essential from optional at capture time.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- What I'd change — honest, named explicitly -->
+    <div>
+      <p class="mono" style="font-size:0.55rem; color:#dc2626; letter-spacing:0.16em; text-transform:uppercase; margin-bottom:1rem;">★ What I'd do differently</p>
+      <div style="background:#fff7ed; border:1px solid #fed7aa; border-radius:12px; padding:1.25rem;">
+        <div style="display:flex; flex-direction:column; gap:1rem;">
+          <div>
+            <p style="font-size:0.8rem; font-weight:600; color:#9a3412; margin-bottom:4px;">01 — Test the trigger, not just the form</p>
+            <p style="font-size:0.76rem; color:#9a3412; line-height:1.6;">We tested form flows but not the moment someone decides to open Quick Capture. That's the real failure point. Next time I'd prototype the trigger interaction first.</p>
+          </div>
+          <div style="border-top:1px solid #fed7aa; padding-top:0.75rem;">
+            <p style="font-size:0.8rem; font-weight:600; color:#9a3412; margin-bottom:4px;">02 — Test with engineers under deadline</p>
+            <p style="font-size:0.76rem; color:#9a3412; line-height:1.6;">4/5 participants were designers or PMs. The hardest adoption case — engineers mid-sprint — wasn't tested. That's the gap I'd close in a v2 research plan.</p>
+          </div>
+          <div style="border-top:1px solid #fed7aa; padding-top:0.75rem;">
+            <p style="font-size:0.8rem; font-weight:600; color:#9a3412; margin-bottom:4px;">03 — Longitudinal validation</p>
+            <p style="font-size:0.76rem; color:#9a3412; line-height:1.6;">Usability testing shows learnability, not sustained adoption. Did teams maintain the ledger after 4 weeks? That's the question current data doesn't answer.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── FOOTER: SUMMARY ──────────────────────────────────────────── -->
+<div style="background:var(--green-light); border:1px solid var(--green-border); border-radius:12px; padding:1.25rem;">
+  <p class="mono" style="color:var(--green); font-size:0.58rem; letter-spacing:0.16em; text-transform:uppercase; margin-bottom:0.75rem;">Variation C Summary — What changed and why</p>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; font-size:0.78rem; color:#065f46;">
+    <div>
+      <p style="font-weight:600; margin-bottom:0.5rem;">What's new vs. current page:</p>
+      <ul style="list-style:none; padding:0; display:flex; flex-direction:column; gap:4px;">
+        <li>→ 60-second summary card at the very top</li>
+        <li>→ Bold editorial section openers — stance, not description</li>
+        <li>→ Inline key insight callouts in right column</li>
+        <li>→ Decision list: decision → evidence → tension navigated</li>
+        <li>→ "What I'd do differently" as dedicated callout</li>
+        <li>→ Scope framed as intentional trade-off, not missing feature</li>
+      </ul>
+    </div>
+    <div>
+      <p style="font-weight:600; margin-bottom:0.5rem;">Hiring manager criteria addressed:</p>
+      <ul style="list-style:none; padding:0; display:flex; flex-direction:column; gap:4px;">
+        <li>✓ Presentation quality — scannable in 2 min, full in 10</li>
+        <li>✓ Measurable outcomes — metrics in summary card + page</li>
+        <li>✓ Research rigor — evidence inline per decision</li>
+        <li>✓ Honest reflection — limitations named specifically</li>
+        <li>✓ Problem framing — HMW inline at the problem</li>
+        <li>✓ Ambiguity navigation — "what we rejected" per decision</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//private/tmp/**)",
+      "Bash(tar xf *)",
+      "Bash(npx tsc *)",
+      "WebFetch(domain:api.anthropic.com)",
+      "Bash(curl -s -L \"https://api.anthropic.com/v1/design/h/AwD6pIwrBFfXG_FIjYKgug?open_file=why.html\" -o /tmp/why_response.html)",
+      "Bash(echo \"Exit code: $?\")",
+      "Read(//tmp/**)",
+      "Bash(curl -sI \"https://api.anthropic.com/v1/design/h/AwD6pIwrBFfXG_FIjYKgug?open_file=why.html\")",
+      "Bash(cp /tmp/why_response.html /tmp/why_response.html.gz)",
+      "Bash(gunzip -f /tmp/why_response.html.gz)",
+      "Bash(echo \"Exit: $?\")",
+      "Bash(node /tmp/debug-lifecycle.js)",
+      "Bash(node /tmp/screenshot-lifecycle.js)",
+      "Bash(curl -s http://localhost:3456)",
+      "Bash(curl -s \"http://localhost:3000/_next/static/chunks/%5Broot-of-the-server%5D__0dplqf.._.css\")",
+      "Bash(node /tmp/get_positions.js)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless=new --disable-gpu --screenshot=/tmp/port_debug.png --window-size=1440,900 --hide-scrollbars --run-all-compositor-stages-before-draw 'javascript:document.title=JSON.stringify\\({badge:document.querySelector\\('\\\\''.badge.role'\\\\''\\)?.getBoundingClientRect\\(\\),hero:document.querySelector\\('\\\\''.hero'\\\\''\\)?.getBoundingClientRect\\(\\)}\\)')",
+      "Bash(grep -v \"^$\")",
+      "Bash(node -e ' *)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless=new --screenshot=/tmp/portfolio-v4.png --window-size=1440,900 --hide-scrollbars --disable-cache http://localhost:3000)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless=new --screenshot=/tmp/portfolio-final.png --window-size=1440,900 --hide-scrollbars --disable-cache http://localhost:3000)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless=new --screenshot=/tmp/portfolio-final2.png --window-size=1440,900 --hide-scrollbars --disable-cache http://localhost:3000)",
+      "Bash(curl -s http://localhost:3033)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000)",
+      "Bash(find /Users/shruthynair -name \"playwright\" -type d -maxdepth 8 2>/dev/null | grep node_modules | head -5)",
+      "Read(//Users/shruthynair/**)"
+    ]
+  }
+}

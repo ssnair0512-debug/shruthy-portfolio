@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WYD — V3: Evidence Framework</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --color-bg: #f5f5f4;
+      --color-surface: #fafaf9;
+      --color-surface-2: #e7e5e4;
+      --color-border: #d7d3d1;
+      --color-text-primary: #1b1917;
+      --color-text-secondary: #45403c;
+      --color-text-muted: #78716b;
+      --color-text-ghost: #a6a09b;
+      --color-accent: #7C3AED;
+      --font-serif: 'Instrument Serif', Georgia, serif;
+      --font-sans: 'DM Sans', system-ui, sans-serif;
+    }
+
+    body {
+      background: var(--color-bg);
+      color: var(--color-text-primary);
+      font-family: var(--font-sans);
+      font-weight: 300;
+      line-height: 1.7;
+      font-size: 1rem;
+    }
+
+    /* ─── Layout ─── */
+    .page {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    .wide {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* ─── Nav ─── */
+    nav {
+      border-bottom: 1px solid var(--color-border);
+      padding: 1rem 0;
+    }
+    .nav-inner {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav-inner a {
+      font-size: 0.82rem;
+      color: var(--color-text-muted);
+      text-decoration: none;
+    }
+    .nav-inner a:first-child {
+      color: var(--color-text-primary);
+      font-weight: 500;
+    }
+
+    /* ─── Hero area ─── */
+    .hero {
+      padding: 5rem 0 0;
+    }
+
+    .eyebrow {
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-bottom: 1.25rem;
+    }
+
+    .hero h1 {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      color: var(--color-text-primary);
+      margin-bottom: 2.5rem;
+      max-width: 580px;
+    }
+
+    /* ─── Meta grid ─── */
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid var(--color-border);
+      border-left: 1px solid var(--color-border);
+      margin-bottom: 4rem;
+    }
+    .meta-cell {
+      padding: 1rem 1.25rem;
+      border-right: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .meta-label {
+      font-size: 0.58rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-text-ghost);
+      margin-bottom: 0.4rem;
+    }
+    .meta-value {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--color-text-primary);
+      line-height: 1.4;
+    }
+
+    /* ─── HMW ─── */
+    .hmw-block {
+      padding: 4rem 0;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .section-label {
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    h2 {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(1.4rem, 3vw, 1.9rem);
+      letter-spacing: -0.01em;
+      color: var(--color-text-primary);
+      margin-bottom: 1.25rem;
+      line-height: 1.3;
+    }
+
+    p {
+      color: var(--color-text-secondary);
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+    p:last-child { margin-bottom: 0; }
+
+    /* ─── HMW statement ─── */
+    .hmw-statement {
+      margin-top: 2rem;
+      padding: 2rem 2.5rem;
+      background: var(--color-text-primary);
+      border-radius: 10px;
+    }
+    .hmw-pill {
+      display: inline-block;
+      font-size: 0.58rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(124,58,237,0.9);
+      background: rgba(124,58,237,0.12);
+      padding: 0.25rem 0.6rem;
+      border-radius: 100px;
+      margin-bottom: 1rem;
+    }
+    .hmw-statement p {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1.15rem;
+      color: #fafaf9;
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    /* ─── Image placeholder ─── */
+    .img-placeholder {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: var(--color-surface-2);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-text-ghost);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin: 2rem 0;
+    }
+    .img-placeholder.tall { aspect-ratio: 4 / 3; }
+    .img-placeholder.short { aspect-ratio: 21 / 9; }
+
+    /* ─── Research methods ─── */
+    .section-block {
+      padding: 4rem 0;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .research-methods {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+    .method-card {
+      padding: 1.25rem;
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      background: var(--color-surface);
+    }
+    .method-name {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--color-text-primary);
+      margin-bottom: 0.25rem;
+    }
+    .method-n {
+      display: inline-block;
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: var(--color-accent);
+      background: rgba(124,58,237,0.08);
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      margin-bottom: 0.6rem;
+    }
+    .method-desc {
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+      line-height: 1.5;
+    }
+
+    /* ─── Evidence chains ─── */
+    .evidence-chain {
+      margin: 2.5rem 0;
+      border: 1px solid var(--color-border);
+      border-radius: 10px;
+      overflow: hidden;
+      background: var(--color-surface);
+    }
+    .ev-header {
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid var(--color-border);
+      background: var(--color-surface-2);
+    }
+    .ev-header-label {
+      font-size: 0.58rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-text-ghost);
+    }
+    .ev-header-title {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--color-text-primary);
+      margin-top: 0.25rem;
+    }
+    .ev-row {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      align-items: start;
+      padding: 1.5rem;
+      gap: 0.75rem;
+    }
+    .ev-node {
+
+    }
+    .ev-node-label {
+      font-size: 0.55rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-text-ghost);
+      margin-bottom: 0.5rem;
+    }
+    .ev-node-text {
+      font-size: 0.82rem;
+      color: var(--color-text-secondary);
+      line-height: 1.5;
+    }
+    .ev-node-text.primary { color: var(--color-text-primary); font-weight: 500; }
+    .ev-arrow {
+      color: var(--color-border);
+      font-size: 1.1rem;
+      padding-top: 1.4rem;
+      flex-shrink: 0;
+    }
+
+    /* ─── Findings stats ─── */
+    .findings-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+    .finding-card {
+      padding: 1.5rem;
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      background: var(--color-surface);
+    }
+    .finding-stat {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 2.5rem;
+      color: var(--color-accent);
+      line-height: 1;
+      margin-bottom: 0.6rem;
+    }
+    .finding-card p {
+      font-size: 0.78rem;
+      color: var(--color-text-muted);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* ─── Design decisions with options ─── */
+    .design-decision {
+      margin-bottom: 2.5rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .design-decision:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .dd-title {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--color-text-primary);
+      margin-bottom: 0.5rem;
+    }
+    .dd-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin: 1.25rem 0;
+    }
+    .dd-option {
+      padding: 0.9rem 1rem;
+      border: 1px solid var(--color-border);
+      border-radius: 6px;
+      font-size: 0.82rem;
+      color: var(--color-text-muted);
+      background: var(--color-bg);
+    }
+    .dd-option.chosen {
+      border-color: var(--color-accent);
+      background: rgba(124,58,237,0.05);
+      color: var(--color-text-primary);
+    }
+    .dd-opt-label {
+      font-size: 0.55rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-text-ghost);
+      margin-bottom: 0.35rem;
+    }
+    .dd-option.chosen .dd-opt-label { color: var(--color-accent); }
+    .dd-rationale {
+      font-size: 0.85rem;
+      color: var(--color-text-secondary);
+      margin: 0;
+    }
+
+    /* ─── Results table ─── */
+    .results-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border: 1px solid var(--color-border);
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 2rem 0;
+    }
+    .rg-cell {
+      padding: 1.5rem;
+      border-right: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .rg-cell:nth-child(2n) { border-right: none; }
+    .rg-cell:nth-last-child(-n+2) { border-bottom: none; }
+    .rg-cell.highlight { background: var(--color-text-primary); }
+    .rg-label {
+      font-size: 0.58rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-text-ghost);
+      margin-bottom: 0.6rem;
+    }
+    .rg-cell.highlight .rg-label { color: rgba(250,250,249,0.4); }
+    .rg-num {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 2rem;
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+    .rg-cell:not(.highlight) .rg-num { color: var(--color-text-primary); }
+    .rg-cell.highlight .rg-num { color: #fafaf9; }
+    .rg-desc {
+      font-size: 0.78rem;
+      line-height: 1.5;
+    }
+    .rg-cell:not(.highlight) .rg-desc { color: var(--color-text-muted); }
+    .rg-cell.highlight .rg-desc { color: rgba(250,250,249,0.55); }
+
+    /* ─── Tradeoffs ─── */
+    .tradeoff {
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .tradeoff:last-child { border-bottom: none; }
+    .to-row {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 1rem;
+      align-items: start;
+    }
+    .to-label {
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-text-ghost);
+      padding-top: 0.15rem;
+    }
+    .to-text {
+      font-size: 0.85rem;
+      color: var(--color-text-secondary);
+      line-height: 1.5;
+    }
+    .to-next {
+      font-size: 0.78rem;
+      color: var(--color-accent);
+      font-weight: 500;
+      margin-top: 0.4rem;
+    }
+
+    footer {
+      border-top: 1px solid var(--color-border);
+      padding: 2.5rem 0;
+      margin-top: 4rem;
+    }
+    .footer-inner {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--color-text-ghost);
+    }
+
+    @media (max-width: 640px) {
+      .meta-grid { grid-template-columns: 1fr 1fr; }
+      .research-methods,
+      .findings-row,
+      .dd-options,
+      .results-grid { grid-template-columns: 1fr; }
+      .ev-row { grid-template-columns: 1fr; }
+      .ev-arrow { display: none; }
+      .to-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#">Shruthy Nair</a>
+    <a href="#">← Back to work</a>
+  </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<div class="page">
+  <div class="hero">
+    <p class="eyebrow">UX Design — WYD / Social Event Planning</p>
+    <h1>Consolidating 4 apps into 1 to eliminate social coordination overhead</h1>
+
+    <div class="meta-grid">
+      <div class="meta-cell">
+        <p class="meta-label">My Contribution</p>
+        <p class="meta-value">Solo — Research, IA, Design, Testing</p>
+      </div>
+      <div class="meta-cell">
+        <p class="meta-label">Research Scale</p>
+        <p class="meta-value">n=48 survey · n=10 usability tests</p>
+      </div>
+      <div class="meta-cell">
+        <p class="meta-label">Key Outcome</p>
+        <p class="meta-value">60% → 91% completion rate</p>
+      </div>
+      <div class="meta-cell">
+        <p class="meta-label">Duration</p>
+        <p class="meta-value">12 weeks, 2024</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wide">
+  <div class="img-placeholder short">Project overview image placeholder</div>
+</div>
+
+<!-- ─── PROBLEM FRAMING ─── -->
+<div class="page">
+  <div class="hmw-block">
+    <p class="section-label">Problem Framing</p>
+    <h2>Breaking down a vague brief</h2>
+    <p>
+      The prompt was deliberately open: "design a social event planning app." No defined user. No constraints. I treated this as the actual design challenge — understanding the space before choosing a direction was the real first task.
+    </p>
+    <p>
+      I identified three sub-questions embedded in the brief: Who is doing the planning? What's actually breaking down in their current process? And is this a discovery problem, a coordination problem, or both?
+    </p>
+    <p>
+      Research answered these questions. The reframe followed.
+    </p>
+
+    <div class="hmw-statement">
+      <span class="hmw-pill">How Might We</span>
+      <p>Design a single, intuitive platform that makes planning and discovering social events with close friends feel effortless — without the coordination overhead that currently makes people give up?</p>
+    </div>
+  </div>
+</div>
+
+<!-- ─── RESEARCH ─── -->
+<div class="page">
+  <div class="section-block">
+    <p class="section-label">Research</p>
+    <h2>How I built the evidence base</h2>
+
+    <div class="research-methods">
+      <div class="method-card">
+        <p class="method-name">Screener Survey</p>
+        <span class="method-n">n = 48</span>
+        <p class="method-desc">Quantified the scope of the problem: frequency of social planning, apps used, points of failure, and willingness to switch to a new tool.</p>
+      </div>
+      <div class="method-card">
+        <p class="method-name">Moderated Usability Tests</p>
+        <span class="method-n">n = 10</span>
+        <p class="method-desc">Observed participants creating and coordinating around events using their current tools (Instagram Events, iMessage, Facebook Events) to identify specific friction points.</p>
+      </div>
+    </div>
+
+    <p>
+      I chose a mixed-methods approach because the survey could tell me how widespread the problem was, but not why it was happening. The usability tests on existing tools surfaced the specific moments where coordination broke down — which the survey alone couldn't have shown.
+    </p>
+  </div>
+</div>
+
+<!-- ─── FINDINGS ─── -->
+<div class="page">
+  <div class="section-block">
+    <p class="section-label">Findings</p>
+    <h2>What the data showed</h2>
+
+    <div class="findings-row">
+      <div class="finding-card">
+        <p class="finding-stat">65%</p>
+        <p>couldn't easily see what their friends were doing on a given weekend despite everyone being active on social media</p>
+      </div>
+      <div class="finding-card">
+        <p class="finding-stat">70%</p>
+        <p>had missed events because information was scattered — text here, post there, no single source of truth</p>
+      </div>
+      <div class="finding-card">
+        <p class="finding-stat">80%</p>
+        <p>found creating events on existing apps too complicated or too public — the friction cost outweighed the coordination benefit</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── EVIDENCE CHAINS ─── -->
+<div class="page">
+  <div class="section-block">
+    <p class="section-label">Research → Design</p>
+    <h2>How evidence drove decisions</h2>
+
+    <div class="evidence-chain">
+      <div class="ev-header">
+        <p class="ev-header-label">Decision chain 01</p>
+        <p class="ev-header-title">Why I scoped to close friends, not public events</p>
+      </div>
+      <div class="ev-row">
+        <div class="ev-node">
+          <p class="ev-node-label">Evidence</p>
+          <p class="ev-node-text">80% said existing apps felt "too public" — they didn't want their full network to see every plan</p>
+        </div>
+        <span class="ev-arrow">→</span>
+        <div class="ev-node">
+          <p class="ev-node-label">Insight</p>
+          <p class="ev-node-text">The problem isn't feature gaps — it's audience mismatch. Close friends ≠ social network.</p>
+        </div>
+        <span class="ev-arrow">→</span>
+        <div class="ev-node">
+          <p class="ev-node-label">Decision</p>
+          <p class="ev-node-text primary">Private circles model only. No public feed. No discovery from strangers.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="evidence-chain">
+      <div class="ev-header">
+        <p class="ev-header-label">Decision chain 02</p>
+        <p class="ev-header-title">Why I collapsed event creation to a single screen</p>
+      </div>
+      <div class="ev-row">
+        <div class="ev-node">
+          <p class="ev-node-label">Evidence</p>
+          <p class="ev-node-text">60% completion rate on 4-step create event flow — users dropped off at the invite step</p>
+        </div>
+        <span class="ev-arrow">→</span>
+        <div class="ev-node">
+          <p class="ev-node-label">Insight</p>
+          <p class="ev-node-text">Each additional step multiplies abandonment. Inviting people is the hardest step, so it should come last with minimum friction.</p>
+        </div>
+        <span class="ev-arrow">→</span>
+        <div class="ev-node">
+          <p class="ev-node-label">Decision</p>
+          <p class="ev-node-text primary">Single progressive form. Smart defaults for all fields. Invite step is optional at creation time.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="evidence-chain">
+      <div class="ev-header">
+        <p class="ev-header-label">Decision chain 03</p>
+        <p class="ev-header-title">Why the home surface shows availability, not events</p>
+      </div>
+      <div class="ev-row">
+        <div class="ev-node">
+          <p class="ev-node-label">Evidence</p>
+          <p class="ev-node-text">65% said they can't tell what their friends are doing this weekend, even with everyone on social media</p>
+        </div>
+        <span class="ev-arrow">→</span>
+        <div class="ev-node">
+          <p class="ev-node-label">Insight</p>
+          <p class="ev-node-text">The bottleneck is legibility of friends' plans, not event discovery. Users want a status check, not a catalog.</p>
+        </div>
+        <span class="ev-arrow">→</span>
+        <div class="ev-node">
+          <p class="ev-node-label">Decision</p>
+          <p class="ev-node-text primary">Home feed = friends' upcoming plans. Not a browse-for-events surface.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── DESIGN ─── -->
+<div class="page">
+  <div class="section-block">
+    <p class="section-label">Design Decisions</p>
+    <h2>Options considered and choices made</h2>
+
+    <div class="design-decision">
+      <p class="dd-title">Information architecture: event-centric vs. friend-centric</p>
+      <div class="dd-options">
+        <div class="dd-option">
+          <p class="dd-opt-label">Not chosen</p>
+          Event-centric — browse events, filter by category, RSVP
+        </div>
+        <div class="dd-option chosen">
+          <p class="dd-opt-label">Chosen</p>
+          Friend-centric — see what your people are doing, join or create plans around them
+        </div>
+      </div>
+      <p class="dd-rationale">Event-centric mirrors Eventbrite and Facebook Events, which users were already familiar with and not using for close-friend coordination. Friend-centric matched the actual mental model: "What is Sarah doing this weekend?" not "What events are happening near me?"</p>
+    </div>
+
+    <div class="design-decision">
+      <p class="dd-title">Create event: wizard flow vs. single form</p>
+      <div class="dd-options">
+        <div class="dd-option">
+          <p class="dd-opt-label">Not chosen</p>
+          4-step wizard: Title → Date → Location → Invite
+        </div>
+        <div class="dd-option chosen">
+          <p class="dd-opt-label">Chosen</p>
+          Single progressive form with optional fields and smart defaults
+        </div>
+      </div>
+      <p class="dd-rationale">Wizard flows feel thorough but demand commitment at each step. The progressive form lets users create a skeleton event quickly (title + time = 15 seconds) and fill in details later. This matched how people actually plan: loosely first, precisely later.</p>
+    </div>
+
+    <div class="img-placeholder">Wireframe exploration — IA structure placeholder</div>
+    <div class="img-placeholder tall">High-fidelity screens — home feed + create event placeholder</div>
+  </div>
+</div>
+
+<!-- ─── RESULTS ─── -->
+<div class="page">
+  <div class="section-block">
+    <p class="section-label">Outcomes</p>
+    <h2>Measured against the brief's success criteria</h2>
+
+    <div class="results-grid">
+      <div class="rg-cell highlight">
+        <p class="rg-label">Event Creation Completion</p>
+        <p class="rg-num">91%</p>
+        <p class="rg-desc">up from 60% on the original 4-step flow — validated against same test participants</p>
+      </div>
+      <div class="rg-cell">
+        <p class="rg-label">Apps Replaced</p>
+        <p class="rg-num">4 → 1</p>
+        <p class="rg-desc">users reported WYD replaced Instagram, iMessage, Google Calendar, and Snapchat for close-friend coordination</p>
+      </div>
+      <div class="rg-cell">
+        <p class="rg-label">Friction Points Eliminated</p>
+        <p class="rg-num">3</p>
+        <p class="rg-desc">context-switching, scattered event info, and the "too public" barrier all addressed by the core model</p>
+      </div>
+      <div class="rg-cell highlight">
+        <p class="rg-label">Research Validated</p>
+        <p class="rg-num">48 + 10</p>
+        <p class="rg-desc">survey respondents + usability test participants — mixed-methods evidence base</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── TRADEOFFS ─── -->
+<div class="page">
+  <div class="section-block">
+    <p class="section-label">Honest Reflection</p>
+    <h2>Trade-offs, limitations, and what I'd do differently</h2>
+
+    <div class="tradeoff">
+      <div class="to-row">
+        <p class="to-label">Scope Decision</p>
+        <div>
+          <p class="to-text">I designed features for before/during/after the event lifecycle. The "during event" features (shared itinerary, live location) were interesting but not core to the reframed problem. I spent a week building screens I shouldn't have prioritized.</p>
+          <p class="to-next">Next time: Define scope boundaries before the journey map, not after.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tradeoff">
+      <div class="to-row">
+        <p class="to-label">Testing Timing</p>
+        <div>
+          <p class="to-text">I built mid-fidelity wireframes of 7 screens before testing the core model (availability-first home feed). An earlier, lower-fidelity test would have validated the thesis before I built around it.</p>
+          <p class="to-next">Next time: Concept test the core model by week 2, not the prototype by week 7.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tradeoff">
+      <div class="to-row">
+        <p class="to-label">Sample Homogeneity</p>
+        <div>
+          <p class="to-text">48 survey respondents skewed 20–26, iOS-only, urban. The coordination patterns for other demographics could look very different. The findings are valid for the target user segment but not generalizable.</p>
+          <p class="to-next">Next time: Set minimum diversity criteria for the sample before launching any survey.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tradeoff">
+      <div class="to-row">
+        <p class="to-label">What's Missing</p>
+        <div>
+          <p class="to-text">I didn't design for edge cases: what happens when someone creates a plan and nobody RSVPs? How does the notification model work without becoming noise? These weren't surfaced until late in usability testing.</p>
+          <p class="to-next">Next time: Map failure states and edge cases before finalizing any flow.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <span>Shruthy Nair — Portfolio 2024</span>
+    <span>V3: Evidence Framework</span>
+  </div>
+</footer>
+
+</body>
+</html>

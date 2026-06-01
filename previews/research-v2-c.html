@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Variation C — Full-Width Screenshot + Caption Strip</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #ffffff; --surface: #f5f5f5;
+      --text-primary: #0a0a0a; --text-secondary: #555555; --text-muted: #999999;
+      --border: #e5e5e5;
+    }
+    body { background: var(--bg); font-family: 'IBM Plex Sans', sans-serif; padding: 48px 24px 80px; max-width: 880px; margin: 0 auto; }
+    .badge { display: inline-block; font-family: 'IBM Plex Mono', monospace; font-size: 0.58rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; background: #0a0a0a; color: #fff; padding: 4px 10px; border-radius: 4px; margin-bottom: 32px; }
+    .section-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 20px; }
+    h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 600; color: var(--text-primary); margin-bottom: 10px; line-height: 1.3; }
+    .intro { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 40px; max-width: 560px; }
+
+    /* Tool block */
+    .tool-block { margin-bottom: 0; border-top: 1px solid var(--border); padding: 28px 0 32px; }
+    .tool-block:last-of-type { border-bottom: 1px solid var(--border); margin-bottom: 28px; }
+
+    /* Header row: num + title + platforms + gap pill inline */
+    .block-header { display: flex; align-items: baseline; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+    .block-num { font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; color: var(--text-muted); }
+    .block-title { font-size: 0.96rem; font-weight: 600; color: var(--text-primary); }
+    .block-platforms { font-family: 'IBM Plex Mono', monospace; font-size: 0.58rem; color: var(--text-muted); }
+    .block-pill {
+      margin-left: auto;
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.52rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--text-muted); background: var(--surface); border: 1px solid var(--border);
+      padding: 3px 10px; border-radius: 100px;
+    }
+
+    /* Full-width screenshot area */
+    .block-img {
+      width: 100%; border-radius: 8px; overflow: hidden;
+      position: relative; margin-bottom: 16px;
+    }
+    .block-img.slack  { background: linear-gradient(145deg, #f5f0ff, #ede0ff); }
+    .block-img.notion { background: linear-gradient(145deg, #f7f7f5, #eeecea); }
+    .block-img.loom   { background: linear-gradient(145deg, #fff4f0, #ffe4db); }
+    .block-img.jira   { background: linear-gradient(145deg, #eef3ff, #dce8ff); }
+
+    /* Wider, landscape mock UI for full-width */
+    .fw-mock {
+      margin: 20px 24px 20px;
+      border-radius: 8px; background: white;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.10); overflow: hidden;
+    }
+    .fw-topbar { height: 28px; background: #f5f5f5; border-bottom: 1px solid #e8e8e8; display: flex; align-items: center; padding: 0 12px; gap: 6px; }
+    .fw-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .fw-content { display: flex; height: 130px; }
+
+    /* Sidebar */
+    .fw-sidebar { width: 140px; border-right: 1px solid #f0f0f0; padding: 10px; display: flex; flex-direction: column; gap: 6px; flex-shrink: 0; background: #fafafa; }
+    .fw-sidebar-item { height: 20px; border-radius: 4px; display: flex; align-items: center; padding: 0 8px; gap: 6px; }
+    .fw-sidebar-item.active { background: #ebebeb; }
+    .fw-sidebar-dot { width: 6px; height: 6px; border-radius: 50%; background: #ccc; flex-shrink: 0; }
+    .fw-sidebar-line { height: 5px; border-radius: 3px; background: #ddd; flex: 1; }
+
+    /* Main area */
+    .fw-main { flex: 1; padding: 12px; display: flex; flex-direction: column; gap: 5px; overflow: hidden; }
+    .fw-msg-row { display: flex; gap: 7px; align-items: flex-start; }
+    .fw-avatar { width: 20px; height: 20px; border-radius: 50%; flex-shrink: 0; }
+    .fw-msg-body { display: flex; flex-direction: column; gap: 3px; flex: 1; }
+    .fw-msg-name { height: 5px; width: 50px; border-radius: 3px; background: #ccc; }
+    .fw-msg-text { height: 5px; border-radius: 3px; background: #e5e5e5; }
+
+    /* Notion main */
+    .fw-doc-main { flex: 1; padding: 12px; display: flex; flex-direction: column; gap: 6px; }
+    .fw-h { height: 9px; border-radius: 3px; background: #bbb; }
+    .fw-p { height: 5px; border-radius: 3px; background: #e5e5e5; }
+
+    /* Loom full-width */
+    .loom-fw { display: flex; align-items: center; justify-content: center; height: 170px; background: #0d0d0d; }
+    .loom-player { width: 90%; max-width: 520px; background: #1a1a1a; border-radius: 6px; padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+    .loom-thumb { background: linear-gradient(135deg, #2d1a3d, #1a0f2e); border-radius: 4px; height: 88px; display: flex; align-items: center; justify-content: center; }
+    .loom-play { width: 36px; height: 36px; border-radius: 50%; background: rgba(239,68,68,0.9); display: flex; align-items:center; justify-content:center; }
+    .loom-controls { display: flex; align-items: center; gap: 6px; }
+    .loom-progress-bg { flex:1; height: 3px; background: rgba(255,255,255,0.1); border-radius: 3px; }
+    .loom-progress-fill { width: 35%; height: 3px; background: rgba(239,68,68,0.8); border-radius: 3px; }
+
+    /* Jira kanban */
+    .jira-fw { padding: 14px 16px; height: 160px; }
+    .jira-cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; height: 100%; }
+    .jira-col { display: flex; flex-direction: column; gap: 5px; }
+    .jira-col-hdr { height: 7px; border-radius: 3px; }
+    .jira-ticket { background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 5px; padding: 8px; display: flex; flex-direction: column; gap: 4px; }
+    .jira-ticket-line { height: 5px; border-radius: 3px; background: #dee2e6; }
+    .jira-no-why { margin-top: auto; padding-top: 4px; display: flex; align-items: center; gap: 4px; }
+    .jira-no-why-text { font-family: 'IBM Plex Mono', monospace; font-size: 7px; color: #aaa; }
+
+    /* Annotation callout below image */
+    .annotation {
+      display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px;
+      padding: 11px 14px; background: #fffbf0; border: 1px solid #fde68a; border-radius: 6px;
+    }
+    .annotation-arrow { font-size: 0.75rem; line-height: 1; margin-top: 1px; }
+    .annotation-text { font-family: 'IBM Plex Mono', monospace; font-size: 0.66rem; color: #92400e; line-height: 1.6; }
+
+    /* Body copy below annotation */
+    .block-body { font-size: 0.82rem; line-height: 1.7; color: var(--text-secondary); max-width: 680px; }
+
+    /* Summary */
+    .summary { background: var(--surface); border-radius: 8px; padding: 20px 24px; display: flex; gap: 16px; align-items: flex-start; }
+    .summary-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.56rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted); white-space: nowrap; padding-top: 2px; min-width: 90px; }
+    .summary-text { font-size: 0.82rem; line-height: 1.65; color: var(--text-secondary); }
+  </style>
+</head>
+<body>
+
+  <div class="badge">Variation C — Full-Width Screenshot + Annotation</div>
+  <p class="section-label">Research</p>
+  <h2>What the Research Pointed To</h2>
+  <p class="intro">We audited the tools teams already use before designing anything new. Each solves part of the problem — understanding which part let us design around the gap, not into it.</p>
+
+  <!-- Tool 01: Slack -->
+  <div class="tool-block">
+    <div class="block-header">
+      <span class="block-num">01</span>
+      <span class="block-title">Messaging Platforms</span>
+      <span class="block-platforms">Teams, Slack</span>
+      <span class="block-pill">Context buried</span>
+    </div>
+    <div class="block-img slack">
+      <div class="fw-mock">
+        <div class="fw-topbar">
+          <div class="fw-dot" style="background:#ff5f57"></div>
+          <div class="fw-dot" style="background:#febc2e"></div>
+          <div class="fw-dot" style="background:#28c840"></div>
+        </div>
+        <div class="fw-content">
+          <div class="fw-sidebar">
+            <div class="fw-sidebar-item active"><div class="fw-sidebar-dot"></div><div class="fw-sidebar-line"></div></div>
+            <div class="fw-sidebar-item"><div class="fw-sidebar-dot"></div><div class="fw-sidebar-line" style="width:55%"></div></div>
+            <div class="fw-sidebar-item"><div class="fw-sidebar-dot" style="background:#8b5cf6"></div><div class="fw-sidebar-line" style="background:#c4b5fd;"></div></div>
+            <div class="fw-sidebar-item"><div class="fw-sidebar-dot"></div><div class="fw-sidebar-line" style="width:70%"></div></div>
+            <div class="fw-sidebar-item"><div class="fw-sidebar-dot"></div><div class="fw-sidebar-line" style="width:45%"></div></div>
+          </div>
+          <div class="fw-main">
+            <div class="fw-msg-row">
+              <div class="fw-avatar" style="background:#c4b5fd"></div>
+              <div class="fw-msg-body"><div class="fw-msg-name"></div><div class="fw-msg-text" style="width:80%"></div></div>
+            </div>
+            <div class="fw-msg-row">
+              <div class="fw-avatar" style="background:#fca5a5"></div>
+              <div class="fw-msg-body"><div class="fw-msg-name"></div><div class="fw-msg-text" style="width:95%"></div><div class="fw-msg-text" style="width:60%"></div></div>
+            </div>
+            <!-- Highlighted decision buried in thread -->
+            <div style="background:#fef3c7; border-left: 2px solid #f59e0b; padding:6px 10px; border-radius:0 4px 4px 0; margin:2px 0;">
+              <div style="height:5px; width:90%; border-radius:3px; background:#fcd34d; margin-bottom:3px;"></div>
+              <div style="height:5px; width:70%; border-radius:3px; background:#fcd34d;"></div>
+            </div>
+            <div class="fw-msg-row">
+              <div class="fw-avatar" style="background:#86efac"></div>
+              <div class="fw-msg-body"><div class="fw-msg-name"></div><div class="fw-msg-text" style="width:55%"></div></div>
+            </div>
+            <div class="fw-msg-row">
+              <div class="fw-avatar" style="background:#93c5fd"></div>
+              <div class="fw-msg-body"><div class="fw-msg-name"></div><div class="fw-msg-text" style="width:75%"></div><div class="fw-msg-text" style="width:40%"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="annotation">
+      <span class="annotation-arrow">↑</span>
+      <span class="annotation-text">The actual decision is in the highlighted message — buried inside message 23 of a 40-message thread. Technically present. Practically inaccessible.</span>
+    </div>
+    <p class="block-body">These platforms are built around conversation as the primary artifact, not decisions. You can search for keywords, but not for structured reasoning. Context exists — it just can't be found when it matters.</p>
+  </div>
+
+  <!-- Tool 02: Notion -->
+  <div class="tool-block">
+    <div class="block-header">
+      <span class="block-num">02</span>
+      <span class="block-title">Documentation Platforms</span>
+      <span class="block-platforms">Confluence, Notion</span>
+      <span class="block-pill">Friction at capture</span>
+    </div>
+    <div class="block-img notion">
+      <div class="fw-mock">
+        <div class="fw-topbar">
+          <div class="fw-dot" style="background:#ff5f57"></div>
+          <div class="fw-dot" style="background:#febc2e"></div>
+          <div class="fw-dot" style="background:#28c840"></div>
+        </div>
+        <div class="fw-content">
+          <div class="fw-sidebar" style="background:#f7f7f5;">
+            <div class="fw-sidebar-item"><div class="fw-sidebar-dot"></div><div class="fw-sidebar-line"></div></div>
+            <div class="fw-sidebar-item active"><div class="fw-sidebar-dot" style="background:#aaa"></div><div class="fw-sidebar-line" style="background:#ccc;"></div></div>
+            <div class="fw-sidebar-item"><div class="fw-sidebar-dot"></div><div class="fw-sidebar-line" style="width:60%"></div></div>
+            <div style="margin-left:12px; display:flex; flex-direction:column; gap:4px; margin-top:2px;">
+              <div class="fw-sidebar-item" style="margin:0; padding:0 4px;"><div class="fw-sidebar-dot"></div><div class="fw-sidebar-line" style="width:80%"></div></div>
+              <div class="fw-sidebar-item" style="margin:0; padding:0 4px;"><div class="fw-sidebar-dot"></div><div class="fw-sidebar-line" style="width:55%"></div></div>
+            </div>
+          </div>
+          <div class="fw-doc-main">
+            <div class="fw-h" style="width:45%"></div>
+            <div class="fw-p" style="width:90%"></div>
+            <div class="fw-p" style="width:78%"></div>
+            <div class="fw-p" style="width:60%"></div>
+            <div style="height:4px"></div>
+            <!-- Empty state with cursor -->
+            <div style="display:flex; align-items:center; gap:4px; margin-top:2px;">
+              <div style="width:2px; height:14px; background:#aaa; border-radius:1px; animation:none;"></div>
+              <div style="height:5px; width:120px; border-radius:3px; background:#f0f0f0; border: 1px dashed #ccc;"></div>
+            </div>
+            <div style="padding:6px 8px; background:#fafafa; border:1px dashed #ddd; border-radius:4px; display:flex; align-items:center; gap:6px; margin-top:4px;">
+              <div style="font-size:8px; color:#bbb; font-family:monospace;">+ New page</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="annotation">
+      <span class="annotation-arrow">↑</span>
+      <span class="annotation-text">Creating a new page requires switching context, finding the right location, choosing a format, and writing from scratch — all after the decision has already been made.</span>
+    </div>
+    <p class="block-body">Right format, wrong timing. The motivation to document collapses the moment the decision is made and everyone moves on. This works for disciplined, well-resourced teams — not most teams under real workload.</p>
+  </div>
+
+  <!-- Tool 03: Loom -->
+  <div class="tool-block">
+    <div class="block-header">
+      <span class="block-num">03</span>
+      <span class="block-title">Video Tools</span>
+      <span class="block-platforms">Loom</span>
+      <span class="block-pill">Not queryable</span>
+    </div>
+    <div class="block-img loom">
+      <div class="loom-fw">
+        <div class="loom-player">
+          <div class="loom-thumb">
+            <div class="loom-play">
+              <div style="width:0; height:0; border-top:8px solid transparent; border-bottom:8px solid transparent; border-left:14px solid white; margin-left:3px;"></div>
+            </div>
+          </div>
+          <div class="loom-controls">
+            <div style="width:0; height:0; border-top:5px solid transparent; border-bottom:5px solid transparent; border-left:9px solid rgba(255,255,255,0.5);"></div>
+            <div class="loom-progress-bg"><div class="loom-progress-fill"></div></div>
+            <div style="font-family:monospace; font-size:8px; color:rgba(255,255,255,0.4);">4:23 / 12:07</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="annotation">
+      <span class="annotation-arrow">↑</span>
+      <span class="annotation-text">The reasoning is somewhere in this 12-minute recording. But you can't search "why did we drop the sidebar nav" across a folder of videos.</span>
+    </div>
+    <p class="block-body">Excellent for explaining complexity with tone and context. But a video is a communication format — not a retrieval system. You can't query a library of Looms for a specific piece of reasoning six months later.</p>
+  </div>
+
+  <!-- Tool 04: Jira -->
+  <div class="tool-block">
+    <div class="block-header">
+      <span class="block-num">04</span>
+      <span class="block-title">Task Management</span>
+      <span class="block-platforms">Jira, Asana</span>
+      <span class="block-pill">What, never why</span>
+    </div>
+    <div class="block-img jira">
+      <div class="fw-mock">
+        <div class="fw-topbar">
+          <div class="fw-dot" style="background:#ff5f57"></div>
+          <div class="fw-dot" style="background:#febc2e"></div>
+          <div class="fw-dot" style="background:#28c840"></div>
+        </div>
+        <div class="jira-fw">
+          <div class="jira-cols">
+            <div class="jira-col">
+              <div class="jira-col-hdr" style="background:#93c5fd; width:55%;"></div>
+              <div class="jira-ticket"><div class="jira-ticket-line" style="width:90%"></div><div class="jira-ticket-line" style="width:60%"></div></div>
+              <div class="jira-ticket"><div class="jira-ticket-line" style="width:75%"></div></div>
+              <div class="jira-ticket"><div class="jira-ticket-line" style="width:85%"></div><div class="jira-ticket-line" style="width:50%"></div></div>
+            </div>
+            <div class="jira-col">
+              <div class="jira-col-hdr" style="background:#fcd34d; width:65%;"></div>
+              <div class="jira-ticket" style="border-color:#fde68a; background:#fffbf0;"><div class="jira-ticket-line" style="width:80%; background:#fcd34d;"></div></div>
+              <div class="jira-ticket"><div class="jira-ticket-line" style="width:70%"></div></div>
+            </div>
+            <div class="jira-col">
+              <div class="jira-col-hdr" style="background:#86efac; width:50%;"></div>
+              <div class="jira-ticket" style="border-color:#bbf7d0; background:#f0fdf4;"><div class="jira-ticket-line" style="width:90%; background:#86efac;"></div><div class="jira-ticket-line" style="width:55%; background:#86efac;"></div></div>
+              <div class="jira-no-why">
+                <span class="jira-no-why-text">Status: Done · Reason: —</span>
+              </div>
+            </div>
+            <div class="jira-col">
+              <div class="jira-col-hdr" style="background:#d1d5db; width:45%;"></div>
+              <div class="jira-ticket"><div class="jira-ticket-line" style="width:80%"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="annotation">
+      <span class="annotation-arrow">↑</span>
+      <span class="annotation-text">Status: Done. Reason: —. The ticket tracks that the work was completed. There is no field for why it was scoped this way instead of another way.</span>
+    </div>
+    <p class="block-body">Designed to track what is being done and whether it's done. The reasoning behind how the work was scoped — why one direction was chosen over another — is absent by design.</p>
+  </div>
+
+  <div class="summary">
+    <span class="summary-label">The gap</span>
+    <span class="summary-text">No existing tool captures a decision as a structured artifact at the moment it happens and makes it retrievable from a central place later.</span>
+  </div>
+
+</body>
+</html>

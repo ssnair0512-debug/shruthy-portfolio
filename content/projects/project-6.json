@@ -1,0 +1,11 @@
+{
+  "slug": "project-6",
+  "title": "Project Title Six",
+  "label": "Personal · Web · 2022",
+  "coverImage": "",
+  "tags": ["Web Design", "Development", "Open Source"],
+  "year": 2022,
+  "featured": false,
+  "description": "A short description of what this project was about and the impact it had.",
+  "role": "Personal Project"
+}

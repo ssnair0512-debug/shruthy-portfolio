@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Variation D2 — 2×2 Grid, Screenshot + Annotation Side by Side</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #ffffff; --surface: #f5f5f5;
+      --text-primary: #0a0a0a; --text-secondary: #555555; --text-muted: #999999;
+      --border: #e5e5e5;
+    }
+    body { background: var(--bg); font-family: 'IBM Plex Sans', sans-serif; padding: 48px 24px 80px; max-width: 920px; margin: 0 auto; }
+    .badge { display: inline-block; font-family: 'IBM Plex Mono', monospace; font-size: 0.58rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; background: #0a0a0a; color: #fff; padding: 4px 10px; border-radius: 4px; margin-bottom: 32px; }
+    .section-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 20px; }
+    h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 600; color: var(--text-primary); margin-bottom: 10px; line-height: 1.3; }
+    .intro { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 36px; max-width: 560px; }
+
+    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-bottom: 24px; }
+    @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+
+    /* Card */
+    .card {
+      border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+      background: var(--bg); display: flex; flex-direction: column;
+    }
+
+    /* Screenshot — taller for portrait feel */
+    .card-img {
+      width: 100%; aspect-ratio: 4/3;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden; flex-shrink: 0;
+    }
+    .card-img.slack  { background: linear-gradient(145deg,#f5f0ff,#ede0ff); }
+    .card-img.notion { background: linear-gradient(145deg,#f7f7f5,#eeecea); }
+    .card-img.loom   { background: linear-gradient(145deg,#fff4f0,#ffe4db); }
+    .card-img.jira   { background: linear-gradient(145deg,#eef3ff,#dce8ff); }
+
+    /* Mock UI */
+    .mock { width: 88%; height: 85%; border-radius: 6px; background: white; box-shadow: 0 2px 14px rgba(0,0,0,0.10); overflow: hidden; display: flex; flex-direction: column; }
+    .mock-bar { height: 20px; background: #f5f5f5; border-bottom: 1px solid #ebebeb; display: flex; align-items: center; padding: 0 8px; gap: 4px; flex-shrink: 0; }
+    .dot { width: 6px; height: 6px; border-radius: 50%; }
+    .mock-inner { flex: 1; padding: 8px; display: flex; flex-direction: column; gap: 4px; overflow: hidden; }
+    .ln { height: 5px; border-radius: 3px; background: #e8e8e8; }
+    .bubble { background: #ebebeb; border-radius: 8px 8px 8px 2px; padding: 5px 9px; max-width: 78%; display: flex; flex-direction: column; gap: 3px; }
+
+    /* Gap badge overlaid bottom-right of image */
+    .img-badge {
+      position: absolute; bottom: 10px; right: 10px;
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.5rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+      background: rgba(10,10,10,0.80); color: #fff;
+      padding: 4px 9px; border-radius: 4px;
+    }
+
+    /* Bottom of card: horizontal split — annotation left, analysis right */
+    .card-bottom {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-top: 1px solid var(--border);
+      flex: 1;
+    }
+
+    /* Left: annotation panel */
+    .ann-panel {
+      padding: 14px 14px 16px;
+      background: #fffbf0;
+      border-right: 1px solid #fde68a;
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .ann-label {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.5rem; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase; color: #b45309;
+    }
+    .ann-text {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; line-height: 1.6; color: #92400e;
+    }
+
+    /* Right: tool info + body */
+    .info-panel {
+      padding: 14px 14px 16px;
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .c-num { font-family: 'IBM Plex Mono', monospace; font-size: 0.54rem; color: var(--text-muted); }
+    .c-title { font-size: 0.86rem; font-weight: 600; color: var(--text-primary); line-height: 1.3; }
+    .c-platforms { font-family: 'IBM Plex Mono', monospace; font-size: 0.54rem; color: var(--text-muted); }
+    .c-body { font-size: 0.74rem; line-height: 1.65; color: var(--text-secondary); margin-top: 2px; }
+
+    /* Summary */
+    .summary { background: var(--surface); border-radius: 8px; padding: 18px 22px; display: flex; gap: 14px; align-items: flex-start; }
+    .s-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.56rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted); white-space: nowrap; padding-top: 2px; }
+    .s-text { font-size: 0.82rem; line-height: 1.65; color: var(--text-secondary); }
+  </style>
+</head>
+<body>
+
+  <div class="badge">Variation D2 — 2×2 Grid, Annotation Beside Analysis</div>
+  <p class="section-label">Research</p>
+  <h2>What the Research Pointed To</h2>
+  <p class="intro">We audited the tools teams already use before designing anything new. Each solves part of the problem — understanding which part let us design around the gap, not into it.</p>
+
+  <div class="grid">
+
+    <!-- Slack -->
+    <div class="card">
+      <div class="card-img slack">
+        <div class="mock">
+          <div class="mock-bar"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div></div>
+          <div class="mock-inner" style="flex-direction:row; gap:0; padding:0;">
+            <div style="width:72px; background:#fafafa; border-right:1px solid #f0f0f0; padding:6px; display:flex; flex-direction:column; gap:4px; flex-shrink:0;">
+              <div class="ln" style="width:70%"></div>
+              <div class="ln" style="width:55%; background:#c4b5fd;"></div>
+              <div class="ln" style="width:65%"></div>
+              <div class="ln" style="width:50%"></div>
+              <div class="ln" style="width:60%"></div>
+            </div>
+            <div style="flex:1; padding:7px 8px; display:flex; flex-direction:column; gap:5px;">
+              <div class="bubble"><div class="ln" style="width:80%"></div></div>
+              <div class="bubble"><div class="ln" style="width:90%"></div><div class="ln" style="width:55%"></div></div>
+              <div class="bubble" style="background:#fef3c7; border-left:2px solid #f59e0b; border-radius:0 6px 6px 0; max-width:90%;"><div class="ln" style="width:95%; background:#fcd34d;"></div><div class="ln" style="width:70%; background:#fcd34d;"></div><div class="ln" style="width:50%; background:#fcd34d;"></div></div>
+              <div class="bubble"><div class="ln" style="width:45%"></div></div>
+              <div class="bubble"><div class="ln" style="width:72%"></div><div class="ln" style="width:40%"></div></div>
+              <div class="bubble"><div class="ln" style="width:60%"></div></div>
+            </div>
+          </div>
+        </div>
+        <span class="img-badge">Context buried</span>
+      </div>
+      <div class="card-bottom">
+        <div class="ann-panel">
+          <span class="ann-label">What's broken</span>
+          <span class="ann-text">The decision is message 23 of 40. Technically present. Practically inaccessible.</span>
+        </div>
+        <div class="info-panel">
+          <span class="c-num">01</span>
+          <span class="c-title">Messaging Platforms</span>
+          <span class="c-platforms">Teams, Slack</span>
+          <p class="c-body">Built around conversation. You can search keywords — not structured reasoning.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notion -->
+    <div class="card">
+      <div class="card-img notion">
+        <div class="mock">
+          <div class="mock-bar"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div></div>
+          <div class="mock-inner" style="flex-direction:row; gap:0; padding:0;">
+            <div style="width:72px; background:#f7f7f5; border-right:1px solid #eeeeec; padding:6px; display:flex; flex-direction:column; gap:4px; flex-shrink:0;">
+              <div class="ln" style="width:70%"></div>
+              <div class="ln" style="width:60%; background:#ccc;"></div>
+              <div class="ln" style="width:50%; margin-left:10px;"></div>
+              <div class="ln" style="width:40%; margin-left:10px;"></div>
+              <div class="ln" style="width:55%"></div>
+            </div>
+            <div style="flex:1; padding:7px 8px; display:flex; flex-direction:column; gap:5px;">
+              <div class="ln" style="width:45%; height:8px; background:#bbb; border-radius:3px;"></div>
+              <div class="ln" style="width:90%"></div>
+              <div class="ln" style="width:80%"></div>
+              <div class="ln" style="width:65%"></div>
+              <div style="height:4px;"></div>
+              <div style="display:flex; align-items:center; gap:5px; padding:5px 7px; background:#f0efed; border:1px dashed #ccc; border-radius:4px;">
+                <div style="font-size:8px; color:#bbb; font-family:monospace;">+ Untitled page</div>
+              </div>
+              <div style="display:flex; align-items:center; gap:5px; padding:4px 7px;">
+                <div style="width:2px; height:12px; background:#aaa; border-radius:1px;"></div>
+                <div class="ln" style="width:40%; background:#ddd;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-badge">Friction at capture</span>
+      </div>
+      <div class="card-bottom">
+        <div class="ann-panel">
+          <span class="ann-label">What's broken</span>
+          <span class="ann-text">Switching tools + blank page = effort after the moment. Most teams skip it.</span>
+        </div>
+        <div class="info-panel">
+          <span class="c-num">02</span>
+          <span class="c-title">Documentation Platforms</span>
+          <span class="c-platforms">Confluence, Notion</span>
+          <p class="c-body">Right format, wrong timing. Motivation to document collapses the moment everyone moves on.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loom -->
+    <div class="card">
+      <div class="card-img loom">
+        <div class="mock" style="background:#111;">
+          <div class="mock-bar" style="background:#1a1a1a; border-color:#2a2a2a;"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div></div>
+          <div style="flex:1; background:linear-gradient(135deg,#2d1a3d,#1a0f2e); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; padding:12px;">
+            <div style="width:32px; height:32px; border-radius:50%; background:rgba(239,68,68,0.9); display:flex; align-items:center; justify-content:center;">
+              <div style="width:0; height:0; border-top:7px solid transparent; border-bottom:7px solid transparent; border-left:12px solid white; margin-left:2px;"></div>
+            </div>
+            <div style="width:88%; display:flex; align-items:center; gap:5px;">
+              <div style="width:24px; height:3px; border-radius:2px; background:rgba(239,68,68,0.7);"></div>
+              <div style="flex:1; height:3px; border-radius:2px; background:rgba(255,255,255,0.1);"></div>
+              <div style="font-family:monospace; font-size:7px; color:rgba(255,255,255,0.35); white-space:nowrap;">12:07</div>
+            </div>
+            <div style="display:flex; gap:5px; flex-wrap:wrap; justify-content:center;">
+              <div style="padding:2px 7px; border-radius:3px; background:rgba(255,255,255,0.06); font-family:monospace; font-size:6.5px; color:rgba(255,255,255,0.25);">decision-review-v2.mp4</div>
+              <div style="padding:2px 7px; border-radius:3px; background:rgba(255,255,255,0.06); font-family:monospace; font-size:6.5px; color:rgba(255,255,255,0.25);">q2-retro-loom.mp4</div>
+              <div style="padding:2px 7px; border-radius:3px; background:rgba(255,255,255,0.06); font-family:monospace; font-size:6.5px; color:rgba(255,255,255,0.25);">nav-discussion.mp4</div>
+            </div>
+          </div>
+        </div>
+        <span class="img-badge">Not queryable</span>
+      </div>
+      <div class="card-bottom">
+        <div class="ann-panel">
+          <span class="ann-label">What's broken</span>
+          <span class="ann-text">The reasoning is in one of these recordings. You can't search across them.</span>
+        </div>
+        <div class="info-panel">
+          <span class="c-num">03</span>
+          <span class="c-title">Video Tools</span>
+          <span class="c-platforms">Loom</span>
+          <p class="c-body">A communication format — not a retrieval system. You can't query a folder of Looms for specific reasoning.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Jira -->
+    <div class="card">
+      <div class="card-img jira">
+        <div class="mock">
+          <div class="mock-bar"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div></div>
+          <div class="mock-inner" style="gap:6px;">
+            <div style="display:flex; gap:5px; margin-bottom:2px;">
+              <div style="padding:2px 7px; border-radius:3px; background:#dbeafe; font-family:monospace; font-size:7px; color:#3b82f6;">To Do</div>
+              <div style="padding:2px 7px; border-radius:3px; background:#fef9c3; font-family:monospace; font-size:7px; color:#ca8a04;">In Progress</div>
+              <div style="padding:2px 7px; border-radius:3px; background:#dcfce7; font-family:monospace; font-size:7px; color:#16a34a;">Done</div>
+            </div>
+            <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:5px; flex:1;">
+              <div style="display:flex; flex-direction:column; gap:4px;">
+                <div style="background:#f1f5f9; border-radius:4px; padding:5px 7px;"><div class="ln" style="width:90%"></div><div class="ln" style="width:55%; margin-top:3px;"></div></div>
+                <div style="background:#f1f5f9; border-radius:4px; padding:5px 7px;"><div class="ln" style="width:70%"></div></div>
+                <div style="background:#f1f5f9; border-radius:4px; padding:5px 7px;"><div class="ln" style="width:80%"></div></div>
+              </div>
+              <div style="display:flex; flex-direction:column; gap:4px;">
+                <div style="background:#eff6ff; border-radius:4px; padding:5px 7px;"><div class="ln" style="width:85%; background:#bfdbfe;"></div><div class="ln" style="width:50%; background:#bfdbfe; margin-top:3px;"></div></div>
+                <div style="background:#f1f5f9; border-radius:4px; padding:5px 7px;"><div class="ln" style="width:75%"></div></div>
+              </div>
+              <div style="display:flex; flex-direction:column; gap:4px;">
+                <div style="background:#f0fdf4; border-radius:4px; padding:5px 7px;">
+                  <div class="ln" style="width:85%; background:#86efac;"></div>
+                  <div class="ln" style="width:55%; background:#86efac; margin-top:3px;"></div>
+                  <div style="margin-top:5px; padding-top:4px; border-top:1px solid #dcfce7;">
+                    <div style="font-family:monospace; font-size:6px; color:#aaa;">Why: —</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-badge">What, never why</span>
+      </div>
+      <div class="card-bottom">
+        <div class="ann-panel">
+          <span class="ann-label">What's broken</span>
+          <span class="ann-text">Status: Done. The "Why" field doesn't exist. Absent by design.</span>
+        </div>
+        <div class="info-panel">
+          <span class="c-num">04</span>
+          <span class="c-title">Task Management</span>
+          <span class="c-platforms">Jira, Asana</span>
+          <p class="c-body">Tracks what is being done and whether it's done. The reasoning behind decisions is absent by design.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="summary">
+    <span class="s-label">The gap</span>
+    <span class="s-text">No existing tool captures a decision as a structured artifact at the moment it happens and makes it retrievable from a central place later.</span>
+  </div>
+
+</body>
+</html>

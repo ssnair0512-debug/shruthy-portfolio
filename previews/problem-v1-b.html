@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Problem Space — Variation B: Three-Act Story</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --bg:#fff; --surface:#f5f5f5; --text-primary:#0a0a0a; --text-secondary:#555; --text-muted:#999; --border:#e5e5e5; }
+    body { background:var(--bg); font-family:'IBM Plex Sans',sans-serif; padding:48px 24px 80px; max-width:880px; margin:0 auto; }
+    .badge { display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:.58rem; font-weight:500; letter-spacing:.18em; text-transform:uppercase; background:#0a0a0a; color:#fff; padding:4px 10px; border-radius:4px; margin-bottom:32px; }
+    .section-label { font-family:'IBM Plex Mono',monospace; font-size:.62rem; font-weight:500; letter-spacing:.22em; text-transform:uppercase; color:var(--text-muted); margin-bottom:20px; }
+    h2 { font-family:'Playfair Display',serif; font-size:clamp(1.4rem,2.5vw,2rem); font-weight:600; color:var(--text-primary); line-height:1.3; margin-bottom:32px; max-width:600px; }
+
+    /* ── Three act cards ── */
+    .acts { display:grid; grid-template-columns:repeat(3,1fr); gap:0; margin-bottom:32px; border:1px solid var(--border); border-radius:12px; overflow:hidden; }
+    @media(max-width:600px){ .acts{ grid-template-columns:1fr; } }
+
+    .act { display:flex; flex-direction:column; border-right:1px solid var(--border); }
+    .act:last-child { border-right:none; }
+
+    /* visual panel */
+    .act-visual {
+      padding:20px 20px 16px;
+      border-bottom:1px solid var(--border);
+      display:flex; align-items:center; justify-content:center;
+      min-height:160px;
+    }
+    .act-visual.a1 { background:linear-gradient(160deg,#f5f5f5,#ebebeb); }
+    .act-visual.a2 { background:linear-gradient(160deg,#fafafa,#f0f0f0); }
+    .act-visual.a3 { background:linear-gradient(160deg,#fff5f2,#ffe8e1); }
+
+    /* act body */
+    .act-body { padding:16px 18px 20px; flex:1; }
+    .act-num { font-family:'IBM Plex Mono',monospace; font-size:.52rem; font-weight:500; letter-spacing:.14em; text-transform:uppercase; color:var(--text-muted); margin-bottom:6px; }
+    .act-title { font-family:'Playfair Display',serif; font-size:.92rem; font-weight:600; color:var(--text-primary); margin-bottom:8px; line-height:1.4; }
+    .act-body-text { font-size:.76rem; line-height:1.65; color:var(--text-secondary); }
+
+    /* ── Act 1 visual: decision being created ── */
+    .a1-scene { display:flex; flex-direction:column; gap:6px; width:100%; }
+    .bubble { border-radius:10px 10px 10px 2px; padding:7px 11px; display:flex; flex-direction:column; gap:3px; max-width:85%; }
+    .ln { height:4px; border-radius:3px; }
+    .surface-tag { display:inline-flex; align-items:center; gap:5px; padding:3px 8px; border-radius:4px; border:1px solid var(--border); background:#fff; font-family:'IBM Plex Mono',monospace; font-size:.52rem; color:var(--text-muted); }
+    .sdot { width:6px; height:6px; border-radius:50%; }
+
+    /* ── Act 2 visual: scatter ── */
+    .scatter { display:grid; grid-template-columns:1fr 1fr; gap:6px; width:100%; }
+    .scatter-chip { border:1px solid var(--border); border-radius:6px; padding:7px 9px; background:#fff; display:flex; flex-direction:column; gap:4px; }
+    .scatter-chip-hdr { display:flex; align-items:center; gap:5px; }
+
+    /* ── Act 3 visual: failed search ── */
+    .search-scene { display:flex; flex-direction:column; gap:7px; width:100%; }
+    .search-bar { display:flex; align-items:center; gap:6px; background:#fff; border:1px solid var(--border); border-radius:6px; padding:6px 10px; }
+    .search-icon { width:12px; height:12px; border-radius:50%; border:1.5px solid #ccc; flex-shrink:0; }
+    .search-ln { height:4px; border-radius:3px; background:#e8e8e8; flex:1; }
+    .result { display:flex; align-items:flex-start; gap:6px; padding:6px 8px; border-radius:5px; border:1px solid var(--border); background:#fff; }
+    .result-icon { width:10px; height:10px; border-radius:2px; flex-shrink:0; margin-top:1px; }
+    .result-lines { display:flex; flex-direction:column; gap:3px; flex:1; }
+    .result-ln { height:4px; border-radius:3px; }
+    .fragment-tag { font-family:'IBM Plex Mono',monospace; font-size:.5rem; padding:2px 6px; border-radius:3px; }
+
+    /* ── Bottom strip ── */
+    .bottom-strip { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+    @media(max-width:560px){ .bottom-strip{ grid-template-columns:1fr; } }
+    .callout { padding:16px 18px; border-radius:8px; border:1px solid var(--border); background:var(--surface); }
+    .callout-label { font-family:'IBM Plex Mono',monospace; font-size:.52rem; font-weight:500; letter-spacing:.16em; text-transform:uppercase; color:var(--text-muted); margin-bottom:6px; }
+    .callout-body { font-size:.78rem; line-height:1.65; color:var(--text-secondary); }
+  </style>
+</head>
+<body>
+
+  <div class="badge">Variation B — Three-Act Story</div>
+  <p class="section-label">Problem Space</p>
+  <h2>Information lives everywhere. None of it is findable when it actually matters.</h2>
+
+  <div class="acts">
+
+    <!-- Act 1: The decision happens fast -->
+    <div class="act">
+      <div class="act-visual a1">
+        <div class="a1-scene">
+          <div class="bubble" style="background:#ebebeb;">
+            <div class="ln" style="width:80%;background:#d4d4d4;"></div>
+          </div>
+          <div class="bubble" style="background:#e8e0ff;">
+            <div class="ln" style="width:90%;background:#c4b5fd;"></div>
+            <div class="ln" style="width:65%;background:#c4b5fd;"></div>
+          </div>
+          <div style="display:flex;gap:5px;flex-wrap:wrap;margin-top:2px;">
+            <span class="surface-tag"><span class="sdot" style="background:#c4b5fd;"></span>Chat</span>
+            <span class="surface-tag"><span class="sdot" style="background:#a5f3fc;"></span>Figma</span>
+            <span class="surface-tag"><span class="sdot" style="background:#fca5a5;"></span>Email</span>
+            <span class="surface-tag"><span class="sdot" style="background:#fde68a;"></span>Notes</span>
+          </div>
+        </div>
+      </div>
+      <div class="act-body">
+        <p class="act-num">Act 01</p>
+        <p class="act-title">It happens across many surfaces at once</p>
+        <p class="act-body-text">A message in chat. A comment in a design file. An email reply. A note from a meeting. Each captures a piece of it.</p>
+      </div>
+    </div>
+
+    <!-- Act 2: Context scatters -->
+    <div class="act">
+      <div class="act-visual a2">
+        <div class="scatter">
+          <div class="scatter-chip">
+            <div class="scatter-chip-hdr"><div style="width:6px;height:6px;border-radius:50%;background:#c4b5fd;flex-shrink:0;"></div><span style="font-family:'IBM Plex Mono',monospace;font-size:.52rem;color:#999;">Slack</span></div>
+            <div class="ln" style="width:90%;background:#e0e0e0;"></div>
+            <div class="ln" style="width:60%;background:#e0e0e0;"></div>
+          </div>
+          <div class="scatter-chip">
+            <div class="scatter-chip-hdr"><div style="width:6px;height:6px;border-radius:50%;background:#a5f3fc;flex-shrink:0;"></div><span style="font-family:'IBM Plex Mono',monospace;font-size:.52rem;color:#999;">Figma</span></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:3px;">
+              <div style="height:14px;border-radius:3px;background:#f0f9ff;border:1px solid #bae6fd;"></div>
+              <div style="height:14px;border-radius:3px;background:#f0fdf4;border:1px solid #bbf7d0;"></div>
+            </div>
+          </div>
+          <div class="scatter-chip">
+            <div class="scatter-chip-hdr"><div style="width:6px;height:6px;border-radius:50%;background:#fca5a5;flex-shrink:0;"></div><span style="font-family:'IBM Plex Mono',monospace;font-size:.52rem;color:#999;">Email</span></div>
+            <div class="ln" style="width:85%;background:#e0e0e0;"></div>
+            <div class="ln" style="width:55%;background:#e0e0e0;"></div>
+          </div>
+          <div class="scatter-chip">
+            <div class="scatter-chip-hdr"><div style="width:6px;height:6px;border-radius:50%;background:#fde68a;flex-shrink:0;"></div><span style="font-family:'IBM Plex Mono',monospace;font-size:.52rem;color:#999;">Notes</span></div>
+            <div class="ln" style="width:80%;background:#e0e0e0;"></div>
+            <div class="ln" style="width:65%;background:#e0e0e0;"></div>
+          </div>
+        </div>
+      </div>
+      <div class="act-body">
+        <p class="act-num">Act 02</p>
+        <p class="act-title">No one surface has the full picture</p>
+        <p class="act-body-text">Each tool holds a fragment. None of them make the context retrievable as a whole — because none were built to capture decisions, only communication.</p>
+      </div>
+    </div>
+
+    <!-- Act 3: Search fails -->
+    <div class="act">
+      <div class="act-visual a3">
+        <div class="search-scene">
+          <div class="search-bar">
+            <div class="search-icon"></div>
+            <div class="search-ln" style="width:65%;"></div>
+            <div style="font-family:monospace;font-size:7px;color:#bbb;">↵</div>
+          </div>
+          <div class="result">
+            <div class="result-icon" style="background:#fde68a;"></div>
+            <div class="result-lines">
+              <div class="result-ln" style="width:80%;background:#e5e5e5;"></div>
+              <span class="fragment-tag" style="background:#fef9c3;color:#ca8a04;border:1px solid #fde68a;margin-top:2px;">partial match</span>
+            </div>
+          </div>
+          <div class="result">
+            <div class="result-icon" style="background:#bfdbfe;"></div>
+            <div class="result-lines">
+              <div class="result-ln" style="width:60%;background:#e5e5e5;"></div>
+              <span class="fragment-tag" style="background:#f0f9ff;color:#3b82f6;border:1px solid #bfdbfe;margin-top:2px;">different thread</span>
+            </div>
+          </div>
+          <div class="result" style="opacity:.45;">
+            <div class="result-icon" style="background:#e5e5e5;"></div>
+            <div class="result-lines">
+              <div class="result-ln" style="width:50%;background:#e5e5e5;"></div>
+              <span class="fragment-tag" style="background:#f5f5f5;color:#aaa;border:1px solid #e5e5e5;margin-top:2px;">no results</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="act-body">
+        <p class="act-num">Act 03</p>
+        <p class="act-title">They search. They find fragments — or nothing.</p>
+        <p class="act-body-text">They check the chat, scan email threads, look for a document. They find pieces. They make assumptions to fill the gaps. Sometimes those assumptions lead to work being undone.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bottom callouts -->
+  <div class="bottom-strip">
+    <div class="callout">
+      <p class="callout-label">The root cause</p>
+      <p class="callout-body">A missing record of reasoning is invisible. Because it is invisible, it rarely gets identified or fixed. The cost compounds — time spent reconstructing context is time not spent moving forward.</p>
+    </div>
+    <div class="callout">
+      <p class="callout-label">Who pays the cost</p>
+      <p class="callout-body">Not the person who made the decision — the new joiner, the mid-project inheritor, the manager who is the only one holding the institutional memory and gets pulled in constantly to provide it.</p>
+    </div>
+  </div>
+
+</body>
+</html>

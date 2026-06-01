@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Variation B — Process Clarity · Why Case Study</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-sans: 'Inter', system-ui, sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+    --purple: #7c3aed;
+    --purple-light: #f5f3ff;
+    --purple-border: #ddd8fe;
+  }
+  body { font-family: var(--font-sans); background: #f5f5f3; color: #0a0a0a; -webkit-font-smoothing: antialiased; }
+  .serif { font-family: var(--font-serif); }
+  .mono  { font-family: var(--font-mono); }
+  .card  { background: #fff; border-radius: 16px; border: 1px solid #e5e5e5; padding: 2rem; margin-bottom: 1.5rem; }
+  .label { font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: #999; margin-bottom: 0.5rem; display: block; }
+  .badge { display:inline-flex; align-items:center; font-family:var(--font-mono); font-size:0.55rem; letter-spacing:0.1em; text-transform:uppercase; padding:3px 9px; border-radius:4px; background:var(--purple-light); color:var(--purple); }
+  .step-num { width:38px; height:38px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; position:relative; z-index:1; }
+  .step-row { display:flex; gap:1.25rem; padding-bottom:2rem; position:relative; }
+  .annot { display:inline-block; background:var(--purple); color:#fff; font-family:var(--font-mono); font-size:0.48rem; letter-spacing:0.08em; padding:2px 8px; border-radius:3px; white-space:nowrap; margin-bottom:0.75rem; text-transform:uppercase; }
+</style>
+</head>
+<body style="max-width:860px; margin:0 auto; padding:3rem 1.5rem;">
+
+<!-- ─── EXPLORATION HEADER ──────────────────────────────────────── -->
+<div style="margin-bottom:2.5rem; padding-bottom:1.5rem; border-bottom:1px solid #e5e5e5;">
+  <p class="mono" style="color:var(--purple); font-size:0.58rem; letter-spacing:0.2em; text-transform:uppercase; margin-bottom:4px;">Variation B — Process Clarity</p>
+  <h1 style="font-size:1.25rem; font-weight:600; color:#0a0a0a; margin:0 0 6px;">Design Thinking Made Visible</h1>
+  <p style="font-size:0.85rem; color:#666; max-width:560px; line-height:1.6; margin:0 0 1rem;">
+    Show how you broke down ambiguity. This variation makes the design process transparent — the journey from a vague brief to a confident decision, with a visual process spine, clear iteration story, and evidence tied directly to each design choice.
+  </p>
+  <div style="display:flex; flex-wrap:wrap; gap:6px;">
+    <span class="badge">✓ Visual process timeline spine</span>
+    <span class="badge">✓ Problem → Insight → HMW chain</span>
+    <span class="badge">✓ Brief reframe story</span>
+    <span class="badge">✓ Decision log with evidence &amp; reasoning</span>
+    <span class="badge">✓ "What we rejected" per decision</span>
+    <span class="badge">✓ Ambiguity → clarity narrative</span>
+  </div>
+</div>
+
+<!-- ─── SECTION 1: PROCESS TIMELINE SPINE ───────────────────────── -->
+<div class="card">
+  <span class="label">Design Process</span>
+  <h2 class="serif" style="font-size:clamp(1.2rem,2.5vw,1.75rem); font-weight:600; color:#0a0a0a; margin-bottom:0.4rem; line-height:1.3;">8 weeks — how the project unfolded</h2>
+  <p style="font-size:0.82rem; color:#888; margin-bottom:2rem;">A vague brief → a specific constraint → a two-mode solution.</p>
+
+  <div style="position:relative;">
+    <!-- Vertical line -->
+    <div style="position:absolute; left:19px; top:38px; bottom:36px; width:2px; background:linear-gradient(to bottom,#e5e5e5 0%,var(--purple) 100%);"></div>
+
+    <!-- Step 1 — Discover -->
+    <div class="step-row">
+      <div class="step-num" style="background:#0a0a0a;">
+        <span class="mono" style="color:#fff; font-size:0.6rem;">01</span>
+      </div>
+      <div style="flex:1; padding-top:4px;">
+        <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:0.5rem;">
+          <p style="font-size:0.88rem; font-weight:600; color:#0a0a0a; margin:0;">Discover — What's actually broken?</p>
+          <span class="mono" style="font-size:0.5rem; background:#f5f5f5; color:#888; border:1px solid #e5e5e5; padding:2px 7px; border-radius:20px;">Weeks 1–2</span>
+        </div>
+        <p style="font-size:0.8rem; color:#666; line-height:1.6; margin-bottom:0.75rem;">Starting point: a brief to "improve knowledge sharing for remote teams." We needed to understand the specific failure mode before designing anything.</p>
+        <div style="display:flex; flex-wrap:wrap; gap:6px;">
+          <span style="font-size:0.7rem; padding:4px 10px; border-radius:20px; background:var(--purple-light); color:var(--purple); border:1px solid var(--purple-border);">4 tools audited</span>
+          <span style="font-size:0.7rem; padding:4px 10px; border-radius:20px; background:var(--purple-light); color:var(--purple); border:1px solid var(--purple-border);">3 persona types mapped</span>
+          <span style="font-size:0.7rem; padding:4px 10px; border-radius:20px; background:var(--purple-light); color:var(--purple); border:1px solid var(--purple-border);">Consistent gap: no capture-as-structured-artifact</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2 — Reframe -->
+    <div class="step-row">
+      <div class="step-num" style="background:var(--purple);">
+        <span class="mono" style="color:#fff; font-size:0.6rem;">02</span>
+      </div>
+      <div style="flex:1; padding-top:4px;">
+        <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:0.5rem;">
+          <p style="font-size:0.88rem; font-weight:600; color:#0a0a0a; margin:0;">Reframe — From "knowledge sharing" to motivation design</p>
+          <span class="mono" style="font-size:0.5rem; background:var(--purple-light); color:var(--purple); border:1px solid var(--purple-border); padding:2px 7px; border-radius:20px;">Week 3</span>
+        </div>
+
+        <!-- The reframe — key insight block -->
+        <div style="background:#fafafa; border:2px solid var(--purple); border-radius:10px; padding:1rem; margin-bottom:0.75rem;">
+          <p class="label" style="color:var(--purple); margin-bottom:0.5rem;">The reframe that changed everything</p>
+          <p style="font-size:0.82rem; color:#0a0a0a; line-height:1.6;">
+            The brief said "make decisions easier to find." The real problem was: <strong>the capture never happens in the first place.</strong> We were designing a retrieval solution for a capture problem.
+          </p>
+        </div>
+
+        <!-- Before/After brief -->
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1px; border-radius:10px; overflow:hidden; border:1px solid #e5e5e5; margin-bottom:0.75rem;">
+          <div style="background:#fff5f5; padding:0.85rem;">
+            <p class="mono" style="font-size:0.5rem; color:#dc2626; letter-spacing:0.14em; text-transform:uppercase; margin-bottom:6px;">Original brief</p>
+            <p style="font-size:0.78rem; font-style:italic; color:#dc2626; line-height:1.5;">"Improve knowledge sharing for remote teams."</p>
+            <p style="font-size:0.68rem; color:#dc2626; margin-top:6px;">Too broad. No actionable constraint.</p>
+          </div>
+          <div style="background:#f0fdf4; padding:0.85rem;">
+            <p class="mono" style="font-size:0.5rem; color:#166534; letter-spacing:0.14em; text-transform:uppercase; margin-bottom:6px;">Reframed to</p>
+            <p style="font-size:0.78rem; font-style:italic; color:#166534; line-height:1.5;">"Why does capture fail at the moment of decision — and how do we remove that barrier?"</p>
+            <p style="font-size:0.68rem; color:#166534; margin-top:6px;">Constraint: motivation at capture time, not technology.</p>
+          </div>
+        </div>
+
+        <!-- HMW statement -->
+        <div style="background:var(--purple-light); border-radius:10px; padding:1rem;">
+          <p class="label" style="color:var(--purple); margin-bottom:0.5rem;">How Might We →</p>
+          <p class="serif" style="font-size:1rem; font-style:italic; color:#0a0a0a; line-height:1.6;">
+            "How might we make capturing a decision easier than not capturing it?"
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3 — Explore -->
+    <div class="step-row">
+      <div class="step-num" style="background:#0a0a0a;">
+        <span class="mono" style="color:#fff; font-size:0.6rem;">03</span>
+      </div>
+      <div style="flex:1; padding-top:4px;">
+        <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:0.5rem;">
+          <p style="font-size:0.88rem; font-weight:600; color:#0a0a0a; margin:0;">Explore — 3 directions, deliberately different</p>
+          <span class="mono" style="font-size:0.5rem; background:#f5f5f5; color:#888; border:1px solid #e5e5e5; padding:2px 7px; border-radius:20px;">Weeks 4–5</span>
+        </div>
+        <p style="font-size:0.8rem; color:#666; line-height:1.6; margin-bottom:1rem;">
+          Rather than variations of one idea, we designed from different assumptions — then compared where each broke down.
+        </p>
+
+        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:0.75rem;">
+          <!-- Direction 1 -->
+          <div style="border:1px solid #e5e5e5; border-radius:10px; overflow:hidden;">
+            <div style="background:#f0f0f0; padding:0.75rem; min-height:100px; display:flex; flex-direction:column; justify-content:center; gap:5px;">
+              <div style="height:6px; width:50%; background:#d4d4d4; border-radius:3px;"></div>
+              <div style="height:12px; background:#fff; border:1px solid #ccc; border-radius:3px;"></div>
+              <div style="height:6px; width:44%; background:#d4d4d4; border-radius:3px;"></div>
+              <div style="height:12px; background:#fff; border:1px solid #ccc; border-radius:3px;"></div>
+              <div style="height:6px; width:48%; background:#d4d4d4; border-radius:3px;"></div>
+              <div style="height:12px; background:#fff; border:1px solid #ccc; border-radius:3px;"></div>
+              <div style="height:6px; width:52%; background:#d4d4d4; border-radius:3px;"></div>
+              <div style="height:12px; background:#fff; border:1px solid #ccc; border-radius:3px;"></div>
+              <div style="height:10px; background:#999; border-radius:3px; margin-top:3px;"></div>
+            </div>
+            <div style="padding:0.75rem;">
+              <p class="mono" style="font-size:0.5rem; color:#999; letter-spacing:0.14em; text-transform:uppercase; margin-bottom:3px;">Direction 01</p>
+              <p style="font-size:0.8rem; font-weight:600; color:#0a0a0a; margin-bottom:0.4rem;">Single Form</p>
+              <div style="background:#fff7ed; border:1px solid #fed7aa; border-radius:5px; padding:0.4rem 0.5rem; margin-bottom:0.3rem;">
+                <p style="font-size:0.68rem; color:#9a3412; line-height:1.4;">Broke: 9 fields = homework</p>
+              </div>
+              <div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:5px; padding:0.4rem 0.5rem;">
+                <p style="font-size:0.68rem; color:#166534; line-height:1.4;">Kept: consistent structure</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Direction 2 -->
+          <div style="border:1px solid #e5e5e5; border-radius:10px; overflow:hidden;">
+            <div style="background:#f0f0f0; padding:0.75rem; min-height:100px; display:flex; flex-direction:column; justify-content:center; gap:5px;">
+              <div style="height:6px; width:44%; background:#d4d4d4; border-radius:3px;"></div>
+              <div style="height:12px; background:#fff; border:1.5px solid #888; border-radius:3px;"></div>
+              <div style="height:6px; width:38%; background:#d4d4d4; border-radius:3px; opacity:0.5;"></div>
+              <div style="height:12px; background:#fafafa; border:1px dashed #bbb; border-radius:3px; opacity:0.5;"></div>
+              <div style="height:6px; width:40%; background:#d4d4d4; border-radius:3px; opacity:0.2;"></div>
+              <div style="height:12px; border:1px dashed #e0e0e0; border-radius:3px; opacity:0.2;"></div>
+              <div style="display:flex; justify-content:center; gap:5px; margin-top:3px;">
+                <div style="width:5px; height:5px; background:#ccc; border-radius:50%;"></div>
+                <div style="width:5px; height:5px; background:#ccc; border-radius:50%; opacity:0.5;"></div>
+                <div style="width:5px; height:5px; background:#ccc; border-radius:50%; opacity:0.2;"></div>
+              </div>
+            </div>
+            <div style="padding:0.75rem;">
+              <p class="mono" style="font-size:0.5rem; color:#999; letter-spacing:0.14em; text-transform:uppercase; margin-bottom:3px;">Direction 02</p>
+              <p style="font-size:0.8rem; font-weight:600; color:#0a0a0a; margin-bottom:0.4rem;">Progressive</p>
+              <div style="background:#fff7ed; border:1px solid #fed7aa; border-radius:5px; padding:0.4rem 0.5rem; margin-bottom:0.3rem;">
+                <p style="font-size:0.68rem; color:#9a3412; line-height:1.4;">Broke: disorienting — "the form that keeps going"</p>
+              </div>
+              <div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:5px; padding:0.4rem 0.5rem;">
+                <p style="font-size:0.68rem; color:#166534; line-height:1.4;">Kept: zero barrier to start</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Direction 3 — Chosen -->
+          <div style="border:2px solid #0a0a0a; border-radius:10px; overflow:hidden; background:#fcfcfc;">
+            <div style="background:#e8e8e8; padding:0.75rem; min-height:100px; display:flex; flex-direction:column; justify-content:center; position:relative;">
+              <span style="position:absolute; top:6px; right:6px; background:#0a0a0a; color:#fff; font-family:var(--font-mono); font-size:0.42rem; letter-spacing:0.08em; padding:2px 5px; border-radius:2px;">★ CHOSEN</span>
+              <div style="display:flex; gap:3px; margin-bottom:6px;">
+                <div style="flex:1; height:13px; background:#0a0a0a; border-radius:3px; display:flex; align-items:center; justify-content:center;">
+                  <span style="font-family:monospace; font-size:5px; color:#fff;">QUICK</span>
+                </div>
+                <div style="flex:1; height:13px; border:1px solid #ccc; border-radius:3px; display:flex; align-items:center; justify-content:center;">
+                  <span style="font-family:monospace; font-size:5px; color:#999;">FULL</span>
+                </div>
+              </div>
+              <div style="display:flex; flex-direction:column; gap:4px;">
+                <div style="height:13px; background:#fff; border:1px solid #ccc; border-radius:3px;"></div>
+                <div style="height:18px; background:#fff; border:1px solid #ccc; border-radius:3px;"></div>
+                <div style="height:9px; border:1px dashed #ccc; border-radius:3px;"></div>
+                <div style="display:flex; justify-content:flex-end;">
+                  <div style="height:10px; width:42px; background:#0a0a0a; border-radius:3px;"></div>
+                </div>
+              </div>
+            </div>
+            <div style="padding:0.75rem;">
+              <p class="mono" style="font-size:0.5rem; color:#0a0a0a; letter-spacing:0.14em; text-transform:uppercase; margin-bottom:3px;">Direction 03 — Chosen</p>
+              <p style="font-size:0.8rem; font-weight:600; color:#0a0a0a; margin-bottom:0.4rem;">Two Modes</p>
+              <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:5px; padding:0.4rem 0.5rem;">
+                <p style="font-size:0.68rem; color:#1e40af; line-height:1.4;">Resolved both. Same ledger, regardless of mode.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 4 — Decide -->
+    <div class="step-row">
+      <div class="step-num" style="background:#0a0a0a;">
+        <span class="mono" style="color:#fff; font-size:0.6rem;">04</span>
+      </div>
+      <div style="flex:1; padding-top:4px;">
+        <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:0.75rem;">
+          <p style="font-size:0.88rem; font-weight:600; color:#0a0a0a; margin:0;">Decide — Key design decisions with evidence</p>
+          <span class="mono" style="font-size:0.5rem; background:#f5f5f5; color:#888; border:1px solid #e5e5e5; padding:2px 7px; border-radius:20px;">Weeks 5–7</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:0.75rem;">
+          <!-- Decision 1 -->
+          <div style="background:#fafafa; border:1px solid #e5e5e5; border-radius:10px; padding:1rem;">
+            <div style="display:flex; gap:0.75rem; align-items:flex-start;">
+              <div style="width:24px; height:24px; background:#0a0a0a; border-radius:4px; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px;">
+                <span class="mono" style="color:#fff; font-size:0.45rem;">D1</span>
+              </div>
+              <div style="flex:1;">
+                <p style="font-size:0.82rem; font-weight:600; color:#0a0a0a; margin-bottom:4px;">No labels on Quick Capture fields</p>
+                <p style="font-size:0.76rem; color:#555; line-height:1.6;"><strong style="color:#0a0a0a;">Evidence:</strong> Testing showed labels increased perceived complexity with no comprehension benefit. 3/5 participants said the form felt "like a lot" with labels. 0/5 had confusion without them.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Decision 2 -->
+          <div style="background:#fafafa; border:1px solid #e5e5e5; border-radius:10px; padding:1rem;">
+            <div style="display:flex; gap:0.75rem; align-items:flex-start;">
+              <div style="width:24px; height:24px; background:#0a0a0a; border-radius:4px; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px;">
+                <span class="mono" style="color:#fff; font-size:0.45rem;">D2</span>
+              </div>
+              <div style="flex:1;">
+                <p style="font-size:0.82rem; font-weight:600; color:#0a0a0a; margin-bottom:4px;">"Quick Log" marker on partial records</p>
+                <p style="font-size:0.76rem; color:#555; line-height:1.6;"><strong style="color:#0a0a0a;">Tension navigated:</strong> Would marking partial records devalue them? Testing resolved it — the marker set expectation rather than judgment. Users trusted the ledger more, not less, when entries were labeled clearly.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Decision 3 -->
+          <div style="background:#fafafa; border:1px solid #e5e5e5; border-radius:10px; padding:1rem;">
+            <div style="display:flex; gap:0.75rem; align-items:flex-start;">
+              <div style="width:24px; height:24px; background:#0a0a0a; border-radius:4px; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px;">
+                <span class="mono" style="color:#fff; font-size:0.45rem;">D3</span>
+              </div>
+              <div style="flex:1;">
+                <p style="font-size:0.82rem; font-weight:600; color:#0a0a0a; margin-bottom:4px;">AI suggests rationale — user edits, no auto-save</p>
+                <p style="font-size:0.76rem; color:#555; line-height:1.6;"><strong style="color:#0a0a0a;">What we explicitly rejected:</strong> AI auto-documenting decisions. If the ledger reads as AI-generated, people stop trusting it. The boundary: AI reduces the blank-page problem. The user's words shape the final record.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 5 — Validate -->
+    <div style="display:flex; gap:1.25rem; padding-bottom:0;">
+      <div class="step-num" style="background:var(--purple);">
+        <span class="mono" style="color:#fff; font-size:0.6rem;">05</span>
+      </div>
+      <div style="flex:1; padding-top:4px;">
+        <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:0.75rem;">
+          <p style="font-size:0.88rem; font-weight:600; color:#0a0a0a; margin:0;">Validate — What held, what we'd change</p>
+          <span class="mono" style="font-size:0.5rem; background:var(--purple-light); color:var(--purple); border:1px solid var(--purple-border); padding:2px 7px; border-radius:20px;">Week 8</span>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
+          <div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:10px; padding:1rem;">
+            <p class="mono" style="font-size:0.52rem; color:#166534; letter-spacing:0.14em; text-transform:uppercase; margin-bottom:0.6rem;">Held up in testing</p>
+            <ul style="list-style:none; padding:0; display:flex; flex-direction:column; gap:5px;">
+              <li style="font-size:0.76rem; color:#166534; display:flex; gap:6px;"><span>→</span>5/5 found Quick Capture without instruction</li>
+              <li style="font-size:0.76rem; color:#166534; display:flex; gap:6px;"><span>→</span>No participant chose Full Entry for low-stakes decisions</li>
+              <li style="font-size:0.76rem; color:#166534; display:flex; gap:6px;"><span>→</span>"Quick Log" marker improved ledger trust, not lowered it</li>
+            </ul>
+          </div>
+          <div style="background:#fff7ed; border:1px solid #fed7aa; border-radius:10px; padding:1rem;">
+            <p class="mono" style="font-size:0.52rem; color:#9a3412; letter-spacing:0.14em; text-transform:uppercase; margin-bottom:0.6rem;">Would change next time</p>
+            <ul style="list-style:none; padding:0; display:flex; flex-direction:column; gap:5px;">
+              <li style="font-size:0.76rem; color:#9a3412; display:flex; gap:6px;"><span>→</span>Test the trigger moment, not just the form</li>
+              <li style="font-size:0.76rem; color:#9a3412; display:flex; gap:6px;"><span>→</span>Include engineers under deadline in user pool</li>
+              <li style="font-size:0.76rem; color:#9a3412; display:flex; gap:6px;"><span>→</span>Longitudinal study: 4-week real-use adoption</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /relative -->
+</div>
+
+<!-- ─── SECTION 2: TENSION + RESOLUTION ─────────────────────────── -->
+<div class="card">
+  <span class="label">Design Challenge</span>
+  <h2 class="serif" style="font-size:clamp(1.2rem,2.5vw,1.75rem); font-weight:600; color:#0a0a0a; margin-bottom:1.25rem; line-height:1.3;">
+    The tension we had to resolve — and how we resolved it
+  </h2>
+
+  <div style="display:grid; grid-template-columns:1fr 48px 1fr; gap:0; align-items:center; margin-bottom:1.25rem;">
+    <div style="background:#fafafa; border:1px solid #e5e5e5; border-radius:12px; padding:1.25rem;">
+      <p class="mono" style="font-size:0.52rem; color:#888; letter-spacing:0.16em; text-transform:uppercase; margin-bottom:0.75rem;">Capture must be</p>
+      <ul style="list-style:none; padding:0; display:flex; flex-direction:column; gap:7px;">
+        <li style="font-size:0.82rem; color:#444; display:flex; gap:7px;"><span style="color:#ccc;">–</span>Under 60 seconds</li>
+        <li style="font-size:0.82rem; color:#444; display:flex; gap:7px;"><span style="color:#ccc;">–</span>No context switch required</li>
+        <li style="font-size:0.82rem; color:#444; display:flex; gap:7px;"><span style="color:#ccc;">–</span>Low cognitive load</li>
+        <li style="font-size:0.82rem; color:#444; display:flex; gap:7px;"><span style="color:#ccc;">–</span>Feels like sending a message</li>
+      </ul>
+    </div>
+    <div style="display:flex; flex-direction:column; align-items:center; gap:6px;">
+      <div style="width:1px; height:40px; background:#e5e5e5;"></div>
+      <p class="mono" style="font-size:0.44rem; color:#bbb; letter-spacing:0.1em; text-transform:uppercase;">vs.</p>
+      <div style="width:1px; height:40px; background:#e5e5e5;"></div>
+    </div>
+    <div style="background:#fafafa; border:1px solid #e5e5e5; border-radius:12px; padding:1.25rem;">
+      <p class="mono" style="font-size:0.52rem; color:#888; letter-spacing:0.16em; text-transform:uppercase; margin-bottom:0.75rem;">Retrieval must be</p>
+      <ul style="list-style:none; padding:0; display:flex; flex-direction:column; gap:7px;">
+        <li style="font-size:0.82rem; color:#444; display:flex; gap:7px;"><span style="color:#ccc;">–</span>Rich enough to be useful 6 months later</li>
+        <li style="font-size:0.82rem; color:#444; display:flex; gap:7px;"><span style="color:#ccc;">–</span>Structured and searchable</li>
+        <li style="font-size:0.82rem; color:#444; display:flex; gap:7px;"><span style="color:#ccc;">–</span>What, why, and alternatives</li>
+        <li style="font-size:0.82rem; color:#444; display:flex; gap:7px;"><span style="color:#ccc;">–</span>Understandable without the author</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Resolution -->
+  <div style="background:#fafafa; border:1px solid var(--purple); border-radius:12px; padding:1.25rem;">
+    <p class="mono" style="font-size:0.52rem; color:var(--purple); letter-spacing:0.16em; text-transform:uppercase; margin-bottom:0.6rem;">How we resolved it</p>
+    <p style="font-size:0.85rem; color:#333; line-height:1.7;">
+      Two-mode design: Quick Capture satisfies the capture side. Full Entry satisfies the retrieval side. Both land in the same searchable ledger — the user chooses based on their moment, not the system's requirement. Neither mode penalizes. A partial record that exists beats a complete record never written.
+    </p>
+  </div>
+</div>
+
+<!-- ─── SECTION 3: REFLECTION ────────────────────────────────────── -->
+<div class="card">
+  <span class="label">Reflection</span>
+  <h2 class="serif" style="font-size:clamp(1.2rem,2.5vw,1.75rem); font-weight:600; color:#0a0a0a; margin-bottom:1.5rem; line-height:1.3;">
+    What this project clarified about the design process
+  </h2>
+  <div style="display:flex; flex-direction:column;">
+    <div style="border-top:1px solid #e5e5e5; padding:1.25rem 0;">
+      <p class="serif" style="font-size:0.95rem; font-weight:600; color:#0a0a0a; margin-bottom:6px;">Test your own design.</p>
+      <p style="font-size:0.82rem; color:#555; line-height:1.7;">We built the first version, stepped back, and asked whether we'd actually use it at the moment it mattered. The answer was no. That question reshaped everything that followed.</p>
+    </div>
+    <div style="border-top:1px solid #e5e5e5; padding:1.25rem 0;">
+      <p class="serif" style="font-size:0.95rem; font-weight:600; color:#0a0a0a; margin-bottom:6px;">Options explored and discarded are part of the story.</p>
+      <p style="font-size:0.82rem; color:#555; line-height:1.7;">Directions 1 and 2 were not wasted effort. They sharpened our understanding of why Direction 3 worked. The tradeoffs made the final decision legible — to us, to the team, and to the stakeholders we presented to.</p>
+    </div>
+    <div style="border-top:1px solid #e5e5e5; padding:1.25rem 0;">
+      <p class="serif" style="font-size:0.95rem; font-weight:600; color:#0a0a0a; margin-bottom:6px;">Let retrieval drive capture.</p>
+      <p style="font-size:0.82rem; color:#555; line-height:1.7;">Starting from "what does someone need to find in the ledger six months from now?" and working backwards made it easier to identify what was essential at capture time — and what was optional.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ─── FOOTER: SUMMARY ──────────────────────────────────────────── -->
+<div style="background:var(--purple-light); border:1px solid var(--purple-border); border-radius:12px; padding:1.25rem;">
+  <p class="mono" style="color:var(--purple); font-size:0.58rem; letter-spacing:0.16em; text-transform:uppercase; margin-bottom:0.75rem;">Variation B Summary — What changed and why</p>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; font-size:0.78rem; color:var(--purple);">
+    <div>
+      <p style="font-weight:600; margin-bottom:0.5rem;">What's new vs. current page:</p>
+      <ul style="list-style:none; padding:0; display:flex; flex-direction:column; gap:4px;">
+        <li>→ Visual process spine — 5-step timeline</li>
+        <li>→ Before/after brief reframe story</li>
+        <li>→ HMW tied to the reframe, not floating</li>
+        <li>→ Decision log: decision → evidence → what we rejected</li>
+        <li>→ Validate step with "held up" + "would change"</li>
+        <li>→ Tension diagram with explicit resolution</li>
+      </ul>
+    </div>
+    <div>
+      <p style="font-weight:600; margin-bottom:0.5rem;">Hiring manager criteria addressed:</p>
+      <ul style="list-style:none; padding:0; display:flex; flex-direction:column; gap:4px;">
+        <li>✓ Ambiguity navigation — brief → insight → HMW</li>
+        <li>✓ Research rigor — evidence tied to each decision</li>
+        <li>✓ Problem framing — explicit reframe story</li>
+        <li>✓ Honest reflection — "what we'd change" in timeline</li>
+        <li>✓ Presentation quality — process is scannable + legible</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

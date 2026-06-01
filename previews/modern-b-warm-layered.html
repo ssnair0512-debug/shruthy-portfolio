@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Direction B — Warm & Layered</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #FAF8F5;
+    --surface: #F3F0EB;
+    --surface2: #EBE7E0;
+    --border: #DDD8CF;
+    --border2: #C8C2B6;
+    --text: #1C1A17;
+    --text-2: #5C5750;
+    --text-3: #9C9589;
+    --accent: #1A4731;      /* forest green */
+    --accent-light: #E8F2EC;
+    --accent2: #B85C38;     /* terracotta */
+    --accent2-light: #FBF0EB;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'IBM Plex Sans', system-ui, sans-serif;
+    --display: 'Playfair Display', Georgia, serif;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    border-bottom: 1px solid var(--border);
+    background: rgba(250,248,245,0.9);
+    backdrop-filter: blur(12px);
+  }
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2.5rem;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-logo {
+    font-family: var(--display);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+    text-decoration: none;
+    font-style: italic;
+  }
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+    align-items: center;
+  }
+  .nav-links a {
+    font-size: 0.8rem;
+    color: var(--text-2);
+    text-decoration: none;
+    font-family: var(--sans);
+    letter-spacing: 0.02em;
+    transition: color 0.15s;
+  }
+  .nav-links a.active { color: var(--text); font-weight: 500; }
+  .nav-cta {
+    background: var(--text);
+    color: var(--bg) !important;
+    padding: 0.45rem 1rem;
+    border-radius: 100px;
+    font-size: 0.75rem !important;
+    font-weight: 500 !important;
+  }
+
+  /* ── MAIN ── */
+  main { max-width: 1200px; margin: 0 auto; padding: 0 2.5rem; }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 5rem 0 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero-left {}
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-light);
+    border: 1px solid rgba(26,71,49,0.15);
+    padding: 0.3rem 0.75rem;
+    border-radius: 100px;
+    margin-bottom: 1.5rem;
+  }
+  .eyebrow-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+  h1 {
+    font-family: var(--display);
+    font-size: clamp(2.5rem, 4.5vw, 4rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    color: var(--text);
+    margin-bottom: 1.5rem;
+  }
+  h1 em { font-style: italic; color: var(--accent2); }
+  .hero-desc {
+    font-size: 0.9375rem;
+    line-height: 1.75;
+    color: var(--text-2);
+    max-width: 380px;
+    margin-bottom: 2rem;
+  }
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--accent);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 0.75rem 1.5rem;
+    border-radius: 100px;
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    transition: opacity 0.2s;
+  }
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-2);
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 0.75rem 1rem;
+  }
+
+  /* Hero right — experience cards */
+  .hero-right {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .exp-stack-label {
+    font-family: var(--mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    margin-bottom: 0.875rem;
+  }
+  .exp-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.875rem 1.25rem;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 0.5rem;
+    transition: border-color 0.2s, transform 0.2s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .exp-card:first-of-type {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  .exp-card:first-of-type .exp-role-name,
+  .exp-card:first-of-type .exp-company-name,
+  .exp-card:first-of-type .exp-year-tag { color: rgba(255,255,255,0.9); }
+  .exp-card:first-of-type .exp-year-tag {
+    background: rgba(255,255,255,0.15);
+    border-color: rgba(255,255,255,0.2);
+  }
+  .exp-left {}
+  .exp-role-name { font-size: 0.8rem; font-weight: 500; color: var(--text); margin-bottom: 0.15rem; }
+  .exp-company-name { font-size: 0.7rem; color: var(--text-3); }
+  .exp-year-tag {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    color: var(--text-3);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 0.2rem 0.6rem;
+    border-radius: 100px;
+  }
+
+  /* ── PROJECTS ── */
+  .projects-section { padding: 3.5rem 0 6rem; }
+  .projects-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+  }
+  .projects-title {
+    font-family: var(--display);
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text);
+    font-style: italic;
+  }
+  .projects-link {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  /* Project list — horizontal card rows */
+  .project-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); border-radius: 14px; overflow: hidden; border: 1px solid var(--border); }
+  .project-row {
+    display: grid;
+    grid-template-columns: 240px 1fr auto;
+    gap: 1.5rem;
+    align-items: center;
+    padding: 1.25rem 1.5rem;
+    background: #fff;
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+  .project-row:hover { background: var(--surface); }
+
+  .project-thumb {
+    width: 240px;
+    height: 140px;
+    border-radius: 8px;
+    overflow: hidden;
+    flex-shrink: 0;
+    position: relative;
+  }
+  .project-thumb-inner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .project-thumb svg { opacity: 0.2; }
+
+  .project-info { display: flex; flex-direction: column; gap: 0.5rem; }
+  .project-tag {
+    font-family: var(--mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-3);
+  }
+  .project-title-row {
+    font-family: var(--display);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.25;
+  }
+  .project-desc {
+    font-size: 0.8rem;
+    color: var(--text-2);
+    line-height: 1.55;
+    max-width: 360px;
+  }
+  .project-skills {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.25rem;
+  }
+  .skill-tag {
+    font-family: var(--mono);
+    font-size: 0.5rem;
+    letter-spacing: 0.08em;
+    padding: 0.2rem 0.6rem;
+    border-radius: 100px;
+    border: 1px solid var(--border2);
+    color: var(--text-3);
+    background: var(--bg);
+  }
+  .project-arrow {
+    font-size: 1.25rem;
+    color: var(--border2);
+    flex-shrink: 0;
+    transition: color 0.15s, transform 0.15s;
+  }
+  .project-row:hover .project-arrow { color: var(--text); transform: translate(2px,-2px); }
+
+  /* ── FOOTER ── */
+  footer { border-top: 1px solid var(--border); padding: 2rem 0; }
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-text { font-size: 0.75rem; color: var(--text-3); }
+  .footer-links { display: flex; gap: 1.5rem; }
+  .footer-links a {
+    font-size: 0.75rem;
+    color: var(--text-3);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  /* ═══════════════════════════════════════
+     WHY PAGE
+  ═══════════════════════════════════════ */
+  .page-divider {
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2), transparent);
+    margin: 4rem 0;
+    border-radius: 2px;
+  }
+  .page-label {
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    padding: 0.5rem 0 2rem;
+  }
+
+  /* Sub-nav */
+  .sub-nav {
+    background: rgba(250,248,245,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .sub-nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2.5rem;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .sub-nav-back {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    color: var(--text-3);
+    text-decoration: none;
+    font-family: var(--mono);
+  }
+  .sub-nav-title { font-family: var(--mono); font-size: 0.7rem; color: var(--text-2); }
+
+  /* Case study layout */
+  .case-layout {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 4rem;
+    padding-top: 3.5rem;
+  }
+  .sidebar-nav { position: sticky; top: 104px; height: fit-content; }
+  .sidebar-label {
+    font-family: var(--mono);
+    font-size: 0.52rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    margin-bottom: 0.875rem;
+  }
+  .sidebar-links { display: flex; flex-direction: column; }
+  .sidebar-links a {
+    font-size: 0.8rem;
+    color: var(--text-3);
+    text-decoration: none;
+    padding: 0.4rem 0.75rem;
+    border-radius: 6px;
+    border-left: 2px solid transparent;
+    transition: all 0.15s;
+  }
+  .sidebar-links a.active {
+    color: var(--accent);
+    border-left-color: var(--accent);
+    background: var(--accent-light);
+  }
+  .sidebar-links a:hover:not(.active) { color: var(--text-2); background: var(--surface); }
+
+  /* Case content */
+  .case-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    margin-bottom: 1.25rem;
+  }
+  .case-h1 {
+    font-family: var(--display);
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    color: var(--text);
+    margin-bottom: 2rem;
+  }
+  .case-h1 em { font-style: italic; color: var(--accent2); }
+
+  .meta-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 3rem;
+  }
+  .meta-item {}
+  .meta-label {
+    font-family: var(--mono);
+    font-size: 0.52rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    margin-bottom: 0.4rem;
+  }
+  .meta-value { font-size: 0.85rem; color: var(--text-2); line-height: 1.5; }
+
+  /* Stats */
+  .stats-row {
+    display: flex;
+    gap: 2rem;
+    padding: 2rem;
+    background: var(--accent);
+    border-radius: 12px;
+    margin-bottom: 3rem;
+  }
+  .stat { display: flex; flex-direction: column; gap: 0.25rem; flex: 1; }
+  .stat-num {
+    font-family: var(--display);
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1;
+  }
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.4;
+  }
+  .stat-divider { width: 1px; background: rgba(255,255,255,0.15); align-self: stretch; }
+
+  /* Hero image */
+  .hero-img-block {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: var(--surface2);
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 3rem;
+  }
+  .hero-img-label {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-3);
+  }
+
+  /* Section label */
+  .section-label {
+    font-family: var(--mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  /* Overview text */
+  .overview-p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--text-2);
+    margin-bottom: 1rem;
+    max-width: 600px;
+  }
+
+  /* Problem cards */
+  .section-h2 {
+    font-family: var(--display);
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.2;
+    margin-bottom: 0.75rem;
+  }
+  .section-p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--text-2);
+    max-width: 540px;
+    margin-bottom: 1.5rem;
+  }
+  .problem-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .problem-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.25rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .problem-card-label {
+    font-family: var(--mono);
+    font-size: 0.5rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    margin-bottom: 0.875rem;
+  }
+
+  .scatter-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .scatter-row:last-child { border-bottom: none; }
+  .scatter-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .scatter-label { font-size: 0.75rem; color: var(--text-2); flex: 1; }
+  .scatter-badge {
+    font-family: var(--mono);
+    font-size: 0.48rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-weight: 500;
+  }
+
+  .person-card {
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    border-left: 3px solid;
+  }
+  .person-name { font-size: 0.8rem; font-weight: 600; color: var(--text); margin-bottom: 0.25rem; }
+  .person-body { font-size: 0.7rem; line-height: 1.5; color: var(--text-2); }
+
+  /* Quote */
+  .quote-block {
+    background: var(--accent);
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 2rem 0;
+  }
+  .quote-text {
+    font-family: var(--display);
+    font-size: 1.1rem;
+    font-style: italic;
+    font-weight: 600;
+    color: #fff;
+    line-height: 1.5;
+    margin-bottom: 0.75rem;
+  }
+  .quote-attr { font-family: var(--mono); font-size: 0.55rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.6); text-transform: uppercase; }
+
+  /* Direction cards */
+  .direction-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  .dir-card {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .dir-card.chosen {
+    border-color: var(--accent);
+    background: var(--accent-light);
+  }
+  .dir-preview {
+    height: 100px;
+    background: var(--surface2);
+    padding: 0.875rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.4rem;
+  }
+  .chosen .dir-preview { background: rgba(26,71,49,0.1); }
+  .dir-info { padding: 1rem; }
+  .dir-num {
+    font-family: var(--mono);
+    font-size: 0.5rem;
+    letter-spacing: 0.14em;
+    color: var(--text-3);
+    margin-bottom: 0.3rem;
+  }
+  .dir-title { font-family: var(--display); font-size: 0.9rem; font-weight: 600; color: var(--text); margin-bottom: 0.5rem; }
+  .dir-body { font-size: 0.7rem; line-height: 1.5; color: var(--text-2); }
+  .chosen-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: var(--mono);
+    font-size: 0.48rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: rgba(26,71,49,0.1);
+    border: 1px solid rgba(26,71,49,0.2);
+    padding: 0.2rem 0.6rem;
+    border-radius: 100px;
+    margin-bottom: 0.4rem;
+  }
+  .pline { border-radius: 100px; }
+</style>
+</head>
+<body>
+
+<!-- ──────────────────────────────────────────
+     LANDING PAGE — DIRECTION B
+────────────────────────────────────────── -->
+
+<header>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">Shruthy Nair</a>
+    <ul class="nav-links">
+      <li><a href="#" class="active">Work</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#" class="nav-cta">Resume ↗</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-eyebrow">
+        <span class="eyebrow-dot"></span>
+        Available · Product Design & Engineering
+      </div>
+      <h1>
+        Designer who<br>
+        also <em>engineers</em><br>
+        things.
+      </h1>
+      <p class="hero-desc">
+        I'm Shruthy. I design products end-to-end — from defining the problem to building the interface.
+        Four internships across design and engineering.
+      </p>
+      <div class="hero-actions">
+        <a href="#" class="btn-primary">View Work →</a>
+        <a href="#" class="btn-secondary">About me</a>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <p class="exp-stack-label">Experience</p>
+
+      <div class="exp-card">
+        <div class="exp-left">
+          <p class="exp-role-name">Product Design Intern</p>
+          <p class="exp-company-name">Company Name</p>
+        </div>
+        <span class="exp-year-tag">2025</span>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-left">
+          <p class="exp-role-name">Software Engineering Intern</p>
+          <p class="exp-company-name">Company Name</p>
+        </div>
+        <span class="exp-year-tag">2024</span>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-left">
+          <p class="exp-role-name">Design + Engineering Intern</p>
+          <p class="exp-company-name">Company Name</p>
+        </div>
+        <span class="exp-year-tag">2023</span>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-left">
+          <p class="exp-role-name">Product Design Intern</p>
+          <p class="exp-company-name">Company Name</p>
+        </div>
+        <span class="exp-year-tag">2022</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="projects-section">
+    <div class="projects-header">
+      <h2 class="projects-title">Selected work</h2>
+      <a href="#" class="projects-link">All projects →</a>
+    </div>
+
+    <div class="project-list">
+
+      <!-- Project 1 -->
+      <a href="#" class="project-row">
+        <div class="project-thumb" style="background:linear-gradient(135deg,#eae4ff,#d8ccff);">
+          <div class="project-thumb-inner">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+              <rect x="4" y="8" width="40" height="30" rx="3" stroke="#7c3aed" stroke-width="2"/>
+              <path d="M14 24h20M14 30h14" stroke="#7c3aed" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="36" cy="12" r="5" fill="#c4b5fd"/>
+            </svg>
+          </div>
+        </div>
+        <div class="project-info">
+          <p class="project-tag">Relay · Feature Design · 2024</p>
+          <p class="project-title-row">Why — The Decision Ledger</p>
+          <p class="project-desc">A dedicated space inside Relay where teams log, organize, and retrieve the reasoning behind decisions so context survives handoffs.</p>
+          <div class="project-skills">
+            <span class="skill-tag">User Research</span>
+            <span class="skill-tag">Interaction Design</span>
+            <span class="skill-tag">AI-Assisted UX</span>
+          </div>
+        </div>
+        <span class="project-arrow">↗</span>
+      </a>
+
+      <!-- Project 2 -->
+      <a href="#" class="project-row">
+        <div class="project-thumb" style="background:linear-gradient(135deg,#e0f5ec,#c5ecd8);">
+          <div class="project-thumb-inner">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+              <circle cx="24" cy="24" r="16" stroke="#1a4731" stroke-width="2"/>
+              <path d="M16 24l5 5 11-11" stroke="#1a4731" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+        <div class="project-info">
+          <p class="project-tag">Poker AI · Product Design · 2023</p>
+          <p class="project-title-row">AI Poker Coaching Platform</p>
+          <p class="project-desc">Leveraging AI to provide personalized poker coaching to beginner-to-intermediate players, with contextual guidance and hand analysis.</p>
+          <div class="project-skills">
+            <span class="skill-tag">Product Design</span>
+            <span class="skill-tag">User Research</span>
+            <span class="skill-tag">Frontend Engineering</span>
+          </div>
+        </div>
+        <span class="project-arrow">↗</span>
+      </a>
+
+      <!-- Project 3 -->
+      <a href="#" class="project-row">
+        <div class="project-thumb" style="background:linear-gradient(135deg,#fdf0eb,#f8ddd1);">
+          <div class="project-thumb-inner">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+              <rect x="4" y="4" width="40" height="40" rx="8" stroke="#b85c38" stroke-width="2" stroke-dasharray="4 3"/>
+              <path d="M16 24h16M24 16v16" stroke="#b85c38" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+        </div>
+        <div class="project-info">
+          <p class="project-tag">OpenAI · Hardware Concept · 2025</p>
+          <p class="project-title-row">The Future of AI & Hardware</p>
+          <p class="project-desc">A concept exploring what AI-native hardware interfaces could look like — designed for the way people actually want to interact with AI.</p>
+          <div class="project-skills">
+            <span class="skill-tag">Product Design</span>
+            <span class="skill-tag">Hardware</span>
+            <span class="skill-tag">AI</span>
+          </div>
+        </div>
+        <span class="project-arrow">↗</span>
+      </a>
+
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-text">Designed & built by Shruthy Nair · 2025</span>
+    <div class="footer-links">
+      <a href="#">LinkedIn</a>
+      <a href="#">GitHub</a>
+      <a href="#">Resume</a>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ══════════════════════════════════════════════
+     PAGE BREAK — WHY PROJECT PAGE
+══════════════════════════════════════════════ -->
+
+<div class="page-divider"></div>
+<p class="page-label">↓ Project Case Study — "Why" page in Direction B</p>
+
+<header style="position:relative;">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">Shruthy Nair</a>
+    <ul class="nav-links">
+      <li><a href="#" class="active">Work</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#" class="nav-cta">Resume ↗</a></li>
+    </ul>
+  </div>
+</header>
+
+<div class="sub-nav">
+  <div class="sub-nav-inner">
+    <a href="#" class="sub-nav-back">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 11L5 7L9 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Back to work
+    </a>
+    <span class="sub-nav-title">Why — The Decision Ledger · Relay</span>
+    <div style="width:60px;"></div>
+  </div>
+</div>
+
+<main style="padding-top:0;">
+  <div class="case-layout">
+
+    <div class="sidebar-nav">
+      <p class="sidebar-label">On this page</p>
+      <div class="sidebar-links">
+        <a href="#" class="active">Overview</a>
+        <a href="#">Problem Space</a>
+        <a href="#">Research</a>
+        <a href="#">Design Challenge</a>
+        <a href="#">Ideation</a>
+        <a href="#">Design Decisions</a>
+        <a href="#">Reflection</a>
+      </div>
+    </div>
+
+    <div>
+      <p class="case-eyebrow">Case Study · Relay · Feature Design</p>
+      <h1 class="case-h1">Why — The<br><em>Decision Ledger</em></h1>
+
+      <div class="meta-strip">
+        <div class="meta-item">
+          <p class="meta-label">Role</p>
+          <p class="meta-value">UX Designer (Team of 2)</p>
+        </div>
+        <div class="meta-item">
+          <p class="meta-label">Timeline</p>
+          <p class="meta-value">8 Weeks</p>
+        </div>
+        <div class="meta-item">
+          <p class="meta-label">Skills & Tools</p>
+          <p class="meta-value">User Research, Interaction Design, Prototyping, AI UX<br><span style="color:var(--text-3);font-size:0.75rem;">Figma, Adobe Creative Suite</span></p>
+        </div>
+      </div>
+
+      <!-- Stats row -->
+      <div class="stats-row">
+        <div class="stat">
+          <p class="stat-num">2</p>
+          <p class="stat-label">Person<br>design team</p>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <p class="stat-num">4</p>
+          <p class="stat-label">User types<br>identified</p>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <p class="stat-num">3</p>
+          <p class="stat-label">Directions<br>explored</p>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <p class="stat-num">4</p>
+          <p class="stat-label">Tools<br>audited</p>
+        </div>
+      </div>
+
+      <!-- Hero image -->
+      <div class="hero-img-block">
+        <span class="hero-img-label">Hero — Why Feature Overview / Ledger UI Mockup</span>
+      </div>
+
+      <!-- Overview -->
+      <p class="section-label">Overview</p>
+      <p class="overview-p">
+        Relay is a workplace async communication platform built for teams across different time zones, schedules, and working patterns. <em>Why</em> is a feature inside Relay — a decision ledger where teams log, organize, and retrieve the reasoning behind decisions, so context survives handoffs and onboarding.
+      </p>
+
+      <div style="height:2.5rem;"></div>
+
+      <!-- Problem -->
+      <p class="section-label">Problem Space</p>
+      <h2 class="section-h2">Information lives everywhere. None of it is findable when it matters.</h2>
+      <p class="section-p">Decisions scatter across many surfaces at once — a message in chat, a comment in a design file, an email reply. Each captures a piece. None of them make context retrievable later.</p>
+
+      <div class="problem-grid">
+        <div class="problem-card">
+          <p class="problem-card-label">Where decisions end up</p>
+          <div class="scatter-row">
+            <div class="scatter-dot" style="background:#7c3aed;"></div>
+            <span class="scatter-label">Chat messages</span>
+            <span class="scatter-badge" style="background:#f5f3ff;color:#7c3aed;border:1px solid #ddd8fe;">buried in thread</span>
+          </div>
+          <div class="scatter-row">
+            <div class="scatter-dot" style="background:#0369a1;"></div>
+            <span class="scatter-label">Design file comments</span>
+            <span class="scatter-badge" style="background:#f0f9ff;color:#0369a1;border:1px solid #bae6fd;">no context</span>
+          </div>
+          <div class="scatter-row">
+            <div class="scatter-dot" style="background:#be123c;"></div>
+            <span class="scatter-label">Email threads</span>
+            <span class="scatter-badge" style="background:#fff1f2;color:#be123c;border:1px solid #fecdd3;">reply 8 of 14</span>
+          </div>
+          <div class="scatter-row">
+            <div class="scatter-dot" style="background:#92400e;"></div>
+            <span class="scatter-label">Stray notes</span>
+            <span class="scatter-badge" style="background:#fffbeb;color:#92400e;border:1px solid #fde68a;">unsynced</span>
+          </div>
+        </div>
+        <div class="problem-card">
+          <p class="problem-card-label">Who pays the cost</p>
+          <div class="person-card" style="background:#f5f3ff;border-left-color:#7c3aed;">
+            <p class="person-name">The New Joiner</p>
+            <p class="person-body">Gets partial answers. Ramp-up is longer than it needs to be.</p>
+          </div>
+          <div class="person-card" style="background:#f0fdf4;border-left-color:#1a4731;">
+            <p class="person-name">The Mid-Project Inheritor</p>
+            <p class="person-body">Inherits outputs, not reasoning. Wrong assumptions show up as rework.</p>
+          </div>
+          <div class="person-card" style="background:#fffbeb;border-left-color:#92400e;">
+            <p class="person-name">The Manager</p>
+            <p class="person-body">Gets messaged constantly for context. The pattern repeats endlessly.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quote -->
+      <div class="quote-block">
+        <p class="quote-text">"Any solution that requires significant effort at the point of capture will not be used consistently. That is not a discipline problem. It is a design problem."</p>
+        <p class="quote-attr">Key insight — Design challenge framing</p>
+      </div>
+
+      <div style="height:2rem;"></div>
+
+      <!-- Ideation -->
+      <p class="section-label">Ideation</p>
+      <h2 class="section-h2">What we explored before landing on a direction</h2>
+
+      <div class="direction-row">
+        <div class="dir-card">
+          <div class="dir-preview" style="background:linear-gradient(135deg,#f0ede8,#e6e2db);">
+            <div class="pline" style="height:4px;width:55%;background:#ccc;"></div>
+            <div class="pline" style="height:18px;background:#fff;border:1px solid #ddd;"></div>
+            <div class="pline" style="height:4px;width:45%;background:#ccc;"></div>
+            <div class="pline" style="height:18px;background:#fff;border:1px solid #ddd;"></div>
+            <div class="pline" style="height:12px;width:60%;background:#ccc;border-radius:2px;align-self:center;"></div>
+          </div>
+          <div class="dir-info">
+            <p class="dir-num">Direction 01</p>
+            <p class="dir-title">Single Structured Form</p>
+            <p class="dir-body">All fields visible upfront. Consistent output — but 9 fields at once feels like homework.</p>
+          </div>
+        </div>
+        <div class="dir-card">
+          <div class="dir-preview" style="background:linear-gradient(135deg,#f0ede8,#e6e2db);">
+            <div class="pline" style="height:4px;width:50%;background:#ccc;"></div>
+            <div class="pline" style="height:18px;background:#fff;border:1.5px solid #888;"></div>
+            <div class="pline" style="height:4px;width:42%;background:#ddd;opacity:0.6;"></div>
+            <div class="pline" style="height:16px;background:#f5f5f5;border:1px solid #ddd;opacity:0.5;"></div>
+            <div style="display:flex;gap:4px;justify-content:center;">
+              <div style="width:5px;height:5px;border-radius:50%;background:#888;"></div>
+              <div style="width:5px;height:5px;border-radius:50%;background:#ccc;"></div>
+              <div style="width:5px;height:5px;border-radius:50%;background:#e0e0e0;"></div>
+            </div>
+          </div>
+          <div class="dir-info">
+            <p class="dir-num">Direction 02</p>
+            <p class="dir-title">Progressive Disclosure</p>
+            <p class="dir-body">Start with one field, reveal more. Low barrier — but disorienting. "The form that keeps going."</p>
+          </div>
+        </div>
+        <div class="dir-card chosen">
+          <div class="dir-preview">
+            <div style="display:flex;gap:4px;margin-bottom:4px;">
+              <div style="flex:1;height:13px;background:var(--accent);border-radius:3px;"></div>
+              <div style="flex:1;height:13px;background:#fff;border:1px solid var(--border2);border-radius:3px;"></div>
+            </div>
+            <div class="pline" style="height:14px;background:#fff;border:1px solid var(--border);"></div>
+            <div class="pline" style="height:20px;background:#fff;border:1px solid var(--border);"></div>
+            <div style="display:flex;justify-content:flex-end;">
+              <div style="height:12px;width:40px;background:var(--accent);border-radius:100px;"></div>
+            </div>
+          </div>
+          <div class="dir-info">
+            <div class="chosen-pill">★ Chosen direction</div>
+            <p class="dir-num">Direction 03</p>
+            <p class="dir-title">Two Modes — Quick & Full</p>
+            <p class="dir-body">Quick Capture: 3 fields, under a minute. Full Entry: complete record. Both land in the same searchable ledger.</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="height:4rem;"></div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-text">Designed & built by Shruthy Nair · 2025</span>
+    <div class="footer-links">
+      <a href="#">LinkedIn</a>
+      <a href="#">GitHub</a>
+      <a href="#">Resume</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

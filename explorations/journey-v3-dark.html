@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Journey Map — V3: Dark Phase Chapters</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: #0E0E11;
+  padding: 60px 40px;
+  min-height: 100vh;
+}
+
+.page { max-width: 1240px; margin: 0 auto; }
+
+/* ── Header ── */
+.header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 36px;
+  gap: 20px;
+}
+.eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #555;
+  margin-bottom: 8px;
+}
+.title {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 600;
+  color: #F0F0EE;
+  letter-spacing: -0.02em;
+}
+.subtitle {
+  font-size: 13px;
+  color: #555;
+  margin-top: 5px;
+}
+.legend {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-shrink: 0;
+}
+.leg-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: #555;
+}
+.leg-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+/* ── Three-card grid ── */
+.cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+/* ── Single phase card ── */
+.card {
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid #222228;
+  background: #15151C;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Colored accent bar at top */
+.card-bar {
+  height: 5px;
+  width: 100%;
+}
+.before .card-bar { background: linear-gradient(90deg, #7C3AED, #A78BFA); }
+.during .card-bar { background: linear-gradient(90deg, #059669, #34D399); }
+.after  .card-bar { background: linear-gradient(90deg, #D97706, #FBBF24); }
+
+/* ── Phase header inside card ── */
+.card-header {
+  padding: 24px 24px 0;
+}
+.card-phase-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+.before .card-phase-label { color: #7C3AED; }
+.during .card-phase-label { color: #34D399; }
+.after  .card-phase-label { color: #FBBF24; }
+
+.card-phase-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: #F0F0EE;
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+}
+.card-phase-sub {
+  font-size: 11.5px;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* ── Mini arc SVG ── */
+.mini-arc-wrap {
+  padding: 20px 24px 0;
+  position: relative;
+}
+.mini-arc-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #3A3A46;
+  margin-bottom: 8px;
+}
+
+/* ── Divider ── */
+.card-divider {
+  height: 1px;
+  background: #222228;
+  margin: 20px 24px 0;
+}
+
+/* ── Activity timeline ── */
+.timeline-wrap {
+  padding: 18px 24px 0;
+}
+.tl-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #3A3A46;
+  margin-bottom: 14px;
+}
+
+.timeline {
+  position: relative;
+  padding-left: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* Vertical track line */
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 6px;
+  bottom: 6px;
+  width: 1px;
+  background: #282830;
+}
+
+.tl-item {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  padding-bottom: 12px;
+}
+.tl-item:last-child { padding-bottom: 0; }
+
+.tl-dot {
+  position: absolute;
+  left: -22px;
+  top: 4px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  border: 1.5px solid #333340;
+  background: #15151C;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tl-dot-inner {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #333340;
+}
+
+.before .tl-dot { border-color: #7C3AED; }
+.before .tl-dot-inner { background: #7C3AED; }
+.during .tl-dot { border-color: #34D399; }
+.during .tl-dot-inner { background: #34D399; }
+.after  .tl-dot { border-color: #FBBF24; }
+.after  .tl-dot-inner { background: #FBBF24; }
+
+.tl-text {
+  font-size: 12.5px;
+  color: #999;
+  line-height: 1.4;
+}
+
+/* ── Quotes ── */
+.quotes-wrap {
+  padding: 18px 24px 0;
+}
+.q-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #3A3A46;
+  margin-bottom: 12px;
+}
+
+.q-block {
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-bottom: 9px;
+}
+.q-block:last-child { margin-bottom: 0; }
+
+.q-block.lo {
+  background: rgba(239,68,68,0.06);
+  border-left: 2.5px solid rgba(239,68,68,0.45);
+}
+.q-block.hi {
+  background: rgba(124,58,237,0.07);
+  border-left: 2.5px solid rgba(167,139,250,0.5);
+}
+.q-block.hi.teal {
+  background: rgba(52,211,153,0.07);
+  border-left: 2.5px solid rgba(52,211,153,0.4);
+}
+.q-block.hi.amber {
+  background: rgba(251,191,36,0.06);
+  border-left: 2.5px solid rgba(251,191,36,0.4);
+}
+
+.q-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.lo .q-tag { color: #EF4444; }
+.hi .q-tag { color: #A78BFA; }
+.hi.teal .q-tag { color: #34D399; }
+.hi.amber .q-tag { color: #FBBF24; }
+
+.q-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 12px;
+  font-style: italic;
+  line-height: 1.6;
+  color: #888;
+}
+
+/* ── Opportunities footer ── */
+.opp-footer {
+  margin: 20px 0 0;
+  padding: 18px 24px 24px;
+  background: rgba(124,58,237,0.05);
+  border-top: 1px solid #222228;
+  flex-grow: 1;
+}
+
+.before .opp-footer { background: rgba(124,58,237,0.05); }
+.during .opp-footer { background: rgba(52,211,153,0.04); }
+.after  .opp-footer { background: rgba(251,191,36,0.04); }
+
+.opp-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.before .opp-label { color: #7C3AED; }
+.during .opp-label { color: #34D399; }
+.after  .opp-label { color: #FBBF24; }
+
+.opp-list {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.opp-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+}
+.opp-n {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: #3A3A46;
+  font-weight: 700;
+  padding-top: 2px;
+  min-width: 16px;
+}
+.opp-text {
+  font-size: 12.5px;
+  color: #777;
+  line-height: 1.45;
+}
+
+/* ── Phase connector strip ── */
+.connector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 28px;
+}
+.conn-phase {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  color: #3A3A46;
+  letter-spacing: 0.1em;
+  padding: 6px 20px;
+  border: 1px solid #222228;
+  border-radius: 0;
+}
+.conn-phase:first-child { border-radius: 100px 0 0 100px; }
+.conn-phase:last-child  { border-radius: 0 100px 100px 0; }
+
+.conn-phase.before-c { background: rgba(124,58,237,0.12); color: #7C3AED; border-color: rgba(124,58,237,0.25); }
+.conn-phase.during-c { background: rgba(52,211,153,0.10); color: #34D399; border-color: rgba(52,211,153,0.2); border-left: none; border-right: none; }
+.conn-phase.after-c  { background: rgba(251,191,36,0.10); color: #FBBF24; border-color: rgba(251,191,36,0.2); }
+
+.conn-arr { color: #2A2A34; font-size: 16px; font-weight: 300; }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ── Page header ── -->
+  <div class="header">
+    <div>
+      <div class="eyebrow">WUD! — User Journey Map · Exploration 03</div>
+      <div class="title">Three Chapters, One Story</div>
+      <div class="subtitle">Each phase is a self-contained emotional chapter</div>
+    </div>
+    <div class="legend">
+      <div class="leg-item"><span class="leg-dot" style="background:#EF4444"></span>Pain point</div>
+      <div class="leg-item"><span class="leg-dot" style="background:#A78BFA"></span>Delight</div>
+      <div class="leg-item"><span class="leg-dot" style="background:#7C3AED"></span>Opportunity</div>
+    </div>
+  </div>
+
+  <!-- Phase indicator -->
+  <div class="connector">
+    <div class="conn-phase before-c">01 — Before</div>
+    <div class="conn-phase during-c">02 — During</div>
+    <div class="conn-phase after-c">03 — After</div>
+  </div>
+
+  <!-- ── Three phase cards ── -->
+  <div class="cards">
+
+    <!-- ─ Card: Before ─ -->
+    <div class="card before">
+      <div class="card-bar"></div>
+      <div class="card-header">
+        <div class="card-phase-label">Phase 01</div>
+        <div class="card-phase-name">Before Event</div>
+        <div class="card-phase-sub">Discovery · Coordination · Getting there</div>
+      </div>
+
+      <div class="mini-arc-wrap">
+        <div class="mini-arc-label">Emotional Arc</div>
+        <svg viewBox="0 0 310 90" style="width:100%;height:auto;display:block;" aria-label="Before-event emotional arc: starts neutral, dips low, rises high">
+          <defs>
+            <linearGradient id="v3bg-before-pos" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#7C3AED" stop-opacity="0.18"/>
+              <stop offset="100%" stop-color="#7C3AED" stop-opacity="0"/>
+            </linearGradient>
+            <linearGradient id="v3bg-before-neg" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#EF4444" stop-opacity="0"/>
+              <stop offset="100%" stop-color="#EF4444" stop-opacity="0.15"/>
+            </linearGradient>
+            <clipPath id="v3ba"><rect x="0" y="0" width="310" height="45"/></clipPath>
+            <clipPath id="v3bb"><rect x="0" y="45" width="310" height="45"/></clipPath>
+          </defs>
+          <line x1="0" y1="45" x2="310" y2="45" stroke="#222228" stroke-width="1" stroke-dasharray="5 4"/>
+          <path d="M 0,45 C 20,45 40,68 65,70 C 88,72 105,80 120,82 C 138,82 154,10 188,8 C 215,6 236,42 265,44 C 280,44 290,45 310,45 L 310,45 L 0,45 Z"
+            fill="url(#v3bg-before-pos)" clip-path="url(#v3ba)"/>
+          <path d="M 0,45 C 20,45 40,68 65,70 C 88,72 105,80 120,82 C 138,82 154,10 188,8 C 215,6 236,42 265,44 C 280,44 290,45 310,45 L 310,45 L 0,45 Z"
+            fill="url(#v3bg-before-neg)" clip-path="url(#v3bb)"/>
+          <path d="M 0,45 C 20,45 40,68 65,70 C 88,72 105,80 120,82 C 138,82 154,10 188,8 C 215,6 236,42 265,44 C 280,44 290,45 310,45"
+            fill="none" stroke="#7C3AED" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="120" cy="82" r="4" fill="#15151C" stroke="#EF4444" stroke-width="2"/>
+          <circle cx="188" cy="8"  r="4" fill="#15151C" stroke="#7C3AED" stroke-width="2"/>
+          <text x="0"   y="85" font-size="8" fill="#3A3A46" font-family="'JetBrains Mono', monospace">low</text>
+          <text x="0"   y="12" font-size="8" fill="#3A3A46" font-family="'JetBrains Mono', monospace">high</text>
+        </svg>
+      </div>
+
+      <div class="card-divider"></div>
+
+      <div class="timeline-wrap">
+        <div class="tl-label">Actions</div>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+            <div class="tl-text">Hear about the event</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+            <div class="tl-text">Research on Google / Social Media</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+            <div class="tl-text">Coordinate with friends</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+            <div class="tl-text">Buy tickets online</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+            <div class="tl-text">Drive to event</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-divider"></div>
+
+      <div class="quotes-wrap">
+        <div class="q-label">Key Moments</div>
+        <div class="q-block lo">
+          <div class="q-tag">↓ pain</div>
+          <div class="q-text">"How can I plan if I don't have info and planning with friends is HARD!!"</div>
+        </div>
+        <div class="q-block hi">
+          <div class="q-tag">↑ delight</div>
+          <div class="q-text">"I can't wait to go now that I have a ticket!"</div>
+        </div>
+      </div>
+
+      <div class="opp-footer">
+        <div class="opp-label">Opportunities</div>
+        <div class="opp-list">
+          <div class="opp-item"><span class="opp-n">01</span><span class="opp-text">Organise planning tools in one place</span></div>
+          <div class="opp-item"><span class="opp-n">02</span><span class="opp-text">Consolidate event info so nothing is scattered</span></div>
+          <div class="opp-item"><span class="opp-n">03</span><span class="opp-text">Make coordination feel less chaotic than a group chat</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─ Card: During ─ -->
+    <div class="card during">
+      <div class="card-bar"></div>
+      <div class="card-header">
+        <div class="card-phase-label">Phase 02</div>
+        <div class="card-phase-name">During Event</div>
+        <div class="card-phase-sub">Arrival · Participation · Socialising</div>
+      </div>
+
+      <div class="mini-arc-wrap">
+        <div class="mini-arc-label">Emotional Arc</div>
+        <svg viewBox="0 0 310 90" style="width:100%;height:auto;display:block;" aria-label="During-event emotional arc: slight dip on arrival, rises to strong high">
+          <defs>
+            <linearGradient id="v3bg-during-pos" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#34D399" stop-opacity="0.16"/>
+              <stop offset="100%" stop-color="#34D399" stop-opacity="0"/>
+            </linearGradient>
+            <linearGradient id="v3bg-during-neg" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#EF4444" stop-opacity="0"/>
+              <stop offset="100%" stop-color="#EF4444" stop-opacity="0.12"/>
+            </linearGradient>
+            <clipPath id="v3da"><rect x="0" y="0" width="310" height="45"/></clipPath>
+            <clipPath id="v3db"><rect x="0" y="45" width="310" height="45"/></clipPath>
+          </defs>
+          <line x1="0" y1="45" x2="310" y2="45" stroke="#222228" stroke-width="1" stroke-dasharray="5 4"/>
+          <path d="M 0,52 C 15,54 28,60 44,63 C 60,66 72,8 100,6 C 124,4 138,50 155,53 C 168,56 180,28 210,22 C 232,18 258,42 280,43 C 292,43 302,44 310,44 L 310,45 L 0,45 Z"
+            fill="url(#v3bg-during-pos)" clip-path="url(#v3da)"/>
+          <path d="M 0,52 C 15,54 28,60 44,63 C 60,66 72,8 100,6 C 124,4 138,50 155,53 C 168,56 180,28 210,22 C 232,18 258,42 280,43 C 292,43 302,44 310,44"
+            fill="url(#v3bg-during-neg)" clip-path="url(#v3db)"/>
+          <path d="M 0,52 C 15,54 28,60 44,63 C 60,66 72,8 100,6 C 124,4 138,50 155,53 C 168,56 180,28 210,22 C 232,18 258,42 280,43 C 292,43 302,44 310,44"
+            fill="none" stroke="#34D399" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="44"  cy="63" r="4" fill="#15151C" stroke="#EF4444" stroke-width="2"/>
+          <circle cx="100" cy="6"  r="4" fill="#15151C" stroke="#34D399" stroke-width="2"/>
+          <circle cx="210" cy="22" r="4" fill="#15151C" stroke="#34D399" stroke-width="2"/>
+          <text x="0" y="85" font-size="8" fill="#3A3A46" font-family="'JetBrains Mono', monospace">low</text>
+          <text x="0" y="12" font-size="8" fill="#3A3A46" font-family="'JetBrains Mono', monospace">high</text>
+        </svg>
+      </div>
+
+      <div class="card-divider"></div>
+
+      <div class="timeline-wrap">
+        <div class="tl-label">Actions</div>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+            <div class="tl-text">See fashion shows on the runway</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+            <div class="tl-text">Buy food &amp; drinks</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+            <div class="tl-text">See live performances</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+            <div class="tl-text">Buy merchandise from local brands</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+            <div class="tl-text">Socialise with others</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-divider"></div>
+
+      <div class="quotes-wrap">
+        <div class="q-label">Key Moments</div>
+        <div class="q-block lo">
+          <div class="q-tag">↓ pain</div>
+          <div class="q-text">"There's so much traffic and I don't know where to find parking?"</div>
+        </div>
+        <div class="q-block hi teal">
+          <div class="q-tag">↑ delight</div>
+          <div class="q-text">"WOW, I love these clothes!" / "I made a new friend."</div>
+        </div>
+      </div>
+
+      <div class="opp-footer">
+        <div class="opp-label">Opportunities</div>
+        <div class="opp-list">
+          <div class="opp-item"><span class="opp-n">01</span><span class="opp-text">Provide an organised itinerary and map</span></div>
+          <div class="opp-item"><span class="opp-n">02</span><span class="opp-text">Surface local food and brand alternatives</span></div>
+          <div class="opp-item"><span class="opp-n">03</span><span class="opp-text">Enable in-event social discovery</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─ Card: After ─ -->
+    <div class="card after">
+      <div class="card-bar"></div>
+      <div class="card-header">
+        <div class="card-phase-label">Phase 03</div>
+        <div class="card-phase-name">After Event</div>
+        <div class="card-phase-sub">Departure · Reflection · Sharing</div>
+      </div>
+
+      <div class="mini-arc-wrap">
+        <div class="mini-arc-label">Emotional Arc</div>
+        <svg viewBox="0 0 310 90" style="width:100%;height:auto;display:block;" aria-label="After-event emotional arc: dips low on exit, rises strongly to memories and sharing">
+          <defs>
+            <linearGradient id="v3bg-after-pos" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#FBBF24" stop-opacity="0.16"/>
+              <stop offset="100%" stop-color="#FBBF24" stop-opacity="0"/>
+            </linearGradient>
+            <linearGradient id="v3bg-after-neg" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#EF4444" stop-opacity="0"/>
+              <stop offset="100%" stop-color="#EF4444" stop-opacity="0.14"/>
+            </linearGradient>
+            <clipPath id="v3aa"><rect x="0" y="0" width="310" height="45"/></clipPath>
+            <clipPath id="v3ab"><rect x="0" y="45" width="310" height="45"/></clipPath>
+          </defs>
+          <line x1="0" y1="45" x2="310" y2="45" stroke="#222228" stroke-width="1" stroke-dasharray="5 4"/>
+          <path d="M 0,46 C 15,48 30,65 50,70 C 68,74 82,78 98,79 C 116,79 138,6 168,4 C 192,2 210,24 238,26 C 260,28 282,24 310,22 L 310,45 L 0,45 Z"
+            fill="url(#v3bg-after-pos)" clip-path="url(#v3aa)"/>
+          <path d="M 0,46 C 15,48 30,65 50,70 C 68,74 82,78 98,79 C 116,79 138,6 168,4 C 192,2 210,24 238,26 C 260,28 282,24 310,22 L 310,45 L 0,45 Z"
+            fill="url(#v3bg-after-neg)" clip-path="url(#v3ab)"/>
+          <path d="M 0,46 C 15,48 30,65 50,70 C 68,74 82,78 98,79 C 116,79 138,6 168,4 C 192,2 210,24 238,26 C 260,28 282,24 310,22"
+            fill="none" stroke="#FBBF24" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="98"  cy="79" r="4" fill="#15151C" stroke="#EF4444" stroke-width="2"/>
+          <circle cx="168" cy="4"  r="4" fill="#15151C" stroke="#FBBF24" stroke-width="2"/>
+          <text x="0" y="85" font-size="8" fill="#3A3A46" font-family="'JetBrains Mono', monospace">low</text>
+          <text x="0" y="12" font-size="8" fill="#3A3A46" font-family="'JetBrains Mono', monospace">high</text>
+        </svg>
+      </div>
+
+      <div class="card-divider"></div>
+
+      <div class="timeline-wrap">
+        <div class="tl-label">Actions</div>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+            <div class="tl-text">Leave event and drive home</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+            <div class="tl-text">Look at pictures</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+            <div class="tl-text">Talk about event with friends</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+            <div class="tl-text">Post on social media</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+            <div class="tl-text">Wear the things they bought</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-divider"></div>
+
+      <div class="quotes-wrap">
+        <div class="q-label">Key Moments</div>
+        <div class="q-block lo">
+          <div class="q-tag">↓ pain</div>
+          <div class="q-text">"There's traffic and crowds when leaving."</div>
+        </div>
+        <div class="q-block hi amber">
+          <div class="q-tag">↑ delight</div>
+          <div class="q-text">"That was so much fun!" / "I'm so glad I bought this shirt."</div>
+        </div>
+      </div>
+
+      <div class="opp-footer">
+        <div class="opp-label">Opportunities</div>
+        <div class="opp-list">
+          <div class="opp-item"><span class="opp-n">01</span><span class="opp-text">Provide exit route options</span></div>
+          <div class="opp-item"><span class="opp-n">02</span><span class="opp-text">Enable post-event sharing and reflection</span></div>
+          <div class="opp-item"><span class="opp-n">03</span><span class="opp-text">Give users a social record of their experience</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /cards -->
+</div><!-- /page -->
+
+</body>
+</html>

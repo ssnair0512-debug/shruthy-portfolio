@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Problem Space — Variation A: Fragmentation Diagram</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --bg:#fff; --surface:#f5f5f5; --text-primary:#0a0a0a; --text-secondary:#555; --text-muted:#999; --border:#e5e5e5; }
+    body { background:var(--bg); font-family:'IBM Plex Sans',sans-serif; padding:48px 24px 80px; max-width:880px; margin:0 auto; }
+    .badge { display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:.58rem; font-weight:500; letter-spacing:.18em; text-transform:uppercase; background:#0a0a0a; color:#fff; padding:4px 10px; border-radius:4px; margin-bottom:32px; }
+    .section-label { font-family:'IBM Plex Mono',monospace; font-size:.62rem; font-weight:500; letter-spacing:.22em; text-transform:uppercase; color:var(--text-muted); margin-bottom:20px; }
+    h2 { font-family:'Playfair Display',serif; font-size:clamp(1.4rem,2.5vw,2rem); font-weight:600; color:var(--text-primary); line-height:1.3; margin-bottom:28px; max-width:600px; }
+
+    /* ── Fragmentation diagram ── */
+    .diagram {
+      position:relative; width:100%; aspect-ratio:16/7;
+      border:1px solid var(--border); border-radius:12px;
+      background:var(--surface); overflow:hidden;
+      display:flex; align-items:center; justify-content:center;
+      margin-bottom:28px;
+    }
+
+    /* SVG lines */
+    .diagram svg { position:absolute; inset:0; width:100%; height:100%; }
+
+    /* Centre node — the inaccessible decision */
+    .node-center {
+      position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+      width:88px; height:88px; border-radius:50%;
+      background:#fff; border:2px dashed #d1d5db;
+      display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px;
+      z-index:2;
+    }
+    .node-center-icon { font-size:1.3rem; opacity:.35; }
+    .node-center-label { font-family:'IBM Plex Mono',monospace; font-size:.52rem; font-weight:500; letter-spacing:.1em; text-transform:uppercase; color:#aaa; text-align:center; line-height:1.4; }
+
+    /* Surface nodes */
+    .node {
+      position:absolute; z-index:2;
+      display:flex; flex-direction:column; align-items:center; gap:6px;
+    }
+    .node-chip {
+      border-radius:8px; border:1px solid var(--border);
+      background:#fff; padding:10px 14px;
+      display:flex; flex-direction:column; gap:5px;
+      box-shadow:0 1px 6px rgba(0,0,0,.06);
+      min-width:110px;
+    }
+    .node-chip-header { display:flex; align-items:center; gap:6px; }
+    .node-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+    .node-chip-name { font-family:'IBM Plex Mono',monospace; font-size:.58rem; font-weight:500; color:var(--text-primary); }
+    .node-chip-line { height:4px; border-radius:3px; background:#e8e8e8; }
+    .node-badge { font-family:'IBM Plex Mono',monospace; font-size:.48rem; letter-spacing:.1em; text-transform:uppercase; color:var(--text-muted); background:var(--surface); border:1px solid var(--border); padding:2px 7px; border-radius:100px; }
+
+    /* Positions */
+    .node-chat   { top:12%; left:4%; }
+    .node-design { top:12%; right:4%; }
+    .node-email  { bottom:12%; left:4%; }
+    .node-meeting{ bottom:12%; right:4%; }
+
+    /* ── Two-col layout below diagram ── */
+    .bottom { display:grid; grid-template-columns:1fr 220px; gap:24px; align-items:start; }
+    @media(max-width:620px){ .bottom{ grid-template-columns:1fr; } }
+
+    .bottom-prose p { font-size:.85rem; line-height:1.75; color:var(--text-secondary); margin-bottom:10px; }
+    .bottom-prose p:last-child { margin-bottom:0; }
+
+    .callout { padding:14px 16px; border-radius:8px; border:1px solid var(--border); background:var(--surface); margin-bottom:10px; }
+    .callout:last-child { margin-bottom:0; }
+    .callout-label { font-family:'IBM Plex Mono',monospace; font-size:.52rem; font-weight:500; letter-spacing:.16em; text-transform:uppercase; color:var(--text-muted); margin-bottom:6px; }
+    .callout-body { font-size:.76rem; line-height:1.65; color:var(--text-secondary); }
+  </style>
+</head>
+<body>
+
+  <div class="badge">Variation A — Fragmentation Diagram</div>
+  <p class="section-label">Problem Space</p>
+  <h2>Information lives everywhere. None of it is findable when it actually matters.</h2>
+
+  <!-- Diagram -->
+  <div class="diagram">
+    <!-- SVG connecting lines (dashed) -->
+    <svg viewBox="0 0 880 308" preserveAspectRatio="none" aria-hidden="true">
+      <!-- lines from each corner node to the centre -->
+      <line x1="175" y1="88"  x2="440" y2="154" stroke="#d1d5db" stroke-width="1.5" stroke-dasharray="5 4"/>
+      <line x1="705" y1="88"  x2="440" y2="154" stroke="#d1d5db" stroke-width="1.5" stroke-dasharray="5 4"/>
+      <line x1="175" y1="220" x2="440" y2="154" stroke="#d1d5db" stroke-width="1.5" stroke-dasharray="5 4"/>
+      <line x1="705" y1="220" x2="440" y2="154" stroke="#d1d5db" stroke-width="1.5" stroke-dasharray="5 4"/>
+    </svg>
+
+    <!-- Centre node -->
+    <div class="node-center">
+      <span class="node-center-icon">?</span>
+      <span class="node-center-label">Decision<br/>context</span>
+    </div>
+
+    <!-- Chat / Slack -->
+    <div class="node node-chat">
+      <div class="node-chip">
+        <div class="node-chip-header">
+          <div class="node-dot" style="background:#c4b5fd"></div>
+          <span class="node-chip-name">Team chat</span>
+        </div>
+        <div class="node-chip-line" style="width:90%"></div>
+        <div style="display:flex;gap:4px;align-items:flex-start;">
+          <div style="width:14px;height:14px;border-radius:50%;background:#e0e0e0;flex-shrink:0;margin-top:1px;"></div>
+          <div style="display:flex;flex-direction:column;gap:3px;flex:1;">
+            <div class="node-chip-line" style="width:80%;background:#c4b5fd22;border:1px solid #c4b5fd66;height:5px;"></div>
+            <div class="node-chip-line" style="width:60%"></div>
+          </div>
+        </div>
+        <div class="node-chip-line" style="width:70%"></div>
+      </div>
+      <span class="node-badge">message 23 of 40</span>
+    </div>
+
+    <!-- Design file / Figma -->
+    <div class="node node-design">
+      <div class="node-chip">
+        <div class="node-chip-header">
+          <div class="node-dot" style="background:#a5f3fc"></div>
+          <span class="node-chip-name">Design file</span>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;">
+          <div style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:4px;height:22px;"></div>
+          <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:4px;height:22px;"></div>
+        </div>
+        <div class="node-chip-line" style="width:75%"></div>
+      </div>
+      <span class="node-badge">buried in a comment</span>
+    </div>
+
+    <!-- Email -->
+    <div class="node node-email">
+      <div class="node-chip">
+        <div class="node-chip-header">
+          <div class="node-dot" style="background:#fca5a5"></div>
+          <span class="node-chip-name">Email thread</span>
+        </div>
+        <div class="node-chip-line" style="width:90%"></div>
+        <div class="node-chip-line" style="width:65%"></div>
+        <div style="display:flex;gap:4px;align-items:center;">
+          <div style="width:12px;height:12px;border-radius:2px;background:#fee2e2;flex-shrink:0;"></div>
+          <div class="node-chip-line" style="width:55%"></div>
+        </div>
+      </div>
+      <span class="node-badge">reply 8 of 14</span>
+    </div>
+
+    <!-- Meeting notes -->
+    <div class="node node-meeting">
+      <div class="node-chip">
+        <div class="node-chip-header">
+          <div class="node-dot" style="background:#fde68a"></div>
+          <span class="node-chip-name">Meeting notes</span>
+        </div>
+        <div class="node-chip-line" style="width:85%"></div>
+        <div class="node-chip-line" style="width:70%"></div>
+        <div style="display:flex;gap:3px;flex-wrap:wrap;">
+          <div style="height:4px;width:28px;border-radius:3px;background:#fef9c3;border:1px solid #fde68a;"></div>
+          <div style="height:4px;width:22px;border-radius:3px;background:#f0f9ff;border:1px solid #bae6fd;"></div>
+        </div>
+      </div>
+      <span class="node-badge">not synced anywhere</span>
+    </div>
+  </div>
+
+  <!-- Below diagram: prose + callouts -->
+  <div class="bottom">
+    <div class="bottom-prose">
+      <p>Decisions happen across many surfaces at once — a message in chat, a comment in a design file, an email chain, a note from a meeting. Each captures something. None of them make context findable later.</p>
+      <p>The people who pay the cost are the ones who come in after: new joiners piecing together why things are the way they are, mid-project inheritors trying to make good decisions without the full picture, and managers constantly pulled in to provide context that was never written down.</p>
+      <p>They search. They find fragments. They make assumptions. Sometimes those assumptions lead to work being undone with no clear understanding of why.</p>
+    </div>
+    <div>
+      <div class="callout">
+        <p class="callout-label">The root cause</p>
+        <p class="callout-body">A missing record of reasoning is invisible. Because it is invisible, it rarely gets identified or fixed.</p>
+      </div>
+      <div class="callout">
+        <p class="callout-label">Who pays the cost</p>
+        <p class="callout-body">Not the person who made the decision — the people who come in after and have to reconstruct context that was never written down.</p>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
