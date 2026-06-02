@@ -295,12 +295,12 @@ body.rds-standalone .site-nav { display: none !important; }
 .rds .hi-type .ty-r.t-lb .sp { font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em; color: var(--ink-3); text-transform: uppercase; }
 
 /* Atom panel */
-.rds .hi-atom .at-list { display: flex; flex-direction: column; gap: 6px; margin-top: 2px; }
-.rds .hi-atom .at-row { display: grid; grid-template-columns: 78px 1fr auto; align-items: center; gap: 10px; padding: 5px 10px; border: 1px solid var(--r-border-soft); border-radius: 5px; }
-.rds .hi-atom .at-row .badge { display: inline-flex; align-items: center; gap: 5px; padding: 2px 8px; border-radius: 999px; font-size: 10px; font-weight: 500; background: var(--r-accent-light); color: var(--r-accent-hover); width: fit-content; }
-.rds .hi-atom .at-row .badge .d { width: 5px; height: 5px; border-radius: 50%; background: var(--r-accent); }
-.rds .hi-atom .at-row .nm { font-family: var(--mono); font-size: 10.5px; color: var(--r-accent-hover); }
-.rds .hi-atom .at-row .ct { font-family: var(--mono); font-size: 9.5px; color: var(--ink-3); }
+.rds .hi-atom .at-list { display: flex; flex-direction: column; gap: 7px; margin-top: 2px; }
+.rds .hi-atom .at-row { display: flex; align-items: center; gap: 12px; padding: 7px 12px; border: 1px solid var(--r-border-soft); border-radius: 8px; background: var(--paper); min-width: 0; }
+.rds .hi-atom .at-row .badge { flex-shrink: 0; display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px; border-radius: 999px; font-family: var(--sans) !important; font-size: 10px !important; font-weight: 500 !important; text-transform: none !important; letter-spacing: 0 !important; white-space: nowrap; line-height: 1.5; }
+.rds .hi-atom .at-row .badge .d { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.rds .hi-atom .at-row .nm { flex: 1; min-width: 0; font-family: var(--mono); font-size: 10.5px; color: var(--r-accent-hover); letter-spacing: 0; text-transform: none; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rds .hi-atom .at-row .ct { flex-shrink: 0; font-family: var(--mono); font-size: 10.5px; color: var(--ink-3); letter-spacing: 0; text-transform: none; }
 
 /* Actions panel */
 .rds .hi-act .ac-body { display: flex; flex-direction: column; gap: 12px; margin-top: 2px; }

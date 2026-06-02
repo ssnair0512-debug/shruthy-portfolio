@@ -39,7 +39,7 @@ export default function RelayDSPage() {
         <div className="meta-row">
           <div className="meta-card y">
             <div className="label">Role</div>
-            <div className="value">Lead designer on the system</div>
+            <div className="value">Product designer</div>
             <div className="sub">Tokens, components, a11y, library docs — with brand, product &amp; eng</div>
           </div>
           <div className="meta-card c">
@@ -76,7 +76,7 @@ export default function RelayDSPage() {
             <div className="hi-bg-dots" />
             <div className="hi-toolbar">
               <div className="mark" />
-              <span className="name">Relay Design System <em>v3.0</em></span>
+              <span className="name">Relay <em>Design System</em></span>
               <span className="crumb">/ components</span>
               <div className="right">
                 <span style={{ opacity: 0.5 }}>8 contributors · 78 screens</span>
@@ -91,23 +91,24 @@ export default function RelayDSPage() {
                 <div className="hi-card hi-featured">
                   <div className="ft-bar">
                     <div className="dots"><i /><i /><i /></div>
-                    <span>relay.team / why / 048</span>
+                    <span>/DecisionCard · 04 / 31 &nbsp;default inst.</span>
                   </div>
                   <div className="ft-body">
-                    <div className="ft-h">DecisionCard / live · default</div>
+                    <div className="ft-h">SURFACES / DECISION</div>
                     <div className="ft-card">
                       <div className="r1">
-                        <span>→ 048</span>
-                        <span className="pill"><span className="d" /> live</span>
+                        <span className="pill"><span className="d" />live</span>
                         <span className="area">infra</span>
+                        <span style={{ marginLeft: 'auto' }}>decided 12 Mar</span>
                       </div>
-                      <div className="t">Move the onboarding email out of Mailchimp into our own queue.</div>
+                      <div className="t">Move onboarding email out of Mailchimp into our own queue.</div>
                       <div className="r2">
                         <div className="avs">
-                          <span className="av">MA</span>
-                          <span className="av">JL</span>
+                          <span className="av" style={{ background: '#0D3B28' }}>SN</span>
+                          <span className="av" style={{ background: '#2DA169' }}>MA</span>
+                          <span className="av" style={{ background: '#4E657A' }}>JL</span>
                         </div>
-                        <span>3 linked sources · revisit at 200k/day</span>
+                        <span>3 linked · revisit Q3</span>
                       </div>
                     </div>
                   </div>
@@ -116,15 +117,16 @@ export default function RelayDSPage() {
                 {/* Panel 2: Tokens */}
                 <div className="hi-card hi-tokens">
                   <div className="hi-card-l">
-                    <span>Token layer · semantic status</span>
-                    <span className="ct">18 tokens</span>
+                    <span>TOKENS / ACCENT</span>
+                    <span className="ct">→ 6 STOPS</span>
                   </div>
                   <div className="tk-list">
                     {[
-                      { bg: '#2DA169', nm: '--status-live',     hex: '#2DA169' },
-                      { bg: '#C68A1F', nm: '--status-drift',    hex: '#C68A1F' },
-                      { bg: '#C8459B', nm: '--status-revise',   hex: '#C8459B' },
-                      { bg: '#5A5C66', nm: '--status-archived', hex: '#5A5C66' },
+                      { bg: '#E8F6EE', nm: '--accent/50',  hex: '#E8F6EE' },
+                      { bg: '#9FE870', nm: '--accent/300', hex: '#9FE870' },
+                      { bg: '#2DA169', nm: '--accent/500', hex: '#2DA169' },
+                      { bg: '#1F8A5B', nm: '--accent/600', hex: '#1F8A5B' },
+                      { bg: '#176E48', nm: '--accent/700', hex: '#176E48' },
                     ].map((t) => (
                       <div className="tk-row" key={t.nm}>
                         <span className="sw" style={{ background: t.bg }} />
@@ -145,32 +147,35 @@ export default function RelayDSPage() {
                 {/* Panel 3: Type ramp */}
                 <div className="hi-card hi-type">
                   <div className="hi-card-l">
-                    <span>Type ramp · Inter + JetBrains Mono</span>
+                    <span>TYPE / SCALE</span>
+                    <span className="ct">5 STEPS</span>
                   </div>
                   <div className="ty-list">
-                    <div className="ty-r t-h1"><span className="sz">32 / 1.1</span><span className="sp">Decisions.</span></div>
-                    <div className="ty-r t-h2"><span className="sz">19 / 1.4</span><span className="sp">Surface title</span></div>
-                    <div className="ty-r t-h3"><span className="sz">15 / 1.5</span><span className="sp">Section label</span></div>
-                    <div className="ty-r t-bd"><span className="sz">14 / 1.55</span><span className="sp">Body copy text.</span></div>
-                    <div className="ty-r t-lb"><span className="sz">11 / 1.0</span><span className="sp">LABEL · MONO</span></div>
+                    <div className="ty-r t-h1"><span className="sz">28 / 1.0</span><span className="sp">Display</span></div>
+                    <div className="ty-r t-h2"><span className="sz">18 / 1.1</span><span className="sp">Heading</span></div>
+                    <div className="ty-r t-h3"><span className="sz">14 / 1.2</span><span className="sp">Subhead</span></div>
+                    <div className="ty-r t-bd"><span className="sz">12 /</span><span className="sp">Body, used for paragraphs.</span></div>
                   </div>
                 </div>
 
-                {/* Panel 4: Component atoms */}
+                {/* Panel 4: StatusBadge states */}
                 <div className="hi-card hi-atom">
                   <div className="hi-card-l">
-                    <span>Component library</span>
-                    <span className="ct">9 entries</span>
+                    <span>COMPONENTS / STATUSBADGE</span>
+                    <span className="ct">4 STATES</span>
                   </div>
                   <div className="at-list">
                     {[
-                      { nm: 'DecisionCard', ct: '4 vars' },
-                      { nm: 'StatusBadge',  ct: '4 states' },
-                      { nm: 'FilterChip',   ct: '3 states' },
-                      { nm: 'MetadataRow',  ct: '2 sizes' },
+                      { dot: '#2DA169', bg: '#E0F5E8', clr: '#1F8A5B', nm: '--status/live',     ct: '27' },
+                      { dot: '#C68A1F', bg: '#FBF1DC', clr: '#A0701A', nm: '--status/drift',    ct: '14' },
+                      { dot: '#C8459B', bg: '#F9E0F0', clr: '#A33580', nm: '--status/revise',   ct: '9'  },
+                      { dot: '#8A8D99', bg: '#EAECEF', clr: '#5A5C66', nm: '--status/archived', ct: '12' },
                     ].map((c) => (
                       <div className="at-row" key={c.nm}>
-                        <span className="badge"><span className="d" />live</span>
+                        <span className="badge" style={{ background: c.bg, color: c.clr, boxShadow: 'none' }}>
+                          <span className="d" style={{ background: c.dot }} />
+                          {c.nm.replace('--status/', '')}
+                        </span>
                         <span className="nm">{c.nm}</span>
                         <span className="ct">{c.ct}</span>
                       </div>
@@ -181,22 +186,23 @@ export default function RelayDSPage() {
                 {/* Panel 5: Actions / UI patterns */}
                 <div className="hi-card hi-act">
                   <div className="hi-card-l">
-                    <span>Actions &amp; inputs</span>
+                    <span>COMPONENTS / ACTIONS</span>
+                    <span className="ct">3 PATTERNS</span>
                   </div>
                   <div className="ac-body">
                     <div className="btn-row">
-                      <span className="btn primary">Confirm decision</span>
+                      <span className="btn primary">Publish</span>
                       <span className="btn secondary">Save draft</span>
-                      <span className="btn ghost">Dismiss</span>
+                      <span className="btn ghost">Cancel</span>
                     </div>
                     <div className="chip-row">
-                      <span className="chip active"><span className="d" />Infra</span>
+                      <span className="chip active"><span className="d" />All</span>
+                      <span className="chip">Infra</span>
                       <span className="chip">Brand</span>
                       <span className="chip">Hiring</span>
-                      <span className="chip">Eng</span>
                     </div>
                     <div className="inp-row">
-                      <span>Search decisions</span>
+                      <span>Search decisions...</span>
                       <span className="cur" />
                       <span className="kbd">⌘K</span>
                     </div>
@@ -206,11 +212,11 @@ export default function RelayDSPage() {
                 {/* Panel 6: Spacing */}
                 <div className="hi-card hi-sp">
                   <div className="hi-card-l">
-                    <span>Spacing scale · 4px base</span>
-                    <span className="ct">8 steps</span>
+                    <span>SPACING · RADII</span>
+                    <span className="ct">8 + 3</span>
                   </div>
                   <div className="sp-bars">
-                    {[['4px','14%'],['8px','26%'],['12px','38%'],['16px','52%'],['24px','68%'],['32px','84%']].map(([label,w]) => (
+                    {[['04','14%'],['08','26%'],['12','38%'],['16','52%'],['24','68%'],['32','84%']].map(([label,w]) => (
                       <div className="br" key={label}>
                         <span>{label}</span>
                         <div className="bar" style={{ width: w }} />
@@ -219,9 +225,9 @@ export default function RelayDSPage() {
                   </div>
                   <div className="sp-divide" />
                   <div className="ra-row">
-                    <div className="ra" style={{ borderRadius: 6 }}>6px</div>
-                    <div className="ra" style={{ borderRadius: 8 }}>8px</div>
-                    <div className="ra" style={{ borderRadius: 12 }}>12px</div>
+                    <div className="ra" style={{ borderRadius: 6 }}>sm · 6</div>
+                    <div className="ra" style={{ borderRadius: 8 }}>md · 8</div>
+                    <div className="ra" style={{ borderRadius: 12 }}>lg · 12</div>
                   </div>
                 </div>
 

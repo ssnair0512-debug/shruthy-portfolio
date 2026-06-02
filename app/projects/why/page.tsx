@@ -444,7 +444,7 @@ export default function WhyPage() {
             <div className="meta-row" role="list">
               <div className="meta-card y" role="listitem">
                 <div className="label">Role</div>
-                <div className="value">Lead Product Designer</div>
+                <div className="value">Product designer</div>
                 <div className="sub">Research, IA, visual + interaction, a11y review</div>
               </div>
               <div className="meta-card c" role="listitem">

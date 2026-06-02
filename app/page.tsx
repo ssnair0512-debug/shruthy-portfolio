@@ -112,13 +112,96 @@ export default function Home() {
       <section data-screen-label="Projects" style={{ paddingTop: '20px' }}>
         <div className="projects">
 
-          {/* 1) WHY */}
+          {/* 1) RELAY DESIGN SYSTEM */}
+          <Link
+            href="/projects/relay-design-system"
+            className="project"
+            style={{ '--accent': 'var(--y)' } as React.CSSProperties}
+            data-screen-label="Project — Relay DS"
+          >
+            <div
+              className="project-preview"
+              style={{ background: 'linear-gradient(135deg, var(--y-2) 0%, #FFF8C8 100%)' }}
+            >
+              <div className="frame-label">
+                <span className="dot" style={{ background: 'var(--y)' }} />
+                relay-ds · /tokens
+              </div>
+              <div className="mini-ds">
+                <div className="mds-head">
+                  <div className="lbl">Token set · <span className="v">brand / light</span></div>
+                  <div className="ver">v3.2</div>
+                </div>
+                <div className="mds-tokens">
+                  <div className="mds-token"><div className="sw" style={{ background: '#2DA169' }} /><div className="nm"><span className="h">brand</span>900</div></div>
+                  <div className="mds-token"><div className="sw" style={{ background: '#1A2638' }} /><div className="nm"><span className="h">ink</span>900</div></div>
+                  <div className="mds-token"><div className="sw" style={{ background: '#4E657A' }} /><div className="nm"><span className="h">ink</span>600</div></div>
+                  <div className="mds-token"><div className="sw" style={{ background: '#D4DCE6' }} /><div className="nm"><span className="h">line</span>300</div></div>
+                  <div className="mds-token"><div className="sw" style={{ background: '#FAFBFC' }} /><div className="nm"><span className="h">surf</span>100</div></div>
+                  <div className="mds-token"><div className="sw" style={{ background: '#C68A1F' }} /><div className="nm"><span className="h">warn</span>700</div></div>
+                </div>
+                <div className="mds-section-lbl">Components · <span className="v">button / input</span></div>
+                <div className="mds-buttons">
+                  <span className="mds-btn primary">Save changes</span>
+                  <span className="mds-btn ghost">Cancel</span>
+                  <span className="mds-btn subtle">Later</span>
+                  <span className="mds-btn danger">Delete</span>
+                </div>
+                <div className="mds-input focused">team-name.relay.team</div>
+                <div className="mds-input">Add a teammate by email</div>
+                <div className="mds-foot">
+                  <div className="stat"><span className="n">47</span>components</div>
+                  <div className="stat"><span className="n">312</span>tokens</div>
+                  <div className="stat"><span className="n">AA</span>contrast min</div>
+                </div>
+              </div>
+            </div>
+            <div className="project-body">
+              <span className="proj-num">01</span>
+              <div className="proj-meta">
+                <span className="tag-pill" style={{ background: 'var(--y)', color: 'var(--ink)' }}>
+                  <span className="sw" style={{ background: '#B58A00' }} />Design systems
+                </span>
+                <span>Relay</span><span className="sep">·</span><span>2025 — ongoing</span>
+              </div>
+              <h3 className="proj-title">Relay DS <em>— tokens, components, contracts.</em></h3>
+              <p className="proj-summary">
+                A token architecture and <strong>47-component library</strong> three product squads ship from without stepping on each other. Built for direct-manipulation edits, dark-mode parity, and accessibility receipts.
+              </p>
+              <div className="proj-facts">
+                <div className="proj-fact"><span className="k">My role</span><span className="v">Product designer</span></div>
+                <div className="proj-fact"><span className="k">Scale</span><span className="v">47 <em>components</em></span></div>
+                <div className="proj-fact"><span className="k">Adoption</span><span className="v">3 <em>squads</em></span></div>
+              </div>
+              <span className="proj-cta" style={{ background: 'var(--y)' }}>Read case study <span className="arrow">→</span></span>
+            </div>
+          </Link>
+
+          {/* 2) WHY */}
           <Link
             href="/projects/why"
-            className="project"
+            className="project flip"
             style={{ '--accent': 'var(--g)' } as React.CSSProperties}
             data-screen-label="Project — Why"
           >
+            <div className="project-body">
+              <span className="proj-num">02</span>
+              <div className="proj-meta">
+                <span className="tag-pill"><span className="sw" style={{ background: 'var(--g)' }} />Feature design</span>
+                <span>Relay</span><span className="sep">·</span><span>2025 — 14 wk</span>
+              </div>
+              <h3 className="proj-title">Why<span style={{ color: 'var(--g)' }}>.</span> &nbsp;<em>The decision ledger.</em></h3>
+              <p className="proj-summary">
+                Engineering teams ship features but lose the <em>why</em> behind them. I designed a capture system that meets people in{' '}
+                <strong>Slack, Figma, and the home feed</strong> — three timing shapes for one decision.
+              </p>
+              <div className="proj-facts">
+                <div className="proj-fact"><span className="k">My role</span><span className="v">Product designer</span></div>
+                <div className="proj-fact"><span className="k">Process</span><span className="v">13 <em>directions</em></span></div>
+                <div className="proj-fact"><span className="k">Outcome</span><span className="v">3 <em>surfaces shipped</em></span></div>
+              </div>
+              <span className="proj-cta">Read case study <span className="arrow">→</span></span>
+            </div>
             <div
               className="project-preview"
               style={{ background: 'linear-gradient(135deg, var(--g-2) 0%, #EAF8E0 100%)' }}
@@ -183,89 +266,6 @@ export default function Home() {
                 <div className="bubble">
                   <div className="who">Maya · PM</div>
                   this is the page I want to live in
-                </div>
-              </div>
-            </div>
-            <div className="project-body">
-              <span className="proj-num">01</span>
-              <div className="proj-meta">
-                <span className="tag-pill"><span className="sw" style={{ background: 'var(--g)' }} />Feature design</span>
-                <span>Relay</span><span className="sep">·</span><span>2025 — 14 wk</span>
-              </div>
-              <h3 className="proj-title">Why<span style={{ color: 'var(--g)' }}>.</span> &nbsp;<em>The decision ledger.</em></h3>
-              <p className="proj-summary">
-                Engineering teams ship features but lose the <em>why</em> behind them. I designed a capture system that meets people in{' '}
-                <strong>Slack, Figma, and the home feed</strong> — three timing shapes for one decision.
-              </p>
-              <div className="proj-facts">
-                <div className="proj-fact"><span className="k">My role</span><span className="v">Lead designer</span></div>
-                <div className="proj-fact"><span className="k">Process</span><span className="v">13 <em>directions</em></span></div>
-                <div className="proj-fact"><span className="k">Outcome</span><span className="v">3 <em>surfaces shipped</em></span></div>
-              </div>
-              <span className="proj-cta">Read case study <span className="arrow">→</span></span>
-            </div>
-          </Link>
-
-          {/* 2) RELAY DESIGN SYSTEM */}
-          <Link
-            href="/projects/relay-design-system"
-            className="project flip"
-            style={{ '--accent': 'var(--y)' } as React.CSSProperties}
-            data-screen-label="Project — Relay DS"
-          >
-            <div className="project-body">
-              <span className="proj-num">02</span>
-              <div className="proj-meta">
-                <span className="tag-pill" style={{ background: 'var(--y)', color: 'var(--ink)' }}>
-                  <span className="sw" style={{ background: '#B58A00' }} />Design systems
-                </span>
-                <span>Relay</span><span className="sep">·</span><span>2025 — ongoing</span>
-              </div>
-              <h3 className="proj-title">Relay DS <em>— tokens, components, contracts.</em></h3>
-              <p className="proj-summary">
-                A token architecture and <strong>47-component library</strong> three product squads ship from without stepping on each other. Built for direct-manipulation edits, dark-mode parity, and accessibility receipts.
-              </p>
-              <div className="proj-facts">
-                <div className="proj-fact"><span className="k">My role</span><span className="v">Systems lead</span></div>
-                <div className="proj-fact"><span className="k">Scale</span><span className="v">47 <em>components</em></span></div>
-                <div className="proj-fact"><span className="k">Adoption</span><span className="v">3 <em>squads</em></span></div>
-              </div>
-              <span className="proj-cta" style={{ background: 'var(--y)' }}>Read case study <span className="arrow">→</span></span>
-            </div>
-            <div
-              className="project-preview"
-              style={{ background: 'linear-gradient(135deg, var(--y-2) 0%, #FFF8C8 100%)' }}
-            >
-              <div className="frame-label">
-                <span className="dot" style={{ background: 'var(--y)' }} />
-                relay-ds · /tokens
-              </div>
-              <div className="mini-ds">
-                <div className="mds-head">
-                  <div className="lbl">Token set · <span className="v">brand / light</span></div>
-                  <div className="ver">v3.2</div>
-                </div>
-                <div className="mds-tokens">
-                  <div className="mds-token"><div className="sw" style={{ background: '#2DA169' }} /><div className="nm"><span className="h">brand</span>900</div></div>
-                  <div className="mds-token"><div className="sw" style={{ background: '#1A2638' }} /><div className="nm"><span className="h">ink</span>900</div></div>
-                  <div className="mds-token"><div className="sw" style={{ background: '#4E657A' }} /><div className="nm"><span className="h">ink</span>600</div></div>
-                  <div className="mds-token"><div className="sw" style={{ background: '#D4DCE6' }} /><div className="nm"><span className="h">line</span>300</div></div>
-                  <div className="mds-token"><div className="sw" style={{ background: '#FAFBFC' }} /><div className="nm"><span className="h">surf</span>100</div></div>
-                  <div className="mds-token"><div className="sw" style={{ background: '#C68A1F' }} /><div className="nm"><span className="h">warn</span>700</div></div>
-                </div>
-                <div className="mds-section-lbl">Components · <span className="v">button / input</span></div>
-                <div className="mds-buttons">
-                  <span className="mds-btn primary">Save changes</span>
-                  <span className="mds-btn ghost">Cancel</span>
-                  <span className="mds-btn subtle">Later</span>
-                  <span className="mds-btn danger">Delete</span>
-                </div>
-                <div className="mds-input focused">team-name.relay.team</div>
-                <div className="mds-input">Add a teammate by email</div>
-                <div className="mds-foot">
-                  <div className="stat"><span className="n">47</span>components</div>
-                  <div className="stat"><span className="n">312</span>tokens</div>
-                  <div className="stat"><span className="n">AA</span>contrast min</div>
                 </div>
               </div>
             </div>
