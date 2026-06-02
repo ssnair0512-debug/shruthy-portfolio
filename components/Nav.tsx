@@ -2,15 +2,21 @@
 
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
+import { useState } from 'react'
 
 export default function Nav() {
   const pathname = usePathname()
   const router = useRouter()
-  const workActive = pathname === '/'
-  const aboutActive = pathname === '/' // about section lives on home
+  const onHome = pathname === '/'
+  const [activeSection, setActiveSection] = useState<'work' | 'about'>('work')
+
+  function handleWorkClick() {
+    setActiveSection('work')
+  }
 
   function handleAboutClick(e: React.MouseEvent<HTMLAnchorElement>) {
     e.preventDefault()
+    setActiveSection('about')
     if (pathname === '/') {
       document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })
     } else {
@@ -53,14 +59,15 @@ export default function Nav() {
       <div className="nav-grp">
         <Link
           href="/#work"
-          className={`nav-btn${workActive ? ' active' : ''}`}
+          onClick={handleWorkClick}
+          className={`nav-btn${onHome && activeSection === 'work' ? ' active' : ''}`}
         >
           Work
         </Link>
         <a
           href="/#about"
           onClick={handleAboutClick}
-          className="nav-btn"
+          className={`nav-btn${onHome && activeSection === 'about' ? ' active' : ''}`}
         >
           About
         </a>
