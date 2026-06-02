@@ -664,7 +664,8 @@
 .wud-cs .navrow .t.c .ic { width: 38px; height: 38px; border-radius: 50%; background: var(--v); color: #fff; font-size: 22px; font-weight: 300; margin-top: -3px; }
 .wud-cs .navrow .t .nm { font-family: var(--display); font-size: 13px; font-weight: 600; }
 .wud-cs .navrow .t.c .nm { color: var(--w-purple-dark); }
-.wud-cs .navrow .t .role { font-family: var(--mono); font-size: 9.5px; color: var(--ink-3); }
+.wud-cs .navrow .t .role { font-family: var(--mono); font-size: 9.5px; color: var(--ink-3); position: static; padding: 0; }
+.wud-cs .navrow .t .role::before { display: none; }
 
 /* ── Section 07 · Solutions — surface heads ─────────────────── */
 .wud-cs .surface-head { margin-top: 64px; }
