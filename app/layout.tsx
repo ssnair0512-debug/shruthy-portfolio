@@ -11,6 +11,7 @@ import {
   Caveat,
   Unbounded,
 } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/next'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import ContactBanner from '@/components/ContactBanner'
@@ -122,6 +123,7 @@ export default function RootLayout({
           <ContactBanner />
           <Footer />
         </div>
+        <Analytics />
       </body>
     </html>
   )
