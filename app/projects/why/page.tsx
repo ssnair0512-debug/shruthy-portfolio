@@ -411,8 +411,6 @@ export default function WhyPage() {
             <div className="hero-top">
               <span className="crumb">
                 <a href="/">Work</a>
-                <span className="sep">/</span>
-                Case study 02
               </span>
             </div>
 

@@ -198,27 +198,29 @@ export function PhoneRSVP() {
             <div className="rb-label">FOOD FESTIVAL</div>
           </div>
           <div className="rsvp-body">
-            <div className="rsvp-title">Angels Square Food Festival</div>
-            <div className="rsvp-meta">Oct 17 <span className="dot">·</span> 1pm <span className="dot">·</span> Angels Square</div>
+            <div className="rsvp-title">Food Festival</div>
+            <div className="rsvp-meta">Oct 17<span className="dot">&middot;</span>1pm<span className="dot">&middot;</span>@Angels Square</div>
             <div className="att-row">
-              <div className="av-stack">
-                <div className="rsvp-av a">N</div><div className="rsvp-av b">J</div>
-                <div className="rsvp-av c">M</div><div className="rsvp-av d">S</div>
+              <div className="att-top">
+                <div className="av-stack">
+                  <div className="rsvp-av a">MA</div><div className="rsvp-av b">DI</div>
+                  <div className="rsvp-av c">AK</div><div className="rsvp-av d">+5</div>
+                </div>
+                <div className="left-pill"><b>49</b> seats left</div>
               </div>
-              <div className="rsvp-nums"><b>151 attending</b><span className="you-going">3 friends going</span></div>
-              <div className="left-pill">49 left</div>
+              <div className="att-counts"><b>151 attending</b><span className="you-going">&middot; 8 friends going</span></div>
             </div>
             <div className="guests">
-              <div className="gh-label">Number of guests</div>
+              <div className="gh-label">Confirm number of guests</div>
               <div className="stepper">
-                <div className="st-btn">−</div>
+                <div className="st-btn">&#8722;</div>
                 <div className="st-num">1</div>
                 <div className="st-btn">+</div>
               </div>
               <div className="st-note">Tickets are limited, RSVP to secure your spot</div>
             </div>
             <div className="rsvp-confirm">
-              <div className="rc-check">✓</div>
+              <div className="rc-check">&#10003;</div>
               I confirm my attendance
             </div>
             <div className="done-btn">DONE</div>

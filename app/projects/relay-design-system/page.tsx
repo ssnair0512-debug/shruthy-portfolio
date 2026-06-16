@@ -16,8 +16,6 @@ export default function RelayDSPage() {
         <div className="hero-top">
           <div className="crumb">
             <Link href="/">Work</Link>
-            <span className="sep">/</span>
-            <span>Case study · 01</span>
           </div>
         </div>
 

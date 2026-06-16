@@ -6,6 +6,9 @@ import {
   PhoneFilter, PhonePrefs, PhoneRSVP,
   PhoneProfile, PhoneHelp, PhoneMyEvents,
 } from './WudPhones'
+import WudHeroReel from './WudHeroReel'
+import WudExploration from './WudExploration'
+import WudIA from './WudIA'
 import './wud.css'
 
 export const metadata: Metadata = {
@@ -36,12 +39,6 @@ function WudHero() {
         <div className="hero-top">
           <div className="crumb">
             <Link href="/">Work</Link>
-            <span className="sep">/</span>
-            <span>Case study 03</span>
-          </div>
-          <div className="avail">
-            <span className="pulse" />
-            WUD! · 6 months · 2024
           </div>
         </div>
 
@@ -50,10 +47,13 @@ function WudHero() {
           <p className="hero-tag">One app for the whole social-event lifecycle &mdash; discover, coordinate, show up, and be seen.</p>
         </div>
 
+        <WudHeroReel />
+
         <p className="hero-sub">
           Event planning is social. The tools people use to plan it aren&apos;t. Four apps were doing the work of one,
-          and the seams between them were where every plan fell apart. I reframed the brief, ran the research, and
-          designed a single product spanning <strong>discovery, coordination, and identity</strong>.
+          and the seams between them were where every plan fell apart. I led the research and reframed the brief from
+          &ldquo;better discovery&rdquo; into a bigger bet, then worked with a second designer, three engineers, and our PM to
+          ship a single 0-to-1 product spanning <strong>discovery, coordination, and identity</strong>.
         </p>
 
         <div className="hero-pills">
@@ -452,7 +452,9 @@ function Ch06() {
   )
 }
 
-/* ── Ch 07 · Solutions ──────────────────────────────────────── */
+/* ── Ch 07 · Solutions ─────────────────────────────────────────
+   (WudExploration renders as its own chapter between 06 and 07)
+   ─────────────────────────────────────────────────────────────── */
 function Ch07() {
   return (
     <section className="chapter">
@@ -552,14 +554,14 @@ function Ch07() {
   )
 }
 
-/* ── Ch 08 · Failures ───────────────────────────────────────── */
+/* ── Ch 09 · Failures ───────────────────────────────────────── */
 function Ch08() {
   return (
     <section className="chapter">
       <div className="chapter-inner">
         <div className="lede">
           <div className="col-l">
-            <div className="kick"><span className="n">08</span> Honest failures</div>
+            <div className="kick"><span className="n">09</span> Honest failures</div>
             <h2 className="chap-h">Four things I got wrong, <em>and what they revealed.</em></h2>
             <p className="chap-body">The failures taught more durable lessons than the versions that worked. Each one named a habit worth keeping.</p>
           </div>
@@ -671,14 +673,14 @@ function Ch08() {
   )
 }
 
-/* ── Ch 09 · Evaluation ─────────────────────────────────────── */
+/* ── Ch 10 · Evaluation ─────────────────────────────────────── */
 function Ch09() {
   return (
     <section className="chapter">
       <div className="chapter-inner">
         <div className="lede">
           <div className="col-l">
-            <div className="kick"><span className="n">09</span> Evaluation</div>
+            <div className="kick"><span className="n">10</span> Evaluation</div>
             <h2 className="chap-h">I designed the fix &mdash; then <em>how we&apos;d know it worked.</em></h2>
             <p className="chap-body">Two pre/post studies during the redesign loop. Imperfect metrics, but a measurement plan is what turns a design exercise into a product argument.</p>
           </div>
@@ -726,14 +728,14 @@ function Ch09() {
   )
 }
 
-/* ── Ch 10 · What's Next ────────────────────────────────────── */
+/* ── Ch 11 · What's Next ────────────────────────────────────── */
 function Ch10() {
   return (
     <section className="chapter">
       <div className="chapter-inner">
         <div className="lede">
           <div className="col-l">
-            <div className="kick"><span className="n">10</span> Where it goes next</div>
+            <div className="kick"><span className="n">11</span> Where it goes next</div>
             <h2 className="chap-h">The coordination features solve the interaction. <em>The next problem is upstream.</em></h2>
             <p className="chap-body">The features address friction at the interaction level. The harder, more valuable problem sits one step earlier.</p>
           </div>
@@ -764,14 +766,14 @@ function Ch10() {
   )
 }
 
-/* ── Ch 11 · Reflections ────────────────────────────────────── */
+/* ── Ch 12 · Reflections ────────────────────────────────────── */
 function Ch11() {
   return (
     <section className="chapter">
       <div className="chapter-inner">
         <div className="lede">
           <div className="col-l">
-            <div className="kick"><span className="n">11</span> Reflections</div>
+            <div className="kick"><span className="n">12</span> Reflections</div>
             <h2 className="chap-h">What changed <em>in how I work.</em></h2>
             <p className="chap-body">Two shifts stuck &mdash; one about the problem, one about the craft of owning a piece of it.</p>
           </div>
@@ -859,7 +861,9 @@ export default function WudPage() {
       <Ch04 />
       <Ch05 />
       <Ch06 />
+      <WudExploration />
       <Ch07 />
+      <WudIA />
       <Ch08 />
       <Ch09 />
       <Ch10 />
