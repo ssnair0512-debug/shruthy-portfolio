@@ -489,10 +489,10 @@
 
 /* ── RSVP screen ────────────────────────────────────────────── */
 .wud-cs .rsvp { flex: 1; display: flex; flex-direction: column; background: var(--w-bg); }
-.wud-cs .rsvp .rsvp-banner { height: 128px; background: linear-gradient(135deg, #FFD9C2 0%, #FFB5D9 60%, #C9B5FF 100%); position: relative; flex-shrink: 0; }
+.wud-cs .rsvp .rsvp-banner { height: 110px; background: linear-gradient(135deg, #FFD9C2 0%, #FFB5D9 60%, #C9B5FF 100%); position: relative; flex-shrink: 0; }
 .wud-cs .rsvp .rsvp-banner .rb-back { position: absolute; top: 12px; left: 14px; width: 28px; height: 28px; border-radius: 50%; background: rgba(255,255,255,0.85); color: var(--w-text); display: grid; place-items: center; font-size: 14px; font-weight: 600; }
 .wud-cs .rsvp .rsvp-banner .rb-label { position: absolute; bottom: 14px; left: 18px; font-family: var(--display); font-size: 11px; font-weight: 700; letter-spacing: 0.16em; color: rgba(26,20,48,0.7); }
-.wud-cs .rsvp .rsvp-body { padding: 14px 18px 14px; flex: 1; display: flex; flex-direction: column; }
+.wud-cs .rsvp .rsvp-body { padding: 11px 18px 11px; flex: 1; display: flex; flex-direction: column; }
 .wud-cs .rsvp .rsvp-title { font-family: var(--display); font-size: 18px; font-weight: 700; letter-spacing: -0.018em; color: var(--w-text); line-height: 1.2; }
 .wud-cs .rsvp .rsvp-meta { margin-top: 6px; font-size: 11px; color: var(--w-text-2); }
 .wud-cs .rsvp .rsvp-meta .dot { margin: 0 5px; color: var(--w-text-3); }
