@@ -762,6 +762,7 @@ section.body + section.body { border-top: 1px solid var(--line); }
 .proj-meta {
   display: flex;
   align-items: center;
+  flex-wrap: nowrap;
   gap: 12px;
   font-family: var(--mono);
   font-size: 11px;
@@ -778,6 +779,8 @@ section.body + section.body { border-top: 1px solid var(--line); }
   background: var(--ink);
   color: var(--paper);
   letter-spacing: 0.06em;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 .proj-meta .tag-pill .sw { width: 6px; height: 6px; border-radius: 50%; }
 .proj-meta .sep { opacity: 0.4; }
@@ -887,8 +890,8 @@ section.body + section.body { border-top: 1px solid var(--line); }
 
 /* ─── Mini Relay Preview ─────────────────────────────────────── */
 .mini-relay {
-  width: 100%;
-  max-width: 540px;
+  width: 490px;
+  flex-shrink: 0;
   background: var(--r-bg);
   border-radius: 8px;
   overflow: hidden;
@@ -1072,8 +1075,8 @@ section.body + section.body { border-top: 1px solid var(--line); }
 
 /* ─── Mini DS Preview ────────────────────────────────────────── */
 .mini-ds {
-  width: 100%;
-  max-width: 540px;
+  width: 490px;
+  flex-shrink: 0;
   background: var(--paper);
   border-radius: 8px;
   overflow: hidden;
@@ -1108,6 +1111,7 @@ section.body + section.body { border-top: 1px solid var(--line); }
 .mini-wud {
   width: 280px;
   height: 560px;
+  flex-shrink: 0;
   background: #000;
   border-radius: 38px;
   padding: 10px;
