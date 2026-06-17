@@ -44,20 +44,21 @@ function WudHero() {
 
         <div>
           <h1 className="hero-name">WUD<span className="dot">!</span></h1>
-          <p className="hero-tag">One app for the whole social-event lifecycle &mdash; discover, coordinate, show up, and be seen.</p>
+          <p className="hero-tag">Designing the social coordination layer that turns interest into attendance.</p>
         </div>
 
         <WudHeroReel />
 
         <p className="hero-sub">
-          Event planning is social. The tools people use to plan it aren&apos;t. Four apps were doing the work of one,
-          and the seams between them were where every plan fell apart. I led the research and reframed the brief from
-          &ldquo;better discovery&rdquo; into a bigger bet, then worked with a second designer, three engineers, and our PM to
-          ship a single 0-to-1 product spanning <strong>discovery, coordination, and identity</strong>.
+          People could find events fine. The harder question was <strong>&ldquo;is anyone I know going?&rdquo;</strong>
+          Research showed the friction wasn&apos;t discovery but what came <em>after</em> &mdash; coordinating with friends,
+          committing, and feeling confident enough to show up. I led research synthesis, the problem reframe, and the{' '}
+          <strong>interaction architecture</strong> of the coordination layer, RSVP and attendance, the Create&nbsp;Event
+          redesign, and validation, partnering with a designer on visual execution and with PM and engineering through delivery.
         </p>
 
         <div className="hero-pills">
-          <span className="hpill"><span className="sw" style={{ background: '#6F4FE6' }} />UX Design</span>
+          <span className="hpill"><span className="sw" style={{ background: '#6F4FE6' }} />Interaction Design</span>
           <span className="hpill"><span className="sw" style={{ background: '#C8459B' }} />Mixed-method research</span>
           <span className="hpill"><span className="sw" style={{ background: '#1F8FA0' }} />Journey mapping</span>
           <span className="hpill"><span className="sw" style={{ background: '#1F8A5B' }} />Hi-fi prototyping</span>
@@ -67,8 +68,8 @@ function WudHero() {
         <div className="meta-row">
           <div className="meta-card y">
             <div className="mc-label">Role</div>
-            <div className="mc-value">UX Designer</div>
-            <div className="mc-sub">In a team of 2 UX · 2 FE · 3 BE · 1 PO</div>
+            <div className="mc-value">Interaction Designer</div>
+            <div className="mc-sub">In a team of 2 design · 2 FE · 3 BE · 1 PO</div>
           </div>
           <div className="meta-card c">
             <div className="mc-label">Timeline</div>
@@ -78,12 +79,12 @@ function WudHero() {
           <div className="meta-card g">
             <div className="mc-label">Owned</div>
             <div className="mc-value">Research, IA, Create&nbsp;Event</div>
-            <div className="mc-sub">Shared: concept ideation &amp; visuals</div>
+            <div className="mc-sub">Shared: concept &amp; visual execution</div>
           </div>
           <div className="meta-card p">
             <div className="mc-label">Outcome</div>
-            <div className="mc-value">60% → 91%</div>
-            <div className="mc-sub">Create&nbsp;Event completion, pre/post</div>
+            <div className="mc-value">38% → 84%</div>
+            <div className="mc-sub">Coordination confidence, pre/post</div>
           </div>
         </div>
       </div>
@@ -116,7 +117,7 @@ function WudOverview() {
   )
 }
 
-/* ── Ch 01 · What Shipped ───────────────────────────────────── */
+/* ── Ch 01 · What Shipped ────────────────────────────────────── */
 function Ch01() {
   return (
     <section className="chapter">
@@ -125,7 +126,7 @@ function Ch01() {
           <div className="col-l">
             <div className="kick"><span className="n">01</span> What shipped</div>
             <h2 className="chap-h">Four apps were doing the job of <em>one.</em></h2>
-            <p className="chap-body">Eventbrite for discovery, WhatsApp to coordinate, Calendar to track, Instagram for proof &mdash; and none of them talking to each other. WUD! replaces the stitching with one lifecycle, discovery through memory.</p>
+            <p className="chap-body">Eventbrite for discovery, WhatsApp to coordinate, Calendar to track, Instagram for proof, and none of them talking to each other. We pulled the whole social-event lifecycle into one app, so discovering, planning, showing up, and being seen finally live in the same place.</p>
           </div>
           <div className="col-r">
             <Think>The interesting question was never which app to copy. It was what falls into the gaps <em>between</em> them.</Think>
@@ -154,16 +155,55 @@ function Ch01() {
   )
 }
 
-/* ── Ch 02 · Reframing ──────────────────────────────────────── */
-function Ch02() {
+/* ── Ch 02 · What I Owned ───────────────────────────────────── */
+function Ch02Owned() {
   return (
     <section className="chapter">
       <div className="chapter-inner">
         <div className="lede">
           <div className="col-l">
-            <div className="kick"><span className="n">02</span> Reframing the brief</div>
-            <h2 className="chap-h">I went in with the wrong hypothesis. <em>The research corrected it.</em></h2>
-            <p className="chap-body">The brief said better discovery. Four methods &mdash; observation, audit, interviews, survey &mdash; were built to capture both behaviour and feeling. They pointed somewhere else entirely.</p>
+            <div className="kick"><span className="n">02</span> What I owned</div>
+            <h2 className="chap-h">I owned the decisions that shaped <em>what got built.</em></h2>
+            <p className="chap-body">Six months, end to end, inside a team of two designers, five engineers and a product owner. I led the parts that set product direction and system behaviour, and partnered on concept and visual execution. The line between the two matters, so here it is, plainly.</p>
+          </div>
+        </div>
+
+        <div className="owned-grid">
+          <div className="owned-col mine">
+            <div className="otag">Mine · end to end</div>
+            <h4>Led, decided, defended</h4>
+            <ul>
+              <li><b>Research synthesis &amp; the strategic pivot</b> &mdash; reframing the brief from discovery to coordination uncertainty.</li>
+              <li><b>Interaction architecture of the coordination layer</b> &mdash; the state model, privacy gates, and system behaviour under every condition.</li>
+              <li><b>The Create&nbsp;Event redesign</b> &mdash; restructuring 13 decisions into four steps (60% &rarr; 91% completion).</li>
+              <li><b>The measurement plan</b> &mdash; the pre/post studies that turned the redesign from taste into evidence.</li>
+            </ul>
+          </div>
+          <div className="owned-col shared">
+            <div className="otag">Shared · partnered</div>
+            <h4>Collaborated, didn&apos;t solo</h4>
+            <ul>
+              <li><b>Concept &amp; ideation</b> &mdash; early divergent exploration alongside a second designer.</li>
+              <li><b>Visual execution</b> &mdash; hi-fi styling and component polish, co-owned with design.</li>
+              <li><b>Delivery</b> &mdash; feasibility, scoping and build with PM and engineering (2 FE · 3 BE · 1 PO).</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ── Ch 03 · Reframing ──────────────────────────────────────── */
+function Ch03() {
+  return (
+    <section className="chapter">
+      <div className="chapter-inner">
+        <div className="lede">
+          <div className="col-l">
+            <div className="kick"><span className="n">03</span> Reframing the brief</div>
+            <h2 className="chap-h">Discovery wasn&apos;t broken. <em>Coordination uncertainty was.</em></h2>
+            <p className="chap-body">The brief said better discovery. Four methods &mdash; observation, audit, interviews, survey &mdash; all came back with the same thing: people could already find events. The breakdown lived between &ldquo;that looks fun&rdquo; and &ldquo;I&apos;m actually going.&rdquo;</p>
           </div>
           <div className="col-r">
             <Think>Being wrong early is cheap. Being wrong at launch is not. I&apos;d rather the research <em>embarrass me now.</em></Think>
@@ -178,7 +218,7 @@ function Ch02() {
           </div>
           <div className="rf found">
             <div className="rf-tag">What I found</div>
-            <h4>Coordination and identity were breaking it.</h4>
+            <h4>Coordination uncertainty was breaking it.</h4>
             <p>Discovery was <em>solved-enough</em>. The drop-offs lived <em>after</em> people found an event &mdash; planning with friends, and being seen as someone who shows up.</p>
           </div>
           <div className="rf-arrow" aria-hidden="true">→</div>
@@ -188,16 +228,16 @@ function Ch02() {
   )
 }
 
-/* ── Ch 03 · Research ───────────────────────────────────────── */
-function Ch03() {
+/* ── Ch 04 · Research ───────────────────────────────────────── */
+function Ch04() {
   return (
     <section className="chapter">
       <div className="chapter-inner">
         <div className="lede">
           <div className="col-l">
-            <div className="kick"><span className="n">03</span> Research</div>
+            <div className="kick"><span className="n">04</span> Research</div>
             <h2 className="chap-h">Four methods, seventy people. <em>The same finding came back from each.</em></h2>
-            <p className="chap-body">Triangulation beats sample size when you&apos;re defending a pivot. I needed a signal strong enough that nobody could argue me out of it.</p>
+            <p className="chap-body">Triangulation beats sample size when you&apos;re defending a pivot. I needed a signal nobody could argue me out of.</p>
           </div>
           <div className="col-r">
             <Think>If one method says it, it&apos;s a hunch. If <em>four</em> say it, it&apos;s a finding I can take to the team.</Think>
@@ -209,28 +249,28 @@ function Ch03() {
             <div className="mh"><div className="mn">01</div><div className="ml">Observation</div></div>
             <div className="mb">
               <div className="scope">Shadowing · 10 users · natural contexts</div>
-              <p>Tracked where people switched apps and stalled while planning. <em>Real drop-off points, not recalled ones.</em></p>
+              <p>Where people switched apps and stalled. <em>Real drop-off points, not recalled ones.</em></p>
             </div>
           </div>
           <div className="method">
             <div className="mh"><div className="mn">02</div><div className="ml">Audit</div></div>
             <div className="mb">
               <div className="scope">7 platforms · Eventbrite, Meetup, Partiful…</div>
-              <p>The market nails centralised discovery and fails at <em>everything after you&apos;ve found an event.</em></p>
+              <p>The market nails discovery and fails at <em>everything after you&apos;ve found an event.</em></p>
             </div>
           </div>
           <div className="method">
             <div className="mh"><div className="mn">03</div><div className="ml">Interviews</div></div>
             <div className="mb">
               <div className="scope">5 sessions · 90 minutes each</div>
-              <p>The emotional layer, not just the inconvenience &mdash; the language people use about <em>FOMO, hesitation, second-guessing.</em></p>
+              <p>The emotional layer: the language of <em>FOMO, hesitation, second-guessing.</em></p>
             </div>
           </div>
           <div className="method">
             <div className="mh"><div className="mn">04</div><div className="ml">Survey</div></div>
             <div className="mb">
               <div className="scope">48 respondents</div>
-              <p>Sized the signal across <em>attendee and host segments</em>, separating personal frustration from systemic pattern.</p>
+              <p>Sized the signal across <em>attendee and host segments</em>, frustration vs. systemic pattern.</p>
             </div>
           </div>
         </div>
@@ -253,14 +293,14 @@ function Ch03() {
   )
 }
 
-/* ── Ch 04 · Journey Map ────────────────────────────────────── */
-function Ch04() {
+/* ── Ch 05 · Journey Map ────────────────────────────────────── */
+function Ch05() {
   return (
     <section className="chapter">
       <div className="chapter-inner">
         <div className="lede">
           <div className="col-l">
-            <div className="kick"><span className="n">04</span> Journey map</div>
+            <div className="kick"><span className="n">05</span> Journey map</div>
             <h2 className="chap-h">The pivot was on <em>the journey map.</em></h2>
             <p className="chap-body">Plotting emotion across before, during, after clustered the pain: coordination anxiety before the event, identity frustration after. The event itself was already fine.</p>
           </div>
@@ -352,14 +392,14 @@ function Ch04() {
   )
 }
 
-/* ── Ch 05 · Problem, Reframed ──────────────────────────────── */
-function Ch05() {
+/* ── Ch 06 · Problem, Reframed ──────────────────────────────── */
+function Ch06() {
   return (
     <section className="chapter">
       <div className="chapter-inner">
         <div className="lede">
           <div className="col-l">
-            <div className="kick"><span className="n">05</span> The problem, reframed</div>
+            <div className="kick"><span className="n">06</span> The problem, reframed</div>
             <h2 className="chap-h">The brief asked for better discovery. <em>The research asked for something harder.</em></h2>
             <p className="chap-body">Better search is a UI problem. Coordination anxiety and social identity are system-design problems &mdash; features that feel less like tools and more like social infrastructure.</p>
           </div>
@@ -370,21 +410,21 @@ function Ch05() {
 
         <div className="tension">
           <div className="lbl">Reframed problem statement</div>
-          <p>How might we reduce the friction of <em>group coordination</em> and <em>social validation</em>, so users never need to leave the app to do the social work that makes events actually happen?</p>
+          <p>How might we reduce <em>coordination uncertainty</em>, so users can confidently commit to events without leaving the platform?</p>
         </div>
       </div>
     </section>
   )
 }
 
-/* ── Ch 06 · Principles ─────────────────────────────────────── */
-function Ch06() {
+/* ── Ch 07 · Principles ─────────────────────────────────────── */
+function Ch07() {
   return (
     <section className="chapter">
       <div className="chapter-inner">
         <div className="lede">
           <div className="col-l">
-            <div className="kick"><span className="n">06</span> Principles</div>
+            <div className="kick"><span className="n">07</span> Principles</div>
             <h2 className="chap-h">Three principles, one structural constraint. <em>Each grounded in research.</em></h2>
             <p className="chap-body">Before any screens, three rules straight from the data &mdash; and one constraint that shaped the entire architecture.</p>
           </div>
@@ -397,8 +437,8 @@ function Ch06() {
           <div className="principle">
             <div className="pn">01</div>
             <div>
-              <h4>Keep the group together.</h4>
-              <p>Every trip to WhatsApp was a product failure. Group planning had to feel calmer than a group chat, or coordination always leaks back out.</p>
+              <h4>Keep coordination where decisions happen.</h4>
+              <p>Every trip to WhatsApp was a product failure. The product should answer &ldquo;is anyone going?&rdquo; before users feel any pull to open another app.</p>
               <span className="badge">70% off-platform</span>
             </div>
           </div>
@@ -413,8 +453,8 @@ function Ch06() {
           <div className="principle">
             <div className="pn">03</div>
             <div>
-              <h4>Let users build an identity.</h4>
-              <p>Event history as a social <em>signal</em>, not a settings page. It&apos;s how people decide who to trust and what&apos;s worth attending.</p>
+              <h4>Make participation visible.</h4>
+              <p>Attending isn&apos;t only functional &mdash; it&apos;s social identity. Event history reads as a <em>signal</em>, not a settings page.</p>
               <span className="badge">80% identity</span>
             </div>
           </div>
@@ -427,41 +467,21 @@ function Ch06() {
             </div>
           </div>
         </div>
-
-        <div className="surface-head" style={{ marginTop: 48 }}>
-          <div className="sub-kick">
-            <span className="sub-n" style={{ background: 'var(--v)' }}>…</span>
-            Navigation as a statement
-          </div>
-          <h3 className="sub-h">Hosting is a first-class action, <em>not a power feature.</em></h3>
-        </div>
-
-        <div className="navrow" aria-label="Navigation diagram">
-          <div className="t"><div className="ic">⌂</div><div className="nm">Explore</div><div className="role">social + geo</div></div>
-          <div className="t"><div className="ic">♡</div><div className="nm">Calendar</div><div className="role">committed</div></div>
-          <div className="t c"><div className="ic">+</div><div className="nm">Create</div><div className="role">host entry</div></div>
-          <div className="t"><div className="ic">◎</div><div className="nm">Map</div><div className="role">geo discovery</div></div>
-          <div className="t"><div className="ic">◯</div><div className="nm">Profile</div><div className="role">identity</div></div>
-        </div>
-
-        <p className="chap-body" style={{ marginTop: 18, maxWidth: 740 }}>
-          Putting <em style={{ fontFamily: 'var(--serif)', color: 'var(--v)' }}>Create</em> at the centre makes event creation as accessible as browsing &mdash; answering the 70% coordination signal at the structural level, before a single screen was drawn.
-        </p>
       </div>
     </section>
   )
 }
 
-/* ── Ch 07 · Solutions ─────────────────────────────────────────
-   (WudExploration renders as its own chapter between 06 and 07)
+/* ── Ch 09 · Solutions ─────────────────────────────────────────
+   (WudExploration + WudIA render between Ch07 and Ch09)
    ─────────────────────────────────────────────────────────────── */
-function Ch07() {
+function Ch09() {
   return (
     <section className="chapter">
       <div className="chapter-inner">
         <div className="lede">
           <div className="col-l">
-            <div className="kick"><span className="n">07</span> Three problems, three responses</div>
+            <div className="kick"><span className="n">09</span> Three problems, three responses</div>
             <h2 className="chap-h">Designed for the <em>specific</em> friction, not the category.</h2>
             <p className="chap-body">Each research problem got one paired response in the product &mdash; and I resisted collapsing them into a single &ldquo;better feed&rdquo;.</p>
           </div>
@@ -478,6 +498,10 @@ function Ch07() {
           </div>
           <h3 className="sub-h">Recommendations earned, <em>not guessed.</em></h3>
           <p className="sub-b">Preferences set during onboarding, then two parallel paths in Explore &mdash; events you&apos;re invited to, and discovery by neighbourhood.</p>
+          <div className="qr" style={{ '--qr': '#6F4FE6' } as React.CSSProperties}>
+            <div className="qr-row qr-q"><span className="lab">User asks</span><span className="txt">&ldquo;Why am I being shown this &mdash; is it actually for me, or just popular?&rdquo;</span></div>
+            <div className="qr-row qr-r"><span className="lab">System responds</span><span className="txt">Recommendations are built from preferences the user set at onboarding, not behavioural guesses. Invited events stack <em>above</em> cold discovery, so social context is the first thing the feed leads with.</span></div>
+          </div>
         </div>
         <div className="shot wide" style={{ marginTop: 34 }}>
           <div className="shot-tag"><span className="sq" style={{ background: '#6F4FE6' }} />wud / onboarding · filters · explore feed</div>
@@ -504,6 +528,10 @@ function Ch07() {
           </div>
           <h3 className="sub-h">Surface the signal <em>in place.</em></h3>
           <p className="sub-b">Who from your network is going &mdash; avatars, follow badges, tickets left &mdash; answered on the event page itself, where the doubt actually happens.</p>
+          <div className="qr" style={{ '--qr': '#C8459B' } as React.CSSProperties}>
+            <div className="qr-row qr-q"><span className="lab">User asks</span><span className="txt">&ldquo;Is anyone I know going &mdash; or am I about to commit alone?&rdquo;</span></div>
+            <div className="qr-row qr-r"><span className="lab">System responds</span><span className="txt">Friends&rsquo; attendance, follow badges and tickets-left resolve on the event page itself, the exact moment of doubt, so there&rsquo;s no reason to leave for WhatsApp to find out.</span></div>
+          </div>
         </div>
         <div className="shot sol" style={{ marginTop: 34 }}>
           <div className="shot-tag"><span className="sq" style={{ background: '#C8459B' }} />wud / event detail · RSVP</div>
@@ -532,6 +560,10 @@ function Ch07() {
           </div>
           <h3 className="sub-h">Participation as a <em>public artifact.</em></h3>
           <p className="sub-b">Profile treats event history as social currency, on par with relationships. Curation tabs keep it expressive, never automatic.</p>
+          <div className="qr" style={{ '--qr': '#1F8FA0' } as React.CSSProperties}>
+            <div className="qr-row qr-q"><span className="lab">User asks</span><span className="txt">&ldquo;How do I show I&rsquo;m someone who actually shows up?&rdquo;</span></div>
+            <div className="qr-row qr-r"><span className="lab">System responds</span><span className="txt">Profile treats event history as social currency, on par with relationships. Curation tabs (Tickets, Saved, Hosted) keep it user-controlled and expressive, never auto-populated.</span></div>
+          </div>
         </div>
         <div className="shot wide" style={{ marginTop: 34 }}>
           <div className="shot-tag"><span className="sq" style={{ background: '#1F8FA0' }} />wud / profile · help · my events</div>
@@ -554,14 +586,14 @@ function Ch07() {
   )
 }
 
-/* ── Ch 09 · Failures ───────────────────────────────────────── */
-function Ch08() {
+/* ── Ch 10 · Failures ───────────────────────────────────────── */
+function Ch10() {
   return (
     <section className="chapter">
       <div className="chapter-inner">
         <div className="lede">
           <div className="col-l">
-            <div className="kick"><span className="n">09</span> Honest failures</div>
+            <div className="kick"><span className="n">10</span> Honest failures</div>
             <h2 className="chap-h">Four things I got wrong, <em>and what they revealed.</em></h2>
             <p className="chap-body">The failures taught more durable lessons than the versions that worked. Each one named a habit worth keeping.</p>
           </div>
@@ -611,6 +643,33 @@ function Ch08() {
               <div className="v"><em>Progressive disclosure is the only way to sustain completion.</em> Split into four steps → 91%.</div>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ── Ch 11 · Host Experience ────────────────────────────────── */
+function Ch11() {
+  return (
+    <section className="chapter">
+      <div className="chapter-inner">
+        <div className="lede">
+          <div className="col-l">
+            <div className="kick"><span className="n">11</span> Host experience</div>
+            <h2 className="chap-h">Hosting broke where every long form breaks: <em>too many decisions at once.</em></h2>
+            <p className="chap-body">Creating an event meant <strong>13 decisions on a single scroll</strong> &mdash; basic info, social settings, RSVP rules and policies all competing at the same level. Hosts lost orientation and abandoned; completion sat at 60%. This wasn&apos;t a styling problem. It was a <strong>cognitive-load</strong> problem.</p>
+            <p className="chap-body">So I treated Create&nbsp;Event as a <strong>sequence of decisions</strong>, not a page. Chunking the thirteen into four ordered steps, each holding three to four related choices, lets a host carry one decision at a time, with everything reviewable before publish.</p>
+          </div>
+          <div className="col-r">
+            <Think>A form isn&apos;t a list of fields. It&apos;s a <em>sequence of decisions</em>, and the order you ask in is the design.</Think>
+          </div>
+        </div>
+
+        <div className="hero-pills" style={{ marginTop: 34 }}>
+          <span className="hpill"><span className="sw" style={{ background: 'var(--v)' }} />Decision chunking · 13 → 4 steps</span>
+          <span className="hpill"><span className="sw" style={{ background: '#C8459B' }} />Progressive disclosure</span>
+          <span className="hpill"><span className="sw" style={{ background: '#1F8FA0' }} />Reviewable before publish</span>
         </div>
 
         <div className="surface-head" style={{ marginTop: 48 }}>
@@ -673,14 +732,14 @@ function Ch08() {
   )
 }
 
-/* ── Ch 10 · Evaluation ─────────────────────────────────────── */
-function Ch09() {
+/* ── Ch 12 · Evaluation ─────────────────────────────────────── */
+function Ch12() {
   return (
     <section className="chapter">
       <div className="chapter-inner">
         <div className="lede">
           <div className="col-l">
-            <div className="kick"><span className="n">10</span> Evaluation</div>
+            <div className="kick"><span className="n">12</span> Evaluation</div>
             <h2 className="chap-h">I designed the fix &mdash; then <em>how we&apos;d know it worked.</em></h2>
             <p className="chap-body">Two pre/post studies during the redesign loop. Imperfect metrics, but a measurement plan is what turns a design exercise into a product argument.</p>
           </div>
@@ -728,14 +787,14 @@ function Ch09() {
   )
 }
 
-/* ── Ch 11 · What's Next ────────────────────────────────────── */
-function Ch10() {
+/* ── Ch 13 · What's Next ────────────────────────────────────── */
+function Ch13() {
   return (
     <section className="chapter">
       <div className="chapter-inner">
         <div className="lede">
           <div className="col-l">
-            <div className="kick"><span className="n">11</span> Where it goes next</div>
+            <div className="kick"><span className="n">13</span> Where it goes next</div>
             <h2 className="chap-h">The coordination features solve the interaction. <em>The next problem is upstream.</em></h2>
             <p className="chap-body">The features address friction at the interaction level. The harder, more valuable problem sits one step earlier.</p>
           </div>
@@ -766,19 +825,19 @@ function Ch10() {
   )
 }
 
-/* ── Ch 12 · Reflections ────────────────────────────────────── */
-function Ch11() {
+/* ── Ch 14 · Reflections ────────────────────────────────────── */
+function Ch14() {
   return (
     <section className="chapter">
       <div className="chapter-inner">
         <div className="lede">
           <div className="col-l">
-            <div className="kick"><span className="n">12</span> Reflections</div>
+            <div className="kick"><span className="n">14</span> Reflections</div>
             <h2 className="chap-h">What changed <em>in how I work.</em></h2>
             <p className="chap-body">Two shifts stuck &mdash; one about the problem, one about the craft of owning a piece of it.</p>
           </div>
           <div className="col-r">
-            <Think>I went in to design a better search box. I came out having designed how people <em>show up &mdash; and show up together.</em></Think>
+            <Think>I went in to design a better search box. I came out having designed how people <em>show up, and show up together.</em></Think>
           </div>
         </div>
 
@@ -786,8 +845,8 @@ function Ch11() {
           <div className="reflect-col worked">
             <h4><span className="dot" /> What the project taught me</h4>
             <div className="reflect-item">
-              <div className="t">Functional and emotional problems differ.</div>
-              <div className="d">Finding events is functional &mdash; solvable with filters. Coordination anxiety and identity are <em>emotional</em>, and need social infrastructure, not a better algorithm.</div>
+              <div className="t">Interaction design is rarely about the screen.</div>
+              <div className="d">The breakthrough wasn&apos;t a better feed. It was understanding the uncertainty <em>between</em> finding an event and committing to it, then designing the states, permissions, and system responses that resolve it.</div>
             </div>
             <div className="reflect-item">
               <div className="t">The journey map was the turning point.</div>
@@ -823,13 +882,34 @@ function Ch11() {
 }
 
 /* ── Contact Banner ─────────────────────────────────────────── */
+function WudContact() {
+  return (
+    <div className="wud-page">
+      <section className="contact-banner" id="contact">
+        <div className="contact-comment">
+          <div className="who"><span className="av">S</span><span className="nm">Shruthy &middot; note</span></div>
+          <p>Open to interaction design roles and good conversations about hard, human problems.</p>
+        </div>
+        <div className="contact-plate">
+          <span className="deco">▸</span>
+          <h2>CONTACT</h2>
+          <span className="deco" style={{ background: 'var(--y)' }}>…</span>
+        </div>
+        <div className="contact-actions">
+          <a className="dark" href="mailto:sndesigns50@gmail.com"><span>✉</span> sndesigns50@gmail.com</a>
+          <a href="https://linkedin.com/in/shruthynair" target="_blank" rel="noopener noreferrer">LinkedIn →</a>
+          <a href="https://read.cv/shruthynair" target="_blank" rel="noopener noreferrer">Read.cv →</a>
+        </div>
+      </section>
+    </div>
+  )
+}
 
 /* ── Footer ─────────────────────────────────────────────────── */
 function WudFooter() {
   return (
     <div className="wud-page">
-      <div className="kick" style={{ marginTop: 64 }}><span className="n">→</span> Up next</div>
-      <div className="up-next">
+      <div className="up-next" style={{ marginTop: 64 }}>
         <Link href="/projects/why" className="next-card">
           <div className="nc-small">Case study 02 · 2025</div>
           <div className="nc-t">Why<em>.</em> the decision ledger.</div>
@@ -854,20 +934,22 @@ export default function WudPage() {
       <script dangerouslySetInnerHTML={{ __html: `document.body.classList.add('wud-standalone')` }} />
       <SuppressChrome />
       <WudHero />
-      <WudOverview />
       <Ch01 />
-      <Ch02 />
+      <Ch02Owned />
       <Ch03 />
       <Ch04 />
       <Ch05 />
       <Ch06 />
-      <WudExploration />
       <Ch07 />
+      <WudExploration />
       <WudIA />
-      <Ch08 />
       <Ch09 />
       <Ch10 />
       <Ch11 />
+      <Ch12 />
+      <Ch13 />
+      <Ch14 />
+      <WudContact />
       <WudFooter />
     </div>
   )
