@@ -541,6 +541,274 @@ p { text-wrap: pretty; }
   display: inline-block;
 }
 
+/* ─── Intro / Entry section ──────────────────────────────────── */
+.intro { padding: 86px 0 60px; }
+
+.entry-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 50px;
+  align-items: center;
+}
+
+.entry { position: relative; }
+
+.entry .greet {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  white-space: nowrap;
+  font-family: var(--hand);
+  font-size: 30px;
+  color: var(--ink-2);
+  margin-bottom: 8px;
+}
+
+.entry .mini-blob {
+  width: 34px;
+  height: 32px;
+  background: var(--g);
+  border-radius: 56% 44% 58% 42% / 54% 50% 50% 46%;
+  box-shadow: inset 0 0 0 2px var(--ink);
+  position: relative;
+  transform: rotate(-6deg);
+  display: inline-block;
+  flex-shrink: 0;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .entry .mini-blob { animation: wobble 8s ease-in-out infinite; }
+}
+.entry .mini-blob::before,
+.entry .mini-blob::after {
+  content: '';
+  position: absolute;
+  top: 36%;
+  width: 4px;
+  height: 9px;
+  border-radius: 999px;
+  background: var(--ink);
+}
+.entry .mini-blob::before { left: 32%; }
+.entry .mini-blob::after  { right: 32%; }
+
+.entry .entry-name {
+  margin: 0;
+  font-family: var(--funky);
+  font-weight: 800;
+  font-size: 100px;
+  line-height: 0.88;
+  letter-spacing: -0.05em;
+  color: var(--ink);
+}
+.entry .entry-name .name-dot { color: var(--p); }
+
+.entry .entry-lead {
+  margin: 26px 0 0;
+  max-width: 660px;
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 1.38;
+  letter-spacing: -0.015em;
+  color: var(--ink-2);
+  text-wrap: pretty;
+}
+.entry .entry-lead em {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--ink);
+}
+
+.entry .entry-avail {
+  margin-top: 28px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+/* generic pulse dot — used in intro and wherever needed */
+.pulse {
+  position: relative;
+  width: 9px;
+  height: 9px;
+  display: inline-block;
+  flex-shrink: 0;
+}
+.pulse::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--r-accent);
+}
+.pulse::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: var(--r-accent);
+  opacity: 0.25;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .pulse::after { animation: pulse 2.2s ease-out infinite; }
+}
+
+/* photo card (polaroid) */
+.entry-photo {
+  display: flex;
+  justify-content: flex-end;
+}
+.photo-card {
+  position: relative;
+  width: 264px;
+  background: #fff;
+  padding: 11px 11px 42px;
+  border: 1.5px solid var(--ink);
+  border-radius: 8px;
+  box-shadow: 0 2px 0 rgba(20,18,15,0.9), 0 26px 50px -28px rgba(20,18,15,0.42);
+  transform: rotate(2.2deg);
+}
+.photo-card .photo-img {
+  display: block;
+  width: 100%;
+  height: 304px;
+  object-fit: cover;
+  object-position: 50% 22%;
+  border-radius: 4px;
+}
+.photo-card .cap {
+  position: absolute;
+  left: 0; right: 0; bottom: 12px;
+  text-align: center;
+  font-family: var(--hand);
+  font-size: 21px;
+  color: var(--ink-2);
+  line-height: 1;
+}
+.photo-card .px-tag {
+  position: absolute;
+  top: 16px; left: -18px;
+  z-index: 3;
+  background: var(--p);
+  color: var(--ink);
+  transform: rotate(-7deg);
+  font-family: var(--mono);
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  padding: 5px 10px;
+  border-radius: 999px;
+  box-shadow: inset 0 0 0 1.5px var(--ink);
+}
+
+/* "right now" strip */
+.now-strip {
+  margin-top: 54px;
+  display: flex;
+  align-items: stretch;
+  border: 1.5px solid var(--ink);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 2px 0 rgba(20,18,15,0.9);
+  background: var(--paper);
+}
+.now-label {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 0 22px;
+  background: var(--paper-2);
+  border-right: 1.5px solid var(--ink);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+.now-label .now-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--p);
+  display: inline-block;
+  flex-shrink: 0;
+}
+.now-items {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.now-item {
+  padding: 18px 22px;
+  border-right: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+.now-item:last-child { border-right: none; }
+.now-item .kk {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.now-item .vv {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  line-height: 1.24;
+  text-wrap: pretty;
+}
+.now-item .mm {
+  font-family: var(--sans);
+  font-size: 12px;
+  color: var(--ink-3);
+  line-height: 1.35;
+}
+
+/* equalizer animation for listening item */
+.eq-mini {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 11px;
+}
+.eq-mini span {
+  width: 3px;
+  background: var(--c);
+  border-radius: 2px;
+  height: 40%;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .eq-mini span { animation: eqm 950ms ease-in-out infinite; }
+  .eq-mini span:nth-child(2) { animation-delay: 160ms; }
+  .eq-mini span:nth-child(3) { animation-delay: 320ms; }
+  .eq-mini span:nth-child(4) { animation-delay: 90ms; }
+}
+
+@keyframes eqm {
+  0%, 100% { height: 25%; }
+  50%       { height: 100%; }
+}
+
+@keyframes wobble {
+  0%,  100% { border-radius: 56% 44% 58% 42% / 54% 50% 50% 46%; }
+  50%        { border-radius: 46% 54% 42% 58% / 48% 56% 44% 52%; }
+}
+
 /* ─── What's up section ──────────────────────────────────────── */
 .whatsup {
   text-align: center;
@@ -890,7 +1158,8 @@ section.body + section.body { border-top: 1px solid var(--line); }
 
 /* ─── Mini Relay Preview ─────────────────────────────────────── */
 .mini-relay {
-  width: 490px;
+  width: 100%;
+  max-width: 540px;
   flex-shrink: 0;
   background: var(--r-bg);
   border-radius: 8px;
@@ -1075,7 +1344,8 @@ section.body + section.body { border-top: 1px solid var(--line); }
 
 /* ─── Mini DS Preview ────────────────────────────────────────── */
 .mini-ds {
-  width: 490px;
+  width: 100%;
+  max-width: 540px;
   flex-shrink: 0;
   background: var(--paper);
   border-radius: 8px;
