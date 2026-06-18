@@ -8,11 +8,7 @@ export default function Nav() {
   const pathname = usePathname()
   const router = useRouter()
   const onHome = pathname === '/'
-  const [activeSection, setActiveSection] = useState<'work' | 'about'>('work')
-
-  function handleWorkClick() {
-    setActiveSection('work')
-  }
+  const [activeSection, setActiveSection] = useState<'work' | 'about'>('about')
 
   function handleAboutClick(e: React.MouseEvent<HTMLAnchorElement>) {
     e.preventDefault()
@@ -21,6 +17,16 @@ export default function Nav() {
       document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })
     } else {
       router.push('/#about')
+    }
+  }
+
+  function handleWorkClick(e: React.MouseEvent<HTMLAnchorElement>) {
+    e.preventDefault()
+    setActiveSection('work')
+    if (pathname === '/') {
+      document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' })
+    } else {
+      router.push('/#work')
     }
   }
 
@@ -57,19 +63,19 @@ export default function Nav() {
 
       {/* Links group */}
       <div className="nav-grp">
-        <Link
-          href="/#work"
-          onClick={handleWorkClick}
-          className={`nav-btn${onHome && activeSection === 'work' ? ' active' : ''}`}
-        >
-          Work
-        </Link>
         <a
           href="/#about"
           onClick={handleAboutClick}
           className={`nav-btn${onHome && activeSection === 'about' ? ' active' : ''}`}
         >
           About
+        </a>
+        <a
+          href="/#work"
+          onClick={handleWorkClick}
+          className={`nav-btn${onHome && activeSection === 'work' ? ' active' : ''}`}
+        >
+          Work
         </a>
         <a
           href="/resume.pdf"

@@ -60,7 +60,7 @@
 .why-cs h1, .why-cs h2, .why-cs h3, .why-cs h4 { margin: 0; }
 
 /* ── Hero ─────────────────────────────────────────────────── */
-.why-cs .hero { position: relative; padding: 96px 0 40px; text-align: left; min-height: 0; }
+.why-cs .hero { position: relative; padding: 200px 0 40px; text-align: left; min-height: 0; }
 .why-cs .hero-top {
   display: flex; align-items: center; gap: 14px;
   font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em;

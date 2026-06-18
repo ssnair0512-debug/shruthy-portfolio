@@ -6,7 +6,7 @@ export default function Home() {
     <main>
 
       {/* ── Intro ─────────────────────────────────────────────────── */}
-      <section className="intro" data-screen-label="Intro">
+      <section className="intro" id="about" data-screen-label="Intro">
 
         <div className="entry-row">
           <div className="entry">
